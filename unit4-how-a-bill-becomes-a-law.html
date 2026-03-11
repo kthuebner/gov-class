@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How a Bill Becomes a Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --phase1: #c8783a;
+    --phase2: #4a7c59;
+    --phase3: #3a5f8a;
+    --phase4: #7a3a5a;
+    --parchment: #f5f0e8;
+    --ink: #1a1a2e;
+    --gold: #c9a84c;
+    --panel-bg: rgba(245, 240, 232, 0.98);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a2e;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(58,95,138,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(122,58,90,0.12) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%231a1a2e'/%3E%3Crect width='1' height='1' fill='%23ffffff08'/%3E%3C/svg%3E");
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--parchment);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    padding: 3.5rem 2rem 2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  header::before {
+    content: '★  ★  ★';
+    display: block;
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 1.6em;
+    margin-bottom: 1rem;
+    opacity: 0.65;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 50px rgba(201,168,76,0.25);
+    line-height: 1.1;
+  }
+  .subtitle {
+    margin-top: 0.6rem;
+    font-size: 1rem;
+    color: rgba(245,240,232,0.45);
+    font-style: italic;
+  }
+  .instruction {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+
+  /* ── Stats ── */
+  .stats-bar {
+    display: flex;
+    gap: 3rem;
+    padding: 1.5rem 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(245,240,232,0.06);
+  }
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+    margin-top: 0.25rem;
+  }
+
+  /* ── Main layout: centered column ── */
+  .diagram {
+    max-width: 900px;
+    margin: 3rem auto 6rem;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* ── Start / End nodes ── */
+  .endpoint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+  }
+  .endpoint-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 50px;
+    padding: 0.75rem 2.2rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .start-badge {
+    background: rgba(201,168,76,0.1);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+  }
+  .end-badge {
+    background: rgba(201,168,76,0.2);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    box-shadow: 0 0 30px rgba(201,168,76,0.35);
+    animation: pulse-gold 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-gold {
+    0%,100% { box-shadow: 0 0 25px rgba(201,168,76,0.35); }
+    50%      { box-shadow: 0 0 50px rgba(201,168,76,0.65); }
+  }
+  .endpoint-hint {
+    font-size: 0.78rem;
+    opacity: 0.35;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ── Vertical connector ── */
+  .v-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+  .v-line {
+    width: 2px;
+    height: 44px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.55), rgba(201,168,76,0.12));
+  }
+  .v-arrow {
+    color: var(--gold);
+    font-size: 0.65rem;
+    opacity: 0.55;
+    margin-top: -2px;
+  }
+
+  /* ── Phase wrapper: label left + card centered ── */
+  .phase-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2.8rem 1fr 2.8rem;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .phase-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 0 0 8px;
+    padding: 0.5rem 0;
+  }
+  .phase-label-right {
+    border-radius: 0 8px 8px 0;
+  }
+  .p1 { background: rgba(200,120,58,0.15); color: var(--phase1); border: 1px solid rgba(200,120,58,0.25); border-right: none; }
+  .p1r { background: rgba(200,120,58,0.15); border: 1px solid rgba(200,120,58,0.25); border-left: none; }
+  .p2 { background: rgba(74,124,89,0.15);  color: var(--phase2); border: 1px solid rgba(74,124,89,0.25);  border-right: none; }
+  .p2r { background: rgba(74,124,89,0.15);  border: 1px solid rgba(74,124,89,0.25);  border-left: none; }
+  .p3 { background: rgba(58,95,138,0.15);  color: var(--phase3); border: 1px solid rgba(58,95,138,0.25);  border-right: none; }
+  .p3r { background: rgba(58,95,138,0.15);  border: 1px solid rgba(58,95,138,0.25);  border-left: none; }
+  .p4 { background: rgba(122,58,90,0.15);  color: var(--phase4); border: 1px solid rgba(122,58,90,0.25);  border-right: none; }
+  .p4r { background: rgba(122,58,90,0.15);  border: 1px solid rgba(122,58,90,0.25);  border-left: none; }
+
+  /* ── Step card ── */
+  .step-card {
+    position: relative;
+    background: rgba(245,240,232,0.055);
+    border-top: 1px solid rgba(245,240,232,0.1);
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+    padding: 2rem 2.5rem 1.8rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    overflow: hidden;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    transition: opacity 0.25s;
+    opacity: 0;
+  }
+  .step-card:hover {
+    background: rgba(245,240,232,0.1);
+    transform: scale(1.01);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.45);
+    z-index: 2;
+  }
+  .step-card:hover::before { opacity: 1; }
+  .step-card.active {
+    background: rgba(201,168,76,0.07);
+    box-shadow: inset 0 0 0 2px var(--gold), 0 6px 30px rgba(0,0,0,0.45);
+  }
+  .step-card.active::before { opacity: 1; }
+
+  /* Phase top-bar color per phase */
+  .step-card.ph1::before { background: var(--phase1); }
+  .step-card.ph2::before { background: var(--phase2); }
+  .step-card.ph3::before { background: var(--phase3); }
+  .step-card.ph4::before { background: var(--phase4); }
+
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .step-num-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .step-num-label.c1 { color: var(--phase1); }
+  .step-num-label.c2 { color: var(--phase2); }
+  .step-num-label.c3 { color: var(--phase3); }
+  .step-num-label.c4 { color: var(--phase4); }
+
+  .step-big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.85;
+    opacity: 0.07;
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .step-desc {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    opacity: 0.7;
+    max-width: 560px;
+  }
+  .step-meta {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .step-question {
+    font-size: 0.8rem;
+    font-style: italic;
+    opacity: 0.55;
+  }
+  .death-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(139,0,0,0.22);
+    border: 1px solid rgba(200,0,0,0.35);
+    border-radius: 4px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.72rem;
+    color: #ff9999;
+    letter-spacing: 0.03em;
+  }
+  .click-hint {
+    position: absolute;
+    bottom: 1.2rem;
+    right: 2rem;
+    font-size: 0.7rem;
+    opacity: 0.3;
+    font-style: italic;
+    transition: opacity 0.2s;
+  }
+  .step-card:hover .click-hint { opacity: 0.6; }
+
+  /* ── Bicameral note ── */
+  .bicameral-note {
+    width: 100%;
+    background: rgba(245,240,232,0.04);
+    border: 1px dashed rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* ── Override path ── */
+  .override-path {
+    width: 100%;
+    background: rgba(122,58,90,0.07);
+    border: 1px dashed rgba(180,80,130,0.35);
+    border-radius: 8px;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 0.82rem;
+  }
+  .override-circle {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 2px solid rgba(180,80,130,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    color: #d090b0;
+    flex-shrink: 0;
+  }
+
+  /* ── Modal panel ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,10,20,0.78);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .overlay.open { display: flex; }
+  .panel {
+    background: var(--panel-bg);
+    color: var(--ink);
+    max-width: 700px; width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    max-height: 88vh;
+    overflow-y: auto;
+    animation: panelIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes panelIn {
+    from { opacity:0; transform: scale(0.88) translateY(28px); }
+    to   { opacity:1; transform: scale(1)    translateY(0);   }
+  }
+  .panel-header {
+    padding: 2rem 2.5rem 1.5rem;
+    color: white;
+    position: relative;
+  }
+  .panel-step-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 0.3rem;
+    font-family: 'Source Serif 4', serif;
+  }
+  .panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.15;
+    padding-right: 2rem;
+  }
+  .panel-close {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: rgba(255,255,255,0.15);
+    border: none; color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .panel-close:hover { background: rgba(255,255,255,0.3); }
+  .panel-body { padding: 1.5rem 2.5rem 2.5rem; }
+  .panel-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #222;
+    margin: 1.4rem 0 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .panel-body p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  .panel-body ul { list-style: none; padding: 0; }
+  .panel-body ul li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #333;
+    padding: 0.3rem 0 0.3rem 1.3rem;
+    position: relative;
+  }
+  .panel-body ul li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: #9a7a2c;
+    font-weight: bold; font-size: 1.1rem;
+  }
+  .fact-box {
+    background: rgba(201,168,76,0.09);
+    border-left: 3px solid #c9a84c;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .fact-box p { color: #2a2010; font-style: italic; font-size: 0.87rem; }
+  .death-box {
+    background: rgba(139,0,0,0.07);
+    border-left: 3px solid #c0392b;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .death-box p { color: #5a0000; font-size: 0.87rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>How a Bill Becomes a Law</h1>
+  <p class="subtitle">The Legislative Process of the United States Congress</p>
+  <p class="instruction">Click any step to explore its mechanics in depth</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-number">~10,000</div><div class="stat-label">Bills Introduced Per Congress</div></div>
+  <div class="stat"><div class="stat-number">~4%</div><div class="stat-label">Become Law</div></div>
+  <div class="stat"><div class="stat-number">10</div><div class="stat-label">Steps to Passage</div></div>
+  <div class="stat"><div class="stat-number">4</div><div class="stat-label">Phases</div></div>
+</div>
+
+<div class="diagram">
+
+  <!-- START -->
+  <div class="endpoint">
+    <div class="endpoint-badge start-badge">💡 It's an Idea</div>
+    <div class="endpoint-hint">Any citizen, lobbyist, interest group, or member can conceive legislation</div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 1 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p1">Phase 1 — Introduction</div>
+    <div class="step-card ph1" onclick="openPanel(1)">
+      <span class="step-big-number">1</span>
+      <div class="step-header">
+        <span class="step-num-label c1">Step 1</span>
+      </div>
+      <div class="step-title">Idea Becomes a Bill</div>
+      <div class="step-desc">The idea is drafted into a bill by legislative staff and legal experts — translated into the precise, legally operative language of formal statute.</div>
+      <div class="step-meta">
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p1r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 2 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p1">Phase 1 — Introduction</div>
+    <div class="step-card ph1" onclick="openPanel(2)">
+      <span class="step-big-number">2</span>
+      <div class="step-header">
+        <span class="step-num-label c1">Step 2</span>
+      </div>
+      <div class="step-title">Bill Introduction</div>
+      <div class="step-desc">A bill needs a member of Congress to sponsor and formally introduce it. Without a sponsor, the bill never officially exists.</div>
+      <div class="step-meta">
+        <span class="step-question">Does the bill get a sponsor?</span>
+        <span class="death-badge">☠ Dies without a sponsor</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p1r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 3 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p2">Phase 2 — Committee Work</div>
+    <div class="step-card ph2" onclick="openPanel(3)">
+      <span class="step-big-number">3</span>
+      <div class="step-header">
+        <span class="step-num-label c2">Step 3</span>
+      </div>
+      <div class="step-title">Referred to Committee</div>
+      <div class="step-desc">The bill is sent to the appropriate committee — here the committee chair has the power to consider the bill or simply let it die quietly, with no vote required.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the committee consider it?</span>
+        <span class="death-badge">☠ Most bills die here</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p2r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 4 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p2">Phase 2 — Committee Work</div>
+    <div class="step-card ph2" onclick="openPanel(4)">
+      <span class="step-big-number">4</span>
+      <div class="step-header">
+        <span class="step-num-label c2">Step 4</span>
+      </div>
+      <div class="step-title">Committee Review</div>
+      <div class="step-desc">Goes to subcommittee for markup, study, debate, hearings, and amendments. Experts and stakeholders give testimony on the merits of the bill.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the bill survive markup?</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p2r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 5 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p2">Phase 2 — Committee Work</div>
+    <div class="step-card ph2" onclick="openPanel(5)">
+      <span class="step-big-number">5</span>
+      <div class="step-header">
+        <span class="step-num-label c2">Step 5</span>
+      </div>
+      <div class="step-title">Committee Vote</div>
+      <div class="step-desc">The committee votes on whether to report the bill to the full chamber — favorably, unfavorably, or not at all. A bill that is tabled here is finished.</div>
+      <div class="step-meta">
+        <span class="step-question">Will they send it to the full House or Senate?</span>
+        <span class="death-badge">☠ Tabled = dead</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p2r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 6 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p3">Phase 3 — Floor Action</div>
+    <div class="step-card ph3" onclick="openPanel(6)">
+      <span class="step-big-number">6</span>
+      <div class="step-header">
+        <span class="step-num-label c3">Step 6</span>
+      </div>
+      <div class="step-title">Scheduled for Debate</div>
+      <div class="step-desc">In the House, the Rules Committee and Speaker control whether and how the bill reaches the floor. In the Senate, the Majority Leader holds that power.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the bill get on the calendar for debate?</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p3r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 7 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p3">Phase 3 — Floor Action</div>
+    <div class="step-card ph3" onclick="openPanel(7)">
+      <span class="step-big-number">7</span>
+      <div class="step-header">
+        <span class="step-num-label c3">Step 7</span>
+      </div>
+      <div class="step-title">Debate &amp; Amendments</div>
+      <div class="step-desc">Members debate the bill and propose amendments on the floor. In the Senate, any member can filibuster — requiring 60 votes to end debate and proceed to a vote.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the bill make it to a vote?</span>
+        <span class="death-badge">☠ Filibuster can kill it</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p3r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 8 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p3">Phase 3 — Floor Action</div>
+    <div class="step-card ph3" onclick="openPanel(8)">
+      <span class="step-big-number">8</span>
+      <div class="step-header">
+        <span class="step-num-label c3">Step 8</span>
+      </div>
+      <div class="step-title">Floor Vote</div>
+      <div class="step-desc">Amendments are voted on first, then there is a vote on final passage. Requires a simple majority — 218 in the House, 51 in the Senate.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the bill pass?</span>
+        <span class="death-badge">☠ Dies on the floor</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p3r"></div>
+  </div>
+
+  <!-- Bicameral bridge -->
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+  <div class="bicameral-note">
+    ↩ Bill passes one chamber — the entire process restarts in the other chamber from Step 3
+  </div>
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 9 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p3">Conference</div>
+    <div class="step-card ph3" onclick="openPanel(9)">
+      <span class="step-big-number">9</span>
+      <div class="step-header">
+        <span class="step-num-label c3">Step 9</span>
+      </div>
+      <div class="step-title">Reconciliation</div>
+      <div class="step-desc">The House and Senate almost always pass slightly different versions. A conference committee of senior members from both chambers must hammer out a single compromise text — which both chambers then vote on again, up or down, no further amendments.</div>
+      <div class="step-meta">
+        <span class="step-question">Will both chambers approve the new version?</span>
+        <span class="death-badge">☠ Irreconcilable = dead</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p3r"></div>
+  </div>
+
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- ══ STEP 10 ══ -->
+  <div class="phase-row">
+    <div class="phase-label p4">Phase 4 — Presidential Action</div>
+    <div class="step-card ph4" onclick="openPanel(10)">
+      <span class="step-big-number">10</span>
+      <div class="step-header">
+        <span class="step-num-label c4">Step 10</span>
+      </div>
+      <div class="step-title">Presidential Decision</div>
+      <div class="step-desc">The President can sign the bill into law, veto it, allow it to become law unsigned after 10 days, or pocket veto it if Congress adjourns before the 10 days expire.</div>
+      <div class="step-meta">
+        <span class="step-question">Will the President sign the bill into law?</span>
+        <span class="death-badge">☠ Vetoed or Pocket Vetoed</span>
+      </div>
+      <span class="click-hint">Click to explore →</span>
+    </div>
+    <div class="phase-label phase-label-right p4r"></div>
+  </div>
+
+  <!-- Veto override -->
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+  <div class="override-path">
+    <div class="override-circle">↺</div>
+    <div>
+      <strong style="color:#d090b0;">Presidential Veto Override Path:</strong>
+      Congress can override a veto with a <strong>⅔ supermajority in both chambers</strong> — 290 in the House and 67 in the Senate. Click Step 10 for the full mechanics.
+    </div>
+  </div>
+  <div class="v-connector"><div class="v-line"></div><div class="v-arrow">▼</div></div>
+
+  <!-- END -->
+  <div class="endpoint">
+    <div class="endpoint-badge end-badge">⚖️ It's the Law!</div>
+    <div class="endpoint-hint">Codified in the United States Code — enforceable by the Executive Branch</div>
+  </div>
+
+</div><!-- /diagram -->
+
+<!-- ══ MODAL ══ -->
+<div class="overlay" id="overlay" onclick="closePanel(event)">
+  <div class="panel" id="panel">
+    <div class="panel-header" id="panel-header">
+      <div class="panel-step-label" id="panel-step-label"></div>
+      <div class="panel-title" id="panel-title"></div>
+      <button class="panel-close" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body" id="panel-body"></div>
+  </div>
+</div>
+
+<script>
+const panelData = {
+  1: {
+    color: '#c8783a',
+    label: 'Step 1 — Phase 1: Introduction',
+    title: 'Idea Becomes a Bill',
+    content: `
+      <p>Before anything can move through Congress, someone has to translate a political idea into the precise, legally operative language of a bill. This is more complex than most people realize — a bill is not a policy memo. It must specify how it interacts with the entire existing body of U.S. law.</p>
+      <h3>Who Actually Writes the Bill?</h3>
+      <p>Members of Congress rarely draft legislation themselves. The real work is done by:</p>
+      <ul>
+        <li><strong>Legislative staff</strong> — often lawyers and policy specialists on personal or committee staffs</li>
+        <li><strong>The House/Senate Legislative Counsel</strong> — nonpartisan drafting offices that translate intent into statutory language</li>
+        <li><strong>Lobbyists and interest groups</strong> — who frequently submit pre-drafted bill language, particularly for technical areas like tax code or financial regulation</li>
+        <li><strong>Executive agencies</strong> — particularly when the President's legislative agenda is being advanced</li>
+      </ul>
+      <h3>What Does a Bill Actually Look Like?</h3>
+      <p>Bills cite specific sections of the U.S. Code they are amending. For example: <em>"Section 1101(a) of the Social Security Act (42 U.S.C. 1301(a)) is amended by inserting after..."</em> — most of a bill's text is surgical modifications to existing law, not freestanding prose.</p>
+      <h3>Types of Legislation</h3>
+      <ul>
+        <li><strong>Public bills</strong> — affect the general public (most major legislation)</li>
+        <li><strong>Private bills</strong> — affect a specific individual or entity (rare; e.g., immigration relief)</li>
+        <li><strong>Simple resolutions (H.Res / S.Res)</strong> — internal rules of one chamber; do not have force of law</li>
+        <li><strong>Concurrent resolutions</strong> — passed by both chambers but not sent to the President; used for budget frameworks</li>
+        <li><strong>Joint resolutions (H.J.Res / S.J.Res)</strong> — treated like bills; used for constitutional amendments or emergency declarations</li>
+      </ul>
+      <div class="fact-box"><p>The Congressional Research Service (CRS) — a nonpartisan arm of the Library of Congress — provides deep policy analysis to members drafting legislation. Their reports are technically for Congress, not the public, though many are publicly available.</p></div>
+    `
+  },
+  2: {
+    color: '#c8783a',
+    label: 'Step 2 — Phase 1: Introduction',
+    title: 'Bill Introduction & Sponsorship',
+    content: `
+      <p>A bill doesn't officially exist until a member of Congress formally introduces it. Only members of Congress can introduce legislation — not the President, not citizens directly.</p>
+      <h3>The Sponsor's Role</h3>
+      <p>The sponsor is the primary champion of the bill. They choose the moment of introduction strategically, recruit co-sponsors to demonstrate support, and shepherd the bill through the process. Many co-sponsors signal broader coalition support to committee chairs and leadership.</p>
+      <h3>House vs. Senate Introduction</h3>
+      <ul>
+        <li><strong>House:</strong> Members drop a physical copy into the "hopper" — a wooden box near the clerk's desk. Electronic filing has also been available since 2013.</li>
+        <li><strong>Senate:</strong> A senator must be formally recognized on the floor to introduce a bill, or submit it to the desk when the Senate is in recess.</li>
+      </ul>
+      <h3>Bill Numbering</h3>
+      <p>Bills are numbered sequentially within each Congress. H.R. 1 is the first House bill; S. 1 is the first Senate bill. Numbering resets every two years. The number conveys nothing about importance — H.R. 1 is often used symbolically for a majority party priority bill.</p>
+      <div class="death-box"><p>☠ <strong>Death by no sponsor:</strong> If no member is willing to put their name on a bill, it never officially exists. Advocacy groups and executive agencies must find a willing member to carry their legislative priorities.</p></div>
+      <div class="fact-box"><p>The President cannot introduce legislation directly. When the President has a legislative agenda, they must work through allied members of Congress — one of the key informal powers of the presidency is "agenda setting" without formal bill introduction authority.</p></div>
+    `
+  },
+  3: {
+    color: '#4a7c59',
+    label: 'Step 3 — Phase 2: Committee Work',
+    title: 'Referred to Committee',
+    content: `
+      <p>Upon introduction, the Speaker of the House (or Senate Presiding Officer) refers the bill to one or more committees based on subject-matter jurisdiction. The committee system is where most legislation lives — and dies.</p>
+      <h3>Committee Jurisdiction</h3>
+      <p>Each committee has a defined subject-matter jurisdiction. The House Judiciary Committee handles constitutional law and courts; the Senate Finance Committee handles taxation and revenue. Complex bills may be referred to multiple committees simultaneously or sequentially.</p>
+      <h3>The Power of the Committee Chair</h3>
+      <p>The chair is the single most powerful gatekeeper in the legislative process. They can:</p>
+      <ul>
+        <li>Simply refuse to schedule a bill — letting it die quietly with no vote required</li>
+        <li>Schedule hearings strategically to build or kill momentum</li>
+        <li>Control which witnesses testify and in what order</li>
+        <li>Decide when (or whether) to bring a bill to markup</li>
+      </ul>
+      <div class="death-box"><p>☠ <strong>Death in committee — the most common fate:</strong> Roughly 90%+ of bills never receive a hearing. The chair's power to ignore a bill is absolute. Bills that die here leave no record of failure — they simply expire at the end of the two-year Congress.</p></div>
+      <h3>Discharge Petition (Rare Escape)</h3>
+      <p>Members can force a bill to the floor via a <strong>discharge petition</strong> — requires 218 signatures in the House. Extremely rare and politically costly. Only about two dozen bills in history have been discharged this way.</p>
+      <div class="fact-box"><p>Committee chairs are selected by their party's caucus, generally based on seniority. Both parties have at times imposed term limits on chairmanships to prevent entrenchment of power.</p></div>
+    `
+  },
+  4: {
+    color: '#4a7c59',
+    label: 'Step 4 — Phase 2: Committee Work',
+    title: 'Committee Review & Markup',
+    content: `
+      <p>If the committee chair chooses to act on a bill, it goes through a rigorous review process that can last weeks, months, or years.</p>
+      <h3>The Subcommittee</h3>
+      <p>Most bills are first referred to a <strong>subcommittee</strong> — a smaller working group within the full committee. The subcommittee conducts most of the substantive work before sending the bill back to the full committee.</p>
+      <h3>Hearings</h3>
+      <ul>
+        <li><strong>Informational</strong> — expert witnesses (academics, agency officials, industry representatives, affected citizens) testify about the implications of the bill</li>
+        <li><strong>Political signaling</strong> — hearings put an issue on record and build public pressure</li>
+        <li><strong>Oversight hearings</strong> — scrutinize how existing laws are being implemented, sometimes generating legislative reform</li>
+      </ul>
+      <h3>Markup</h3>
+      <p>Markup is the committee's line-by-line revision of the bill. Members propose amendments, argue about specific language, and vote on changes. A bill can look substantially different after markup than when it was introduced.</p>
+      <div class="fact-box"><p>Markup sessions are generally public — one of the most transparent parts of the legislative process. Lobbyists pay close attention to specific word choices that can mean billions of dollars for an industry.</p></div>
+      <h3>The CBO Score</h3>
+      <p>For significant legislation, the committee requests a <strong>CBO score</strong> — an independent cost estimate over 10 years. This can make or break a bill's political viability. "Pay-go" rules require new spending to be offset by cuts or revenue increases.</p>
+    `
+  },
+  5: {
+    color: '#4a7c59',
+    label: 'Step 5 — Phase 2: Committee Work',
+    title: 'Committee Vote',
+    content: `
+      <p>After markup, the full committee votes on whether to "report" the bill to the full chamber — essentially, whether to recommend it for floor consideration.</p>
+      <h3>Possible Outcomes</h3>
+      <ul>
+        <li><strong>Favorable report</strong> — committee recommends passage; bill goes to the floor calendar</li>
+        <li><strong>Unfavorable report</strong> — rare; committee recommends against passage</li>
+        <li><strong>Tabled</strong> — no vote taken; the bill dies without a recorded failure</li>
+        <li><strong>Reported with amendments</strong> — committee rewrites the bill before sending it forward</li>
+      </ul>
+      <h3>The Committee Report</h3>
+      <p>When a bill is reported favorably, staff prepare a <strong>committee report</strong> explaining the bill's purpose, its effects, how it interacts with existing law, and dissenting views. These reports are legally significant — courts and agencies use them to interpret Congressional intent when laws are ambiguous.</p>
+      <div class="death-box"><p>☠ <strong>Tabling:</strong> A motion to table kills a bill without requiring members to vote against it on the merits — politically useful for members who don't want a recorded vote against a popular bill.</p></div>
+      <div class="fact-box"><p>Committee votes require a <strong>quorum</strong> — a majority of committee members must be present. Members can proxy vote in some committees, though House rules have tightened this in recent years.</p></div>
+    `
+  },
+  6: {
+    color: '#3a5f8a',
+    label: 'Step 6 — Phase 3: Floor Action',
+    title: 'Scheduled for Debate',
+    content: `
+      <p>Getting out of committee is a major victory — but the bill still isn't guaranteed floor time. Scheduling is a crucial bottleneck controlled by party leadership.</p>
+      <h3>The House Rules Committee</h3>
+      <p>One of the most powerful committees in Congress. It issues a "rule" for each major bill specifying:</p>
+      <ul>
+        <li>How much time is allowed for debate (e.g., two hours, divided equally)</li>
+        <li>Which amendments may be offered (open rule = any; closed rule = none; structured rule = specific pre-approved amendments only)</li>
+        <li>Whether points of order can be waived</li>
+      </ul>
+      <p>Tightly controlled by the Speaker — sometimes called the "traffic cop" of the House. A closed rule preventing minority amendments is frequently criticized as antidemocratic.</p>
+      <h3>The Senate Calendar</h3>
+      <p>Bills go on the <strong>Calendar of Business</strong>. The Majority Leader controls floor time through <strong>unanimous consent agreements (UCAs)</strong> — negotiated with the Minority Leader. Any single senator can object to a UCA, forcing either further negotiation or a cloture vote.</p>
+      <div class="fact-box"><p>The House <strong>Suspension of the Rules</strong> process lets noncontroversial bills skip the Rules Committee entirely, with no amendments allowed and a ⅔ majority required. Most bills that actually become law use this fast track — handling 10–20 bills in a single session on Mondays and Tuesdays.</p></div>
+    `
+  },
+  7: {
+    color: '#3a5f8a',
+    label: 'Step 7 — Phase 3: Floor Action',
+    title: 'Debate & Amendments',
+    content: `
+      <p>Floor debate is constitutionally protected speech — members cannot be held legally liable for anything said during official floor proceedings (the Speech and Debate Clause, Art. I, Sec. 6). In practice, floor debate is highly choreographed and rarely changes votes.</p>
+      <h3>The Senate Filibuster</h3>
+      <ul>
+        <li>Any senator can delay a vote by extended debate or simply by threatening to do so</li>
+        <li>To end debate and proceed to a vote, <strong>60 senators must vote for cloture</strong> (Rule XXII)</li>
+        <li>This means any 41 senators can block almost any bill</li>
+        <li>The modern filibuster is largely a <em>paper filibuster</em> — senators don't have to hold the floor; the mere threat is enough to require 60 votes</li>
+        <li><strong>Budget reconciliation</strong> bypasses the filibuster for bills directly affecting spending, taxes, and the debt limit — limited to one reconciliation bill per year</li>
+      </ul>
+      <div class="death-box"><p>☠ <strong>Filibuster death:</strong> If cloture fails, the bill is effectively dead for that session. Many major bills die at the 60-vote threshold, not the 51-vote majority threshold.</p></div>
+      <h3>Amendments on the Floor</h3>
+      <p>In the Senate, <strong>riders</strong> (unrelated amendments) are common and can hijack legislation. The House's germaneness rule generally limits amendments to the subject matter of the bill being debated.</p>
+      <div class="fact-box"><p>The record for the longest actual talking filibuster: Sen. Strom Thurmond spoke for 24 hours and 18 minutes against the Civil Rights Act of 1957.</p></div>
+    `
+  },
+  8: {
+    color: '#3a5f8a',
+    label: 'Step 8 — Phase 3: Floor Action',
+    title: 'Floor Vote',
+    content: `
+      <p>After debate ends, the chamber votes. This is the most public moment in the process — every member's vote is recorded and becomes part of the permanent record.</p>
+      <h3>Types of Votes</h3>
+      <ul>
+        <li><strong>Voice vote</strong> — members say "aye" or "nay"; no individual record. Used for noncontroversial measures.</li>
+        <li><strong>Division vote</strong> — members stand to be counted; still no individual record</li>
+        <li><strong>Recorded / roll call vote</strong> — each member's vote is recorded publicly; requested by 1/5 of members present</li>
+        <li><strong>Electronic voting (House)</strong> — 15-minute minimum, but the Majority Leader can hold the vote open to pressure holdouts. The 2003 Medicare vote was held open for 3 hours.</li>
+      </ul>
+      <h3>Passage Thresholds</h3>
+      <ul>
+        <li><strong>Simple majority</strong> — most legislation: 218/435 House; 51/100 Senate (or 50 + VP tiebreaker)</li>
+        <li><strong>⅔ supermajority</strong> — constitutional amendments, veto overrides, expelling a member, impeachment conviction</li>
+        <li><strong>60 votes</strong> — Senate cloture to end debate</li>
+      </ul>
+      <div class="fact-box"><p>The Constitution says each chamber is the judge of its own rules. Procedural decisions are generally not reviewable by courts — a principle called the "enrolled bill doctrine."</p></div>
+    `
+  },
+  9: {
+    color: '#3a5f8a',
+    label: 'Step 9 — Conference & Reconciliation',
+    title: 'Conference Committee & Reconciliation',
+    content: `
+      <p>The Constitution requires both chambers to pass the <em>exact same text</em> before a bill goes to the President. In practice, the House and Senate almost always pass different versions — requiring reconciliation.</p>
+      <h3>Methods of Reconciliation</h3>
+      <ul>
+        <li><strong>One chamber concurs</strong> — one chamber simply accepts the other's version as-is. More common for noncontroversial bills.</li>
+        <li><strong>Ping-pong (amendment exchange)</strong> — chambers pass the bill back and forth with amendments until they agree. Now the dominant method for major legislation.</li>
+        <li><strong>Conference Committee</strong> — formal process: House and Senate appoint senior conferees who meet to negotiate a compromise. The resulting conference report must be voted on up-or-down by both chambers — no further amendments allowed.</li>
+      </ul>
+      <h3>Politics of Conference</h3>
+      <p>Conference is where significant policy is made behind closed doors. Provisions never passed by either chamber individually, earmarks, and wholesale rewrites can all emerge from conference — a persistent source of criticism about transparency.</p>
+      <div class="death-box"><p>☠ If conferees cannot agree, or if either chamber rejects the conference report, the bill is dead. Relatively rare this late in the process, but it has happened on major immigration reform attempts.</p></div>
+      <div class="fact-box"><p>Formal conference committees have become extremely rare in the modern Congress. The 112th–115th Congresses (2011–2019) used formal conferences only a handful of times. "Ping-pong" dominates because it's faster and gives leadership more control.</p></div>
+    `
+  },
+  10: {
+    color: '#7a3a5a',
+    label: 'Step 10 — Phase 4: Presidential Action',
+    title: 'Presidential Decision',
+    content: `
+      <p>Once both chambers pass identical text, an enrolled bill on special parchment is sent to the President. The Constitution (Art. I, Sec. 7) gives the President exactly four options — the 10-day clock starts ticking upon presentation.</p>
+      <h3>The Four Options</h3>
+      <ul>
+        <li><strong>1. Sign</strong> — Becomes law immediately upon signing. Presidents hold ceremonies for significant legislation.</li>
+        <li><strong>2. Veto</strong> — Returned to Congress with a written veto message. Congress may attempt an override.</li>
+        <li><strong>3. Unsigned for 10 days (Congress in session)</strong> — Becomes law <em>without</em> the President's signature. Signals disapproval without a formal veto.</li>
+        <li><strong>4. Pocket Veto</strong> — If Congress adjourns within the 10-day window and the President hasn't signed, the bill is automatically killed. <em>Cannot be overridden</em> because Congress is not in session.</li>
+      </ul>
+      <h3>Veto Override</h3>
+      <p>Requires <strong>⅔ supermajority in both chambers</strong> — 290 House + 67 Senate. Fewer than 10% of vetoes in history have been overridden. A veto threat is almost always credible — the President only needs 34 senators to sustain it.</p>
+      <div class="fact-box"><p>FDR issued 635 vetoes — the most of any president; Congress overrode only 9. Andrew Johnson had the highest override rate: 15 of 29 vetoes overridden during Reconstruction, a period of intense presidential-congressional conflict.</p></div>
+      <h3>The Line-Item Veto Question</h3>
+      <p>Congress passed a Line Item Veto Act in 1996. The Supreme Court struck it down in <em>Clinton v. City of New York</em> (1998) as a violation of the Presentment Clause — the President must sign or veto the entire bill.</p>
+      <div class="death-box"><p>☠ <strong>Pocket Veto nuance:</strong> Congress tries to prevent pocket vetoes by keeping pro forma sessions open during recesses. Whether this actually prevents a pocket veto is unresolved — the Supreme Court has never definitively ruled on it.</p></div>
+    `
+  }
+};
+
+function openPanel(n) {
+  const d = panelData[n];
+  document.getElementById('panel-header').style.background =
+    `linear-gradient(135deg, ${d.color} 0%, ${d.color}bb 100%)`;
+  document.getElementById('panel-step-label').textContent = d.label;
+  document.getElementById('panel-title').textContent = d.title;
+  document.getElementById('panel-body').innerHTML = d.content;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+  const cards = document.querySelectorAll('.step-card');
+  if (cards[n-1]) cards[n-1].classList.add('active');
+}
+
+function closePanel(e) {
+  if (!e || e.target === document.getElementById('overlay') || e.target.classList.contains('panel-close')) {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePanel({ target: document.getElementById('overlay') });
+});
+</script>
+</body>
+</html>
