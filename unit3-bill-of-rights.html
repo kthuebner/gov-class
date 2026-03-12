@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3: The Bill of Rights | American Government</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #5c2d91;
+    --purple-mid: #7b4bbf;
+    --purple-light: #ede7f6;
+    --purple-pale: #f5f0fc;
+    --parchment: #faf7f2;
+    --parchment-dark: #f0ead8;
+    --text-block-bg: #f2f2f4;
+    --text-block-border: #c0bcc8;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3a50;
+    --accent-gold: #c9a227;
+    --border-soft: #d6cfe4;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--purple);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.025) 40px,
+      rgba(255,255,255,0.025) 80px
+    );
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+  }
+  .header-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 0.6rem;
+  }
+  .header-nav {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 1rem;
+    letter-spacing: 0.08em;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+  }
+
+  /* ── INTRO BANNER ── */
+  .intro-banner {
+    background: var(--purple-light);
+    border-left: 5px solid var(--purple);
+    padding: 1.4rem 2rem;
+    max-width: 860px;
+    margin: 2rem auto;
+    border-radius: 0 6px 6px 0;
+  }
+  .intro-banner p {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .intro-banner strong { color: var(--purple); }
+
+  /* ── AMENDMENT CARD ── */
+  .amendments-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .amendment-card {
+    background: var(--white);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(92,45,145,0.07);
+    transition: box-shadow 0.2s;
+  }
+  .amendment-card:hover {
+    box-shadow: 0 4px 18px rgba(92,45,145,0.13);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: stretch;
+    background: var(--purple-pale);
+    border-bottom: 2px solid var(--border-soft);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .card-header:hover { background: #ede7f6; }
+
+  /* Expand toggle arrow */
+  .card-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0 1.2rem 0 0.5rem;
+    flex-shrink: 0;
+  }
+  .card-toggle svg {
+    width: 18px;
+    height: 18px;
+    color: var(--purple-mid);
+    transition: transform 0.25s ease;
+  }
+  .amendment-card.open .card-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .amend-number-block {
+    background: var(--purple);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.4rem;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .amend-ordinal {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .amend-word {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  .card-title-block {
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--purple);
+    line-height: 1.2;
+  }
+  .card-tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-top: 0.25rem;
+  }
+
+  /* ── CARD BODY ── */
+  .card-body {
+    padding: 0 1.8rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.42s ease, padding 0.3s ease;
+  }
+  .amendment-card.open .card-body {
+    max-height: 2400px;
+    padding: 1.4rem 1.8rem 1.6rem;
+  }
+
+  /* Original text */
+  .original-text {
+    background: var(--text-block-bg);
+    border-left: 4px solid var(--text-block-border);
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 1.2rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .original-text-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.35rem;
+  }
+  .original-text p {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* Plain language */
+  .plain-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 0.4rem;
+  }
+  .plain-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1.3rem;
+  }
+
+  /* Key protections list */
+  .protections-list {
+    list-style: none;
+    margin-bottom: 1.3rem;
+  }
+  .protections-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .protections-list li::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--purple-mid);
+    flex-shrink: 0;
+    margin-top: 0.42rem;
+  }
+
+  /* ── CASES ── */
+  .cases-section {
+    margin-bottom: 1.3rem;
+  }
+  .cases-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+  .case-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.45rem 0.9rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .case-chip:hover { background: var(--purple-mid); transform: translateY(-1px); }
+  .case-chip:active { transform: translateY(0); }
+  .case-chip svg { width: 13px; height: 13px; opacity: 0.8; flex-shrink: 0; }
+
+  /* Case modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28,20,50,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 10px;
+    max-width: 520px;
+    width: 100%;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+    animation: modalIn 0.18s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--ink-soft);
+    line-height: 1;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: background 0.1s;
+  }
+  .modal-close:hover { background: var(--purple-light); }
+  .modal-case-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+    padding-right: 2rem;
+  }
+  .modal-case-year {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+  }
+  .modal-ruling {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 0.3rem;
+  }
+  .modal-ruling-text {
+    background: var(--text-block-bg);
+    border-left: 3px solid var(--text-block-border);
+    padding: 0.6rem 0.9rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.9rem;
+    border-radius: 0 3px 3px 0;
+  }
+  .modal-explain-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 0.3rem;
+  }
+  .modal-explain { font-size: 0.97rem; line-height: 1.65; color: var(--ink); }
+
+  .oyez-link {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--purple);
+    text-decoration: none;
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 1px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .oyez-link:hover { color: var(--purple-mid); border-color: var(--purple-mid); }
+
+  /* ── BIG QUESTIONS ── */
+  .questions-section {
+    background: var(--purple-light);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-top: 0.5rem;
+  }
+  .questions-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 0.6rem;
+  }
+  .question-item {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.97rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed var(--border-soft);
+  }
+  .question-item:last-child { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--purple);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Responsive */
+  @media (max-width: 540px) {
+    .amendment-card.open .card-body { padding: 1rem 1.1rem 1.2rem; }
+    .amend-ordinal { font-size: 2rem; }
+    .amend-number-block { min-width: 70px; padding: 0.8rem 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">BVA &nbsp;|&nbsp; Mr. Huebner &nbsp;|&nbsp; American Government</div>
+  <h1>Unit 3: The Bill of Rights</h1>
+  <div class="header-sub">The First Ten Amendments to the United States Constitution</div>
+  <div class="header-nav">Click an amendment to expand &nbsp;|&nbsp; Click cases to learn more</div>
+</header>
+
+<div class="intro-banner">
+  <p>The Constitution tells the government what it <strong>can</strong> do. The Bill of Rights tells it what it <strong>cannot</strong>. Ratified in 1791, these ten amendments were the price of getting enough states to approve the Constitution. <strong>No right is absolute</strong> — every single one has limits, and the Supreme Court has been arguing over those limits ever since.</p>
+</div>
+
+<div class="amendments-container">
+
+  <!-- AMENDMENT 1 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">1</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Five Fundamental Freedoms</div>
+        <div class="card-tagline">Religion, Speech, Press, Assembly, Petition</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">The government cannot set up an official religion, tell you what to believe, silence your speech, shut down the press, stop you from gathering with others, or prevent you from complaining directly to the government about something it's doing wrong. This is the most packed amendment in the entire Bill of Rights.</p>
+      <ul class="protections-list">
+        <li><strong>Establishment Clause:</strong> No official state religion. Government must stay neutral on religion.</li>
+        <li><strong>Free Exercise Clause:</strong> You can practice whatever religion you want. Government can regulate religious actions that harm others, but not belief itself.</li>
+        <li><strong>Freedom of Speech:</strong> Includes symbolic speech (flag burning, protests) and even hate speech. Not absolute: threatening speech, incitement to imminent violence, and fraud are not protected.</li>
+        <li><strong>Freedom of the Press:</strong> The government cannot censor or punish news outlets for what they publish. Slander and libel (provable lies meant to harm) are not protected.</li>
+        <li><strong>Freedom of Assembly &amp; Petition:</strong> You can protest. You can organize. You can send Congress a letter telling them they are doing everything wrong.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('tinker')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Tinker v. Des Moines (1969)
+        </button>
+        <button class="case-chip" onclick="openModal('snyder')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Snyder v. Phelps (2011)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Where is the line between protected speech and speech that causes real harm? Who decides?</div>
+        <div class="question-item">Can a private company like a social media platform silence your speech? Does the First Amendment apply?</div>
+        <div class="question-item">Should a business owner be able to refuse service based on religious beliefs? Does free exercise trump anti-discrimination law?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 2 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">2</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">The Right to Bear Arms</div>
+        <div class="card-tagline">The most debated amendment in modern America</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">You have the right to own and carry weapons. This is the only amendment that explains its own reason — it mentions a "well regulated Militia." Whether that reason limits the right to militia service or was simply the justification for a broader individual right is the central argument that has never been fully settled. This amendment was largely uncontroversial for most of American history. That changed dramatically in the last 40 years.</p>
+      <ul class="protections-list">
+        <li>Individuals have a constitutional right to own firearms for personal self-defense in the home (DC v. Heller, 2008).</li>
+        <li>The government can still regulate firearms — banning certain weapons, requiring background checks, restricting felons from ownership — but cannot ban handguns outright.</li>
+        <li>What counts as an "arm" and what regulations cross the constitutional line remain actively contested in courts today.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('heller')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          DC v. Heller (2008)
+        </button>
+        <button class="case-chip" onclick="openModal('bruen')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          NYSRPA v. Bruen (2022)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Does the militia clause limit the right — or was it just the Framers' stated reason for a broader individual right?</div>
+        <div class="question-item">What weapons are covered? Does the 2nd Amendment protect AR-15s, machine guns, or weapons that didn't exist in 1791?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 3 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">3</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">No Quartering of Soldiers</div>
+        <div class="card-tagline">The quiet foundation of the right to privacy</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"No soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">The government cannot force you to house soldiers in your home without your permission. This was a direct response to British policy during the colonial era — the Quartering Acts forced colonists to feed and shelter British troops. The government has never seriously tried this since ratification, so there is almost no legal controversy around it. Its deeper significance is what it implies: your home is your private space, and the government has no automatic right to enter it.</p>
+      <ul class="protections-list">
+        <li>No military occupation of private homes in peacetime.</li>
+        <li>Wartime quartering requires specific legal authorization — it cannot just happen.</li>
+        <li>Combined with the 4th Amendment, it forms the constitutional foundation for a general right to privacy in your own home.</li>
+      </ul>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Does the 3rd Amendment's protection of the home from government intrusion extend to digital privacy — your phone, your data, your cloud storage?</div>
+        <div class="question-item">This amendment has essentially never been litigated. Does that make it irrelevant, or is it so widely respected that nobody tries to violate it?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 4 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">4</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Search and Seizure</div>
+        <div class="card-tagline">Protection from unreasonable government searches</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Key Language</div>
+        <p>"The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause…"</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">Police and government agents cannot search your home, your car, your belongings, or your person without a warrant — and to get a warrant they need probable cause (a legitimate reason to believe a crime has occurred), and they have to describe specifically what they're looking for and where they're looking. "Just a hunch" is not enough.</p>
+      <ul class="protections-list">
+        <li>Evidence obtained through an illegal search is generally thrown out of court — this is called the Exclusionary Rule.</li>
+        <li>There are significant exceptions: consent searches, searches incident to arrest, plain view, exigent circumstances, and automobile exceptions have all created major carve-outs.</li>
+        <li>Courts are still actively debating how the 4th Amendment applies to cell phones, GPS tracking, and digital data.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('mapp')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Mapp v. Ohio (1961)
+        </button>
+        <button class="case-chip" onclick="openModal('carpenter')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Carpenter v. US (2018)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">What actually counts as "probable cause"? Is it objective, or does it depend on the judge?</div>
+        <div class="question-item">Does the 4th Amendment protect your cell phone location data, emails, or browsing history held by third-party companies?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 5 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">5</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Rights in Criminal Cases</div>
+        <div class="card-tagline">Grand jury, double jeopardy, self-incrimination, due process</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Key Language</div>
+        <p>"No person shall be held to answer for a capital, or otherwise infamous crime, unless on a presentment or indictment of a Grand Jury… nor shall any person be subject for the same offence to be twice put in jeopardy… nor be compelled in any criminal case to be a witness against himself, nor be deprived of life, liberty, or property, without due process of law…"</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">Before the government can put you on trial for a serious crime, it has to convince a grand jury there's enough evidence to justify it. Once you've been acquitted, they cannot try you again for the same crime. You cannot be forced to testify against yourself — this is "pleading the 5th." And the government cannot take your life, freedom, or property without going through the proper legal process.</p>
+      <ul class="protections-list">
+        <li><strong>Grand Jury:</strong> A group of citizens must decide there is enough evidence before a major trial can proceed.</li>
+        <li><strong>Double Jeopardy:</strong> You cannot be tried twice for the same crime after an acquittal. (Separate state and federal charges are technically different offenses.)</li>
+        <li><strong>Self-Incrimination:</strong> You have the right to stay silent. Prosecutors cannot use your silence against you.</li>
+        <li><strong>Due Process:</strong> The government must follow fair, established legal procedures before punishing you.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('miranda')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Miranda v. Arizona (1966)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">What actually constitutes "due process"? The Constitution says it's required but doesn't define it — courts have been filling that in ever since.</div>
+        <div class="question-item">If everyone knows someone is guilty but they walk free on a technicality, is that the system working or failing?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 6 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">6</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Right to a Fair Trial</div>
+        <div class="card-tagline">Speedy, public, impartial — with legal counsel</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury… and to have the Assistance of Counsel for his defence."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">If you are accused of a crime, the government cannot drag out your case indefinitely, hold a secret trial, hand-pick your jury, or leave you to face professional prosecutors without a lawyer. The word "speedy" means the government must move the case forward — it cannot just leave you sitting in jail waiting forever.</p>
+      <ul class="protections-list">
+        <li>You have the right to a jury of your peers — not hand-picked by the government.</li>
+        <li>Trials must be open to the public. Secret courts are unconstitutional in criminal cases.</li>
+        <li>You have the right to an attorney. If you cannot afford one, the government must provide one (Gideon v. Wainwright, 1963).</li>
+        <li>You have the right to confront witnesses against you and to call your own witnesses.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('gideon')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Gideon v. Wainwright (1963)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">What is an "impartial jury" in the age of social media, when jurors may have already seen wall-to-wall coverage of a case?</div>
+        <div class="question-item">Public defenders are often underfunded and overloaded with cases. Does the right to counsel mean anything if your attorney barely has time to meet you?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 7 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">7</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Rights in Civil Cases</div>
+        <div class="card-tagline">Jury trials in civil disputes</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Key Language</div>
+        <p>"In suits at common law, where the value in controversy shall exceed twenty dollars, the right of trial by jury shall be preserved…"</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">This covers civil cases — when one private party sues another, not when the government is charging you with a crime. If you are suing someone (or being sued) and the amount in dispute is significant, you have the right to have a jury decide the outcome instead of just a judge. Think of the difference between a criminal trial and a lawsuit over a car accident or a contract dispute.</p>
+      <ul class="protections-list">
+        <li>Applies to civil lawsuits, not criminal prosecutions (the 6th Amendment covers those).</li>
+        <li>The $20 threshold is technically still in the text — in practice the threshold for federal jury trials is much higher, and small claims courts (Judge Judy territory) operate without juries.</li>
+        <li>Once a jury decides the facts, a judge cannot simply override their factual findings.</li>
+      </ul>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Are ordinary citizens well-equipped to decide complex civil cases involving financial fraud, patent disputes, or medical malpractice?</div>
+        <div class="question-item">Most civil disputes are now settled through private arbitration instead of jury trials. Has the 7th Amendment become a formality?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 8 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">8</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Cruel and Unusual Punishment</div>
+        <div class="card-tagline">No excessive bail, fines, or inhumane punishment</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">The government cannot set an impossibly high bail just to keep you locked up before trial. Fines must be proportional to the offense. And punishments — including prison sentences — cannot be barbaric or wildly disproportionate to what you actually did. The phrase "cruel and unusual" has been one of the most debated in all of constitutional law.</p>
+      <ul class="protections-list">
+        <li>The Supreme Court has ruled the death penalty constitutional in general, but has limited it — no execution for non-homicide crimes, no execution for people who were juveniles when the crime occurred, no execution for those with serious intellectual disabilities.</li>
+        <li>Solitary confinement and mandatory minimum sentencing have both been challenged under this amendment with mixed results.</li>
+        <li>What counts as "cruel and unusual" is judged by "evolving standards of decency" — meaning the Court's interpretation changes as society's views change.</li>
+      </ul>
+      <div class="cases-section">
+        <div class="cases-label">Key Supreme Court Cases</div>
+        <button class="case-chip" onclick="openModal('roper')">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-5h1.5v5zm0-6.5h-1.5V3.5h1.5V5z"/></svg>
+          Roper v. Simmons (2005)
+        </button>
+      </div>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Is the death penalty itself "cruel and unusual" by modern standards, or does that depend entirely on how it's carried out?</div>
+        <div class="question-item">If "evolving standards of decency" determine what's cruel and unusual, who decides when society's standards have changed enough to matter?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 9 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">9</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Rights Retained by the People</div>
+        <div class="card-tagline">The list is not the limit</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"The enumeration in the Constitution of certain rights shall not be construed to deny or disparage others retained by the people."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">Just because a right is not written down here does not mean you don't have it. The Framers were worried that listing specific rights would imply those were the only rights protected. This amendment was their answer: the list is not exhaustive. The government cannot say "that right isn't in the Bill of Rights, so we can do whatever we want." Courts have used this amendment to recognize rights not explicitly listed — including the right to privacy.</p>
+      <ul class="protections-list">
+        <li>This amendment has rarely been the direct basis of a Supreme Court ruling on its own.</li>
+        <li>It was invoked in Griswold v. Connecticut (1965) to establish a right to privacy, which later became the foundation for Roe v. Wade and other landmark privacy cases.</li>
+        <li>The overturning of Roe in 2022 has reignited debate over what "unenumerated" rights actually mean.</li>
+      </ul>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">Who gets to decide what counts as an "unenumerated" right retained by the people — the courts, the legislature, or the people themselves?</div>
+        <div class="question-item">If a right is not in the text, how do we know whether it really exists? What's the standard?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMENDMENT 10 -->
+  <div class="amendment-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="amend-number-block">
+        <div class="amend-ordinal">10</div>
+        <div class="amend-word">Amendment</div>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Powers Reserved to the States</div>
+        <div class="card-tagline">Federalism's final word</div>
+      </div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="original-text">
+        <div class="original-text-label">Text of the Amendment</div>
+        <p>"The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people."</p>
+      </div>
+      <div class="plain-label">What It Means</div>
+      <p class="plain-text">If the Constitution doesn't give a specific power to the federal government — and doesn't say states can't have it — then that power belongs to the states or to the people. This is the constitutional backbone of federalism: the idea that the national government has limited, defined powers, and everything else belongs closer to home.</p>
+      <ul class="protections-list">
+        <li>This amendment has been used to argue that the federal government has overstepped its authority in areas like education, marijuana policy, and healthcare.</li>
+        <li>The "necessary and proper" clause and the Commerce Clause have allowed the federal government to expand significantly beyond the original list — leading to ongoing tension with the 10th Amendment.</li>
+        <li>Some legal scholars argue this amendment is mostly symbolic and rarely enforced. Others see it as an active limit on federal power.</li>
+      </ul>
+      <div class="questions-section">
+        <div class="questions-label">Big Questions</div>
+        <div class="question-item">What issues should be decided nationally versus by individual states? Does your answer change depending on the issue?</div>
+        <div class="question-item">Has the growth of the federal government effectively made the 10th Amendment irrelevant, or does it still have real force?</div>
+      <div class="card-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.amendments-container -->
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer>
+  BVA &nbsp;|&nbsp; Mr. Huebner &nbsp;|&nbsp; American Government &nbsp;|&nbsp; Unit 3
+</footer>
+
+<script>
+const cases = {
+  tinker: {
+    name: "Tinker v. Des Moines Independent Community School District",
+    year: "1969",
+    ruling: "7-2 decision in favor of students",
+    rulingText: "Students do not shed their constitutional rights at the schoolhouse gate.",
+    explain: "Students wore black armbands to protest the Vietnam War. The school suspended them, arguing it was disruptive. The Supreme Court ruled that the school violated the First Amendment. Schools can only restrict student speech if there is specific, reasonable evidence it would substantially disrupt school operations — not just because administrators are uncomfortable with the message.",
+    oyez: "https://www.oyez.org/cases/1968/21"
+  },
+  snyder: {
+    name: "Snyder v. Phelps",
+    year: "2011",
+    ruling: "8-1 decision in favor of Westboro Baptist Church",
+    rulingText: "Speech on public matters, even deeply offensive speech, is protected.",
+    explain: "Members of Westboro Baptist Church protested a Marine's funeral with signs containing hateful messages. The family sued for emotional distress. The Court ruled that because the protest addressed matters of public concern (military policy, religion, national morality) in a public place, it was fully protected speech — no matter how hurtful. The case is a stark illustration that the First Amendment protects speech we despise, not just speech we agree with.",
+    oyez: "https://www.oyez.org/cases/2010/09-751"
+  },
+  heller: {
+    name: "District of Columbia v. Heller",
+    year: "2008",
+    ruling: "5-4 decision striking down DC's handgun ban",
+    rulingText: "The Second Amendment protects an individual right to possess firearms for traditionally lawful purposes, including self-defense.",
+    explain: "DC had one of the strictest gun laws in the country — essentially banning all handguns and requiring rifles to be stored disassembled. Heller challenged the law. The Court ruled for the first time that the Second Amendment protects an individual right to own firearms, independent of militia service. However, the majority opinion also stated that this right is not unlimited — regulations like background checks and bans on felons owning weapons remain constitutional.",
+    oyez: "https://www.oyez.org/cases/2007/07-290"
+  },
+  bruen: {
+    name: "New York State Rifle & Pistol Association v. Bruen",
+    year: "2022",
+    ruling: "6-3 decision striking down New York's gun licensing law",
+    rulingText: "The government must justify gun regulations by pointing to a historical tradition of firearm regulation.",
+    explain: "New York required applicants for concealed carry permits to demonstrate a 'proper cause' — essentially a special need beyond ordinary self-defense. The Court struck this down and established a new test: gun regulations are only constitutional if they are consistent with the nation's historical tradition of firearm regulation going back to 1791. This decision has led to courts striking down a wave of gun laws across the country.",
+    oyez: "https://www.oyez.org/cases/2021/20-843"
+  },
+  mapp: {
+    name: "Mapp v. Ohio",
+    year: "1961",
+    ruling: "6-3 decision establishing the Exclusionary Rule for state courts",
+    rulingText: "Evidence obtained through an unconstitutional search cannot be used in a criminal prosecution.",
+    explain: "Police searched Dollree Mapp's home without a valid warrant, looking for a bombing suspect. They found obscene materials instead and charged her. The Supreme Court ruled that the Exclusionary Rule — which already applied in federal courts — must apply in state courts too. This was a landmark ruling: it gave the Fourth Amendment real teeth. If police violate your rights to get evidence, that evidence cannot be used against you at trial.",
+    oyez: "https://www.oyez.org/cases/1960/236"
+  },
+  carpenter: {
+    name: "Carpenter v. United States",
+    year: "2018",
+    ruling: "5-4 decision requiring a warrant for cell phone location data",
+    rulingText: "Accessing a week or more of cell phone location records requires a warrant.",
+    explain: "The FBI obtained months of Timothy Carpenter's cell phone location data from his carrier without a warrant, using it to place him near a series of robberies. The Court ruled this violated the Fourth Amendment. In the digital age, people carry devices that create detailed records of their movements — accessing that history is a search. The ruling was narrow and left many digital privacy questions open, but it was the first major signal that the Court would extend Fourth Amendment protections to digital data held by third parties.",
+    oyez: "https://www.oyez.org/cases/2017/16-402"
+  },
+  miranda: {
+    name: "Miranda v. Arizona",
+    year: "1966",
+    ruling: "5-4 decision requiring warnings before custodial interrogation",
+    rulingText: "Suspects must be told their rights before police questioning.",
+    explain: "Ernesto Miranda confessed to kidnapping and rape after two hours of police interrogation. He was never told he had the right to remain silent or the right to an attorney. The Supreme Court threw out the confession and established what are now called Miranda rights: before police question someone in custody, they must inform them that they have the right to remain silent, that anything they say can be used against them, and that they have the right to an attorney. If police skip these warnings, confessions obtained during that interrogation are generally inadmissible.",
+    oyez: "https://www.oyez.org/cases/1965/759"
+  },
+  gideon: {
+    name: "Gideon v. Wainwright",
+    year: "1963",
+    ruling: "Unanimous decision — right to an attorney applies in state courts",
+    rulingText: "Any person charged with a felony who cannot afford an attorney has the right to a court-appointed lawyer.",
+    explain: "Clarence Earl Gideon was charged with breaking into a pool hall in Florida. He asked the court for a lawyer; the judge refused, saying Florida only provided attorneys in capital cases. Gideon defended himself, was convicted, and handwrote a petition to the Supreme Court from prison. The Court ruled unanimously that the Sixth Amendment's right to counsel is a fundamental right that applies in all state courts. This decision created the public defender system across America.",
+    oyez: "https://www.oyez.org/cases/1962/155"
+  },
+  roper: {
+    name: "Roper v. Simmons",
+    year: "2005",
+    ruling: "5-4 decision banning juvenile execution",
+    rulingText: "It is unconstitutional to execute a person who was under 18 at the time of the crime.",
+    explain: "Christopher Simmons committed murder at age 17 and was sentenced to death. The Court ruled that executing someone for a crime committed as a juvenile violates the Eighth Amendment's prohibition on cruel and unusual punishment. The majority opinion pointed to a national consensus against juvenile execution, as well as scientific evidence about adolescent brain development. The ruling used the concept of 'evolving standards of decency' — what society considers acceptable punishment changes over time, and courts must reflect that change.",
+    oyez: "https://www.oyez.org/cases/2004/03-633"
+  }
+};
+
+function openModal(id) {
+  const c = cases[id];
+  if (!c) return;
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-case-name">${c.name}</div>
+    <div class="modal-case-year">${c.year} &nbsp;|&nbsp; ${c.ruling}</div>
+    <div class="modal-ruling">The Ruling</div>
+    <div class="modal-ruling-text">${c.rulingText}</div>
+    <div class="modal-explain-label">Why It Matters</div>
+    <p class="modal-explain">${c.explain}</p>
+    <a href="${c.oyez}" target="_blank" rel="noopener" class="oyez-link">Read full case on Oyez.org &#8599;</a>
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function toggleCard(headerEl) {
+  const card = headerEl.closest('.amendment-card');
+  card.classList.toggle('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.querySelectorAll('.case-chip').forEach(btn => {
+  btn.addEventListener('click', e => e.stopPropagation());
+});
+</script>
+</body>
+</html>
