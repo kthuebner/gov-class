@@ -30,8 +30,7 @@
 
   body {
     background-color: var(--parchment);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     color: var(--ink);
     font-family: 'Source Serif 4', Georgia, serif;
     font-size: 16px;
@@ -167,44 +166,15 @@
     max-width: 780px;
   }
 
-  /* ── TYPES OF GOVERNMENT ── */
-  .gov-tabs {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 1.5rem;
-  }
-  .gov-tab {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.2rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-bottom: none;
-    background: transparent;
-    color: var(--ink-faded);
-    transition: all 0.2s;
-    margin-bottom: -2px;
-  }
-  .gov-tab:hover { color: var(--accent); }
-  .gov-tab.active {
-    color: var(--accent-dark);
-    border-color: var(--border);
-    border-bottom-color: var(--parchment);
-    background: var(--parchment);
-  }
-  .gov-panel { display: none; }
-  .gov-panel.active { display: block; }
-
+  /* ── TYPES OF GOVERNMENT GRID ── */
   .gov-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
+  @media (max-width: 720px) { .gov-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .gov-grid { grid-template-columns: 1fr; } }
+
   .gov-card {
     background: #fff;
     border: 1px solid var(--border);
@@ -213,6 +183,8 @@
     padding: 1.2rem 1.3rem;
     box-shadow: 0 2px 6px var(--shadow);
   }
+  .gov-card.hybrid { border-top-color: var(--gold); }
+
   .gov-card-title {
     font-family: 'Oswald', sans-serif;
     font-size: 1.05rem;
@@ -222,6 +194,8 @@
     color: var(--accent-dark);
     margin-bottom: 0.3rem;
   }
+  .gov-card.hybrid .gov-card-title { color: #7a6010; }
+
   .gov-card-subtitle {
     font-family: 'Source Serif 4', serif;
     font-size: 0.82rem;
@@ -256,206 +230,110 @@
     border-radius: 2px;
     margin-bottom: 0.6rem;
   }
+  .gov-card.hybrid .legitimacy-tag {
+    background: var(--gold-pale);
+    color: #7a6010;
+  }
 
-  /* two-col layout for authoritarian/totalitarian */
-  .gov-two-col {
+  /* ── FLIP CARDS ── */
+  .flip-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
-  @media (max-width: 600px) { .gov-two-col { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .flip-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .flip-grid { grid-template-columns: 1fr; } }
 
-  .compare-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
+  .flip-card {
+    height: 140px;
+    perspective: 1000px;
+    cursor: pointer;
   }
-  .compare-card.total { border-top: 3px solid #8b2020; }
-  .compare-card.auth { border-top: 3px solid var(--gold); }
-  .compare-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.5rem;
-  }
-  .compare-card.total .compare-card-title { color: #8b2020; }
-  .compare-card.auth .compare-card-title { color: var(--gold); }
-  .compare-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
-  .compare-card .example { font-size: 0.85rem; color: var(--ink-faded); font-style: italic; }
-
-  /* power distribution diagram */
-  .power-diagram {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  @media (max-width: 640px) { .power-diagram { grid-template-columns: 1fr; } }
-  .power-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.2rem;
-    text-align: center;
-    box-shadow: 0 2px 6px var(--shadow);
+  .flip-card-inner {
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
   }
-  .power-bar-wrap {
-    display: flex;
-    height: 8px;
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-front, .flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     border-radius: 4px;
-    overflow: hidden;
-    margin: 0.8rem 0;
-    background: var(--parchment-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px var(--shadow);
   }
-  .power-bar-national { background: var(--accent); transition: width 0.3s; }
-  .power-bar-state { background: var(--gold); transition: width 0.3s; }
-  .power-card-title {
+  .flip-front {
+    background: var(--accent-dark);
+    background-image: linear-gradient(135deg, #2a3f7a, #4a6aaa);
+    border: 1px solid var(--border);
+  }
+  .flip-front-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .flip-front-name {
     font-family: 'Oswald', sans-serif;
     font-size: 1rem;
     font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent-dark);
-    margin-bottom: 0.3rem;
+    color: #fff;
+    line-height: 1.2;
   }
-  .power-card p { font-size: 0.88rem; color: var(--ink-light); }
-  .power-card .example { font-size: 0.82rem; color: var(--ink-faded); font-style: italic; margin-top: 0.5rem; }
-  .power-legend { display: flex; gap: 1.5rem; justify-content: center; font-size: 0.8rem; color: var(--ink-faded); margin-top: 0.5rem; }
-  .power-legend span { display: flex; align-items: center; gap: 0.4rem; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-
-  /* exec system cards */
-  .system-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 560px) { .system-grid { grid-template-columns: 1fr; } }
-  .system-card {
+  .flip-hint {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+  .flip-back {
     background: #fff;
     border: 1px solid var(--border);
     border-top: 3px solid var(--accent);
-    border-radius: 0 0 4px 4px;
-    padding: 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1rem 1.1rem;
   }
-  .system-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent-dark);
+  .flip-back-def {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.5;
     margin-bottom: 0.6rem;
   }
-  .system-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
-  .pro-con { display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; }
-  .pro, .con {
+  .flip-back-example {
     font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-style: italic;
+    border-top: 1px solid var(--parchment-dark);
+    padding-top: 0.5rem;
+    line-height: 1.4;
+  }
+  .flip-back-label {
     font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
-  }
-  .pro { background: #e8f4e8; color: #2a6b2a; }
-  .con { background: var(--red-pale); color: var(--red-violation); }
-
-  /* ── KEY PRINCIPLES ── */
-  .principles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .principle-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px var(--shadow);
-    overflow: hidden;
-  }
-  .principle-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 1.3rem;
-    cursor: pointer;
-    background: var(--parchment-mid);
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
-    gap: 0.8rem;
-  }
-  .principle-header:hover { background: var(--accent-pale); }
-  .principle-header-left { display: flex; align-items: center; gap: 0.9rem; }
-  .principle-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    opacity: 0.35;
-    line-height: 1;
-    flex-shrink: 0;
-    width: 2rem;
-    text-align: right;
-  }
-  .principle-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--ink);
-  }
-  .principle-chevron {
-    font-size: 0.75rem;
     color: var(--accent);
-    transition: transform 0.25s;
-    flex-shrink: 0;
+    margin-bottom: 0.15rem;
   }
-  .principle-card.open .principle-chevron { transform: rotate(180deg); }
-
-  .principle-body {
-    display: none;
-    padding: 1.3rem;
-  }
-  .principle-card.open .principle-body { display: block; }
-
-  .principle-def {
-    font-size: 0.97rem;
-    color: var(--ink-light);
-    margin-bottom: 1rem;
-    line-height: 1.65;
-  }
-
-  .principle-section-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .good-box {
-    background: var(--gold-pale);
-    border-left: 3px solid var(--gold);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-    margin-bottom: 0.9rem;
-  }
-  .good-box .principle-section-label { color: var(--gold); }
-  .good-box p { font-size: 0.9rem; color: var(--ink-light); }
-
-  .bad-box {
-    background: var(--red-pale);
-    border-left: 3px solid var(--red-violation);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-  }
-  .bad-box .principle-section-label { color: var(--red-violation); }
-  .bad-box p { font-size: 0.9rem; color: var(--ink-light); }
 
   /* ── SCENARIO CARDS ── */
   .scenarios-grid {
@@ -497,43 +375,13 @@
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink-faded);
-    margin-bottom: 0.5rem;
-  }
-  .reveal-btn {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1.1rem;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .reveal-btn:hover { background: var(--accent-dark); }
-  .scenario-answer {
-    display: none;
-    margin-top: 0.9rem;
-    background: var(--accent-pale);
-    border-left: 3px solid var(--accent);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-  }
-  .scenario-answer.revealed { display: block; }
-  .answer-principle {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--accent-dark);
     font-weight: 600;
-    margin-bottom: 0.3rem;
+    padding: 0.5rem 0.8rem;
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
   }
-  .answer-explanation { font-size: 0.9rem; color: var(--ink-light); }
 
   /* ── FOOTER ── */
   .page-footer {
@@ -547,20 +395,8 @@
     text-transform: uppercase;
   }
 
-  /* ── UTILITIES ── */
   @media (max-width: 700px) {
-    .gov-tabs { overflow-x: auto; flex-wrap: nowrap; }
-    .gov-tab { white-space: nowrap; font-size: 0.75rem; padding: 0.6rem 0.9rem; }
     .page-nav a { font-size: 0.72rem; padding: 0.65rem 0.9rem; }
-  }
-  .us-gov-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.1rem;
-    margin-bottom: 1.2rem;
-  }
-  @media (max-width: 780px) {
-    .us-gov-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -594,150 +430,58 @@
         <h2 class="section-title">Types of Government</h2>
       </div>
     </div>
-    <p class="section-intro">Every government in history can be categorized by who holds power, how much control they exercise, and how that power is structured. Understanding these categories is essential for comparing American democracy to other systems.</p>
+    <p class="section-intro">Every government can be categorized by who holds power and how that authority is justified. The key question is not just who rules, but what claim they make to make that rule legitimate.</p>
 
-    <!-- TABS -->
-    <div class="gov-tabs">
-      <button class="gov-tab active" onclick="switchTab('who')">Who Rules?</button>
-      <button class="gov-tab" onclick="switchTab('control')">How Much Control?</button>
-      <button class="gov-tab" onclick="switchTab('power')">How Is Power Distributed?</button>
-      <button class="gov-tab" onclick="switchTab('exec')">How Is the Executive Chosen?</button>
-    </div>
+    <div class="gov-grid">
 
-    <!-- WHO RULES -->
-    <div class="gov-panel active" id="panel-who">
-      <div class="gov-grid">
-        <div class="gov-card">
-          <div class="gov-card-title">Democracy / Republic</div>
-          <div class="gov-card-subtitle">Rule by the People</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Popular Sovereignty</div>
-          <p>Government derives its authority from the people. Citizens elect leaders who govern on their behalf. Widely considered the only truly legitimate form of government.</p>
-          <p class="example">Example: The United States, most of Europe, India, Japan.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Monarchy</div>
-          <div class="gov-card-subtitle">Rule by a King or Queen</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Divine Right</div>
-          <p>Power is held by a single hereditary ruler. Historically, monarchs claimed authority from God — to question the king was to question God himself.</p>
-          <p class="example">Example: Medieval European kingdoms; modern constitutional monarchies like the UK retain a monarch but with limited power.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Oligarchy</div>
-          <div class="gov-card-subtitle">Rule by a Small Group</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Varies — often military</div>
-          <p>Power is concentrated among a small elite — wealthy families, a military council, or a single party. Legitimacy is difficult to establish and often depends on force.</p>
-          <p class="example">Example: Ancient Sparta; many modern authoritarian states function as oligarchies in practice.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Theocracy</div>
-          <div class="gov-card-subtitle">Rule by Religious Leaders</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Divine Authority</div>
-          <p>Government is led by religious authorities who claim to enforce God's law. Questioning the government means questioning God — dissent is often treated as heresy.</p>
-          <p class="example">Example: Medieval papal states; Iran today, where religious scholars hold supreme authority above elected officials.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Dictatorship</div>
-          <div class="gov-card-subtitle">Rule by a Single Person</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Military Force</div>
-          <p>A single leader holds power, often having seized it by force. Many dictators are tyrants who use the military and coercion to maintain control. "Might makes right."</p>
-          <p class="example">Example: Adolf Hitler in Nazi Germany; Kim Jong-un in North Korea; Muammar Gaddafi in Libya.</p>
-        </div>
-        <div class="gov-card" style="border-top-color: var(--gold);">
-          <div class="gov-card-title" style="color: var(--gold);">Hybrid Regime</div>
-          <div class="gov-card-subtitle">Democracy as a Facade</div>
-          <div class="legitimacy-tag" style="background: var(--gold-pale); color: #7a6010;">Claim to Legitimacy: Rigged Elections</div>
-          <p>A hybrid regime holds elections and maintains the formal structures of democracy — a constitution, a legislature, political parties — but systematically rigs the game so the ruling party cannot lose. Independent courts, free press, and genuine opposition are gradually dismantled while the appearance of legitimacy is preserved.</p>
-          <p>This makes hybrid regimes harder to identify than outright dictatorships. Leaders like <strong>Viktor Orbán</strong> in Hungary have rewritten constitutions, packed courts, taken over media, and gerrymandered districts — all through technically legal processes — until the opposition has almost no path to power. Scholars call this <em>democratic backsliding</em> or <em>illiberal democracy</em>: the machinery of democracy without its substance.</p>
-          <p class="example">Examples: Hungary under Orbán (Fidesz party); Turkey under Erdoğan; Venezuela under Maduro; Russia, which holds elections but has no genuine opposition allowed to compete fairly.</p>
-        </div>
+      <div class="gov-card">
+        <div class="gov-card-title">Democracy / Republic</div>
+        <div class="gov-card-subtitle">Rule by the People</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Popular Sovereignty</div>
+        <p>Government derives its authority from the people. Citizens elect leaders who govern on their behalf. Widely considered the only truly legitimate form of government.</p>
+        <p class="example">Examples: United States, most of Europe, India, Japan.</p>
       </div>
-    </div>
 
-    <!-- HOW MUCH CONTROL -->
-    <div class="gov-panel" id="panel-control">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">Both authoritarian and totalitarian governments concentrate power — but the degree of control is fundamentally different. This distinction matters for understanding modern regimes.</p>
-      <div class="gov-two-col">
-        <div class="compare-card total">
-          <div class="compare-card-title">Totalitarian</div>
-          <p>The government exercises <strong>total control</strong> over nearly every aspect of society — the economy, the media, education, culture, family life, and even private belief. There is no meaningful separation between the state and everyday life.</p>
-          <p class="example">Examples: North Korea (the government controls information, movement, employment, and family loyalty); Nazi Germany; Stalinist USSR.</p>
-        </div>
-        <div class="compare-card auth">
-          <div class="compare-card-title">Authoritarian</div>
-          <p>The government exercises <strong>absolute political power</strong>, but does not necessarily control all aspects of daily life. Citizens may have some economic freedom or private life — but political opposition is suppressed.</p>
-          <p class="example">Example: Russia under Putin — he has bent or rewritten the constitution and eliminated political competition, but ordinary Russians have more personal freedom than citizens of North Korea.</p>
-        </div>
+      <div class="gov-card">
+        <div class="gov-card-title">Monarchy</div>
+        <div class="gov-card-subtitle">Rule by a King or Queen</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Divine Right</div>
+        <p>Power is held by a single hereditary ruler. Historically, monarchs claimed authority from God — to question the king was to question God.</p>
+        <p class="example">Examples: Medieval European kingdoms. Modern constitutional monarchies (UK, Sweden) retain a monarch but with little real power.</p>
       </div>
-    </div>
 
-    <!-- POWER DISTRIBUTION -->
-    <div class="gov-panel" id="panel-power">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">One of the most important structural questions in government design: how is power divided between a central (national) government and regional (state/local) governments?</p>
-      <div class="power-diagram">
-        <div class="power-card">
-          <div class="power-card-title">Unitary</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:90%"></div>
-            <div class="power-bar-state" style="width:10%"></div>
-          </div>
-          <p>The national government holds almost all meaningful power. Regional or local governments exist but are largely subordinate to the center.</p>
-          <p class="example">Very common: United Kingdom, France, China, Japan.</p>
-        </div>
-        <div class="power-card">
-          <div class="power-card-title">Federal</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:50%"></div>
-            <div class="power-bar-state" style="width:50%"></div>
-          </div>
-          <p>Power is constitutionally divided and shared between the national government and the states. Each level has its own defined authority.</p>
-          <p class="example">The United States. The Founders feared a too-powerful central government — federalism was their solution.</p>
-        </div>
-        <div class="power-card">
-          <div class="power-card-title">Confederal</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:15%"></div>
-            <div class="power-bar-state" style="width:85%"></div>
-          </div>
-          <p>Power rests almost entirely with the regional governments. The national government is weak and exists mainly to hold the coalition together.</p>
-          <p class="example">Very rare. The United States under the Articles of Confederation (before the Constitution); Switzerland historically.</p>
-        </div>
+      <div class="gov-card">
+        <div class="gov-card-title">Oligarchy</div>
+        <div class="gov-card-subtitle">Rule by a Small Group</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Wealth or Military Force</div>
+        <p>Power is concentrated among a small elite. Legitimacy is difficult to establish and often depends on coercion. Many authoritarian states function as oligarchies in practice.</p>
+        <p class="example">Examples: Ancient Sparta; Russia today, where a small circle of oligarchs and security officials holds real power.</p>
       </div>
-      <div class="power-legend">
-        <span><span class="legend-dot" style="background:var(--accent)"></span> National Government Power</span>
-        <span><span class="legend-dot" style="background:var(--gold)"></span> State/Regional Power</span>
-      </div>
-    </div>
 
-    <!-- EXEC CHOSEN -->
-    <div class="gov-panel" id="panel-exec">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">Even among democracies, the method of selecting the head of government differs significantly — with real consequences for how accountable that leader is to the people.</p>
-      <div class="system-grid">
-        <div class="system-card">
-          <div class="system-card-title">Presidential System</div>
-          <p>The head of the executive branch is elected directly by the people (or through an electoral college, as in the U.S.). The president serves a fixed term and is separate from the legislature.</p>
-          <p>The executive and legislative branches are <strong>independent</strong> of each other — which enables checks and balances but can also create gridlock.</p>
-          <div class="pro-con">
-            <span class="pro">Clear executive accountability</span>
-            <span class="pro">Fixed terms = stability</span>
-            <span class="con">Can lead to gridlock</span>
-          </div>
-          <p class="example" style="margin-top:0.8rem; font-style:italic; color:var(--ink-faded); font-size:0.85rem;">Examples: United States, Brazil, Mexico.</p>
-        </div>
-        <div class="system-card">
-          <div class="system-card-title">Parliamentary System</div>
-          <p>Citizens vote for representatives or parties. The party that wins the most seats in parliament selects the head of government — usually called the <strong>Prime Minister</strong>.</p>
-          <p>The executive <strong>comes from</strong> the legislature and must maintain its confidence. A vote of no confidence can remove the Prime Minister from power.</p>
-          <div class="pro-con">
-            <span class="pro">More responsive to parliament</span>
-            <span class="pro">Easier to remove failed leaders</span>
-            <span class="con">Less direct accountability to voters</span>
-          </div>
-          <p class="example" style="margin-top:0.8rem; font-style:italic; color:var(--ink-faded); font-size:0.85rem;">Examples: United Kingdom, Canada, Australia, Germany, Japan.</p>
-        </div>
+      <div class="gov-card">
+        <div class="gov-card-title">Theocracy</div>
+        <div class="gov-card-subtitle">Rule by Religious Leaders</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Divine Authority</div>
+        <p>Government is led by religious authorities who claim to enforce God's law. Questioning the government means questioning God — dissent is treated as heresy.</p>
+        <p class="example">Examples: Medieval papal states; Iran today, where religious scholars hold supreme authority above elected officials.</p>
       </div>
-      <div style="margin-top:1rem; background:var(--parchment-mid); border:1px solid var(--border); padding:1rem 1.2rem; border-radius:4px;">
-        <p style="font-size:0.9rem; color:var(--ink-light);"><strong style="font-family:'Oswald',sans-serif; letter-spacing:0.05em;">Note on Direct vs. Indirect Democracy:</strong> In a <em>direct democracy</em>, citizens vote on laws themselves (example: Ancient Athens; ballot initiatives in some U.S. states today). In an <em>indirect democracy</em> (republic), citizens elect representatives who vote on laws. The U.S. is an indirect democracy — we elect people to govern on our behalf.</p>
+
+      <div class="gov-card">
+        <div class="gov-card-title">Dictatorship</div>
+        <div class="gov-card-subtitle">Rule by a Single Person</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Military Force</div>
+        <p>A single leader holds power, often having seized it by force. Dictators typically use the military and coercion to maintain control. "Might makes right."</p>
+        <p class="example">Examples: Adolf Hitler in Nazi Germany; Kim Jong-un in North Korea; Muammar Gaddafi in Libya.</p>
       </div>
+
+      <div class="gov-card hybrid">
+        <div class="gov-card-title">Hybrid Regime</div>
+        <div class="gov-card-subtitle">Democracy as a Facade</div>
+        <div class="legitimacy-tag">Claim to Legitimacy: Rigged Elections</div>
+        <p>Holds elections and maintains the formal structures of democracy — but systematically rigs the game so the ruling party cannot lose. Courts, press, and genuine opposition are gradually dismantled. Scholars call this <em>democratic backsliding</em>.</p>
+        <p class="example">Examples: Hungary under Orban; Turkey under Erdogan; Venezuela under Maduro; Russia.</p>
+      </div>
+
     </div>
   </section>
 
@@ -752,178 +496,139 @@
         <h2 class="section-title">Key Principles of American Democracy</h2>
       </div>
     </div>
-    <p class="section-intro">American democracy rests on eight foundational principles. These aren't just abstract ideals — they are structural commitments built into the Constitution and tested throughout American history. Click each principle to explore its definition and how it works in practice.</p>
+    <p class="section-intro">American democracy rests on eight foundational principles built into the Constitution and tested throughout American history. Click each card to flip it and explore the definition and an example.</p>
 
-    <!-- US GOV TYPE BOX -->
-    <div style="background:#fff; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:0 0 4px 4px; padding:1.6rem 1.8rem; margin-bottom:2rem; box-shadow:0 2px 10px var(--shadow);">
-      <div style="font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem;">Before You Begin</div>
-      <h3 style="font-family:'Oswald',sans-serif; font-size:1.3rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink); margin-bottom:1rem;">What Type of Government Does the United States Have?</h3>
-      <div class="us-gov-grid">
-        <div style="background:var(--accent-pale); border-radius:3px; padding:1rem 1.1rem;">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--accent-dark); margin-bottom:0.5rem;">Democracy</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">At its core, a democracy is a system where political power comes from the people. The government rules with the consent of the governed. Citizens have a say — directly or indirectly — in the decisions that affect their lives. No single person or group can rule without accountability to the public.</p>
-        </div>
-        <div style="background:var(--gold-pale); border-radius:3px; padding:1rem 1.1rem;">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:#7a6010; margin-bottom:0.5rem;">Republic</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">A republic is a specific form of democracy — one where citizens elect representatives to make decisions on their behalf rather than voting directly on every law. It is an <em>indirect</em> democracy. Crucially, a republic also implies a system governed by law rather than the unchecked will of any individual or majority. The Founders deliberately chose a republic over a direct democracy, fearing that pure majority rule could become mob rule.</p>
-        </div>
-        <div style="background:var(--parchment-mid); border-radius:3px; padding:1rem 1.1rem; border:1px solid var(--border);">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink); margin-bottom:0.5rem;">Democratic Republic</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">The United States is a <strong>constitutional democratic republic</strong>. It is democratic because power ultimately derives from the people. It is a republic because citizens exercise that power through elected representatives rather than directly. And it is constitutional because the government's authority is defined and limited by the Constitution — no one, not even a majority, can simply do whatever they want.</p>
+    <div class="flip-grid">
+
+      <!-- 1 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">1</div>
+            <div class="flip-front-name">Popular Sovereignty</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">All government authority comes from the people. The government rules only with the consent of the governed.</div>
+            <div class="flip-back-example">Citizens vote for leaders, sign petitions, and can amend the Constitution. Power flows upward from the governed.</div>
+          </div>
         </div>
       </div>
-      <div style="background:var(--parchment-mid); border-left:3px solid var(--accent); padding:0.8rem 1rem; border-radius:0 3px 3px 0; font-size:0.88rem; color:var(--ink-light);">
-        <strong style="font-family:'Oswald',sans-serif; letter-spacing:0.05em;">Why the distinction matters:</strong> The Founders were deeply suspicious of pure democracy. James Madison wrote in Federalist No. 10 that direct democracies are prone to the "violence of faction" — where a passionate majority steamrolls the rights of minorities. A republic with constitutional constraints was their solution: a government that is responsive to the people but protected against the tyranny of the majority. The eight principles below are the specific commitments that make that balance possible.
+
+      <!-- 2 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">2</div>
+            <div class="flip-front-name">Limited Government</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">Government power is defined and bounded. It cannot act outside those limits.</div>
+            <div class="flip-back-example">The Constitution lists what Congress can do. The Bill of Rights lists what government cannot do — restrict speech, conduct unreasonable searches, deny due process.</div>
+          </div>
+        </div>
       </div>
+
+      <!-- 3 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">3</div>
+            <div class="flip-front-name">Separation of Powers</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">Government power is split among three branches. No single branch can do everything.</div>
+            <div class="flip-back-example">Congress passes laws. The President enforces them. The Supreme Court interprets them. Each branch operates in its own lane.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">4</div>
+            <div class="flip-front-name">Checks &amp; Balances</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">Each branch can limit the others, preventing any one from abusing power.</div>
+            <div class="flip-back-example">Congress can impeach the President. The President nominates Supreme Court justices, but the Senate confirms them. The Court can strike down laws as unconstitutional.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">5</div>
+            <div class="flip-front-name">Rule of Law</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">No one is above the law — not citizens, not officials, not the President. Rules apply equally to everyone.</div>
+            <div class="flip-back-example">Even the President can face criminal charges. Courts operate independently to ensure the law is applied fairly regardless of who is involved.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">6</div>
+            <div class="flip-front-name">Majority Rule</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">The side that wins elections earns the right to govern. Losers must accept the legitimate outcome.</div>
+            <div class="flip-back-example">The winning party takes power. The losing side accepts the result and competes in the next election rather than rejecting the results of the last one.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">7</div>
+            <div class="flip-front-name">Minority Rights</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">No majority has the right to strip away the basic rights of a minority. Majority rule has limits.</div>
+            <div class="flip-back-example">The Bill of Rights protects individual freedoms regardless of popular opinion. Courts can strike down laws that violate minority rights even if passed by large majorities.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-num">8</div>
+            <div class="flip-front-name">Federalism</div>
+            <div class="flip-hint">click to flip</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-label">Definition</div>
+            <div class="flip-back-def">Power is divided between the national government and the states. Neither can simply absorb the other's authority.</div>
+            <div class="flip-back-example">Education and law enforcement are largely left to the states. National defense, immigration, and currency are federal responsibilities.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="principles-grid">
-
-      <!-- 1. Popular Sovereignty -->
-      <div class="principle-card" id="pc1">
-        <div class="principle-header" onclick="togglePrinciple('pc1')">
-          <div class="principle-header-left">
-            <div class="principle-num">1</div>
-            <div class="principle-name">Popular Sovereignty</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Government is created by and derives all of its authority from the people. The citizens have a voice in their government — through voting, petitioning, amending the Constitution, and holding officials accountable.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Citizens vote for their leaders, participate in elections, sign petitions, and can amend the Constitution through defined processes. The government's power ultimately flows upward from the governed.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Limited Government -->
-      <div class="principle-card" id="pc2">
-        <div class="principle-header" onclick="togglePrinciple('pc2')">
-          <div class="principle-header-left">
-            <div class="principle-num">2</div>
-            <div class="principle-name">Limited Government</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">The government's power is defined, bounded, and limited. It is prevented from acting outside those boundaries. The Constitution specifies what the federal government can do; the Bill of Rights specifies what it cannot.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The Constitution lists the enumerated powers of Congress. The Bill of Rights prohibits the government from restricting speech, conducting unreasonable searches, or denying due process — among other protections.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Separation of Powers -->
-      <div class="principle-card" id="pc3">
-        <div class="principle-header" onclick="togglePrinciple('pc3')">
-          <div class="principle-header-left">
-            <div class="principle-num">3</div>
-            <div class="principle-name">Separation of Powers</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Government power is divided among three distinct branches — legislative, executive, and judicial — each with its own defined responsibilities. No single branch can do everything. This prevents dangerous concentrations of power.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Congress passes laws; the President enforces them as Chief Executive and Commander in Chief; the Supreme Court interprets them. Each branch operates in its own lane.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Checks and Balances -->
-      <div class="principle-card" id="pc4">
-        <div class="principle-header" onclick="togglePrinciple('pc4')">
-          <div class="principle-header-left">
-            <div class="principle-num">4</div>
-            <div class="principle-name">Checks &amp; Balances</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Each branch of government has the power to limit or "check" the actions of the other branches, preventing any one branch from abusing or accumulating too much power. Separation of powers defines the lanes; checks and balances enforce them.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Congress can impeach the President. The President nominates Supreme Court Justices — but the Senate must confirm them. The Supreme Court can strike down laws passed by Congress as unconstitutional.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Rule of Law -->
-      <div class="principle-card" id="pc5">
-        <div class="principle-header" onclick="togglePrinciple('pc5')">
-          <div class="principle-header-left">
-            <div class="principle-num">5</div>
-            <div class="principle-name">Rule of Law</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">No person is above the law — not citizens, not officials, not even the President. Rules must be followed consistently. Everyone is entitled to due process and a fair trial. The law applies equally to all.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The government cannot arbitrarily imprison people. Even the President can face criminal charges. Courts operate independently to ensure the law is applied fairly, regardless of who is involved.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Majority Rule -->
-      <div class="principle-card" id="pc6">
-        <div class="principle-header" onclick="togglePrinciple('pc6')">
-          <div class="principle-header-left">
-            <div class="principle-num">6</div>
-            <div class="principle-name">Majority Rule</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">In a democracy, the side that wins elections earns the right to govern. The losing side must accept the legitimacy of the outcome. Elections only function as a democratic mechanism if results are respected — even when the outcome is unwelcome.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The party or candidate that wins the election takes power. The losing side accepts the outcome, transitions peacefully, and continues to participate in the democratic process — competing in the next election rather than rejecting the results of the last one.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7. Protect Rights of the Minority -->
-      <div class="principle-card" id="pc7">
-        <div class="principle-header" onclick="togglePrinciple('pc7')">
-          <div class="principle-header-left">
-            <div class="principle-num">7</div>
-            <div class="principle-name">Protect Rights of the Minority</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Even in a democracy, no majority — no matter how large — has the right to strip away the basic rights and freedoms of a minority group or individual. Majority rule has limits. The winners cannot silence, oppress, or exclude the losers.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The Bill of Rights protects individual freedoms from government overreach regardless of popular opinion. Courts can strike down laws that violate minority rights even if those laws were passed by large majorities.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8. Federalism -->
-      <div class="principle-card" id="pc8">
-        <div class="principle-header" onclick="togglePrinciple('pc8')">
-          <div class="principle-header-left">
-            <div class="principle-num">8</div>
-            <div class="principle-name">Federalism</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Power is divided between the national government and the states. Neither can simply absorb the other's authority. Both levels of government have their own defined spheres of responsibility, creating a system of dual sovereignty.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Education and most law enforcement are left to the states. National defense, immigration, and currency are federal responsibilities. States can serve as "laboratories of democracy," trying different policies without requiring national consensus.</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end principles-grid -->
   </section>
 
   <!-- ════════════════════════════════════════════
@@ -937,7 +642,7 @@
         <h2 class="section-title">Scenario Challenge</h2>
       </div>
     </div>
-    <p class="section-intro">Each scenario below describes a situation in which one of the key principles of American democracy is being violated or threatened. Read each one carefully, identify which principle is under threat, and then reveal the answer to check your thinking.</p>
+    <p class="section-intro">Each scenario below describes a real or plausible situation. Read carefully and be ready to answer: which principle of American democracy is being violated?</p>
 
     <div class="scenarios-grid">
 
@@ -946,13 +651,8 @@
           <div class="scenario-number">Scenario 01</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">A state legislature redraws its congressional district maps after a census. Critics point out that the new maps are drawn in such a way that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal.</p>
+          <p class="scenario-question">A state legislature redraws its congressional district maps after a census. Critics point out that the new maps are drawn so that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Popular Sovereignty</div>
-            <p class="answer-explanation">When electoral maps are engineered to predetermine outcomes regardless of how people actually vote, the connection between the people's choices and their representation breaks down. This is gerrymandering — the process of carving out districts to manufacture results rather than reflect public will.</p>
-          </div>
         </div>
       </div>
 
@@ -961,13 +661,8 @@
           <div class="scenario-number">Scenario 02</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">Following a presidential election, the losing candidate claims — without presenting credible evidence — that the election was stolen through widespread fraud. The candidate pressures state officials to reverse their certified results and urges supporters to take action to stop Congress from certifying the outcome.</p>
+          <p class="scenario-question">Following a presidential election, the losing candidate claims — without credible evidence — that the election was stolen. The candidate pressures state officials to reverse certified results and urges supporters to take action to stop Congress from certifying the outcome.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Majority Rule</div>
-            <p class="answer-explanation">Democracy requires that losers accept legitimate outcomes. When a candidate refuses to concede a legitimate election and attempts to reverse the result through pressure or disruption, it undermines the foundational rule that elections determine who governs. A democracy where results only count when your side wins is not a democracy.</p>
-          </div>
         </div>
       </div>
 
@@ -978,11 +673,6 @@
         <div class="scenario-body">
           <p class="scenario-question">After a disputed local election, the President orders federal law enforcement agencies to take control of city government functions, overriding decisions made by the elected mayor and city council. The President argues that the federal government has a responsibility to maintain order.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Federalism</div>
-            <p class="answer-explanation">Local governance and law enforcement are functions constitutionally reserved to the states and localities. When the federal government uses troops or federal agencies to supersede the authority of elected state and local leaders — especially in areas the Constitution leaves to them — it collapses the division of power that federalism is designed to protect.</p>
-          </div>
         </div>
       </div>
 
@@ -991,13 +681,8 @@
           <div class="scenario-number">Scenario 04</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">A newly elected majority party passes a package of voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</p>
+          <p class="scenario-question">A newly elected majority party passes voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Protect Rights of the Minority</div>
-            <p class="answer-explanation">Majority rule does not give a winning party the right to deprive its opponents of the ability to participate in democracy. When the winners use political power to disenfranchise the losers, they are not just governing — they are eliminating the mechanism by which they could ever be removed from power. This is precisely what minority rights protections are designed to prevent.</p>
-          </div>
         </div>
       </div>
 
@@ -1006,13 +691,8 @@
           <div class="scenario-number">Scenario 05</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations and tie them up in legal proceedings heading into an election season.</p>
+          <p class="scenario-question">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations heading into an election season.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Rule of Law</div>
-            <p class="answer-explanation">The rule of law requires that the legal system operate as a neutral institution applying rules consistently to everyone. When a president uses the Justice Department as a political weapon to target opponents, the law ceases to be a standard applied equally — it becomes a tool of power. No principle is more fundamental to preventing tyranny than this one.</p>
-          </div>
         </div>
       </div>
 
@@ -1021,13 +701,8 @@
           <div class="scenario-number">Scenario 06</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">Facing pressure to respond quickly to an economic crisis, a President issues a series of executive orders that set new tax rates on imported goods, raise tariffs, and restructure federal spending — all without a vote in Congress. The White House argues that the economic situation constitutes a national emergency justifying executive action.</p>
+          <p class="scenario-question">Facing pressure to respond quickly to an economic crisis, a President issues executive orders that set new tax rates on imported goods, raise tariffs, and restructure federal spending — all without a vote in Congress. The White House argues the economic situation justifies executive action.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Separation of Powers</div>
-            <p class="answer-explanation">Article I of the Constitution explicitly grants Congress — not the President — the power to lay and collect taxes and to control federal spending. When the executive branch assumes these powers under the cover of emergency declarations, it is not just overstepping its authority; it is collapsing the wall between two branches that the Constitution deliberately separated.</p>
-          </div>
         </div>
       </div>
 
@@ -1038,11 +713,6 @@
         <div class="scenario-body">
           <p class="scenario-question">Congress issues subpoenas to senior White House officials as part of an oversight investigation into potential executive misconduct. The President instructs all administration officials to refuse to comply, claiming that executive privilege shields the entire executive branch from Congressional oversight.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Checks &amp; Balances</div>
-            <p class="answer-explanation">Congressional oversight is one of the primary constitutional mechanisms for checking executive power. If the President can simply refuse all oversight — shielding the entire executive branch from scrutiny — the legislative check on executive misconduct becomes unenforceable. A check that can be ignored at will is no check at all.</p>
-          </div>
         </div>
       </div>
 
@@ -1051,17 +721,12 @@
           <div class="scenario-number">Scenario 08</div>
         </div>
         <div class="scenario-body">
-          <p class="scenario-question">A state passes a law declaring that federal environmental regulations no longer apply within its borders, citing its status as a sovereign state. The governor argues that states have the right to reject any federal law they believe exceeds Congress's authority — and that the state will not enforce federal rules it disagrees with.</p>
+          <p class="scenario-question">A state passes a law declaring that federal environmental regulations no longer apply within its borders, citing its status as a sovereign state. The governor argues that states have the right to reject any federal law they believe exceeds Congress's authority.</p>
           <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Limited Government / Federalism</div>
-            <p class="answer-explanation">Federalism divides power between national and state governments, but the Supremacy Clause of the Constitution establishes that federal law is the supreme law of the land in areas where Congress has constitutional authority to act. States cannot unilaterally "nullify" federal law — this doctrine was rejected after the Civil War. Federalism works in both directions: just as the federal government cannot override states in their constitutional sphere, states cannot simply opt out of valid federal authority in the national sphere.</p>
-          </div>
         </div>
       </div>
 
-    </div><!-- end scenarios-grid -->
+    </div>
   </section>
 
 </main>
@@ -1070,30 +735,5 @@
   Blue Valley Academy &mdash; American Government &mdash; Unit 1
 </footer>
 
-<script>
-  // TAB SWITCHING
-  function switchTab(panelId) {
-    document.querySelectorAll('.gov-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.gov-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('panel-' + panelId).classList.add('active');
-    event.currentTarget.classList.add('active');
-  }
-
-  // PRINCIPLE ACCORDION — true independent toggle
-  function togglePrinciple(id) {
-    const card = document.getElementById(id);
-    card.classList.toggle('open');
-  }
-
-  // SCENARIO REVEAL
-  function revealAnswer(btn) {
-    const answer = btn.nextElementSibling;
-    answer.classList.add('revealed');
-    btn.textContent = 'Answer Revealed';
-    btn.disabled = true;
-    btn.style.background = 'var(--ink-faded)';
-    btn.style.cursor = 'default';
-  }
-</script>
 </body>
 </html>
