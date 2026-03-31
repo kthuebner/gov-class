@@ -17,9 +17,10 @@
     --accent-dark: #3a5a9a;
     --accent-light: #8aaae0;
     --accent-pale: #dce6f5;
-    --accent-glow: rgba(96,128,192,0.15);
     --red-violation: #8b2020;
-    --red-pale: #f5e8e8;
+    --red-pale: #fdf0f0;
+    --green-uphold: #1a5c2e;
+    --green-pale: #edf7f0;
     --gold: #b8952a;
     --gold-pale: #f5f0dc;
     --border: rgba(96,128,192,0.25);
@@ -138,7 +139,6 @@
     opacity: 0.25;
     flex-shrink: 0;
   }
-  .section-title-wrap {}
   .section-label {
     font-family: 'Oswald', sans-serif;
     font-size: 0.72rem;
@@ -184,7 +184,6 @@
     box-shadow: 0 2px 6px var(--shadow);
   }
   .gov-card.hybrid { border-top-color: var(--gold); }
-
   .gov-card-title {
     font-family: 'Oswald', sans-serif;
     font-size: 1.05rem;
@@ -195,7 +194,6 @@
     margin-bottom: 0.3rem;
   }
   .gov-card.hybrid .gov-card-title { color: #7a6010; }
-
   .gov-card-subtitle {
     font-family: 'Source Serif 4', serif;
     font-size: 0.82rem;
@@ -205,18 +203,10 @@
     padding-bottom: 0.7rem;
     border-bottom: 1px solid var(--parchment-dark);
   }
-  .gov-card p {
-    font-size: 0.92rem;
-    color: var(--ink-light);
-    margin-bottom: 0.5rem;
-  }
+  .gov-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
   .gov-card .example {
-    font-size: 0.85rem;
-    color: var(--ink-faded);
-    font-style: italic;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--parchment-dark);
+    font-size: 0.85rem; color: var(--ink-faded); font-style: italic;
+    margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--parchment-dark);
   }
   .legitimacy-tag {
     display: inline-block;
@@ -230,12 +220,9 @@
     border-radius: 2px;
     margin-bottom: 0.6rem;
   }
-  .gov-card.hybrid .legitimacy-tag {
-    background: var(--gold-pale);
-    color: #7a6010;
-  }
+  .gov-card.hybrid .legitimacy-tag { background: var(--gold-pale); color: #7a6010; }
 
-  /* ── FLIP CARDS ── */
+  /* ── PRINCIPLE FLIP CARDS ── */
   .flip-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -245,7 +232,7 @@
   @media (max-width: 480px) { .flip-grid { grid-template-columns: 1fr; } }
 
   .flip-card {
-    height: 140px;
+    height: 170px;
     perspective: 1000px;
     cursor: pointer;
   }
@@ -256,21 +243,15 @@
     transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;
   }
-  .flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
-  }
+  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
   .flip-front, .flip-back {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    text-align: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 1rem; text-align: center;
     box-shadow: 0 2px 8px var(--shadow);
   }
   .flip-front {
@@ -280,107 +261,156 @@
   }
   .flip-front-num {
     font-family: 'Oswald', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.15);
-    line-height: 1;
-    margin-bottom: 0.3rem;
+    font-size: 1.8rem; font-weight: 700;
+    color: rgba(255,255,255,0.15); line-height: 1; margin-bottom: 0.3rem;
   }
   .flip-front-name {
     font-family: 'Oswald', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #fff;
-    line-height: 1.2;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff; line-height: 1.2;
   }
-  .flip-hint {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.4);
-    font-style: italic;
-    margin-top: 0.5rem;
-  }
+  .flip-hint { font-family: 'Source Serif 4', serif; font-size: 0.7rem; color: rgba(255,255,255,0.4); font-style: italic; margin-top: 0.5rem; }
   .flip-back {
     background: #fff;
     border: 1px solid var(--border);
     border-top: 3px solid var(--accent);
     transform: rotateY(180deg);
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
+    justify-content: flex-start; align-items: flex-start; text-align: left;
     padding: 1rem 1.1rem;
   }
-  .flip-back-def {
-    font-size: 0.85rem;
-    color: var(--ink-light);
-    line-height: 1.5;
-    margin-bottom: 0.6rem;
-  }
-  .flip-back-example {
-    font-size: 0.78rem;
-    color: var(--ink-faded);
-    font-style: italic;
-    border-top: 1px solid var(--parchment-dark);
-    padding-top: 0.5rem;
-    line-height: 1.4;
-  }
   .flip-back-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.15rem;
+    font-family: 'Oswald', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.15rem;
+  }
+  .flip-back-def { font-size: 0.85rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 0.6rem; }
+  .flip-back-example {
+    font-size: 0.78rem; color: var(--ink-faded); font-style: italic;
+    border-top: 1px solid var(--parchment-dark); padding-top: 0.5rem; line-height: 1.4;
   }
 
-  /* ── SCENARIO CARDS ── */
+  #principles { padding-bottom: 2.5rem; }
+
+  /* ── SCENARIO FLIP CARDS ── */
   .scenarios-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem;
   }
-  .scenario-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px var(--shadow);
-    overflow: hidden;
+  @media (max-width: 800px) { .scenarios-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .scenarios-grid { grid-template-columns: 1fr; } }
+
+  /* instruction legend */
+  .scenario-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
   }
-  .scenario-card-top {
-    background: var(--accent-dark);
-    padding: 0.5rem 1rem;
+  .legend-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-  }
-  .scenario-number {
+    gap: 0.5rem;
     font-family: 'Oswald', sans-serif;
     font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent-light);
+    color: var(--ink-faded);
   }
-  .scenario-body { padding: 1.2rem 1.3rem; }
-  .scenario-question {
-    font-size: 0.97rem;
-    color: var(--ink);
-    margin-bottom: 1.1rem;
-    line-height: 1.6;
+  .legend-dot {
+    width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
   }
-  .scenario-prompt {
+  .legend-dot.green { background: var(--green-uphold); }
+  .legend-dot.red { background: var(--red-violation); }
+
+  /* scenario card flip container */
+  .sc-flip {
+    height: 300px;
+    perspective: 1200px;
+    cursor: pointer;
+  }
+  .sc-flip-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .sc-flip.flipped .sc-flip-inner { transform: rotateY(180deg); }
+
+  .sc-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px var(--shadow);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* GREEN side — principle upheld */
+  .sc-face.sc-green {
+    background: var(--green-pale);
+    border: 1px solid rgba(26,92,46,0.2);
+    border-top: 4px solid var(--green-uphold);
+  }
+  .sc-face-header {
+    padding: 0.6rem 1rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sc-face.sc-green .sc-face-header { background: var(--green-uphold); }
+  .sc-face.sc-red .sc-face-header { background: var(--red-violation); }
+
+  .sc-face-label {
     font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+  }
+  .sc-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55);
+  }
+  .sc-body {
+    padding: 1rem 1.1rem;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .sc-text {
+    font-size: 0.9rem; color: var(--ink-light); line-height: 1.55;
+    flex: 1;
+  }
+  .sc-prompt {
+    margin-top: 0.8rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent-dark);
-    font-weight: 600;
-    padding: 0.5rem 0.8rem;
-    background: var(--accent-pale);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 2px 2px 0;
+    padding: 0.4rem 0.7rem;
+    border-radius: 2px;
+    align-self: flex-start;
+  }
+  .sc-face.sc-green .sc-prompt {
+    background: rgba(26,92,46,0.1);
+    color: var(--green-uphold);
+    border-left: 3px solid var(--green-uphold);
+  }
+  .sc-face.sc-red .sc-prompt {
+    background: rgba(139,32,32,0.08);
+    color: var(--red-violation);
+    border-left: 3px solid var(--red-violation);
+  }
+  .sc-flip-hint {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.68rem; font-style: italic;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* RED side — principle violated */
+  .sc-face.sc-red {
+    background: var(--red-pale);
+    border: 1px solid rgba(139,32,32,0.15);
+    border-top: 4px solid var(--red-violation);
+    transform: rotateY(180deg);
   }
 
   /* ── FOOTER ── */
@@ -433,7 +463,6 @@
     <p class="section-intro">Every government can be categorized by who holds power and how that authority is justified. The key question is not just who rules, but what claim they make to make that rule legitimate.</p>
 
     <div class="gov-grid">
-
       <div class="gov-card">
         <div class="gov-card-title">Democracy / Republic</div>
         <div class="gov-card-subtitle">Rule by the People</div>
@@ -441,7 +470,6 @@
         <p>Government derives its authority from the people. Citizens elect leaders who govern on their behalf. Widely considered the only truly legitimate form of government.</p>
         <p class="example">Examples: United States, most of Europe, India, Japan.</p>
       </div>
-
       <div class="gov-card">
         <div class="gov-card-title">Monarchy</div>
         <div class="gov-card-subtitle">Rule by a King or Queen</div>
@@ -449,7 +477,6 @@
         <p>Power is held by a single hereditary ruler. Historically, monarchs claimed authority from God — to question the king was to question God.</p>
         <p class="example">Examples: Medieval European kingdoms. Modern constitutional monarchies (UK, Sweden) retain a monarch but with little real power.</p>
       </div>
-
       <div class="gov-card">
         <div class="gov-card-title">Oligarchy</div>
         <div class="gov-card-subtitle">Rule by a Small Group</div>
@@ -457,7 +484,6 @@
         <p>Power is concentrated among a small elite. Legitimacy is difficult to establish and often depends on coercion. Many authoritarian states function as oligarchies in practice.</p>
         <p class="example">Examples: Ancient Sparta; Russia today, where a small circle of oligarchs and security officials holds real power.</p>
       </div>
-
       <div class="gov-card">
         <div class="gov-card-title">Theocracy</div>
         <div class="gov-card-subtitle">Rule by Religious Leaders</div>
@@ -465,7 +491,6 @@
         <p>Government is led by religious authorities who claim to enforce God's law. Questioning the government means questioning God — dissent is treated as heresy.</p>
         <p class="example">Examples: Medieval papal states; Iran today, where religious scholars hold supreme authority above elected officials.</p>
       </div>
-
       <div class="gov-card">
         <div class="gov-card-title">Dictatorship</div>
         <div class="gov-card-subtitle">Rule by a Single Person</div>
@@ -473,7 +498,6 @@
         <p>A single leader holds power, often having seized it by force. Dictators typically use the military and coercion to maintain control. "Might makes right."</p>
         <p class="example">Examples: Adolf Hitler in Nazi Germany; Kim Jong-un in North Korea; Muammar Gaddafi in Libya.</p>
       </div>
-
       <div class="gov-card hybrid">
         <div class="gov-card-title">Hybrid Regime</div>
         <div class="gov-card-subtitle">Democracy as a Facade</div>
@@ -481,7 +505,6 @@
         <p>Holds elections and maintains the formal structures of democracy — but systematically rigs the game so the ruling party cannot lose. Courts, press, and genuine opposition are gradually dismantled. Scholars call this <em>democratic backsliding</em>.</p>
         <p class="example">Examples: Hungary under Orban; Turkey under Erdogan; Venezuela under Maduro; Russia.</p>
       </div>
-
     </div>
   </section>
 
@@ -499,8 +522,6 @@
     <p class="section-intro">American democracy rests on eight foundational principles built into the Constitution and tested throughout American history. Click each card to flip it and explore the definition and an example.</p>
 
     <div class="flip-grid">
-
-      <!-- 1 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -515,8 +536,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 2 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -531,8 +550,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 3 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -547,8 +564,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 4 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -563,8 +578,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 5 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -579,8 +592,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 6 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -595,8 +606,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 7 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -611,8 +620,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 8 -->
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">
@@ -627,7 +634,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -642,87 +648,246 @@
         <h2 class="section-title">Scenario Challenge</h2>
       </div>
     </div>
-    <p class="section-intro">Each scenario below describes a real or plausible situation. Read carefully and be ready to answer: which principle of American democracy is being violated?</p>
+    <p class="section-intro">Each card shows two versions of the same situation. The green side shows the principle working as intended. The red side shows it breaking down. Flip to see both — then be ready to answer: which principle is mainly at play?</p>
+
+    <div class="scenario-legend">
+      <div class="legend-item"><div class="legend-dot green"></div> Principle upheld</div>
+      <div class="legend-item"><div class="legend-dot red"></div> Principle violated</div>
+    </div>
 
     <div class="scenarios-grid">
 
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 01</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A state legislature redraws its congressional district maps after a census. Critics point out that the new maps are drawn so that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 02</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Following a presidential election, the losing candidate claims — without credible evidence — that the election was stolen. The candidate pressures state officials to reverse certified results and urges supporters to take action to stop Congress from certifying the outcome.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 03</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">After a disputed local election, the President orders federal law enforcement agencies to take control of city government functions, overriding decisions made by the elected mayor and city council. The President argues that the federal government has a responsibility to maintain order.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
+      <!-- S01: Popular Sovereignty -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 01 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">After a census, the state legislature redraws congressional districts using an independent bipartisan commission. The new maps are tested against neutral criteria — compactness, contiguity, community boundaries — and result in district outcomes that closely track the statewide vote share.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 01</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">A state legislature redraws its congressional districts so that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal. Critics call it gerrymandering.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 04</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A newly elected majority party passes voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 05</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations heading into an election season.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 06</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Facing pressure to respond quickly to an economic crisis, a President issues executive orders that set new tax rates on imported goods, raise tariffs, and restructure federal spending — all without a vote in Congress. The White House argues the economic situation justifies executive action.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
+      <!-- S02: Majority Rule -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 02 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Following a close presidential election, the losing candidate reviews the certified results, acknowledges the outcome, and concedes publicly. The candidate directs legal challenges through the courts, all of which are decided against them, and then participates in the peaceful transfer of power.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 02</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Following a presidential election, the losing candidate claims — without credible evidence — that the election was stolen. The candidate pressures state officials to reverse certified results and urges supporters to take action to stop Congress from certifying the outcome.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 07</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Congress issues subpoenas to senior White House officials as part of an oversight investigation into potential executive misconduct. The President instructs all administration officials to refuse to comply, claiming that executive privilege shields the entire executive branch from Congressional oversight.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
+      <!-- S03: Checks and Balances -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 03 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">The President nominates individuals to the cabinet and the Supreme Court. The Senate holds rigorous confirmation hearings, scrutinizes each nominee's record and qualifications, rejects two who appear unfit for the role, and confirms the rest only after thorough questioning.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 03</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">The President nominates several individuals to federal positions. Multiple nominees have no relevant experience and have stated they intend to use their offices to serve the President's political agenda. The Senate holds brief hearings and confirms all of them without serious scrutiny or dissent.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 08</div>
+      <!-- S04: Minority Rights -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 04 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">A newly elected majority party passes election administration reforms. The changes are reviewed by federal courts, which strike down provisions that would have disproportionately burdened minority voters. The surviving reforms apply equally to all voters regardless of party affiliation.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 04</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">A newly elected majority party passes voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
         </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A state passes a law declaring that federal environmental regulations no longer apply within its borders, citing its status as a sovereign state. The governor argues that states have the right to reject any federal law they believe exceeds Congress's authority.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
+      </div>
+
+      <!-- S05: Rule of Law -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 05 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Allegations surface that a political opponent of the President may have engaged in financial misconduct. The President directs the Justice Department to investigate — through its normal independent processes — and explicitly states that the decision to prosecute or decline belongs entirely to career prosecutors, not the White House.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 05</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations heading into an election season.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S06: Separation of Powers -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 06 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Facing an economic crisis, the President proposes a package of tariff increases and spending adjustments, then works with Congressional leaders to pass the package through both chambers. The President signs the resulting legislation into law.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 06</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Facing pressure to respond quickly to an economic crisis, a President issues executive orders setting new tax rates on imported goods, raising tariffs, and restructuring federal spending — all without a vote in Congress. The White House argues the situation justifies executive action.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S07: Checks and Balances / Congressional Oversight -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 07 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Congress issues subpoenas to White House officials as part of an oversight investigation. The President asserts executive privilege over a narrow set of documents involving confidential deliberations, but directs all other officials to cooperate fully. Courts resolve the privilege dispute and the investigation proceeds.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 07</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Congress issues subpoenas to senior White House officials as part of an oversight investigation. The President instructs all administration officials to refuse to comply, claiming executive privilege shields the entire executive branch from Congressional oversight — absolutely and without exception.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S08: Federalism -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 08 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Crime spikes in a major city. The President offers federal law enforcement resources and National Guard support. The governor and mayor review the offer, request assistance with a specific task, and enter a formal agreement with the federal government that defines the scope of federal involvement and preserves local command authority.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 08</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">The President deploys National Guard troops to a major city to assist with policing. Both the mayor and governor formally object, stating they have not requested federal assistance and do not want it. The President deploys the troops anyway, arguing the federal government has an obligation to protect American citizens.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S09: Separation of Powers (emergency/tariffs) -->
+      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
+        <div class="sc-flip-inner">
+          <div class="sc-face sc-green">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Upheld</div>
+              <div class="sc-num">Scenario 09 <span class="sc-flip-hint">click to flip</span></div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Facing a trade dispute, the President urges Congress to authorize new tariffs. Congress holds hearings, debates the scope of the tariffs, and passes legislation granting the President limited authority to adjust rates within defined bounds. The President signs the bill and implements the tariffs under that grant of authority.</div>
+              <div class="sc-prompt">Which principle is at work?</div>
+            </div>
+          </div>
+          <div class="sc-face sc-red">
+            <div class="sc-face-header">
+              <div class="sc-face-label">Principle Violated</div>
+              <div class="sc-num">Scenario 09</div>
+            </div>
+            <div class="sc-body">
+              <div class="sc-text">Facing pressure over a trade dispute, the President declares a national economic emergency and uses that declaration to impose sweeping new tariffs on hundreds of imported goods without a vote in Congress. The White House argues the emergency declaration gives the executive broad authority to act unilaterally on trade.</div>
+              <div class="sc-prompt">Which principle is being violated?</div>
+            </div>
+          </div>
         </div>
       </div>
 
