@@ -647,7 +647,7 @@ function nextRoundL3(){
     document.getElementById('l3-layout').style.display='none';
     document.getElementById('l3-round-ind').style.display='none';
     document.getElementById('l3-score-text').innerHTML=
-      'You worked through all twelve scenarios.<br><span style="font-family:'Oswald','Arial Narrow',Arial,sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:0.06em;">Final Score: '+state[3].score+' / 12</span>';
+      `You worked through all twelve scenarios.<br><span style="font-family:Oswald,sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:0.06em;">Final Score: ${state[3].score} / 12</span>`;
     document.getElementById('l3-complete').classList.add('show');
   }else{
     document.getElementById('l3-banner').classList.remove('show');
