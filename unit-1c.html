@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Key Principles: American Government</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -16,12 +18,12 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Lora', serif;
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
   background: #1c2b3a;
   background-image:
     repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.015) 50px, rgba(255,255,255,0.015) 51px),
     repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.015) 50px, rgba(255,255,255,0.015) 51px);
-  min-height: 100vh; color: var(--ink);
+  min-height: 100vh; color: var(--ink); overflow-x: hidden;
 }
 .site-header {
   background: linear-gradient(135deg, var(--steel-dark) 0%, var(--steel) 60%, var(--steel-light) 100%);
@@ -32,11 +34,11 @@ body {
   content: ''; position: absolute; inset: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
-.site-header h1 { font-family:'Oswald',sans-serif; font-weight:700; font-size:2.2rem; color:#fff; letter-spacing:0.06em; text-transform:uppercase; position:relative; }
+.site-header h1 { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:2.2rem; color:#fff; letter-spacing:0.06em; text-transform:uppercase; position:relative; }
 .site-header p { color:rgba(255,255,255,0.7); font-size:0.92rem; margin-top:6px; font-style:italic; position:relative; }
 .level-tabs { display:flex; justify-content:center; padding:28px 40px 0; }
 .level-tab {
-  font-family:'Oswald',sans-serif; font-weight:600; font-size:0.95rem;
+  font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:600; font-size:0.95rem;
   letter-spacing:0.08em; text-transform:uppercase; padding:12px 36px;
   background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45);
   border:2px solid rgba(255,255,255,0.12); cursor:pointer; transition:all 0.2s;
@@ -50,22 +52,22 @@ body {
 .level-panel.active { display:block; }
 .game-wrap { max-width:1120px; margin:0 auto; padding:32px 24px 80px; }
 .level-intro { text-align:center; margin-bottom:24px; }
-.level-intro h2 { font-family:'Oswald',sans-serif; font-weight:700; font-size:1.55rem; color:#fff; letter-spacing:0.05em; text-transform:uppercase; }
+.level-intro h2 { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:1.55rem; color:#fff; letter-spacing:0.05em; text-transform:uppercase; }
 .level-intro p { color:rgba(255,255,255,0.6); font-size:0.88rem; margin-top:6px; font-style:italic; }
 .round-indicator { display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:24px; }
 .round-pip { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.25); transition:all 0.3s; }
 .round-pip.active { background:var(--gold); border-color:var(--gold); transform:scale(1.3); }
 .round-pip.done { background:var(--green-light); border-color:var(--green-light); }
-.round-label { font-family:'Oswald',sans-serif; font-size:0.82rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase; }
+.round-label { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.82rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase; }
 .game-layout { display:grid; grid-template-columns:220px 1fr; gap:22px; align-items:start; }
 .sidebar { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:16px 12px; position:sticky; top:20px; }
-.sidebar-title { font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-align:center; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08); }
+.sidebar-title { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-align:center; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08); }
 .chip {
   display:flex; align-items:center; gap:9px;
   background:var(--parchment); border:2px solid var(--parchment-dark);
   border-radius:10px; padding:8px 11px; margin-bottom:8px;
   cursor:grab; transition:all 0.2s; user-select:none;
-  font-family:'Oswald',sans-serif; font-weight:600;
+  font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:600;
   font-size:0.82rem; letter-spacing:0.03em;
   color:var(--ink); text-transform:uppercase;
 }
@@ -94,7 +96,7 @@ body {
   margin-top:13px; min-height:40px;
   background:rgba(58,97,134,0.07); border:2px dashed rgba(58,97,134,0.28);
   border-radius:7px; display:flex; align-items:center; justify-content:center;
-  font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:0.08em;
+  font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.68rem; letter-spacing:0.08em;
   color:rgba(58,97,134,0.45); text-transform:uppercase; transition:all 0.2s; gap:6px;
 }
 .def-card-drop.has-chip { background:var(--steel); border-color:var(--steel); color:#fff; font-size:0.75rem; }
@@ -104,7 +106,7 @@ body {
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 .submit-row { display:flex; justify-content:center; margin-top:20px; }
 .btn-submit {
-  font-family:'Oswald',sans-serif; font-weight:700; font-size:1rem;
+  font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:1rem;
   letter-spacing:0.1em; text-transform:uppercase; padding:13px 50px;
   background:var(--gold); color:var(--ink); border:none; border-radius:8px;
   cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(201,168,76,0.3);
@@ -117,15 +119,15 @@ body {
   border-radius:12px; margin-top:18px;
 }
 .round-banner.show { display:block; animation:fadeUp 0.45s ease-out; }
-.round-banner h3 { font-family:'Oswald',sans-serif; font-size:1.25rem; color:var(--green-light); text-transform:uppercase; letter-spacing:0.08em; }
+.round-banner h3 { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:1.25rem; color:var(--green-light); text-transform:uppercase; letter-spacing:0.08em; }
 .round-banner p { color:rgba(255,255,255,0.65); margin-top:6px; font-size:0.88rem; }
-.btn-next { font-family:'Oswald',sans-serif; font-weight:700; font-size:0.92rem; letter-spacing:0.1em; text-transform:uppercase; padding:10px 34px; background:var(--green); color:#fff; border:none; border-radius:8px; cursor:pointer; margin-top:12px; transition:all 0.2s; }
+.btn-next { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:0.92rem; letter-spacing:0.1em; text-transform:uppercase; padding:10px 34px; background:var(--green); color:#fff; border:none; border-radius:8px; cursor:pointer; margin-top:12px; transition:all 0.2s; }
 .btn-next:hover { background:var(--green-light); }
 .level-complete { display:none; text-align:center; padding:40px 20px; }
 .level-complete.show { display:block; animation:fadeUp 0.55s ease-out; }
-.level-complete h2 { font-family:'Oswald',sans-serif; font-size:1.9rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; }
+.level-complete h2 { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:1.9rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; }
 .level-complete p { color:rgba(255,255,255,0.65); margin:10px 0 22px; font-size:0.92rem; }
-.btn-advance { font-family:'Oswald',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; padding:13px 44px; background:var(--gold); color:var(--ink); border:none; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.btn-advance { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; padding:13px 44px; background:var(--gold); color:var(--ink); border:none; border-radius:8px; cursor:pointer; transition:all 0.2s; }
 .btn-advance:hover { background:#ddc05e; transform:translateY(-2px); }
 /* LEVEL 3 */
 .scenario-card {
@@ -141,12 +143,12 @@ body {
 .scenario-card.violated .scenario-header { background:var(--red); }
 .scenario-card.correct.upheld .scenario-header { background:#1b5e20; }
 .scenario-card.correct.violated .scenario-header { background:#b71c1c; }
-.scenario-num { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.12em; color:rgba(255,255,255,0.7); text-transform:uppercase; }
+.scenario-num { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.72rem; letter-spacing:0.12em; color:rgba(255,255,255,0.7); text-transform:uppercase; }
 .scenario-drop {
   min-width:145px; height:32px; background:rgba(255,255,255,0.14);
   border:2px dashed rgba(255,255,255,0.38); border-radius:6px;
   display:flex; align-items:center; justify-content:center;
-  font-family:'Oswald',sans-serif; font-size:0.64rem; letter-spacing:0.08em;
+  font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.64rem; letter-spacing:0.08em;
   color:rgba(255,255,255,0.5); text-transform:uppercase; transition:all 0.2s; gap:5px;
 }
 .scenario-drop.has-chip { background:rgba(255,255,255,0.93); border-color:transparent; color:var(--ink); font-size:0.7rem; }
@@ -159,7 +161,7 @@ body {
 .scenario-card.upheld .scenario-footer { background:rgba(46,125,50,0.12); }
 .scenario-card.violated .scenario-footer { background:rgba(198,40,40,0.1); }
 .toggle-wrap { display:flex; align-items:center; gap:10px; justify-content:center; }
-.toggle-label { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:rgba(80,80,80,0.5); transition:all 0.3s; }
+.toggle-label { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:rgba(80,80,80,0.5); transition:all 0.3s; }
 .scenario-card.upheld .toggle-label.left { color:var(--green); font-weight:700; }
 .scenario-card.violated .toggle-label.right { color:var(--red); font-weight:700; }
 .toggle-track { width:50px; height:25px; border-radius:13px; background:#bbb; position:relative; cursor:pointer; transition:background 0.3s; flex-shrink:0; border:none; outline:none; padding:0; }
@@ -169,7 +171,7 @@ body {
 .scenario-card.violated .toggle-thumb { transform:translateX(25px); }
 .explanation { display:none; padding:12px 15px; background:rgba(58,97,134,0.07); border-top:2px solid rgba(58,97,134,0.2); font-size:0.81rem; line-height:1.58; color:var(--ink-light); }
 .explanation.show { display:block; animation:fadeUp 0.4s ease-out; }
-.explanation strong { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--steel-dark); display:block; margin-bottom:5px; }
+.explanation strong { font-family:'Oswald','Arial Narrow',Arial,sans-serif; font-size:0.75rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--steel-dark); display:block; margin-bottom:5px; }
 </style>
 </head>
 <body>
@@ -218,7 +220,7 @@ body {
 <div class="level-panel" id="panel-3">
   <div class="game-wrap">
     <div class="level-intro"><h2>Scenario Challenge</h2><p>Drag the principle that best fits each scenario. Flip the toggle: upheld or violated? Set all four cards, then click Check Answers.</p></div>
-    <div class="round-indicator" id="l3-round-ind"><span class="round-label">Round</span><div class="round-pip active" id="l3-pip-1"></div><div class="round-pip" id="l3-pip-2"></div><div class="round-pip" id="l3-pip-3"></div><div class="round-pip" id="l3-pip-4"></div></div>
+    <div class="round-indicator" id="l3-round-ind"><span class="round-label">Round</span><div class="round-pip active" id="l3-pip-1"></div><div class="round-pip" id="l3-pip-2"></div><div class="round-pip" id="l3-pip-3"></div></div>
     <div class="game-layout" id="l3-layout">
       <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l3-chips"></div></div>
       <div>
@@ -227,7 +229,7 @@ body {
         <div class="round-banner" id="l3-banner"><h3>Round Complete!</h3><p>All four scenarios answered correctly.</p><button class="btn-next" onclick="nextRoundL3()">Next Round &rarr;</button></div>
       </div>
     </div>
-    <div class="level-complete" id="l3-complete"><h2>Challenge Complete!</h2><p>You analyzed all sixteen scenarios. Strong work.</p></div>
+    <div class="level-complete" id="l3-complete"><h2>Challenge Complete!</h2><p id="l3-score-text">You worked through all twelve scenarios.</p></div>
   </div>
 </div>
 <script>
@@ -292,7 +294,7 @@ const ALL_SCENARIOS = [
     id:"2U", topic:2,
     text:"Following a close presidential election, the losing candidate reviews the certified results, acknowledges the outcome, and concedes publicly. The candidate directs legal challenges through the courts, all of which are decided against them, and then participates in the peaceful transfer of power.",
     answer:"Majority Rule", status:"upheld", alt:["Rule of Law"],
-    exp:"The best answer is <strong>Majority Rule</strong>: Accepting a certified election result, pursuing challenges only through legal channels, and participating in the peaceful transfer of power are the precise behaviors this principle requires of the losing side in a democracy."
+    exp:"<strong>Majority Rule</strong> and <strong>Rule of Law</strong> are both correct here. Accepting the certified result and participating in the peaceful transfer of power is Majority Rule working exactly as designed. Pursuing challenges only through the courts and abiding by their decisions is Rule of Law in action. The two principles reinforce each other: the loser respects both the outcome and the legal process used to confirm it."
   },
   {
     id:"3V", topic:3,
@@ -334,7 +336,7 @@ const ALL_SCENARIOS = [
     id:"7V", topic:7,
     text:"Congress issues subpoenas to senior White House officials as part of an oversight investigation. The President instructs all administration officials to refuse to comply, claiming executive privilege shields the entire executive branch from Congressional oversight, absolutely and without exception.",
     answer:"Checks & Balances", status:"violated", alt:["Separation of Powers","Rule of Law"],
-    exp:"The best answer is <strong>Checks & Balances</strong>: Congressional oversight and the power to subpoena are among the most important checks the legislative branch has on the executive. A blanket refusal to allow any oversight dismantles that check entirely."
+    exp:"<strong>Checks & Balances</strong> and <strong>Rule of Law</strong> are both correct here. Congressional subpoenas are lawful instruments and refusing to comply with them is both a dismantling of the legislative check on the executive and a refusal to follow the law. The two violations are inseparable: the President is simultaneously abandoning a constitutional norm and ignoring a legal obligation."
   },
   {
     id:"7U", topic:7,
@@ -369,8 +371,8 @@ const ALL_SCENARIOS = [
   {
     id:"WV", topic:10,
     text:"The President orders military action in a foreign country without notifying Congress. The War Powers Resolution requires congressional notification within 48 hours and limits unauthorized military engagement to 60 days. More than 60 days pass. Congress has not authorized the action but takes no steps to compel withdrawal or cut off funding. Both branches continue as if the law does not apply.",
-    answer:"Checks & Balances", status:"violated", alt:["Separation of Powers"],
-    exp:"The best answer is <strong>Checks & Balances</strong>: The War Powers Resolution exists precisely as a legislative check on executive military power. Here both sides of that check fail simultaneously: the President acts without authorization and Congress declines to exercise its authority to stop it. Separation of Powers is plausible, since war-making power is constitutionally shared, but the specific breakdown is the checking mechanism collapsing on both ends."
+    answer:"Checks & Balances", status:"violated", alt:["Separation of Powers","Rule of Law"],
+    exp:"<strong>Checks & Balances</strong> and <strong>Rule of Law</strong> are both correct here. The War Powers Resolution is an established law that binds both branches. The President violates it by acting without notification, and Congress violates it by refusing to exercise the authority the law grants them. The checking mechanism collapses on both ends, and both branches are ignoring a statute they are legally required to follow."
   },
   {
     id:"WU", topic:10,
@@ -406,7 +408,7 @@ const ALL_SCENARIOS = [
     id:"LGV", topic:13,
     text:"Legal permanent residents holding valid green cards are detained by federal agents following their participation in peaceful protests. Officials argue the government has broad authority to remove non-citizens whose presence it deems contrary to national interests, even without criminal charges. No specific laws are cited as the basis for detention.",
     answer:"Limited Government", status:"violated", alt:["Rule of Law"],
-    exp:"The best answer is <strong>Limited Government</strong>: Detaining people without citing a legal basis for doing so is precisely what limited government prohibits. Government power must be defined and bounded by law. When officials act on claimed authority with no legal foundation, they have stepped outside the limits the Constitution places on them. Rule of Law is also directly implicated, since legal residents are entitled to due process."
+    exp:"<strong>Limited Government</strong> and <strong>Rule of Law</strong> are both correct here. Detaining people without citing any legal authority is precisely what limited government prohibits: officials acting beyond the bounds the law defines for them. It is equally a Rule of Law violation, since legal permanent residents are entitled to due process and no one can be detained without a legal basis, regardless of citizenship status."
   },
   {
     id:"FEV", topic:14,
@@ -426,7 +428,7 @@ const ALL_SCENARIOS = [
 const state = {
   1:{round:0,locked:[],assignments:{},rounds:[]},
   2:{round:0,locked:[],assignments:{},rounds:[]},
-  3:{round:0,assignments:{},toggles:{},rounds:[],roundIdx:0}
+  3:{round:0,assignments:{},toggles:{},rounds:[],roundIdx:0,score:0,total:0}
 };
 let dragP = null;
 
@@ -560,8 +562,8 @@ function nextRound(lv){
 function initL3(){
   // Pick 16 random scenarios from 25, arranged into 4 rounds of 4
   const sh=shuffle([...ALL_SCENARIOS]);
-  const selected=sh.slice(0,16);
-  state[3].rounds=[selected.slice(0,4),selected.slice(4,8),selected.slice(8,12),selected.slice(12,16)];
+  const selected=sh.slice(0,12);
+  state[3].rounds=[selected.slice(0,4),selected.slice(4,8),selected.slice(8,12)];
   state[3].roundIdx=0;
   renderRound3();
 }
@@ -571,7 +573,7 @@ function renderRound3(){
   const round=state[3].rounds[ri];
   state[3].assignments={};state[3].toggles={};
   // Update pips
-  [1,2,3,4].forEach(n=>{
+  [1,2,3].forEach(n=>{
     const el=document.getElementById('l3-pip-'+n);if(!el)return;
     el.className='round-pip'+(n-1<ri?' done':n-1===ri?' active':'');
   });
@@ -619,6 +621,7 @@ function submitL3(){
     const tOk=at===sc.status;
     if(pOk&&tOk){
       card.classList.add('correct');
+      state[3].score++;state[3].total++;
       const exp=document.getElementById('exp-'+i);
       exp.innerHTML='<strong>Why this answer?</strong> '+sc.exp;
       exp.classList.add('show');
@@ -640,9 +643,11 @@ function submitL3(){
 
 function nextRoundL3(){
   state[3].roundIdx++;
-  if(state[3].roundIdx>=4){
+  if(state[3].roundIdx>=3){
     document.getElementById('l3-layout').style.display='none';
     document.getElementById('l3-round-ind').style.display='none';
+    document.getElementById('l3-score-text').innerHTML=
+      'You worked through all twelve scenarios.<br><span style="font-family:'Oswald','Arial Narrow',Arial,sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:0.06em;">Final Score: '+state[3].score+' / 12</span>';
     document.getElementById('l3-complete').classList.add('show');
   }else{
     document.getElementById('l3-banner').classList.remove('show');
