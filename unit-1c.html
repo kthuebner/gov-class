@@ -3,1097 +3,663 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 1: Ideas About Government</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Key Principles: American Government</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --parchment: #f5f0e8;
-    --parchment-dark: #e8e0cc;
-    --parchment-mid: #ede5d0;
-    --ink: #1a1408;
-    --ink-light: #3d3320;
-    --ink-faded: #6b5e40;
-    --accent: #6080c0;
-    --accent-dark: #3a5a9a;
-    --accent-light: #8aaae0;
-    --accent-pale: #dce6f5;
-    --accent-glow: rgba(96,128,192,0.15);
-    --red-violation: #8b2020;
-    --red-pale: #f5e8e8;
-    --gold: #b8952a;
-    --gold-pale: #f5f0dc;
-    --border: rgba(96,128,192,0.25);
-    --shadow: rgba(26,20,8,0.12);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background-color: var(--parchment);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    color: var(--ink);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  /* ── HEADER ── */
-  .site-header {
-    background: var(--accent-dark);
-    background-image: linear-gradient(135deg, #2a3f7a 0%, #3a5a9a 50%, #4a6aaa 100%);
-    color: #fff;
-    text-align: center;
-    padding: 3rem 2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .site-header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
-    background-size: 60px 60px;
-  }
-  .unit-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 0.6rem;
-    position: relative;
-  }
-  .site-header h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #fff;
-    position: relative;
-    line-height: 1.1;
-  }
-  .header-rule {
-    width: 80px; height: 2px;
-    background: var(--accent-light);
-    margin: 1.2rem auto 1rem;
-    position: relative;
-  }
-  .header-sub {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.8);
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  /* ── NAV ── */
-  .page-nav {
-    background: var(--accent);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px var(--shadow);
-  }
-  .page-nav a {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    padding: 0.75rem 1.4rem;
-    border-right: 1px solid rgba(255,255,255,0.15);
-    transition: background 0.2s, color 0.2s;
-  }
-  .page-nav a:last-child { border-right: none; }
-  .page-nav a:hover { background: var(--accent-dark); color: #fff; }
-
-  /* ── MAIN CONTENT ── */
-  .page-content { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 4rem; }
-
-  /* ── SECTION HEADERS ── */
-  .section-block { margin: 3.5rem 0 0; }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.8rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid var(--accent);
-  }
-  .section-number {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    opacity: 0.25;
-    flex-shrink: 0;
-  }
-  .section-title-wrap {}
-  .section-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.1rem;
-  }
-  .section-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  .section-intro {
-    font-family: 'Lora', serif;
-    font-size: 1.02rem;
-    color: var(--ink-faded);
-    margin-bottom: 2rem;
-    max-width: 780px;
-  }
-
-  /* ── TYPES OF GOVERNMENT ── */
-  .gov-tabs {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 1.5rem;
-  }
-  .gov-tab {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.2rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-bottom: none;
-    background: transparent;
-    color: var(--ink-faded);
-    transition: all 0.2s;
-    margin-bottom: -2px;
-  }
-  .gov-tab:hover { color: var(--accent); }
-  .gov-tab.active {
-    color: var(--accent-dark);
-    border-color: var(--border);
-    border-bottom-color: var(--parchment);
-    background: var(--parchment);
-  }
-  .gov-panel { display: none; }
-  .gov-panel.active { display: block; }
-
-  .gov-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  .gov-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent);
-    border-radius: 0 0 4px 4px;
-    padding: 1.2rem 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  .gov-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    margin-bottom: 0.3rem;
-  }
-  .gov-card-subtitle {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.82rem;
-    font-style: italic;
-    color: var(--ink-faded);
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--parchment-dark);
-  }
-  .gov-card p {
-    font-size: 0.92rem;
-    color: var(--ink-light);
-    margin-bottom: 0.5rem;
-  }
-  .gov-card .example {
-    font-size: 0.85rem;
-    color: var(--ink-faded);
-    font-style: italic;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--parchment-dark);
-  }
-  .legitimacy-tag {
-    display: inline-block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--accent-pale);
-    color: var(--accent-dark);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    margin-bottom: 0.6rem;
-  }
-
-  /* two-col layout for authoritarian/totalitarian */
-  .gov-two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  @media (max-width: 600px) { .gov-two-col { grid-template-columns: 1fr; } }
-
-  .compare-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  .compare-card.total { border-top: 3px solid #8b2020; }
-  .compare-card.auth { border-top: 3px solid var(--gold); }
-  .compare-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.5rem;
-  }
-  .compare-card.total .compare-card-title { color: #8b2020; }
-  .compare-card.auth .compare-card-title { color: var(--gold); }
-  .compare-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
-  .compare-card .example { font-size: 0.85rem; color: var(--ink-faded); font-style: italic; }
-
-  /* power distribution diagram */
-  .power-diagram {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  @media (max-width: 640px) { .power-diagram { grid-template-columns: 1fr; } }
-  .power-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.2rem;
-    text-align: center;
-    box-shadow: 0 2px 6px var(--shadow);
-    position: relative;
-    overflow: hidden;
-  }
-  .power-bar-wrap {
-    display: flex;
-    height: 8px;
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 0.8rem 0;
-    background: var(--parchment-dark);
-  }
-  .power-bar-national { background: var(--accent); transition: width 0.3s; }
-  .power-bar-state { background: var(--gold); transition: width 0.3s; }
-  .power-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent-dark);
-    margin-bottom: 0.3rem;
-  }
-  .power-card p { font-size: 0.88rem; color: var(--ink-light); }
-  .power-card .example { font-size: 0.82rem; color: var(--ink-faded); font-style: italic; margin-top: 0.5rem; }
-  .power-legend { display: flex; gap: 1.5rem; justify-content: center; font-size: 0.8rem; color: var(--ink-faded); margin-top: 0.5rem; }
-  .power-legend span { display: flex; align-items: center; gap: 0.4rem; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-
-  /* exec system cards */
-  .system-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 560px) { .system-grid { grid-template-columns: 1fr; } }
-  .system-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent);
-    border-radius: 0 0 4px 4px;
-    padding: 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  .system-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent-dark);
-    margin-bottom: 0.6rem;
-  }
-  .system-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
-  .pro-con { display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; }
-  .pro, .con {
-    font-size: 0.78rem;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
-  }
-  .pro { background: #e8f4e8; color: #2a6b2a; }
-  .con { background: var(--red-pale); color: var(--red-violation); }
-
-  /* ── KEY PRINCIPLES ── */
-  .principles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .principle-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px var(--shadow);
-    overflow: hidden;
-  }
-  .principle-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 1.3rem;
-    cursor: pointer;
-    background: var(--parchment-mid);
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
-    gap: 0.8rem;
-  }
-  .principle-header:hover { background: var(--accent-pale); }
-  .principle-header-left { display: flex; align-items: center; gap: 0.9rem; }
-  .principle-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    opacity: 0.35;
-    line-height: 1;
-    flex-shrink: 0;
-    width: 2rem;
-    text-align: right;
-  }
-  .principle-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .principle-chevron {
-    font-size: 0.75rem;
-    color: var(--accent);
-    transition: transform 0.25s;
-    flex-shrink: 0;
-  }
-  .principle-card.open .principle-chevron { transform: rotate(180deg); }
-
-  .principle-body {
-    display: none;
-    padding: 1.3rem;
-  }
-  .principle-card.open .principle-body { display: block; }
-
-  .principle-def {
-    font-size: 0.97rem;
-    color: var(--ink-light);
-    margin-bottom: 1rem;
-    line-height: 1.65;
-  }
-
-  .principle-section-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .good-box {
-    background: var(--gold-pale);
-    border-left: 3px solid var(--gold);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-    margin-bottom: 0.9rem;
-  }
-  .good-box .principle-section-label { color: var(--gold); }
-  .good-box p { font-size: 0.9rem; color: var(--ink-light); }
-
-  .bad-box {
-    background: var(--red-pale);
-    border-left: 3px solid var(--red-violation);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-  }
-  .bad-box .principle-section-label { color: var(--red-violation); }
-  .bad-box p { font-size: 0.9rem; color: var(--ink-light); }
-
-  /* ── SCENARIO CARDS ── */
-  .scenarios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.2rem;
-  }
-  .scenario-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px var(--shadow);
-    overflow: hidden;
-  }
-  .scenario-card-top {
-    background: var(--accent-dark);
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .scenario-number {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-  }
-  .scenario-body { padding: 1.2rem 1.3rem; }
-  .scenario-question {
-    font-size: 0.97rem;
-    color: var(--ink);
-    margin-bottom: 1.1rem;
-    line-height: 1.6;
-  }
-  .scenario-prompt {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faded);
-    margin-bottom: 0.5rem;
-  }
-  .reveal-btn {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1.1rem;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .reveal-btn:hover { background: var(--accent-dark); }
-  .scenario-answer {
-    display: none;
-    margin-top: 0.9rem;
-    background: var(--accent-pale);
-    border-left: 3px solid var(--accent);
-    padding: 0.8rem 1rem;
-    border-radius: 0 3px 3px 0;
-  }
-  .scenario-answer.revealed { display: block; }
-  .answer-principle {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-  }
-  .answer-explanation { font-size: 0.9rem; color: var(--ink-light); }
-
-  /* ── FOOTER ── */
-  .page-footer {
-    background: var(--ink);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.82rem;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ── UTILITIES ── */
-  @media (max-width: 700px) {
-    .gov-tabs { overflow-x: auto; flex-wrap: nowrap; }
-    .gov-tab { white-space: nowrap; font-size: 0.75rem; padding: 0.6rem 0.9rem; }
-    .page-nav a { font-size: 0.72rem; padding: 0.65rem 0.9rem; }
-  }
-  .us-gov-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.1rem;
-    margin-bottom: 1.2rem;
-  }
-  @media (max-width: 780px) {
-    .us-gov-grid { grid-template-columns: 1fr; }
-  }
+:root {
+  --steel: #3a6186; --steel-dark: #2a4d6b; --steel-light: #5a85b0;
+  --parchment: #f5f0e8; --parchment-dark: #e8e0cc;
+  --ink: #1a1a2e; --ink-light: #3d3d5c;
+  --green: #2e7d32; --green-light: #4caf50;
+  --red: #c62828; --gold: #c9a84c;
+  --shadow: rgba(26,26,46,0.18);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lora', serif;
+  background: #1c2b3a;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.015) 50px, rgba(255,255,255,0.015) 51px),
+    repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.015) 50px, rgba(255,255,255,0.015) 51px);
+  min-height: 100vh; color: var(--ink);
+}
+.site-header {
+  background: linear-gradient(135deg, var(--steel-dark) 0%, var(--steel) 60%, var(--steel-light) 100%);
+  padding: 28px 40px 24px; text-align: center;
+  border-bottom: 4px solid var(--gold); position: relative; overflow: hidden;
+}
+.site-header::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.site-header h1 { font-family:'Oswald',sans-serif; font-weight:700; font-size:2.2rem; color:#fff; letter-spacing:0.06em; text-transform:uppercase; position:relative; }
+.site-header p { color:rgba(255,255,255,0.7); font-size:0.92rem; margin-top:6px; font-style:italic; position:relative; }
+.level-tabs { display:flex; justify-content:center; padding:28px 40px 0; }
+.level-tab {
+  font-family:'Oswald',sans-serif; font-weight:600; font-size:0.95rem;
+  letter-spacing:0.08em; text-transform:uppercase; padding:12px 36px;
+  background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45);
+  border:2px solid rgba(255,255,255,0.12); cursor:pointer; transition:all 0.2s;
+}
+.level-tab:first-child { border-radius:8px 0 0 8px; }
+.level-tab:last-child { border-radius:0 8px 8px 0; }
+.level-tab.active { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+.level-tab:not(.active):hover { background:rgba(255,255,255,0.13); color:rgba(255,255,255,0.8); }
+.level-tab .lvl-num { display:block; font-size:0.62rem; opacity:0.65; margin-bottom:2px; letter-spacing:0.14em; }
+.level-panel { display:none; }
+.level-panel.active { display:block; }
+.game-wrap { max-width:1120px; margin:0 auto; padding:32px 24px 80px; }
+.level-intro { text-align:center; margin-bottom:24px; }
+.level-intro h2 { font-family:'Oswald',sans-serif; font-weight:700; font-size:1.55rem; color:#fff; letter-spacing:0.05em; text-transform:uppercase; }
+.level-intro p { color:rgba(255,255,255,0.6); font-size:0.88rem; margin-top:6px; font-style:italic; }
+.round-indicator { display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:24px; }
+.round-pip { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.25); transition:all 0.3s; }
+.round-pip.active { background:var(--gold); border-color:var(--gold); transform:scale(1.3); }
+.round-pip.done { background:var(--green-light); border-color:var(--green-light); }
+.round-label { font-family:'Oswald',sans-serif; font-size:0.82rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase; }
+.game-layout { display:grid; grid-template-columns:220px 1fr; gap:22px; align-items:start; }
+.sidebar { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:16px 12px; position:sticky; top:20px; }
+.sidebar-title { font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-align:center; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08); }
+.chip {
+  display:flex; align-items:center; gap:9px;
+  background:var(--parchment); border:2px solid var(--parchment-dark);
+  border-radius:10px; padding:8px 11px; margin-bottom:8px;
+  cursor:grab; transition:all 0.2s; user-select:none;
+  font-family:'Oswald',sans-serif; font-weight:600;
+  font-size:0.82rem; letter-spacing:0.03em;
+  color:var(--ink); text-transform:uppercase;
+}
+.chip:hover { background:#fff; border-color:var(--steel); transform:translateX(3px); box-shadow:2px 2px 10px var(--shadow); }
+.chip.dragging { opacity:0.35; cursor:grabbing; }
+.chip.used { opacity:0.25; pointer-events:none; filter:grayscale(0.4); }
+.chip img { width:32px; height:32px; object-fit:contain; border-radius:4px; flex-shrink:0; }
+@keyframes flyBack {
+  0% { transform:translateX(240px) translateY(-60px) scale(0.7); opacity:0.1; }
+  55% { transform:translateX(-10px) scale(1.05); opacity:0.9; }
+  100% { transform:translateX(0) scale(1); opacity:1; }
+}
+.chip.flying-back { animation:flyBack 0.55s cubic-bezier(0.22,1,0.36,1); }
+.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.def-card {
+  background:var(--parchment); border:3px dashed var(--parchment-dark);
+  border-radius:12px; padding:18px; min-height:165px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  transition:all 0.25s; position:relative;
+}
+.def-card.drag-over { border-color:var(--steel); background:#edf3fb; transform:scale(1.015); }
+.def-card.correct { border:3px solid var(--green); background:#e8f5e9; animation:lockIn 0.4s ease-out; }
+.def-card.wrong { animation:shake 0.45s ease-out; border-color:var(--red); }
+.def-card-text { font-size:0.9rem; line-height:1.58; color:var(--ink-light); flex:1; }
+.def-card-drop {
+  margin-top:13px; min-height:40px;
+  background:rgba(58,97,134,0.07); border:2px dashed rgba(58,97,134,0.28);
+  border-radius:7px; display:flex; align-items:center; justify-content:center;
+  font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:0.08em;
+  color:rgba(58,97,134,0.45); text-transform:uppercase; transition:all 0.2s; gap:6px;
+}
+.def-card-drop.has-chip { background:var(--steel); border-color:var(--steel); color:#fff; font-size:0.75rem; }
+.def-card-drop img { width:20px; height:20px; object-fit:contain; border-radius:3px; }
+@keyframes lockIn { 0%{transform:scale(1.03);} 50%{transform:scale(0.98);} 100%{transform:scale(1);} }
+@keyframes shake { 0%,100%{transform:translateX(0);} 20%{transform:translateX(-9px);} 40%{transform:translateX(9px);} 60%{transform:translateX(-6px);} 80%{transform:translateX(6px);} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+.submit-row { display:flex; justify-content:center; margin-top:20px; }
+.btn-submit {
+  font-family:'Oswald',sans-serif; font-weight:700; font-size:1rem;
+  letter-spacing:0.1em; text-transform:uppercase; padding:13px 50px;
+  background:var(--gold); color:var(--ink); border:none; border-radius:8px;
+  cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(201,168,76,0.3);
+}
+.btn-submit:hover { background:#ddc05e; transform:translateY(-2px); }
+.btn-submit:disabled { background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.28); cursor:not-allowed; transform:none; box-shadow:none; }
+.round-banner {
+  display:none; text-align:center; padding:20px 20px 16px;
+  background:rgba(46,125,50,0.18); border:2px solid var(--green-light);
+  border-radius:12px; margin-top:18px;
+}
+.round-banner.show { display:block; animation:fadeUp 0.45s ease-out; }
+.round-banner h3 { font-family:'Oswald',sans-serif; font-size:1.25rem; color:var(--green-light); text-transform:uppercase; letter-spacing:0.08em; }
+.round-banner p { color:rgba(255,255,255,0.65); margin-top:6px; font-size:0.88rem; }
+.btn-next { font-family:'Oswald',sans-serif; font-weight:700; font-size:0.92rem; letter-spacing:0.1em; text-transform:uppercase; padding:10px 34px; background:var(--green); color:#fff; border:none; border-radius:8px; cursor:pointer; margin-top:12px; transition:all 0.2s; }
+.btn-next:hover { background:var(--green-light); }
+.level-complete { display:none; text-align:center; padding:40px 20px; }
+.level-complete.show { display:block; animation:fadeUp 0.55s ease-out; }
+.level-complete h2 { font-family:'Oswald',sans-serif; font-size:1.9rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; }
+.level-complete p { color:rgba(255,255,255,0.65); margin:10px 0 22px; font-size:0.92rem; }
+.btn-advance { font-family:'Oswald',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; padding:13px 44px; background:var(--gold); color:var(--ink); border:none; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.btn-advance:hover { background:#ddc05e; transform:translateY(-2px); }
+/* LEVEL 3 */
+.scenario-card {
+  background:var(--parchment); border-radius:14px; overflow:hidden;
+  display:flex; flex-direction:column; min-height:330px;
+  transition:border-color 0.2s, transform 0.2s; border:3px solid transparent;
+}
+.scenario-card.drag-over { border-color:var(--steel); transform:scale(1.01); }
+.scenario-card.correct { border:3px solid var(--green); animation:lockIn 0.4s ease-out; }
+.scenario-card.wrong { animation:shake 0.45s ease-out; border-color:var(--red); }
+.scenario-header { padding:10px 14px; display:flex; justify-content:space-between; align-items:center; background:var(--steel); transition:background 0.35s; }
+.scenario-card.upheld .scenario-header { background:var(--green); }
+.scenario-card.violated .scenario-header { background:var(--red); }
+.scenario-card.correct.upheld .scenario-header { background:#1b5e20; }
+.scenario-card.correct.violated .scenario-header { background:#b71c1c; }
+.scenario-num { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.12em; color:rgba(255,255,255,0.7); text-transform:uppercase; }
+.scenario-drop {
+  min-width:145px; height:32px; background:rgba(255,255,255,0.14);
+  border:2px dashed rgba(255,255,255,0.38); border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Oswald',sans-serif; font-size:0.64rem; letter-spacing:0.08em;
+  color:rgba(255,255,255,0.5); text-transform:uppercase; transition:all 0.2s; gap:5px;
+}
+.scenario-drop.has-chip { background:rgba(255,255,255,0.93); border-color:transparent; color:var(--ink); font-size:0.7rem; }
+.scenario-drop img { width:18px; height:18px; object-fit:contain; border-radius:3px; }
+.scenario-body { padding:15px 16px; flex:1; transition:background 0.35s; }
+.scenario-card.upheld .scenario-body { background:rgba(46,125,50,0.05); }
+.scenario-card.violated .scenario-body { background:rgba(198,40,40,0.05); }
+.scenario-text { font-size:0.865rem; line-height:1.62; color:var(--ink-light); }
+.scenario-footer { padding:13px 16px; background:rgba(0,0,0,0.045); border-top:1px solid rgba(0,0,0,0.07); transition:background 0.35s; }
+.scenario-card.upheld .scenario-footer { background:rgba(46,125,50,0.12); }
+.scenario-card.violated .scenario-footer { background:rgba(198,40,40,0.1); }
+.toggle-wrap { display:flex; align-items:center; gap:10px; justify-content:center; }
+.toggle-label { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:rgba(80,80,80,0.5); transition:all 0.3s; }
+.scenario-card.upheld .toggle-label.left { color:var(--green); font-weight:700; }
+.scenario-card.violated .toggle-label.right { color:var(--red); font-weight:700; }
+.toggle-track { width:50px; height:25px; border-radius:13px; background:#bbb; position:relative; cursor:pointer; transition:background 0.3s; flex-shrink:0; border:none; outline:none; padding:0; }
+.scenario-card.upheld .toggle-track { background:var(--green); }
+.scenario-card.violated .toggle-track { background:var(--red); }
+.toggle-thumb { width:19px; height:19px; border-radius:50%; background:#fff; position:absolute; top:3px; left:3px; transition:transform 0.3s; box-shadow:0 1px 5px rgba(0,0,0,0.28); }
+.scenario-card.violated .toggle-thumb { transform:translateX(25px); }
+.explanation { display:none; padding:12px 15px; background:rgba(58,97,134,0.07); border-top:2px solid rgba(58,97,134,0.2); font-size:0.81rem; line-height:1.58; color:var(--ink-light); }
+.explanation.show { display:block; animation:fadeUp 0.4s ease-out; }
+.explanation strong { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--steel-dark); display:block; margin-bottom:5px; }
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header class="site-header">
-  <div class="unit-label">American Government &mdash; Unit 1</div>
-  <h1>Ideas About Government</h1>
-  <div class="header-rule"></div>
-  <p class="header-sub">Where does government come from? Who should rule? And what makes a government legitimate?</p>
+  <h1>Key Principles: American Government</h1>
+  <p>Blue Valley Academy | American Government | Unit 1</p>
 </header>
-
-<!-- NAV -->
-<nav class="page-nav">
-  <a href="#types">Types of Government</a>
-  <a href="#principles">Key Principles</a>
-  <a href="#scenarios">Scenario Challenge</a>
-</nav>
-
-<main class="page-content">
-
-  <!-- ════════════════════════════════════════════
-       SECTION 1 — TYPES OF GOVERNMENT
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="types">
-    <div class="section-header">
-      <div class="section-number">01</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section One</span>
-        <h2 class="section-title">Types of Government</h2>
+<div class="level-tabs">
+  <button class="level-tab active" onclick="switchLevel(1)"><span class="lvl-num">Level 1</span>Name &amp; Definition</button>
+  <button class="level-tab" onclick="switchLevel(2)"><span class="lvl-num">Level 2</span>Name &amp; Example</button>
+  <button class="level-tab" onclick="switchLevel(3)"><span class="lvl-num">Level 3</span>Scenario Challenge</button>
+</div>
+<!-- LEVEL 1 -->
+<div class="level-panel active" id="panel-1">
+  <div class="game-wrap">
+    <div class="level-intro"><h2>Match Each Principle to Its Definition</h2><p>Drag a principle from the sidebar onto the correct definition card. Place all four, then click Check Answers.</p></div>
+    <div class="round-indicator"><span class="round-label">Round</span><div class="round-pip active" id="l1-pip-1"></div><div class="round-pip" id="l1-pip-2"></div></div>
+    <div class="game-layout" id="l1-layout">
+      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l1-chips"></div></div>
+      <div>
+        <div class="card-grid" id="l1-grid"></div>
+        <div class="submit-row"><button class="btn-submit" id="l1-submit" disabled onclick="submitL(1)">Check Answers</button></div>
+        <div class="round-banner" id="l1-banner"><h3>Round Complete!</h3><p>All four matched correctly.</p><button class="btn-next" onclick="nextRound(1)">Next Round &rarr;</button></div>
       </div>
     </div>
-    <p class="section-intro">Every government in history can be categorized by who holds power, how much control they exercise, and how that power is structured. Understanding these categories is essential for comparing American democracy to other systems.</p>
-
-    <!-- TABS -->
-    <div class="gov-tabs">
-      <button class="gov-tab active" onclick="switchTab('who')">Who Rules?</button>
-      <button class="gov-tab" onclick="switchTab('control')">How Much Control?</button>
-      <button class="gov-tab" onclick="switchTab('power')">How Is Power Distributed?</button>
-      <button class="gov-tab" onclick="switchTab('exec')">How Is the Executive Chosen?</button>
-    </div>
-
-    <!-- WHO RULES -->
-    <div class="gov-panel active" id="panel-who">
-      <div class="gov-grid">
-        <div class="gov-card">
-          <div class="gov-card-title">Democracy / Republic</div>
-          <div class="gov-card-subtitle">Rule by the People</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Popular Sovereignty</div>
-          <p>Government derives its authority from the people. Citizens elect leaders who govern on their behalf. Widely considered the only truly legitimate form of government.</p>
-          <p class="example">Example: The United States, most of Europe, India, Japan.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Monarchy</div>
-          <div class="gov-card-subtitle">Rule by a King or Queen</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Divine Right</div>
-          <p>Power is held by a single hereditary ruler. Historically, monarchs claimed authority from God — to question the king was to question God himself.</p>
-          <p class="example">Example: Medieval European kingdoms; modern constitutional monarchies like the UK retain a monarch but with limited power.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Oligarchy</div>
-          <div class="gov-card-subtitle">Rule by a Small Group</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Varies — often military</div>
-          <p>Power is concentrated among a small elite — wealthy families, a military council, or a single party. Legitimacy is difficult to establish and often depends on force.</p>
-          <p class="example">Example: Ancient Sparta; many modern authoritarian states function as oligarchies in practice.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Theocracy</div>
-          <div class="gov-card-subtitle">Rule by Religious Leaders</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Divine Authority</div>
-          <p>Government is led by religious authorities who claim to enforce God's law. Questioning the government means questioning God — dissent is often treated as heresy.</p>
-          <p class="example">Example: Medieval papal states; Iran today, where religious scholars hold supreme authority above elected officials.</p>
-        </div>
-        <div class="gov-card">
-          <div class="gov-card-title">Dictatorship</div>
-          <div class="gov-card-subtitle">Rule by a Single Person</div>
-          <div class="legitimacy-tag">Claim to Legitimacy: Military Force</div>
-          <p>A single leader holds power, often having seized it by force. Many dictators are tyrants who use the military and coercion to maintain control. "Might makes right."</p>
-          <p class="example">Example: Adolf Hitler in Nazi Germany; Kim Jong-un in North Korea; Muammar Gaddafi in Libya.</p>
-        </div>
-        <div class="gov-card" style="border-top-color: var(--gold);">
-          <div class="gov-card-title" style="color: var(--gold);">Hybrid Regime</div>
-          <div class="gov-card-subtitle">Democracy as a Facade</div>
-          <div class="legitimacy-tag" style="background: var(--gold-pale); color: #7a6010;">Claim to Legitimacy: Rigged Elections</div>
-          <p>A hybrid regime holds elections and maintains the formal structures of democracy — a constitution, a legislature, political parties — but systematically rigs the game so the ruling party cannot lose. Independent courts, free press, and genuine opposition are gradually dismantled while the appearance of legitimacy is preserved.</p>
-          <p>This makes hybrid regimes harder to identify than outright dictatorships. Leaders like <strong>Viktor Orbán</strong> in Hungary have rewritten constitutions, packed courts, taken over media, and gerrymandered districts — all through technically legal processes — until the opposition has almost no path to power. Scholars call this <em>democratic backsliding</em> or <em>illiberal democracy</em>: the machinery of democracy without its substance.</p>
-          <p class="example">Examples: Hungary under Orbán (Fidesz party); Turkey under Erdoğan; Venezuela under Maduro; Russia, which holds elections but has no genuine opposition allowed to compete fairly.</p>
-        </div>
+    <div class="level-complete" id="l1-complete"><h2>Level 1 Complete!</h2><p>You matched all eight principles to their definitions.</p><button class="btn-advance" onclick="switchLevel(2)">Advance to Level 2 &rarr;</button></div>
+  </div>
+</div>
+<!-- LEVEL 2 -->
+<div class="level-panel" id="panel-2">
+  <div class="game-wrap">
+    <div class="level-intro"><h2>Match Each Principle to an Example</h2><p>Each card shows a principle in action. Drag the correct principle onto it. Place all four, then click Check Answers.</p></div>
+    <div class="round-indicator"><span class="round-label">Round</span><div class="round-pip active" id="l2-pip-1"></div><div class="round-pip" id="l2-pip-2"></div></div>
+    <div class="game-layout" id="l2-layout">
+      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l2-chips"></div></div>
+      <div>
+        <div class="card-grid" id="l2-grid"></div>
+        <div class="submit-row"><button class="btn-submit" id="l2-submit" disabled onclick="submitL(2)">Check Answers</button></div>
+        <div class="round-banner" id="l2-banner"><h3>Round Complete!</h3><p>All four matched correctly.</p><button class="btn-next" onclick="nextRound(2)">Next Round &rarr;</button></div>
       </div>
     </div>
-
-    <!-- HOW MUCH CONTROL -->
-    <div class="gov-panel" id="panel-control">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">Both authoritarian and totalitarian governments concentrate power — but the degree of control is fundamentally different. This distinction matters for understanding modern regimes.</p>
-      <div class="gov-two-col">
-        <div class="compare-card total">
-          <div class="compare-card-title">Totalitarian</div>
-          <p>The government exercises <strong>total control</strong> over nearly every aspect of society — the economy, the media, education, culture, family life, and even private belief. There is no meaningful separation between the state and everyday life.</p>
-          <p class="example">Examples: North Korea (the government controls information, movement, employment, and family loyalty); Nazi Germany; Stalinist USSR.</p>
-        </div>
-        <div class="compare-card auth">
-          <div class="compare-card-title">Authoritarian</div>
-          <p>The government exercises <strong>absolute political power</strong>, but does not necessarily control all aspects of daily life. Citizens may have some economic freedom or private life — but political opposition is suppressed.</p>
-          <p class="example">Example: Russia under Putin — he has bent or rewritten the constitution and eliminated political competition, but ordinary Russians have more personal freedom than citizens of North Korea.</p>
-        </div>
+    <div class="level-complete" id="l2-complete"><h2>Level 2 Complete!</h2><p>You matched all eight principles to examples. Ready for the real test?</p><button class="btn-advance" onclick="switchLevel(3)">Advance to Level 3 &rarr;</button></div>
+  </div>
+</div>
+<!-- LEVEL 3 -->
+<div class="level-panel" id="panel-3">
+  <div class="game-wrap">
+    <div class="level-intro"><h2>Scenario Challenge</h2><p>Drag the principle that best fits each scenario. Flip the toggle: upheld or violated? Set all four cards, then click Check Answers.</p></div>
+    <div class="round-indicator" id="l3-round-ind"><span class="round-label">Round</span><div class="round-pip active" id="l3-pip-1"></div><div class="round-pip" id="l3-pip-2"></div><div class="round-pip" id="l3-pip-3"></div><div class="round-pip" id="l3-pip-4"></div></div>
+    <div class="game-layout" id="l3-layout">
+      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l3-chips"></div></div>
+      <div>
+        <div class="card-grid" id="l3-grid"></div>
+        <div class="submit-row"><button class="btn-submit" id="l3-submit" disabled onclick="submitL3()">Check Answers</button></div>
+        <div class="round-banner" id="l3-banner"><h3>Round Complete!</h3><p>All four scenarios answered correctly.</p><button class="btn-next" onclick="nextRoundL3()">Next Round &rarr;</button></div>
       </div>
     </div>
-
-    <!-- POWER DISTRIBUTION -->
-    <div class="gov-panel" id="panel-power">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">One of the most important structural questions in government design: how is power divided between a central (national) government and regional (state/local) governments?</p>
-      <div class="power-diagram">
-        <div class="power-card">
-          <div class="power-card-title">Unitary</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:90%"></div>
-            <div class="power-bar-state" style="width:10%"></div>
-          </div>
-          <p>The national government holds almost all meaningful power. Regional or local governments exist but are largely subordinate to the center.</p>
-          <p class="example">Very common: United Kingdom, France, China, Japan.</p>
-        </div>
-        <div class="power-card">
-          <div class="power-card-title">Federal</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:50%"></div>
-            <div class="power-bar-state" style="width:50%"></div>
-          </div>
-          <p>Power is constitutionally divided and shared between the national government and the states. Each level has its own defined authority.</p>
-          <p class="example">The United States. The Founders feared a too-powerful central government — federalism was their solution.</p>
-        </div>
-        <div class="power-card">
-          <div class="power-card-title">Confederal</div>
-          <div class="power-bar-wrap">
-            <div class="power-bar-national" style="width:15%"></div>
-            <div class="power-bar-state" style="width:85%"></div>
-          </div>
-          <p>Power rests almost entirely with the regional governments. The national government is weak and exists mainly to hold the coalition together.</p>
-          <p class="example">Very rare. The United States under the Articles of Confederation (before the Constitution); Switzerland historically.</p>
-        </div>
-      </div>
-      <div class="power-legend">
-        <span><span class="legend-dot" style="background:var(--accent)"></span> National Government Power</span>
-        <span><span class="legend-dot" style="background:var(--gold)"></span> State/Regional Power</span>
-      </div>
-    </div>
-
-    <!-- EXEC CHOSEN -->
-    <div class="gov-panel" id="panel-exec">
-      <p style="margin-bottom:1rem; font-style:italic; color:var(--ink-faded); font-size:0.92rem;">Even among democracies, the method of selecting the head of government differs significantly — with real consequences for how accountable that leader is to the people.</p>
-      <div class="system-grid">
-        <div class="system-card">
-          <div class="system-card-title">Presidential System</div>
-          <p>The head of the executive branch is elected directly by the people (or through an electoral college, as in the U.S.). The president serves a fixed term and is separate from the legislature.</p>
-          <p>The executive and legislative branches are <strong>independent</strong> of each other — which enables checks and balances but can also create gridlock.</p>
-          <div class="pro-con">
-            <span class="pro">Clear executive accountability</span>
-            <span class="pro">Fixed terms = stability</span>
-            <span class="con">Can lead to gridlock</span>
-          </div>
-          <p class="example" style="margin-top:0.8rem; font-style:italic; color:var(--ink-faded); font-size:0.85rem;">Examples: United States, Brazil, Mexico.</p>
-        </div>
-        <div class="system-card">
-          <div class="system-card-title">Parliamentary System</div>
-          <p>Citizens vote for representatives or parties. The party that wins the most seats in parliament selects the head of government — usually called the <strong>Prime Minister</strong>.</p>
-          <p>The executive <strong>comes from</strong> the legislature and must maintain its confidence. A vote of no confidence can remove the Prime Minister from power.</p>
-          <div class="pro-con">
-            <span class="pro">More responsive to parliament</span>
-            <span class="pro">Easier to remove failed leaders</span>
-            <span class="con">Less direct accountability to voters</span>
-          </div>
-          <p class="example" style="margin-top:0.8rem; font-style:italic; color:var(--ink-faded); font-size:0.85rem;">Examples: United Kingdom, Canada, Australia, Germany, Japan.</p>
-        </div>
-      </div>
-      <div style="margin-top:1rem; background:var(--parchment-mid); border:1px solid var(--border); padding:1rem 1.2rem; border-radius:4px;">
-        <p style="font-size:0.9rem; color:var(--ink-light);"><strong style="font-family:'Oswald',sans-serif; letter-spacing:0.05em;">Note on Direct vs. Indirect Democracy:</strong> In a <em>direct democracy</em>, citizens vote on laws themselves (example: Ancient Athens; ballot initiatives in some U.S. states today). In an <em>indirect democracy</em> (republic), citizens elect representatives who vote on laws. The U.S. is an indirect democracy — we elect people to govern on our behalf.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════
-       SECTION 2 — KEY PRINCIPLES
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="principles">
-    <div class="section-header">
-      <div class="section-number">02</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section Two</span>
-        <h2 class="section-title">Key Principles of American Democracy</h2>
-      </div>
-    </div>
-    <p class="section-intro">American democracy rests on eight foundational principles. These aren't just abstract ideals — they are structural commitments built into the Constitution and tested throughout American history. Click each principle to explore its definition and how it works in practice.</p>
-
-    <!-- US GOV TYPE BOX -->
-    <div style="background:#fff; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:0 0 4px 4px; padding:1.6rem 1.8rem; margin-bottom:2rem; box-shadow:0 2px 10px var(--shadow);">
-      <div style="font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem;">Before You Begin</div>
-      <h3 style="font-family:'Oswald',sans-serif; font-size:1.3rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink); margin-bottom:1rem;">What Type of Government Does the United States Have?</h3>
-      <div class="us-gov-grid">
-        <div style="background:var(--accent-pale); border-radius:3px; padding:1rem 1.1rem;">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--accent-dark); margin-bottom:0.5rem;">Democracy</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">At its core, a democracy is a system where political power comes from the people. The government rules with the consent of the governed. Citizens have a say — directly or indirectly — in the decisions that affect their lives. No single person or group can rule without accountability to the public.</p>
-        </div>
-        <div style="background:var(--gold-pale); border-radius:3px; padding:1rem 1.1rem;">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:#7a6010; margin-bottom:0.5rem;">Republic</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">A republic is a specific form of democracy — one where citizens elect representatives to make decisions on their behalf rather than voting directly on every law. It is an <em>indirect</em> democracy. Crucially, a republic also implies a system governed by law rather than the unchecked will of any individual or majority. The Founders deliberately chose a republic over a direct democracy, fearing that pure majority rule could become mob rule.</p>
-        </div>
-        <div style="background:var(--parchment-mid); border-radius:3px; padding:1rem 1.1rem; border:1px solid var(--border);">
-          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink); margin-bottom:0.5rem;">Democratic Republic</div>
-          <p style="font-size:0.9rem; color:var(--ink-light); line-height:1.6;">The United States is a <strong>constitutional democratic republic</strong>. It is democratic because power ultimately derives from the people. It is a republic because citizens exercise that power through elected representatives rather than directly. And it is constitutional because the government's authority is defined and limited by the Constitution — no one, not even a majority, can simply do whatever they want.</p>
-        </div>
-      </div>
-      <div style="background:var(--parchment-mid); border-left:3px solid var(--accent); padding:0.8rem 1rem; border-radius:0 3px 3px 0; font-size:0.88rem; color:var(--ink-light);">
-        <strong style="font-family:'Oswald',sans-serif; letter-spacing:0.05em;">Why the distinction matters:</strong> The Founders were deeply suspicious of pure democracy. James Madison wrote in Federalist No. 10 that direct democracies are prone to the "violence of faction" — where a passionate majority steamrolls the rights of minorities. A republic with constitutional constraints was their solution: a government that is responsive to the people but protected against the tyranny of the majority. The eight principles below are the specific commitments that make that balance possible.
-      </div>
-    </div>
-
-    <div class="principles-grid">
-
-      <!-- 1. Popular Sovereignty -->
-      <div class="principle-card" id="pc1">
-        <div class="principle-header" onclick="togglePrinciple('pc1')">
-          <div class="principle-header-left">
-            <div class="principle-num">1</div>
-            <div class="principle-name">Popular Sovereignty</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Government is created by and derives all of its authority from the people. The citizens have a voice in their government — through voting, petitioning, amending the Constitution, and holding officials accountable.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Citizens vote for their leaders, participate in elections, sign petitions, and can amend the Constitution through defined processes. The government's power ultimately flows upward from the governed.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Limited Government -->
-      <div class="principle-card" id="pc2">
-        <div class="principle-header" onclick="togglePrinciple('pc2')">
-          <div class="principle-header-left">
-            <div class="principle-num">2</div>
-            <div class="principle-name">Limited Government</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">The government's power is defined, bounded, and limited. It is prevented from acting outside those boundaries. The Constitution specifies what the federal government can do; the Bill of Rights specifies what it cannot.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The Constitution lists the enumerated powers of Congress. The Bill of Rights prohibits the government from restricting speech, conducting unreasonable searches, or denying due process — among other protections.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Separation of Powers -->
-      <div class="principle-card" id="pc3">
-        <div class="principle-header" onclick="togglePrinciple('pc3')">
-          <div class="principle-header-left">
-            <div class="principle-num">3</div>
-            <div class="principle-name">Separation of Powers</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Government power is divided among three distinct branches — legislative, executive, and judicial — each with its own defined responsibilities. No single branch can do everything. This prevents dangerous concentrations of power.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Congress passes laws; the President enforces them as Chief Executive and Commander in Chief; the Supreme Court interprets them. Each branch operates in its own lane.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Checks and Balances -->
-      <div class="principle-card" id="pc4">
-        <div class="principle-header" onclick="togglePrinciple('pc4')">
-          <div class="principle-header-left">
-            <div class="principle-num">4</div>
-            <div class="principle-name">Checks &amp; Balances</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Each branch of government has the power to limit or "check" the actions of the other branches, preventing any one branch from abusing or accumulating too much power. Separation of powers defines the lanes; checks and balances enforce them.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Congress can impeach the President. The President nominates Supreme Court Justices — but the Senate must confirm them. The Supreme Court can strike down laws passed by Congress as unconstitutional.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Rule of Law -->
-      <div class="principle-card" id="pc5">
-        <div class="principle-header" onclick="togglePrinciple('pc5')">
-          <div class="principle-header-left">
-            <div class="principle-num">5</div>
-            <div class="principle-name">Rule of Law</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">No person is above the law — not citizens, not officials, not even the President. Rules must be followed consistently. Everyone is entitled to due process and a fair trial. The law applies equally to all.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The government cannot arbitrarily imprison people. Even the President can face criminal charges. Courts operate independently to ensure the law is applied fairly, regardless of who is involved.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Majority Rule -->
-      <div class="principle-card" id="pc6">
-        <div class="principle-header" onclick="togglePrinciple('pc6')">
-          <div class="principle-header-left">
-            <div class="principle-num">6</div>
-            <div class="principle-name">Majority Rule</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">In a democracy, the side that wins elections earns the right to govern. The losing side must accept the legitimacy of the outcome. Elections only function as a democratic mechanism if results are respected — even when the outcome is unwelcome.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The party or candidate that wins the election takes power. The losing side accepts the outcome, transitions peacefully, and continues to participate in the democratic process — competing in the next election rather than rejecting the results of the last one.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7. Protect Rights of the Minority -->
-      <div class="principle-card" id="pc7">
-        <div class="principle-header" onclick="togglePrinciple('pc7')">
-          <div class="principle-header-left">
-            <div class="principle-num">7</div>
-            <div class="principle-name">Protect Rights of the Minority</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Even in a democracy, no majority — no matter how large — has the right to strip away the basic rights and freedoms of a minority group or individual. Majority rule has limits. The winners cannot silence, oppress, or exclude the losers.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>The Bill of Rights protects individual freedoms from government overreach regardless of popular opinion. Courts can strike down laws that violate minority rights even if those laws were passed by large majorities.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8. Federalism -->
-      <div class="principle-card" id="pc8">
-        <div class="principle-header" onclick="togglePrinciple('pc8')">
-          <div class="principle-header-left">
-            <div class="principle-num">8</div>
-            <div class="principle-name">Federalism</div>
-          </div>
-          <div class="principle-chevron">&#9660;</div>
-        </div>
-        <div class="principle-body">
-          <p class="principle-def">Power is divided between the national government and the states. Neither can simply absorb the other's authority. Both levels of government have their own defined spheres of responsibility, creating a system of dual sovereignty.</p>
-          <div class="good-box">
-            <div class="principle-section-label">In Practice</div>
-            <p>Education and most law enforcement are left to the states. National defense, immigration, and currency are federal responsibilities. States can serve as "laboratories of democracy," trying different policies without requiring national consensus.</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end principles-grid -->
-  </section>
-
-  <!-- ════════════════════════════════════════════
-       SECTION 3 — SCENARIO CHALLENGE
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="scenarios">
-    <div class="section-header">
-      <div class="section-number">03</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section Three</span>
-        <h2 class="section-title">Scenario Challenge</h2>
-      </div>
-    </div>
-    <p class="section-intro">Each scenario below describes a situation in which one of the key principles of American democracy is being violated or threatened. Read each one carefully, identify which principle is under threat, and then reveal the answer to check your thinking.</p>
-
-    <div class="scenarios-grid">
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 01</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A state legislature redraws its congressional district maps after a census. Critics point out that the new maps are drawn in such a way that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Popular Sovereignty</div>
-            <p class="answer-explanation">When electoral maps are engineered to predetermine outcomes regardless of how people actually vote, the connection between the people's choices and their representation breaks down. This is gerrymandering — the process of carving out districts to manufacture results rather than reflect public will.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 02</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Following a presidential election, the losing candidate claims — without presenting credible evidence — that the election was stolen through widespread fraud. The candidate pressures state officials to reverse their certified results and urges supporters to take action to stop Congress from certifying the outcome.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Majority Rule</div>
-            <p class="answer-explanation">Democracy requires that losers accept legitimate outcomes. When a candidate refuses to concede a legitimate election and attempts to reverse the result through pressure or disruption, it undermines the foundational rule that elections determine who governs. A democracy where results only count when your side wins is not a democracy.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 03</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">After a disputed local election, the President orders federal law enforcement agencies to take control of city government functions, overriding decisions made by the elected mayor and city council. The President argues that the federal government has a responsibility to maintain order.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Federalism</div>
-            <p class="answer-explanation">Local governance and law enforcement are functions constitutionally reserved to the states and localities. When the federal government uses troops or federal agencies to supersede the authority of elected state and local leaders — especially in areas the Constitution leaves to them — it collapses the division of power that federalism is designed to protect.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 04</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A newly elected majority party passes a package of voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Protect Rights of the Minority</div>
-            <p class="answer-explanation">Majority rule does not give a winning party the right to deprive its opponents of the ability to participate in democracy. When the winners use political power to disenfranchise the losers, they are not just governing — they are eliminating the mechanism by which they could ever be removed from power. This is precisely what minority rights protections are designed to prevent.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 05</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations and tie them up in legal proceedings heading into an election season.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Rule of Law</div>
-            <p class="answer-explanation">The rule of law requires that the legal system operate as a neutral institution applying rules consistently to everyone. When a president uses the Justice Department as a political weapon to target opponents, the law ceases to be a standard applied equally — it becomes a tool of power. No principle is more fundamental to preventing tyranny than this one.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 06</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Facing pressure to respond quickly to an economic crisis, a President issues a series of executive orders that set new tax rates on imported goods, raise tariffs, and restructure federal spending — all without a vote in Congress. The White House argues that the economic situation constitutes a national emergency justifying executive action.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Separation of Powers</div>
-            <p class="answer-explanation">Article I of the Constitution explicitly grants Congress — not the President — the power to lay and collect taxes and to control federal spending. When the executive branch assumes these powers under the cover of emergency declarations, it is not just overstepping its authority; it is collapsing the wall between two branches that the Constitution deliberately separated.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 07</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">Congress issues subpoenas to senior White House officials as part of an oversight investigation into potential executive misconduct. The President instructs all administration officials to refuse to comply, claiming that executive privilege shields the entire executive branch from Congressional oversight.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Checks &amp; Balances</div>
-            <p class="answer-explanation">Congressional oversight is one of the primary constitutional mechanisms for checking executive power. If the President can simply refuse all oversight — shielding the entire executive branch from scrutiny — the legislative check on executive misconduct becomes unenforceable. A check that can be ignored at will is no check at all.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-card-top">
-          <div class="scenario-number">Scenario 08</div>
-        </div>
-        <div class="scenario-body">
-          <p class="scenario-question">A state passes a law declaring that federal environmental regulations no longer apply within its borders, citing its status as a sovereign state. The governor argues that states have the right to reject any federal law they believe exceeds Congress's authority — and that the state will not enforce federal rules it disagrees with.</p>
-          <div class="scenario-prompt">Which principle is being violated?</div>
-          <button class="reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
-          <div class="scenario-answer">
-            <div class="answer-principle">Limited Government / Federalism</div>
-            <p class="answer-explanation">Federalism divides power between national and state governments, but the Supremacy Clause of the Constitution establishes that federal law is the supreme law of the land in areas where Congress has constitutional authority to act. States cannot unilaterally "nullify" federal law — this doctrine was rejected after the Civil War. Federalism works in both directions: just as the federal government cannot override states in their constitutional sphere, states cannot simply opt out of valid federal authority in the national sphere.</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end scenarios-grid -->
-  </section>
-
-</main>
-
-<footer class="page-footer">
-  Blue Valley Academy &mdash; American Government &mdash; Unit 1
-</footer>
-
+    <div class="level-complete" id="l3-complete"><h2>Challenge Complete!</h2><p>You analyzed all sixteen scenarios. Strong work.</p></div>
+  </div>
+</div>
 <script>
-  // TAB SWITCHING
-  function switchTab(panelId) {
-    document.querySelectorAll('.gov-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.gov-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('panel-' + panelId).classList.add('active');
-    event.currentTarget.classList.add('active');
-  }
+const ICONS = {
+  "Popular Sovereignty": "data:image/png;base64,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",
+  "Limited Government": "data:image/png;base64,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",
+  "Separation of Powers": "data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADrAOEDASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAAAAYHAwUBAgQI/8QAQxAAAQQBAQQDCBICAgMBAAAAAQACAwQFEQYHITESUXETIjRBYXKRkhQVFhcjMjZCUlNUVXOBocHR4SSTM7FigqLS/8QAGgEBAAIDAQAAAAAAAAAAAAAAAAQFAQIDBv/EACsRAAICAgEDAwQCAgMAAAAAAAABAgMEETEFEiETQVEUFTNhIjJSgSM0cf/aAAwDAQACEQMRAD8A1KIi9qUIRCCOYRAERc9F30T6EBwi56Lvon0J0XfRPoWNg4Rc9F30T6FwQRzBCAIi9WIoy5LJ16EH/JO/oNSTUVthLb0jyormobq8IKzPZs9x82nfGOQNGvZovR71mzP1mQ/3D/8AKr31Sj9kn6OwpFFbM+7vAMmewPu6A6D4Ufwunve4H6d3/aP4WPulH7M/R2FUot5tlgTgsgyJry+KVpcwnmBrpxWjU+uyNkVKPDI0ouD0wiItzAREQBERAEREAREQBERAFKN3mEgy96WWyOlFX0DmdZPL/pRdbPZjPT7P5A2GsMteThLGOZ8qjZasdTVfJ1pcVNd3BZWe2XxNjGyiKrHBIxhc1zBoeAVRyNLJHMPNp0KnGb3iQWaD6+NqTCWRpaXSDQNB58ioK3XTvjq7xnrUXpsLop+px+ztlODa7SZbt8FVyZnuW2NkZC8NDDyPDVT32iw/3fB6qqvZDaWXZ2zIJInTVJiC9reYPWFLxvKwung9of8AqP5ULNryHa2t69jvjyrUESX2ixH3fB6qe0WI+74PVUb98nCfUWvQP5T3ycJ9Ra9A/lQ/SyPhnfvr+UST2ixH3fB6q8+Q2ZxFqq+IU4o3Ed69reIK0fvk4T6i16B/K82R3k0jVe2hUndO4aNLwNB5ea2jVk7WkzDnVrzoguQg9i3p6+uvc3luvYVu92vy2xv4w/dR6SSSaV80p1kkcXO7SpDu1+W2N/GC9Bfv6d750VlevVWvk+hkRF5QuTQWvCZPOKxLLa8Jk84rEgK83v8AOp2fuq+Vg73+dTs/dV8vTdN/66KrL/IwiIp5GCIiAIiIAiIgCIiAIiIAiLe7GYH28vOa9xbBF/yEc/IFztsjVFylwbQg5vSNCuVZWd2Hx4x75KBkZLG0u752oIAVauaWuLXDQjgVyx8qGQm4+xtbTKvkLjQdQUm2G2cZm5ZJrDiK8Tg1wB0JPNTYbE4LT/jm9f8ApcbuoVVS7X5Z0rxpzWyo9B1BNB1BW57icF9VN6/9J7icF9VN6/8AS5fdafhm/wBHP5Kj0HUEAA5BW57icF9VN6/9LzZLYXFSVXioJWTAd6S/ULK6rS3ww8OZVqkW7X5bY38YLQ24XV7MsD/jRuLT+S327X5bY38YKVktOiTXwcKlqxH0MiIvJl0aC14TJ5xWJZbXhMnnFYkBXm9/nU7P3VfKwd7/ADqdn7qvl6bpv4EVWX+RhERTyMEREAREQBERAEREAREQBb7YjaKPAZGQWgRVsadN30SOR/VaFcEAjQjVcrqo3QcJG1c3CXci0NoNucJHjZG0Lbbc8jS1rGAjTUc+IVYdJzyXv+M46ldWsY06hoC7Lji4kcdPT3s6XXu3kk+wG01fCTzVMg7oV53BwlPJp00U8G1+zRGoy0Hod/CpsgEaEarp3GP6IXC/psLZue9bOleVKEe3Rc/uu2b+9oPQ7+E912zf3tB6HfwqY7jH9EJ3GP6IXH7RH/I6fWv4Ln912zf3tB6HfwvLk9uMBWqPfBejsTad5G0HUn0Kou4x/RC5bGxp1DQi6RDfmRh5r+DNZsPt2pbMg0dK8u06tSt/u1+W2N/GCjqkW7X5bY38YKfkpRokl8Eep7sTPoZEReTLk0FrwmTzisSy2vCZPOKxICvt77T0Kj/EOH6qvFaO9qAvwEUzW6lszQeziquXpOmPdH+yqy1/yBERWJGCIiAIiIAiIgCIiAIiIAtvsvg585cMUbuhGz47+pahS7dhmKmPv2adp4jNnouY5x0HAH+VGzLJ10uUOTrRGMppSPbmNgTBSfPUs90fG3UsLdNQOaghBBIIII5gq685msdQxs08tqI94Q1rXAlxI4cFS08xsTyWC3o90cXdHq1UTpt9tqff5O2VXCGu03eyWzk2dlkIk7lBGdHP0149ilo3fUtBrZcT2f2tdurzNSu2zjrUrIZXODmF3AOGnWrB9lVvtEPrhQszLvja4p6SO9FNbgm1siHvfUftLvQnvfUftLvQpf7KrfaIfXCeyq32iH1wov1mR/kzt6FfwRD3vqP2l3oXmyG76MV3OqWj3RoJDSOf6qceyq32iH1wsF3KUKdZ881qENYCT341K2jm5Cf9jDoq1wUfYifBO+GQaPY4tcPKFv8Adr8tsb+MFpcnabdyVi0waMkkJbw8WvBbrdr8tsb+MFf3tvHbfOitrSVqS+T6GREXlC5NBa8Jk84rEstrwmTzisSA120tI5DC2arWgvcw9DXrVGyMdHK+N3xmOLT2g6L6DVWbysGaWQ9sK7AK82moaPin+yrbpd6hN1v3IWZXtdy9iHIiK/K4IiIAiIgCIiAIiIAiIgC6Sxskb0XtBC7r1YrH2slbbWqxl7z6AtZSUVuXBlJt6R4O4sLgXauLfi6+JZVIstsflsfVNh7WSMA77oHUhRxaVWVzW634MzjKL/kdJYmSadNoJHIrsO7AaCzMB1ArY4XE3MvZ7hUZqRzceQUhGwGV04yQ+uuV19EJam1s3hXY1uJDfh/tU3rJ8P8AapvWUz9wGU+sh9dPcBlPrIfXXL6nE+Ub+lcQz4f7VN6y6vi7oQZnul05dI6qa+4DKfWQ+uvNkNiMtVrOnHc5A0akNdqVmOTi78NGHVdryiLDhyUj3a/LbG/jBR1wLXFrhoQdCFIt2oJ22xv4oXbK/DL/AMNKfyI+hkRF5IujQWvCZPOKxLLa8Jk84rEgC82TpV8hSkq2WB8bx4/EfEV6UWU2ntBrZSm1OAs4S6WPaXV3H4OTTgfJ2rTK/MjRrZCq+vaibJG4cj4lWu02w9um90+OBsQ8+jp3w8gCv8TqMZrts8Mrb8Vxe48ENRd54pIJTFMxzHjm1w0IWz2PpxX9o6tSYasdq70DVWU7FCDn7IiRi5S7Txx429JXNhlWQxDm/TgvKQQdDzX0AyvAyPubYmBmmmnRUQ2u2LhvdK3jg2KweLmfNcetVdPVYylqa0iZZhtLcXsq5FmuVZ6dh0FmJ0cjToQ4aLCrZNNbRCa0ERFkBERAFMt1N2pBkbNadzWzS6GIu4cAOIUNXUg9IPY9zHt5OadCFwyafWrcNnSqz05KRemcs16uKsSWXsazubh3x5nRUc97ZHue0aNcdQPIuZ7F6y0Mt3rE7Bya95IXRRsHEeOn3Pk6ZF6t1on+6S5Vay5Ue5rbDpA5oPMjTxKwl8+jujJBLDK+GRvJ7DoQvUMpmhwGWtf7Co2T02dljnF8nanKjGKi0Xwiof21zf3tZ/2FPbXN/e1n/YVH+1W/KOv1kC+FitTQ1675Z3tbG0EuLjw0VGe2ub+9rP8AsKx2LmSss7nZyNmVnjaZDoVldJt35aMPMh8GTKTRz5O1LCPg3SuLdOrVSXdJWNjbGFwGvcQHn0qIgADQcgrV3FY0j2ZlHN01Hcm+XkVZZjVWM1/oi0LvtTLUREXmC2NBa8Jk84rEstrwmTzisSAIiIAiIgPBkcPjb8bmWKsZ6XNzWgO9K1uM2QxWOykV+o2Rr4wdAXk8xopCi6K6cY9qfg1cIt7aCIi5mxp9o9n6OagLZmBkuneyNHEHy9aqnaHAXsLOWTsLo9e9kbxBHl6ldywXqle7XdXsxNkjcOIIU3FzZ0PXKI92PGzz7lBIpjtfsZPj+lbx4MtbXi3m5gUOcC0kEEEeIr0VN8Lo90GVk65QemERF2NAiIgCIiAIiIAiIgCIjQXODWgkk6ADxoDNQqy3bkVWFhe+RwAAX0bspiI8Jg69BmhdGwB7h849ahm6jZA0oxmMhH8O8fBMI+KOv9VZC871HKVsuyPCLPFp7F3PlhERVhLNBa8Jk84rEstrwmTzisSAIo9tZtNHs9Yr+yIC+CUd85vFw49S2eHy2Py1cTUbLJhoCQ08W+Qrdwko92vBjuW9HuREWhkIiIAiIgCIiAEAjQjUFVpvSwtWj3HJVmNj7tKI3tHjJDjr/wDKsLJ36mOqus3JmxRtHNx5qodstppNorjREx0dGF2sbTzceI6R9JVh02NjuTjx7kbKcezT5NEiIvSlUEREARGguOgBJPUp3sLsDayzmXMiHQVOYaeDnjyLjdfCmPdNm8K5TekR7ZbZrI5+22KtGWx699I4aAD91bmK3d4GtSEU8T5pSO/f0v8ArqUnxePqY2q2tThbFG0cgOa9a8/k59lr/i9Is6saMF58s+ft4uzsez2YEUDia8o1ZqeI6wowrn3obLZLaC9UdSaOgzXpOPi4BazC7qQHNflLrXt8bYtWn9VZUZ9caU7JeSJZjSc32rwVlSp2bs7YasL5XuOgDWkq2dgd3zKTmZDLta+fmyLmG9vWpng9n8Vhow2lVYxwGheR3x/NbVQcrqMrV2w8IkU4qh5l5Zw0BoAaAAOQC5RFWEsIiIDQWvCZPOKxLLa8Jk84rEgK83wDU1Aer91X1WSxSnFijYkgkadR0XHontHIqwd7/Op2fuq+XpOnxUsdJoq8ltW7RMcNvHv1uhFl6osN176aPgQPNAUzw+2OAyjSYbrYdOYn0j/7VNrFJBDJ8eNru0LW3pdU/MfBmGXOPPk+hYZ4Jm9KGaORvWxwI/RZF8+QzXoG9GtkbcDfEI5SApTu8y+XftRVqWMhNPA9r+k2RxJ4BV93TLK4uW/CJMMuMmlotpEXDnNa0uc4NA5knQBVpKOVoNrNqaGBg0e8S2XfEiadT+fUo/tpt2yv0sfhdJbB4Pm+azydqrqV0s9h1mzI6ad/xnuOp7FZYnT5W/yn4REuyVDxHk9edy2Qztw2b8hDPmQtOjWjq8q8Y4clyi9BXXGuPbFeCtlJye2ERFuYCz0ali9ZZWqxOlledA1o4r0bP4ufMZaHH1/jyHieoaga/qFfGyWymO2frARRiSwR38rhx1ULLzY461yzvTQ7PPsRzYXd5BQDLuXa2afm2M8m/wBqw2tDQA0AAeILlF5y26dsu6bLSEIwWkERFyNwiIgCIiAIiIAiIgNBa8Jk84rEstrwmTzisSArze/zqdn7qvlYO9/nU7P3VfL03TfwIqsv8jCIinkYL04nIS4rJwZCJocYjxHWDwK8yLWcVOLi/czFuL2i3YdvdmH1myvycMUhbqYXE9IHqUF2u2yu5zpVaXTq0Twdoe+kHUfIo10Ga69Ea9i5UCnptVcu5+SRPKnJa4OGMawaNGi7IisSMEREAREQG42LzUeA2kr5CdpMGnQkIGpDS4HX9F9DYvIVMlUZapzMljcNdWnXTtXzAQCNDxC2uy+0eV2atCWhK59cnv65PekeQdaq8/Cdz74ckvHyFD+L4PpRFHdjtrsXtJUD68ojsAfCQuPfNKkSoJRcXplkmmtoIiLUyEREARdJJYohrJIxg/8AJwCi+0O3+zuHDmPttnnHKKPXU/npotowlJ6ijDklySokAangFprG0+IizVfECy2S1O7otazvgD5SOSqHajeRmswHQUGux9Y8Ofwh/MLX7tWk7dY+R7i+R0wLnu4klT49Omq3OfjRGeVFyUYn0QiIq4lGgteEyecViWW14TJ5xWJAV5vf51Oz91XysHe/zqdn7qvl6bpv4EVWX+RhERTyMEREAREQBERAEREAREQBERAdqs1mlbZcozvr2GHUOYf0VvbA7ya+QMeOzZZWucmyE97If5VPrq9od1gjkRzCiZOHC9eeTtVfKt/o+qQQQCOIK5VGbB7w7mFfHRy7nWKHJsnN0Y/dXNjspQyFMW6lqOSEjXpBw4dq85fjTolqSLSu2Ni2iJ7y9tLuzEteKlThndNrr3TXQcPIq+v7zdq7eoY2tUHXCXa/qvTvizFTJZ6OvUlbK2u3vntOo1I5fooQrjCwqpVKU4+SDffNTai/B6sll85k9RkcvasNPzHOGgXhZExnJqyLg8irOFcIf1WiI5SlyyV7H7EZHaCA2mFsNcHTpO4anyKb7L7uZcRna2Rdb6YheHdHr/RbPdDk6l3ZWOvC5omgJbIzx+LipovPZWbc5ShwizpogkpBERVxKNBa8Jk84rEstrwmTzisSA0G1mzcef7l3Sd8Xc+XR04qJZnYCetWdNTsGXoAucHc9B2KzFgyNmGpSmsWHBsbGEnXx8OSlU5dtWoxfg42UQn5aKDc1zXFrgQ4cCD4lws16dlq/YsxghksrntGmnAlYV6mLbSbKhrT0ERFsYCIiAIiIAiIgCIiAIiIAiIgOCARoRqEjdYiaWQXLULDzZHK5o9AK5RayipcoJtcHVrQ3XmSeZJ4ldkRbAIiIDZ7KZyzs5mo79ckxkhszPE4L6Jw+Rq5XHw3qcgfDK3pNK+Yjx5qabqdq3YPJtxdx59g2HaNJPCN3X2Kp6jid69SPKJmLf2vtZeqLqxzXsD2kFpGoIXZUBZGgteEyecViWW14TJ5xWJACQBqToFVO8naQ5K37VUpP8WI6yuHz3dX5KRbytpfa6p7W0n/AOXOOLgeLG+P81VrG9Ec9STqSfGVb9NxO5+rLj2IWVdpdiOQNBoFyiK+K4IiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAur2hzdF2RAW7uf2v9m1xg8jL/AJUI+CeTxe1WWvlmvPPUtRXKryyeFwcwjrC+gd3+00G0mGZKCG2Yx0ZmePUcNfzXnOoYnpS748MtMa7vXa+TNa8Jk84rR7WZyDBYp9qUgyHvYmH57upbbL2YabbFmd7WRx6kknRUdtRmpc/lnWnFwrsOkDTw73r061ww8V3z17Lk3vuVcf2a+zPPcty3LTzJNK7VziuqIvURiorSKhtt7YREWwCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAs+MyGRxVr2Vi7j60vj0GoPaDwKwItZRjNakvBlNxe0e/LZ/P5lgjymR7tHrr0WRtYD26DiteOA0C5RYrrhWtRWhKbk9thERbmAiIgCIiAIiIAiIgCIiAIiID/2Q==",
+  "Checks & Balances": "data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADoAOADASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAYBAgQFBwMI/8QAQRAAAgIBAgEGCQoFBAMBAAAAAAECAwQFEQYSITFBUXEHFjJhc4GRkrETFBUiIzM0QlJTQ3KhwdE1RGKCFyRU4f/EABoBAQADAQEBAAAAAAAAAAAAAAADBAUCBgH/xAAsEQACAgIBAgUDBQADAAAAAAAAAQIDBBExBRITITNBURQ0UhUyQmGBIiOh/9oADAMBAAIRAxEAPwDUgA9qYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALLJxrg5zaSReaPVMh23utP6kOb1lfKyFRX3MkpqdktHvfqkuU1TFbdrPD6Ryv1R90xAednnXye+7Rpxx60taMxajldsfYVWpZP/D2GED4s29fyZ98Cv4M5anf1xgz3o1SLe1sOT50aoEkOo3xe97OZYtbXBJYTjOKlFpp9ZcaTTMl03KEn9SX9DdG/jZEb4dyM22p1y0yoALBGAAAAAAAAADI0zBydRza8PEqlZdY9oxRjpNvZLds7l4G+EFpmCtZz6l87vX2aa54Qf+VsVcvJWPDu9/YlpqdktEH1HwXcRYemyzfsLnGPKdUG3P4EFknGTi1s09mj6w1fOxdN02/NzLI10VRcpSfYfKmddHIzb74R5MJ2NxXmK3T8qy/ff7EuTTGvXaeQANMqgAuprndYq61u3/Q5lJQXdJ+R9ScnpFpWMZS8mLfcbjG06qtJ2fXl8DMUIroil6jJt6tFPUFsuQwm/wBzI5bRkKqTVM99ubmI9LCzFvKePNNvfoOi7LsKcmPYvYZ2VmSyElJa0WqaFVvRzaVVsfKrkvUW8mX6X7DpXIh+iPsLJY1EvKqi/UUyc5xs+wodClp2DLysat+o8p6Lpsv9rBdwBAgTefD+ny6K3HuPGfDOFLostj3bAEONlDULVFLkReyNxdwxRGEpQvnzLfnI7ZHkWSj2PYnpyLKd9j0RzqjP9yMz6Rt/biFqNm/PXEwgTfqGR+Rx9NV8G7xro318uPrXYepr9H6LF3GwPQ41jtqjN+5l2xUJtIAAnOAAbbhPRMniDWqdPxov6z3nLqjHrOZyUIuT4R9inJ6RKPBDwi9a1RajmVv5ljvdbry5Lo9jO9xUYQUUlGMVsl2IwtB0vG0bS6dPxIKNdcdu99pjcY4+rZWg34uizjXlWrkqbe3JT6WvOeWyb3kWbfBr1VqqGjkHho4wer6h9Bafb/6VD+2kn5cuzu5znS5joa8EnEW7btpcpPeTclzv2mHrPgz4i03AszHCu6Fa3koSW+3dvzm3jW41UFCMkULYWzk5NEJAa2ezBoFYo3svO+ZG+07HWPQt19eS3kzTYUFbn01voe79i3JEYXVrn3KtcGhhwWnIAAxy8AAAAAAAAAAAAWX/AHM/5X8Dn+R9/P8AmZ0C/wC5n/K/gc/yPv5/zMAsAABsNH/ieo2Br9H/AInqNgeqwft4mPkeowAC2Qg6H4CtX0/T+IcvHzrK6Z5FUY0zm9k2m3tuc8LZRUtnu010NPZohyKfGrcPk7qn2SUj68i1KKlFpp9DRU+Q+Xl9Wpagu7Kn/k6B4HeGM/WNXhqmTn6g8LGluuVkzanJdC6edcxhXdOdMHOUjRhlKctJHfDD1vMxsDSsnLy7Iwprrbk30GWkkkupHCvDTxf9Lah9Bafa3h47+3lF805dnnXQVMaiV9iiia2xVx2zn+ZdDIzLrqo8mE5txXYjyKLmRU9alpaMVvb2WV5tODnVW3crk7Ncy36jP8ZNO7bfcI9rvTV3v4GtPN9T9f8Aw1cT0yZ+MmndtvuDxk07tt9whgM8skz8ZNO7bfcHjJp3bb7hDAATPxk07tt9weMmndtvuEMABM/GTTu233B4yad22+4QwAEz8ZNO7bfcHjJp3bb7hDAATG3iTTnVNb2+S/yEJv1bEd03vPyn+Uvs+7l3Mjdn3ku8A330tids/dH0tids/dI+ACc8O5FeTXbOrfZNLnRtiO8D/g7/AEn9kSI9Vg/bxMfI9RgAFshAAANrwromVr+s06fjRb5T3nL9Met+w+l9A0vF0bS6cDFgowrik2vzPbnZxvwB6lgYmu5uNlWQruvrj8jKT23233Os8VcR6foGjXahkX1ycI/UrUk3OXUkee6lZOdvh+yNLEjGMO4jPhi4wWg6U9NwrEtRyo7Ra6a49cjga33bk25N7tvrZma3qeVrWrX6nmzcrbZbpP8AKupGIauFjKiHny+Spfd4kv6AALhAavXf4Xe/gaw22uxbxozS8l7mpPOdUi1dv5RqYb3XoAAzS0AAAAAAAAAAAAW2fdy7mRuz7yXeSO9qNM2/0sjcnvJvtYBQAAEt4H/B3+k/siREd4H/AAd/pP7IkR6rB+3iY+R6jAALZCAAAWyipNS3alF7prpRdfO/IlGWVkW3uPNH5SW+wBy4pvbR929aAAOj4AAAed9atplXLoa2I5KEqrJUz8qP9UScwdTwlkR5cPq2x6H2lLOxfHh5conx7vDl58GmBSTlXP5O2PIku3rKnmZwlB6kjWUlJbQAByfQAAAAU5UV+Ze0AqC35Sv9cfaXVKd0+RTFyfb1I7hXOb1FHMpqK22YOrXONPyUN3KXTsafkT/RL2E/wtPqpq+0ipzfS2jI+bUftR9hrx6RtLul5lJ5vn5I5xyJ/ol7Cqrsb2UJN9x0b5tR+1H2FVj0J7qqPsOv0iP5Hz61/BquE8S3FwJO1cl2S5W3YboolstkVNWqtVwUF7FOcnKTbAAJDkAAAAHpjUWZFqrqW7+BzKSgu6XB9ScnpHmUJDi6Rj1xTt3nL2GXHDxo9FMPWjLn1atP/itluOFJ8siZXZ9jJd83o/Yr9xFfkKP2a/dRG+rr2j/6dfRf2RHky/S/YUJf8jT+1D3UYuZpmPem1HkS6nE6h1eLepR0fJYT15MieTi05EdrIJ+c11ujyTbovcV2PnN5lUWY1zqsWz6n2nmaLrqvim1tFZSnW9cGh+i8z9yPsL46TkvyshL/AKm7BEsChfxOvqbPk0y0ab8rJk+5F8dFr/NbN+s2wJFi0riKOXdY/c1sdGxV08t/9i9aVhr+Hv3szwSKmtcJHPfJ+5iR0/Ej0Ux9hkV111raEFFeZF4O1FLg5bbAAPoAAAAAAABi6jfKmtKHlS6+w4ssVcXKXCPsYuT0jJBo3da3u7Je0p8rZ+uXtMz9Xr/Flv6KXyb1tJNkk0LGVOHGxr69n1t/N1ECx5zlfCLnJpyXWdKxYtY1SjF7KC+BSzc9XxUYrRYox/De2XguUJvohL2F0aLpeTVN+ozS0eYMmOn5kvJx5v1HtDR9Sl0Yk/6AGADaw0DUpdNLj3nvDhnOl0yhHvAIhxBQrMN3JfWr59/MR46jk8H5N+NOqWTUuWtuhmqj4OchR2+fV7+v/BsdPzIVQcbGUsmiU5JxRBATHN8H+qUwc6b6bv8AjHff4EZ1HTM7T7ORmY1lT86NavJqt/bIpTqnDlGIACcjAAAABWEZTkoxTcm9kkAUB0nhvgPFnp8L9SlN3WR3cOqP/wCkW440COg6hXCqxzpuTcN+lbdPxKdebVZZ4cX5k08ecY9zI+AC4QgAAA12sdNfrNia7WOmv1lTO+3kTY/qIwAAeVNg99OSefjprdfKR+J9F6fp+EsKiSxq03XF9HmR86ab/qGP6SPxPpXT/wABj+ij8EAXRx6I+TVFeo9FGK6EioAKbLsRUAAAAAAAAGPnYeNm48qMmmNkJdKaMgH1NrzQ5OScbcLz0ez51jJyxJP1wZFzvWpYlWdg24tsU42Ra5+p7dJw3UsaWHn34s1s65tLu35j0PTst3R7Jcoy8qlQfcuDHABplUE48GnDvzq9arlw3pg/s4v8z7SPcKaLdreqQogmqovlWy7EdrwsanDxa8aiChXWtopdSMnqWX2Lwo8vkuYtPc+9npOUYQc5NRjFbtvqRxnj7XY63re1H4bG3hB/qfW/aiU+FHiR49P0Ng27X2r7aUX5Mez185zSEVGKSIumYvn4sv8ADvLu/gi4AG2UAAAAa7WOmv1mxNHxbkTxqKbK9t3Lbn7ipnfbyJsf1EeYND9LZPZH2D6WyeyPsPKmwSXTf9Qx/SR+J9K6f+Ax/RR+CPkvA1fJWdQ9o81kerzn0Bg8S56wqF9V7Vx6vMATsEK8Zs/siPGbP7IgE1BCvGbP7Ijxmz+yIBNQQrxmz+yI8Zs/siATUEK8Zs/siPGbP7IgE1BCvGbP7Ijxmz+yIBNTj/hJqjVxbkclbKUIPb/qiV+M2f2RIJxZmXZuvW3XtOXJiuZeZGj0t/8Af/hVy/TNYVrhKyyMIreUnsigUp1yjZW9pwe6PRy3ryMtc+Z23g7RKdF0qFUUndNcqyfazdNbrYg+j+EbRJ4Vcc524+RGO048nm38z3M3/wAhcMf/AFz91f5PJ2VXOTck9m1GcEkkz0yuBdBysu3KujlSttk5SfyzPN+D/h7Z7QyU/TM3+jali6thRzMOUpUybSbW25lzlGEXKTSilu2wsm6Pl3MeFW/PRxbjTQXoOpRpjNzpti5VvzGiJBx9rkdb1z7D8NjJ1wl+p9f9SPnpcVzlVFz5Mm5RU2o8AAFgjBHOOPwlHpP7MkZHOOPwlHpP7MqZ328ibH9RETAB5U2D2wfxtPpI/E7vh/hKfRx+BwjC/GU+kj8Tu+H+Dp9HH4AHqAAAAAAAAAAAAAAARfXP9Yt/lj8ESgiutNS1i7boSj8DR6X6/wDhVy/TMYAHpDLLXGL6UmbbhXQpa1qsMeENq4vlWS26EayuErLI1xW7k9kds4P0OvRNLhVsnfJb2zXWyhn5XgQ0uWWMarxJbfCNpg4tOFiV4uPBQrrjtFIg/hS4keNT9C4U9r7V9tJPyY9nr3JJxjrtOg6RPJm+VdL6tUOtyZxO667JyLMrIm53WycpN/Ay+n4vjT75cIuZN3ZHtXJZGKitkXAHozLAAABHOOPwlHpP7MkZr9c09ahifJ77ST3i/OQZNbsqlFcskqkozTZAAbefD2oqWyjBrvKeL+o/tx9p5v6K/wDE1PqK/k1cJOE4zXSnujuPD+VDM0bFug918nGL70uc5F4v6j+3H2ky4AycnTIvTs9KNcpb1S35k+w5liXRW3E+q6tvSZOgFzrdArkoAAAAAAAAAAABZdZGqqVkntGKbZDvlHdbZdLn5cm13dRsuItQ+Wl8wx5b/uyXV5jWxSSSXQjd6XjuKdj9zOzLU32oqADYKQjOdU421+VCSkjqWB4SNBngRsy7J0ZKj9ankNvfvS2OWlOTHffZFTJw4ZGnL2Jqr5Vb0bPijW7+INVeXYpQohzU1vqXb3s1oBPXXGuKjHgjnJze2AASHIAAAAAAAAALLa42Q5MvU+wvB85B7YWr5+DFVWVrJqXQ99ml/czI8UUL7zFvj3R3NaUKFnTaZvfBZjlWRWjcx4n019McmPfUz1hxDpcv40o/zLY0LjF9KRa6q30wj7CF9Jr9mztZsvdEnr1nTJ/72lfzTSPWOoYMvJzKH3TREHjUPpqh7C14eO/4aXcRvpC9pHSzf6JtHIol5N0H3SL+VHbflLYgrwqOyS7pMp8xp7bPfZw+kS/I6+tXwTLK1LBxot25Naa/KpLf2Gh1DXL8xOrBhKqp8zskudruNdDFog91BN9r5z2SSWyLFHS4Qe5vZFZmSktR8i2qtVx2W7b6W+ll4BqJa4KgAB9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//2Q==",
+  "Rule of Law": "data:image/png;base64,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",
+  "Majority Rule": "data:image/png;base64,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",
+  "Minority Rights": "data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADoAN8DASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAMEBQYHAgEI/8QAPBAAAQMDAQQGCQMDBAMBAAAAAQACAwQFEQYSITFBBxMVUYGxFCI0VWFxc5TSIzKRQlLBQ3LR8FOCoeH/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQQFAwYC/8QAKBEAAgIBAgYCAgMBAAAAAAAAAAECAxEEEgUTITFRUkGRMmEicaGB/9oADAMBAAIRAxEAPwDG0tzuz6WJ7rxdC5zASfTpeOP9yk7Runve6ffS/kqNF7FB9Nvkpl7BVV4/FGHvl5LHaN0973T76X8k7Runve6ffS/kq6KeVX6r6G+Xksdo3T3vdPvpfyTtG6e97p99L+SronKr9V9DfLyWO0bp73un30v5J2jdPe90++l/JV0TlV+q+hvl5LHaN0973T76X8k7Runve6ffS/kq6Jyq/VfQ3y8ljtG6e97p99L+Sdo3T3vdPvpfyVdE5Vfqvob5eSx2jdPe90++l/JO0bp73un30v5Kuicqv1X0N8vJY7Runve6ffS/knaN0973T76X8lXROVX6r6G+Xksdo3T3vdPvpfyTtG6e97p99L+SronKr9V9DfLyWO0bp73un30v5J2jdPe90++l/JV0TlV+q+hvl5LHaN0973T76X8k7Runve6ffS/kq6Jyq/VfQ3y8ljtG6e97p99L+Sdo3T3vdPvpfyVdE5Vfqvob5eSx2jdPe90++l/JO0bp73un30v5Kuicqv1X0N8vJY7Runve6ffS/knaN0973T76X8lXROVX6r6G+XkhovYoPpt8lMoaL2KD6bfJTL7XY+WERFICIiAIiIAiIgCIiAIvUUb5ZGxxMc97jhrWjJJ7gFu+nOjDUFzDJq0MtlO47+uGZcfBg8nELlZdCpZm8H1CEpvEUaMs9prSF/1A5poKFzYDxqJvUjHjz8Mldn050e6bs2xL6J6dUt39bU+tg/Bv7R8N2fitjqa+ipnhk9VDG48nPAKyruLLtUv+suV6L5mzmti6LrfR4fep3VsuN8cZLIx4/uPz3fJYXpL0bSWuhbcrXGWRh+zKzOQM8CF2Cd0U8TZ4ZGyMO7aachYy8UMdytdRQygbMzC3fyPI/wAqlXr7Vapyl0LEtPDZtSPzcinuNLJRV01LK0tfE8tIPwUC9MnlZRktYCIikBERAEREAREQENF7FB9NvkplDRexQfTb5KZQuwYREUgIiIAiIgCLZNOaH1HfWtlpqEw0zuE9QdhhHeObh8gV0zTnRVZKHYmukstynG8sPqRZ+Q3nxOD3KpdraaejeX+jtXp5z7I47ZbPdLzU+j2uimqpOewPVb/uJ3AfMro+m+iOV+zNf64RtxnqKU5d8i8jA8AfmusU1PBSwNgpoY4IWDDY42hrWj4AbgsTBqe1TXt1oZK70gHG8YBPcFkXcUtn0h0X+l2vRwj+XUlsVgstgpyy20UNPuw+Ti93zcd5+XBVbjq+xUVQ2nfWNkkccYj9YD5ngta1zb9VXK7vp6V0noOPVDXYb44Wq6Ht9FValFFdWuBDi3Zz/UDwKzZScnlvLLSSSwjpWur2+26bNXSE7c2GscOWea59YdL1t/pnXCouUcQeTgyPyXFdQ1DZYLtZ3W93qAD1D3Lnp6Pr9G8siq4+r5EPI3KCTdtGWXse0vo3VraoucXZbwHyV1ww4juXKq2C+aQuNO+Wr3uOcNeSCPiF1OnlNVQ09XjHWsDigOR9Mlo9Gu0dziZiOpGH45PHFaAv0Brq0i8abqacNzKxvWR/Mf8A5lcAe0seWuGCDgr0vDbuZTtfdGVqq9s8+T4iItArBERAEREAREQENF7FB9NvkplDRexQfTb5KZQuwYRFk7Dp+832QstVvmqANzngBrG/NxwB8sqJSUVmTwgk28IxikpaeoqqhlPSwSTzPOGxxtLnOPwAXWNN9EcTWtmv9c57uPUUxwB83kZPgB810azWa1WeAQ2yggpW4wSxvrO+buJ8Ss67ilUOkOr/AMLdejnL8uhx3TfRXe69zZbq9lsg47Jw+Vw+QOB4nI7l0zTWhtOWEtkp6P0ioaciepw94PLG7DfmACtkkc1jHPccNaMkrlupNW3e73J1tsRkZHtbOYx6zvjnuWRdrrrujeF+i7Xp4Q7I6ltNzjIz81r+vbrXWey+lUDWl+1guIzshanp7T+qaS6U9XWVboYWu2nl8vL4hbvXPt99t1XQwVEU7tkghpzsnkqh2INFXvtuyMqpC0TNOzKB3rnevGMtWsW19FK07bhLhp4OzvH/AHvWIo3Xeir5rPQzPifLJsloOMrOVWg7lHaKi4VM+1Oxm3scSe9AdRs9bHcbZT1kZy2VgPiuX9IlE+yatiudONiOciQEcnDj/hZrogupkpZrVK71oztxg93MLYNe2N18sjoYQPSI3B8RPfzH8IDK2atZcbXBWRnIkYCfgea0DVEutKS9Ty0pnfTl36YYMgBbR0fWyvtVk9Grzh+2S1vcFsaA5LbtN6h1Dc2VN4dK2IH1nP7u4Dkupejsio2wRjDY2gN8FY3AdwVSoqDktZw70BWXCekqz9k6lmDG7ME/6sfdg8v5XdlpfS3Z+0NP+mRtzNSHa3cS08Ve4fdyrkn2fQr6mvfD+jiyJzwp20VW6Hrm00pj/uDThembSMkgRDuOCikBERAEREBDRexQfTb5LZ9H6Pu2ppT6GI4qdpw+eU4aPgAN5K1ii9ig+m3yXcegm4QTWCooBhs8EmXDvaeB8x4Kpq7p007odztRCM54Zc010YWC1ubNXbV0nByOubiMf+nPxJC22oqrZaKRrZZKejgYMMYMNAHcAP8ACunODjiuJaipaibWT6O41Lw2SXAe4k4BK81bdZa8zeTVhXGCxFHVLdqeyV84gpq5jpD+0Hdlan0pVt2t1zo6mmqZI6fHqhp3bXxWt6xslHp+akfb68yzO3uGd7fit5vFDJftARPkbmpZCJGnG8kD/hcj7L1VcjctDS19McOkpznHI8CFqvQ1HA6prZXYNQ0ADPEBeuia4tlhq7FUnLXAuYD3cCFjLvabzpO9urrc17oHHIc0ZGO4oDYukGzagulewUUrvQ9ne0PwAeeVrfRiZ6PWLqUOzlrmPAO445qWr15fK2lNJDSNZK8Yc5rST4LN9GOnKmklfdq9mzK8YjaeO/iSgMV0m2+S23+C7UrSA9wdkcnZXSLVOK+0QTvYR10QLmkd43qeppoKlgZURMlaN4DhlSMa1jQ1jQ1oGAByQGt2DSFHaLzLcIJXHazssPBuVsq+OcGjLiAO8rD3LUdvpMtY/r5B/Szh/KAzK8dbHkt22kgZIytKqb3d7m8xUrHRMPKMb/5Vyz2etpZfS6mQgn+nOSfmgM7PM6R3cFCilDRhAeWsyMleZYI5Y3xStD43tLXNPMFSjcF9QGo37QllrqcejUzKeVpyC3dtfArY6S30dPRNpI6eNsQbgt2Rgq2i6yusklGT7Hwq4p5SOD9KNkFn1I90MezTVI6yPHAd4WqLuXSzaBctMvqGNzNSHrG95HMLhq9HoL+bSs910MvU17JhERXTgEREBDRexQfTb5LbujC9Gy6sp5HuxBOepl7sHgf5wtRovYoPpt8lMCQQRxC5zgrIOL+T6jJxllH6xBBAI3grnPS9ajsw3WJu9vqvIWx9HF67b0rTVD3bU8Y6qbv2hz8eKyt/oGXK0z0jxnbacfNeRsg4ScX8G1GSkk0cFidMZmVk0b542v8AWLskH4ZXXtJ6ttd2ZHQNYYJtkNEZ4H5LB9HdlraerrqG5UWaQ8OsHE/DwWx0OjbPRXdtxp43Mc3eGZ3Ar4Po0+WyXO06+jmoIHmF020HAersniF1FzWvbh7Q4HiCMr18UQFdlDRMftspYQ7jkMCsKhcbvQUIPXTtL/7G7ytcrtUVdQ4x0EPVg7g4jLkBttTU09NGXzysjaObiteuOq4WEsoYjK7+524LG01julyeJqt7mg85Dv8A4WepLFbbfEZp8SFoyXP4BAa7i+Xt/rGTqzyHqtCy9t0rDHh9XJ1jv7W8Er9UU0I6qhi6wjcDjAU2ma+5Vs8hqmAQ4y04xgoDM01NBTM2IImsHwC81rm9XsnirCx1Q7alcUBGoampfGQxrd+OKsNbkr2GNznZBI5oDHddUt9c5x8QrlLUCZuDucOKlk2Qwl2MAb1g6OuYKpwa07icIDOhzSSMjIVapquqeA3Du9UXyPfIX5OT3L1FDLK7gfiSgPtbOKmF0Lm+o8EOHeFwTVFudar3U0hHqh2WfFp4LvtVTGFocDkHiuc9LVr6ylhukbfWjOxJjuPArS4Zdy7dr7Mq6uvdDPg5qiIvRmWEREBDRexQfTb5KZQ0XsUH02+SmULsGdD6EL36FfpLXK/EVY31Mng8f8jyXbl+VbfVS0VbDVwO2ZIXh7T8Qcr9OafuMV2s1LcITls0Yd8jzCweK07ZqxfJo6OzMdvgvL497GNLnuDWjiSVHWPlZSyPhbtSBvqj4rSnUl8u8xE5kDc7w7c0eCyS6bfS3Giqp3QwTske3iAsTqpt2kkjiojIIXDDtjvUtkskNqd6TLMDJjGeAC9XLUdDS5bG7rpByagMVb9KyPIkrpdnO8gHJWVL7LZmf6YePFxWCnut4uj+rpmOjYeTR/lWaDS8sh62ulIzvIzkoD7UapqJZgyhpvVzzGSVsj4hXW/q52lvWMG0O5Y8us1nj/09oeJWJrtUTzOMVBCRngcZKAycFmtNtHWTFriObyq9fqelpwYqOMPI3AgbljILPdrm/rKqRzGH+4rOUFgt1EA6UCV45uQGIoau+3CtjkZtMjDgSOAwtglaWyEHirbZYI24ZgAcgFWqJGyOy0YQHmM78KRQjcVKDkIDXr3PWmd0WHtjHDHNUaOZsDz1jTv5rbyAeIBVepoqeoYWvjAJ5gICO3ejSM6yJ22eeeSu8FrLmy2m4DBJjJ/kLZI3iSNr28CMhAeahnWROb8Ny128UbK+21FHKAWyMLfkVsyxFU3ZnePipTcXlENZWD88VkD6aqlp5Bh0bi0+CiWZ1rG2LU1axpyOsz8s8lhl7GuW6Cl5MOSw2giIvsghovYoPpt8lMoaL2KD6bfJTKF2DC690EXvrKapscz/AFoz1sIPceI/nf4rkKy2j7s+yaipLg0kNY8CQd7TuP8A8VfV086px+TrTPZNM/Taweor0+3SNghh25HDOeSzMErJoWTRuDmPaHAjmCvFVFTOHWzxsdsDOXDgvJmyaY2G93l+ZHPbGfALLUGmqOmaJKyQPI79wUdw1RDFmKhi2yNwONyxojvl4flxe2M9+4IDY47paaaZtLE5gJOBshSagjrZqAsoXYeTvweSoWrTMFO9s1Q8yyA5xyyrt4vNNbcRuBdJjIaEBhaHS88zutr5iO8ZyVl4WWa1YZtRNfwyd5Wv1F6utzkMVJG4NPJg/wApBYKl7w+tlweOAclAbfJUs6sGMh2RuIVNxLjknK8RMEcbY28GjAUjBk70B5X3BUhaMcF9AwMICIAngpGZAwV9AwvpQBF8a4H5r6gK1dRRVbWiTIwdxCniY2ONrG8GjAXpEAWLrxioPxCyip3KPLBIOI3FAcR6TqOWm1K+Zw/TnaHMK1Zdd6TbV6fYTUxtzLSnbHxbzXIl6jQXcyleV0MjUw2WP9hERXTgQ0XsUH02+SmUNF7FB9NvkplC7BhERSDvXQ3e+09LtpJX5noj1Zyd5b/Sf8eC3WaNssTo3jLXDBX5/wCia9dkashZI/EFX+i/uyf2n+fNfoJeY4hTyrnjs+praazfD+jDMtdntmZpA0cwXnKo3DVEEQMdFFtEcCeCvagsr7nNG5tR1bW7iF6tunqCjw4s62Qf1PVEsFbTFdc62d7qmMiHGQSMb1kK+z0VdUNnqIy5w+PFX2ta0YaAB3BfUBFT08FOwMhiawDuCpznMrvmsg9wa0uPJY2R208u70B9jG9ezgccKB5cGEs/djcqgiqJjk58UBkxvRYxr5qaUBxOFfMrREJSdyAkRV5KqIMJDgTyCpCqmAwHIC8XAvcAd44r2xxzgrHU0hE2XH93FX0BMi+NORlfUAXmRoewtPAhekQGCqYWvZJBK3LXAtcO8LhWpLc613qpo3Dcx+WHvaeC/QVyjw8SDg7iuadLdr2oYLrG3ew9XJju5FaXDLtlu19mVdXXuhnwc3REXozLIaL2KD6bfJTKGi9ig+m3yUyhdgwiIpB9Y5zHte0kOacgjkv0noO8tvmmKSt2gZQ3YlHc4bivzWuldBd79Gus9mlfiOpG3ED/AHjj/I8lncSp5lW5d0WdLZtnjydnREXmzVCIiAr1xIjAHMqmr1Y3aiz3KggJWtAC9cF8achVrpFPLSllO7ZflAUL7XNYWRxEOcDvXmOeSWnYHbhjgFjZbfXMdtOic49/FWaC4Nhk2KmLhz7kBejppXgENwD3q3DRsDf1N5Ksxva9gcwgtPDC9IDDSNMchaeIKvwP24g7+VFc2Yc2Qc9xXmgd+5vigLsZ5KRQg4OVMN4QBERARVMfWQubz4ha7eqFlxtlRRSAESMIGeR5LZ1i66Pq5zjg7eFMW4vKIaysM/OtZBJS1UtPKCHxuLSD8FEtz6VbV6Ld2XCNuI6ket/uHFaYvXUWq2tTXyYtkNknEhovYoPpt8lMoaL2KD6bfJTLqux8MIiKQFatNbLbrlT10BxJDIHj445KqihpNYYTwfqaz10VytdNXQO2o5ow8eIVtc06Cr36RbJ7NM/L6c7cQP8AYeI8D5rpa8lqKnTY4G1VPfBSCIi4HQEZBCxsrdiQtWSVWuZwePFAV4zvwpFCDgqUHIygPqx93oI6mBzmtAkG8HvWQRAYTTk7w6Slfn1d4+Czajjgije57GAOdxIUiArXAZpye5U6I/reCyFWC6neB3LGQO2JQUBkVJGcjCj5ZVatudDQAPq6qOIE49Z3FSk28IhtLuZBF5je2RjXsIc1wyCOYXpQSFWr49uHaHFu9WV4mfHHG58r2sYBvc44AQGl64tYuun54gMyxjrI/mFxMggkEYI4rrmpdcWaiE1PRSGtl3tBj/YP/bn4ZXJZnmWV8hABcSTheh4XCyEGprC+DM1bg5JxZXovYoPpt8lMoaL2KD6bfJTLTXYqMIiKQEREBnNC3h1j1NSVxdiLa2Jf9h3H/nwX6Uje2SNr2nLXDIK/J6/QPRJe+19KRRyPzPSfovzxIHA/wsbi1OUrF/Re0VnVwZuCIiwzQC+PaHtLTzX1EBjJGFji0o12FfniEg7j3qjJG5hwQgPYIK+qFSMOQgPSIiA+HeMLE1MfVzOby4hZdU7lHlgkHEcUBzzpF1VebTPHR0gZFFIzIlxknvC5nWV1XWT9dVVEk0mc5e4ldU6UKGOq08ahxDZKd200nnncR/3uXI16Thux0ppdfkytVuU8Nnd+i68i6acjie8Gam9Rwzvxy/78Fnrvd7baacz3Gsip2cto7z8hxK/OttudfbXufQ1UlO5wwSw4yoaqpqKuYzVU8s8h4vkcXE+JXGfClO1y3YR0jrHGCWOp1HUfSnEzMNipOtP/AJ5wQ3wbx/nC55fL/d71KZLjWyyjlHnDG/Jo3LGIr1Okqp/FdStZdOfdhERWTmQ0XsUH02+SmUNF7FB9NvkplC7BhERSAiIgC3bodvfZeqW0sj8QVo6t2eAd/Sf8eK0leoZHwzMljcWvY4OaRyIXO2tWwcH8n1CThJSR+r0WH0bdmXvTlJXtI2nsAkA5OG4j+VmF5CUXGTi/g2001lBEXiaaKFhfLI1jRzJwvkk9r44NLTtYx8Vp2o+kOyWoOjil9JmH9LN65rqPpGvVzLo6dwpYTybxV2nQXW9cYRXs1MIHWtQX6yWlhdUVjGu/sByVqlF0j0NVfIKKCB4gkdsulecY8Fx+onmqJDJPK+R54lxyV5hkdFK2Rhw5pyFqQ4VVGP8AJ5ZUlrJt9D9QotJ09r2xmwwyXGtbDPGzZe0tJJI7gOKwOoOlRxL4bJRADgJ5+PzDR/krJjob5ScVEuvUVpZydPqaiClhdNUzRwxNGXPe4NA8StH1J0lWWlifDbWOuE28ZGWxjxO8+C5Pd7xdLtKZLjXT1BJyA53qj5DgFRWnTwqEetjyU7NZJ9IrBmtQ6nut69SplDIM5EUYw3x5lYVEWpCEYLbFYRUlJyeWERF9kBERAEREBDRexQfTb5KZQ0XsUH02+SmULsGERFICIiAIiIDpvQhqKKjqKiz1kwZHL+pEXHcHcCPL/wCrq1xu9uoITNVVcTGgZ/cF+XWuc1wc0kEcCFJNVVMzQ2aeSQDgHOJWbqOGxus35wWq9U4R24Ov6k6VKSDahtUJmfw2zuC5xftWXu8Pcamre1h/oYcBYJFYp0dVP4rqcrL5z7sEknJOURFaOQREQBERAEREAREQBERAEREAREQENF7FB9NvkpkRQuwYREUgIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiA/9k=",
+  "Federalism": "data:image/png;base64,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"
+};
 
-  // PRINCIPLE ACCORDION — true independent toggle
-  function togglePrinciple(id) {
-    const card = document.getElementById(id);
-    card.classList.toggle('open');
-  }
+const PRINCIPLES = [
+  "Popular Sovereignty","Limited Government","Separation of Powers",
+  "Checks & Balances","Rule of Law","Majority Rule","Minority Rights","Federalism"
+];
 
-  // SCENARIO REVEAL
-  function revealAnswer(btn) {
-    const answer = btn.nextElementSibling;
-    answer.classList.add('revealed');
-    btn.textContent = 'Answer Revealed';
-    btn.disabled = true;
-    btn.style.background = 'var(--ink-faded)';
-    btn.style.cursor = 'default';
+const DEFINITIONS = [
+  {p:"Popular Sovereignty", t:"All government authority comes from the people. The government rules only with the consent of the governed."},
+  {p:"Limited Government",  t:"Government power is defined and bounded by law. It cannot act outside those limits, no matter who is in power."},
+  {p:"Separation of Powers",t:"Government power is divided among three branches. No single branch can make, enforce, and interpret the law all on its own."},
+  {p:"Checks & Balances",   t:"Each branch of government can limit the powers of the other branches, preventing any one from abusing its authority."},
+  {p:"Rule of Law",         t:"No one is above the law. Laws apply equally to every person, including government officials and the President."},
+  {p:"Majority Rule",       t:"The side that wins elections earns the right to govern. Those who lose must accept the legitimate outcome."},
+  {p:"Minority Rights",     t:"No majority has the right to take away the basic rights and freedoms of a minority group or individual, even in a democracy."},
+  {p:"Federalism",          t:"Power is divided between the national government and the states. Neither level can simply absorb the authority of the other."}
+];
+
+const EXAMPLES = [
+  {p:"Popular Sovereignty", t:"Every two years, voters choose who represents them in Congress. If they are unhappy with those representatives, they can vote them out."},
+  {p:"Limited Government",  t:"A senator wants to pass a law banning a religion she dislikes. She cannot. The First Amendment places that action outside the government's power."},
+  {p:"Separation of Powers",t:"Congress writes and passes a new environmental law. The President signs it and directs agencies to enforce it. The courts stay out until someone challenges it."},
+  {p:"Checks & Balances",   t:"The President nominates a judge to the Supreme Court. Before that judge can serve, the Senate must hold hearings and vote to confirm the nomination."},
+  {p:"Rule of Law",         t:"A city mayor is caught taking bribes. She is investigated, charged, and tried in court just like any private citizen would be."},
+  {p:"Majority Rule",       t:"In a local election, one candidate wins 54% of the vote. The other candidate publicly accepts the result, and the winner is sworn in without incident."},
+  {p:"Minority Rights",     t:"A state legislature passes a popular law banning a small religious group from practicing their faith. Federal courts strike it down as unconstitutional."},
+  {p:"Federalism",          t:"The federal government controls immigration policy for the entire country, while Kansas sets its own speed limits and decides how to fund its public schools."}
+];
+
+const ALL_SCENARIOS = [
+  {
+    id:"1V", topic:1,
+    text:"A state legislature redraws its congressional districts so that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal. Critics call it gerrymandering.",
+    answer:"Minority Rights", status:"violated", alt:["Majority Rule"],
+    exp:"The best answer is <strong>Minority Rights</strong>: Gerrymandering uses majority control of the legislature to systematically silence voters who support the minority party, stripping them of meaningful representation. Majority Rule is plausible, since the maps distort electoral outcomes, but the core harm is to the political minority whose votes are effectively erased."
+  },
+  {
+    id:"1U", topic:1,
+    text:"After a census, the state legislature redraws congressional districts using an independent bipartisan commission. The new maps are tested against neutral criteria, including compactness, contiguity, and community boundaries, and result in district outcomes that closely track the statewide vote share.",
+    answer:"Minority Rights", status:"upheld", alt:["Majority Rule"],
+    exp:"The best answer is <strong>Minority Rights</strong>: An independent redistricting commission with neutral criteria protects minority voters from having their representation diluted by the party in power. The result, districts that reflect actual voter preferences, is the principle working as intended."
+  },
+  {
+    id:"2V", topic:2,
+    text:"Following a presidential election, the losing candidate claims, without credible evidence, that the election was stolen. The candidate pressures state officials to reverse certified results and urges supporters to take action to stop Congress from certifying the outcome.",
+    answer:"Majority Rule", status:"violated", alt:["Rule of Law"],
+    exp:"The best answer is <strong>Majority Rule</strong>: The principle requires that the losing side accept the legitimate outcome of elections. Refusing to concede and pressuring officials directly undermines this norm. Rule of Law is also implicated, since pressuring officials to break the law violates it, but the foundational breach is rejecting majority rule itself."
+  },
+  {
+    id:"2U", topic:2,
+    text:"Following a close presidential election, the losing candidate reviews the certified results, acknowledges the outcome, and concedes publicly. The candidate directs legal challenges through the courts, all of which are decided against them, and then participates in the peaceful transfer of power.",
+    answer:"Majority Rule", status:"upheld", alt:["Rule of Law"],
+    exp:"The best answer is <strong>Majority Rule</strong>: Accepting a certified election result, pursuing challenges only through legal channels, and participating in the peaceful transfer of power are the precise behaviors this principle requires of the losing side in a democracy."
+  },
+  {
+    id:"3V", topic:3,
+    text:"The President nominates several individuals to federal positions. Multiple nominees have no relevant experience and have stated they intend to use their offices to serve the President's political agenda. The Senate holds brief hearings and confirms all of them without serious scrutiny.",
+    answer:"Checks & Balances", status:"violated", alt:["Separation of Powers"],
+    exp:"The best answer is <strong>Checks & Balances</strong>: Senate confirmation exists precisely as a check on executive appointments. When the Senate rubber-stamps nominees without meaningful scrutiny, it abandons that check and allows one branch to extend unchecked influence into another."
+  },
+  {
+    id:"3U", topic:3,
+    text:"The President nominates individuals to the cabinet and the Supreme Court. The Senate holds rigorous confirmation hearings, scrutinizes each nominee's record and qualifications, rejects two who appear unfit for the role, and confirms the rest only after thorough questioning.",
+    answer:"Checks & Balances", status:"upheld", alt:["Separation of Powers"],
+    exp:"The best answer is <strong>Checks & Balances</strong>: Rigorous Senate confirmation hearings, including the rejection of unqualified nominees, are exactly how this check is supposed to function. The Senate is exercising its constitutional role as a meaningful restraint on executive appointments."
+  },
+  {
+    id:"4V", topic:4,
+    text:"A newly elected majority party passes voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.",
+    answer:"Minority Rights", status:"violated", alt:["Majority Rule","Popular Sovereignty"],
+    exp:"<strong>Minority Rights</strong> and <strong>Popular Sovereignty</strong> are both correct here. Using majority power to suppress voting rights directly disenfranchises a minority group and simultaneously undermines the foundational idea that government derives its legitimacy from the participation of the people. Majority Rule is also implicated, but the core wrongs are denying a minority equal political standing and eroding the people's ability to govern themselves."
+  },
+  {
+    id:"4U", topic:4,
+    text:"A newly elected majority party passes election administration reforms. The changes are reviewed by federal courts, which strike down provisions that would have disproportionately burdened minority voters. The surviving reforms apply equally to all voters regardless of party affiliation.",
+    answer:"Minority Rights", status:"upheld", alt:["Rule of Law"],
+    exp:"The best answer is <strong>Minority Rights</strong>: Federal court review that strikes down discriminatory provisions and allows only equally applied reforms demonstrates the system protecting minority rights from majority overreach. Rule of Law is also at work here, since the courts are applying the law impartially."
+  },
+  {
+    id:"5V", topic:5,
+    text:"A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations heading into an election season.",
+    answer:"Rule of Law", status:"violated", alt:["Checks & Balances","Separation of Powers"],
+    exp:"The best answer is <strong>Rule of Law</strong>: Using the legal system as a political weapon rather than to fairly apply the law equally to everyone is a direct assault on this principle. The law must be applied based on evidence, not political motive."
+  },
+  {
+    id:"5U", topic:5,
+    text:"Allegations surface that a political opponent of the President may have engaged in financial misconduct. The President directs the Justice Department to investigate through its normal independent processes, and explicitly states that the decision to prosecute or decline belongs entirely to career prosecutors, not the White House.",
+    answer:"Rule of Law", status:"upheld", alt:["Checks & Balances"],
+    exp:"The best answer is <strong>Rule of Law</strong>: Directing the DOJ to follow its normal independent processes and explicitly removing White House influence from the prosecutorial decision demonstrates the principle in action. The law applies to everyone, and its application is left to those whose job it is to apply it."
+  },
+  {
+    id:"7V", topic:7,
+    text:"Congress issues subpoenas to senior White House officials as part of an oversight investigation. The President instructs all administration officials to refuse to comply, claiming executive privilege shields the entire executive branch from Congressional oversight, absolutely and without exception.",
+    answer:"Checks & Balances", status:"violated", alt:["Separation of Powers","Rule of Law"],
+    exp:"The best answer is <strong>Checks & Balances</strong>: Congressional oversight and the power to subpoena are among the most important checks the legislative branch has on the executive. A blanket refusal to allow any oversight dismantles that check entirely."
+  },
+  {
+    id:"7U", topic:7,
+    text:"Congress issues subpoenas to White House officials as part of an oversight investigation. The President asserts executive privilege over a narrow set of documents involving confidential deliberations, but directs all other officials to cooperate fully. Courts resolve the privilege dispute and the investigation proceeds.",
+    answer:"Checks & Balances", status:"upheld", alt:["Rule of Law"],
+    exp:"The best answer is <strong>Checks & Balances</strong>: Asserting executive privilege narrowly, allowing broad cooperation, and submitting the dispute to courts for resolution is the system working as designed. The legislative check on the executive proceeds, with the judiciary resolving the boundary dispute between branches."
+  },
+  {
+    id:"8V", topic:8,
+    text:"The President deploys National Guard troops to a major city to assist with policing. Both the mayor and governor formally object, stating they have not requested federal assistance and do not want it. The President deploys the troops anyway, arguing the federal government has an obligation to protect American citizens.",
+    answer:"Federalism", status:"violated", alt:["Separation of Powers","Limited Government"],
+    exp:"The best answer is <strong>Federalism</strong>: Law enforcement is primarily a state and local power. Deploying federal forces into a state over the explicit objection of its governor overrides the boundary between federal and state authority that federalism is designed to protect."
+  },
+  {
+    id:"8U", topic:8,
+    text:"Crime spikes in a major city. The President offers federal law enforcement resources and National Guard support. The governor and mayor review the offer, request assistance with a specific task, and enter a formal agreement with the federal government that defines the scope of federal involvement and preserves local command authority.",
+    answer:"Federalism", status:"upheld", alt:["Limited Government"],
+    exp:"The best answer is <strong>Federalism</strong>: Federal assistance offered voluntarily, accepted selectively by state and local authorities, and governed by a formal agreement that preserves local command is federalism functioning correctly. Both levels of government cooperate within their defined roles."
+  },
+  {
+    id:"9V", topic:9,
+    text:"Facing pressure over a trade dispute, the President declares a national economic emergency and uses that declaration to impose sweeping new tariffs on hundreds of imported goods without a vote in Congress. The White House argues the emergency declaration gives the executive broad authority to act unilaterally on trade.",
+    answer:"Separation of Powers", status:"violated", alt:["Checks & Balances","Limited Government"],
+    exp:"The best answer is <strong>Separation of Powers</strong>: The power to set tariffs and regulate commerce belongs to Congress under Article I of the Constitution. Using an emergency declaration to transfer that legislative power to the executive collapses the separation between branches."
+  },
+  {
+    id:"9U", topic:9,
+    text:"Facing a trade dispute, the President urges Congress to authorize new tariffs. Congress holds hearings, debates the scope of the tariffs, and passes legislation granting the President limited authority to adjust rates within defined bounds. The President signs the bill and implements the tariffs under that grant of authority.",
+    answer:"Separation of Powers", status:"upheld", alt:["Checks & Balances"],
+    exp:"The best answer is <strong>Separation of Powers</strong>: Congress holds the tariff power and properly delegates a limited, defined portion of it to the executive through legislation. Each branch operates within its constitutional role."
+  },
+  {
+    id:"WV", topic:10,
+    text:"The President orders military action in a foreign country without notifying Congress. The War Powers Resolution requires congressional notification within 48 hours and limits unauthorized military engagement to 60 days. More than 60 days pass. Congress has not authorized the action but takes no steps to compel withdrawal or cut off funding. Both branches continue as if the law does not apply.",
+    answer:"Checks & Balances", status:"violated", alt:["Separation of Powers"],
+    exp:"The best answer is <strong>Checks & Balances</strong>: The War Powers Resolution exists precisely as a legislative check on executive military power. Here both sides of that check fail simultaneously: the President acts without authorization and Congress declines to exercise its authority to stop it. Separation of Powers is plausible, since war-making power is constitutionally shared, but the specific breakdown is the checking mechanism collapsing on both ends."
+  },
+  {
+    id:"WU", topic:10,
+    text:"The President orders military action in a foreign country and notifies Congress within 48 hours as required by the War Powers Resolution. After 30 days, Congress holds hearings, debates the scope of the mission, and passes a formal Authorization for Use of Military Force. The President operates within the boundaries Congress sets.",
+    answer:"Checks & Balances", status:"upheld", alt:["Separation of Powers","Rule of Law"],
+    exp:"<strong>Checks & Balances</strong> and <strong>Rule of Law</strong> are both correct here. The War Powers Resolution is working as intended: the executive notifies Congress, Congress deliberates and authorizes, and the President operates within those limits. That is the checking mechanism functioning correctly. It is also Rule of Law, since both branches are following an established statute rather than acting as though it does not apply."
+  },
+  {
+    id:"PSV1", topic:11,
+    text:"A state legislature repeatedly blocks citizen-initiated ballot measures from reaching voters. When a petition drive gathers well above the required number of signatures to place a measure on the ballot, legislative leaders challenge the signatures on technical grounds, change the threshold requirements mid-process, and ultimately prevent the measure from appearing. Voters never get to weigh in.",
+    answer:"Popular Sovereignty", status:"violated", alt:["Limited Government"],
+    exp:"The best answer is <strong>Popular Sovereignty</strong>: The ballot initiative process is one of the most direct expressions of popular sovereignty available to citizens. Using legislative power to obstruct that process, after voters have already demonstrated sufficient support, removes the people from their own government."
+  },
+  {
+    id:"PSU1", topic:11,
+    text:"Citizens in a state gather enough signatures to place a constitutional amendment on the ballot regarding abortion access. Both sides campaign vigorously. On election day, voters pass the amendment by a clear majority. The state legislature and governor, regardless of their personal positions, implement the outcome as required by the state constitution.",
+    answer:"Popular Sovereignty", status:"upheld", alt:["Majority Rule"],
+    exp:"The best answer is <strong>Popular Sovereignty</strong>: Citizens exercising their right to place a measure directly on the ballot, voting on it, and having the outcome implemented by elected officials regardless of those officials' personal views is popular sovereignty in its most direct form."
+  },
+  {
+    id:"PSV2", topic:12,
+    text:"A state government conducts a mass purge of voter rolls shortly before an election, removing hundreds of thousands of registrations with minimal notice. The state also closes a significant number of polling places in densely populated areas, resulting in lines stretching several hours. Many eligible voters leave without casting a ballot.",
+    answer:"Popular Sovereignty", status:"violated", alt:["Minority Rights"],
+    exp:"The best answer is <strong>Popular Sovereignty</strong>: When eligible voters are effectively prevented from casting ballots through administrative obstruction, the foundation of democratic government is undermined. Minority Rights is also implicated if the burden falls disproportionately on minority communities, but the primary principle violated is the people's ability to participate in their own government."
+  },
+  {
+    id:"PSU2", topic:12,
+    text:"A state conducts a voter roll maintenance program with advance notice, a clear appeal process, and a 90-day waiting period before any removal takes effect. The state simultaneously expands early voting, adds polling locations in high-density areas, and launches a public outreach campaign to help eligible voters confirm or update their registration.",
+    answer:"Popular Sovereignty", status:"upheld", alt:["Minority Rights"],
+    exp:"The best answer is <strong>Popular Sovereignty</strong>: Maintaining accurate rolls while simultaneously expanding access demonstrates that election administration can serve the integrity of the vote without suppressing participation. The system is designed to include eligible voters, not obstruct them."
+  },
+  {
+    id:"LGV", topic:13,
+    text:"Legal permanent residents holding valid green cards are detained by federal agents following their participation in peaceful protests. Officials argue the government has broad authority to remove non-citizens whose presence it deems contrary to national interests, even without criminal charges. No specific laws are cited as the basis for detention.",
+    answer:"Limited Government", status:"violated", alt:["Rule of Law"],
+    exp:"The best answer is <strong>Limited Government</strong>: Detaining people without citing a legal basis for doing so is precisely what limited government prohibits. Government power must be defined and bounded by law. When officials act on claimed authority with no legal foundation, they have stepped outside the limits the Constitution places on them. Rule of Law is also directly implicated, since legal residents are entitled to due process."
+  },
+  {
+    id:"FEV", topic:14,
+    text:"Congress passes a law requiring all state departments of education to redesign their social studies curricula to align with standards issued by the federal Department of Education. States that refuse face the loss of all federal education funding. Several states challenge the law, arguing that curriculum decisions have historically and constitutionally belonged to the states.",
+    answer:"Federalism", status:"violated", alt:["Limited Government"],
+    exp:"The best answer is <strong>Federalism</strong>: Education policy, and curriculum decisions in particular, has historically been a state function. Using the threat of total funding loss to compel states to adopt federal curriculum standards crosses the line from incentive to coercion, overriding the boundary between federal and state authority."
+  },
+  {
+    id:"FEU", topic:14,
+    text:"The federal Department of Education develops a set of recommended social studies guidelines and offers competitive grant funding to states that voluntarily adopt them. No state is required to participate. Several states adopt the guidelines, others modify them to fit local priorities, and others decline entirely. The federal government accepts all three responses without penalty.",
+    answer:"Federalism", status:"upheld", alt:["Limited Government"],
+    exp:"The best answer is <strong>Federalism</strong>: Voluntary guidelines with optional incentives, where states retain full authority to adopt, modify, or decline without penalty, respects the division of power between federal and state governments. The federal government influences without compelling."
   }
+];
+
+// ── STATE ──
+const state = {
+  1:{round:0,locked:[],assignments:{},rounds:[]},
+  2:{round:0,locked:[],assignments:{},rounds:[]},
+  3:{round:0,assignments:{},toggles:{},rounds:[],roundIdx:0}
+};
+let dragP = null;
+
+// ── UTILS ──
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function chipId(p,lv){return 'chip-'+lv+'-'+p.replace(/[^a-z0-9]/gi,'_');}
+function chipHTML(p,lv){
+  return `<div class="chip" id="${chipId(p,lv)}" draggable="true" data-p="${p}" data-lv="${lv}"
+    ondragstart="dstart(event)" ondragend="dend(event)">
+    <img src="${ICONS[p]}" alt=""><span>${p}</span>
+  </div>`;
+}
+
+// ── DRAG ──
+function dstart(e){dragP=e.currentTarget.dataset.p;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
+function dend(e){e.currentTarget.classList.remove('dragging');}
+function dover(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+function dleave(e){e.currentTarget.classList.remove('drag-over');}
+
+function dropDef(e,ci,lv){
+  e.preventDefault();e.currentTarget.classList.remove('drag-over');
+  if(!dragP)return;
+  const st=state[lv];
+  if(st.assignments[ci]){const oc=document.getElementById(chipId(st.assignments[ci],lv));if(oc)oc.classList.remove('used');}
+  for(const[k,v]of Object.entries(st.assignments)){if(v===dragP&&parseInt(k)!==ci){st.assignments[k]=null;renderDZ(k,lv,null);}}
+  st.assignments[ci]=dragP;
+  const chip=document.getElementById(chipId(dragP,lv));if(chip)chip.classList.add('used');
+  renderDZ(ci,lv,dragP);dragP=null;checkReady(lv);
+}
+
+function dropScen(e,ci){
+  e.preventDefault();e.currentTarget.classList.remove('drag-over');
+  if(!dragP)return;
+  const st=state[3];
+  if(st.assignments[ci]){const oc=document.getElementById(chipId(st.assignments[ci],3));if(oc)oc.classList.remove('used');}
+  st.assignments[ci]=dragP;
+  renderSDZ(ci,dragP);dragP=null;checkReady(3);
+}
+
+function renderDZ(ci,lv,p){
+  const z=document.getElementById('dz-'+lv+'-'+ci);if(!z)return;
+  if(p){z.classList.add('has-chip');z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}`;}
+  else{z.classList.remove('has-chip');z.innerHTML='Drop here';}
+}
+function renderSDZ(ci,p){
+  const z=document.getElementById('sdz-'+ci);if(!z)return;
+  if(p){z.classList.add('has-chip');z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}`;}
+  else{z.classList.remove('has-chip');z.innerHTML='Drop principle here';}
+}
+
+function checkReady(lv){
+  if(lv===3){
+    const ok=[0,1,2,3].every(i=>state[3].assignments[i]&&state[3].toggles[i]!==undefined);
+    document.getElementById('l3-submit').disabled=!ok;
+  }else{
+    const ok=[0,1,2,3].every(i=>state[lv].assignments[i]);
+    document.getElementById('l'+lv+'-submit').disabled=!ok;
+  }
+}
+
+function flyBack(p,lv){
+  const chip=document.getElementById(chipId(p,lv));if(!chip)return;
+  chip.classList.remove('used');
+  chip.classList.add('flying-back');
+  setTimeout(()=>chip.classList.remove('flying-back'),600);
+}
+
+// ── LEVELS 1 & 2 ──
+function initL(lv){
+  const data=lv===1?DEFINITIONS:EXAMPLES;
+  const sh=shuffle(data);
+  state[lv].rounds=[sh.slice(0,4),sh.slice(4,8)];
+  state[lv].round=0;state[lv].locked=[];
+  renderRound(lv);
+}
+
+function renderRound(lv){
+  const st=state[lv];const round=st.rounds[st.round];
+  st.assignments={};
+  [1,2].forEach(n=>{
+    const el=document.getElementById('l'+lv+'-pip-'+n);if(!el)return;
+    el.className='round-pip'+(n-1<st.round?' done':n-1===st.round?' active':'');
+  });
+  document.getElementById('l'+lv+'-chips').innerHTML=
+    PRINCIPLES.filter(p=>!st.locked.includes(p)).map(p=>chipHTML(p,lv)).join('');
+  document.getElementById('l'+lv+'-grid').innerHTML=round.map((item,i)=>`
+    <div class="def-card" id="l${lv}-card-${i}"
+      ondragover="dover(event)" ondragleave="dleave(event)" ondrop="dropDef(event,${i},${lv})">
+      <div class="def-card-text">${item.t}</div>
+      <div class="def-card-drop" id="dz-${lv}-${i}">Drop here</div>
+    </div>`).join('');
+  document.getElementById('l'+lv+'-submit').disabled=true;
+  document.getElementById('l'+lv+'-banner').classList.remove('show');
+}
+
+function submitL(lv){
+  const st=state[lv];const round=st.rounds[st.round];
+  let allOk=true;
+  round.forEach((item,i)=>{
+    const card=document.getElementById('l'+lv+'-card-'+i);
+    const assigned=st.assignments[i];
+    if(assigned===item.p){
+      card.classList.add('correct');card.classList.remove('wrong');
+      const chip=document.getElementById(chipId(assigned,lv));if(chip)chip.style.display='none';
+    }else{
+      card.classList.add('wrong');allOk=false;
+      if(assigned)flyBack(assigned,lv);
+      st.assignments[i]=null;renderDZ(i,lv,null);
+      setTimeout(()=>card.classList.remove('wrong'),500);
+    }
+  });
+  if(allOk){
+    st.locked.push(...round.map(r=>r.p));
+    document.getElementById('l'+lv+'-submit').disabled=true;
+    document.getElementById('l'+lv+'-banner').classList.add('show');
+  }
+}
+
+function nextRound(lv){
+  state[lv].round++;
+  if(state[lv].round>=2){
+    document.getElementById('l'+lv+'-layout').style.display='none';
+    document.getElementById('l'+lv+'-complete').classList.add('show');
+  }else{
+    document.getElementById('l'+lv+'-banner').classList.remove('show');
+    renderRound(lv);
+  }
+}
+
+// ── LEVEL 3 ──
+function initL3(){
+  // Pick 16 random scenarios from 25, arranged into 4 rounds of 4
+  const sh=shuffle([...ALL_SCENARIOS]);
+  const selected=sh.slice(0,16);
+  state[3].rounds=[selected.slice(0,4),selected.slice(4,8),selected.slice(8,12),selected.slice(12,16)];
+  state[3].roundIdx=0;
+  renderRound3();
+}
+
+function renderRound3(){
+  const ri=state[3].roundIdx;
+  const round=state[3].rounds[ri];
+  state[3].assignments={};state[3].toggles={};
+  // Update pips
+  [1,2,3,4].forEach(n=>{
+    const el=document.getElementById('l3-pip-'+n);if(!el)return;
+    el.className='round-pip'+(n-1<ri?' done':n-1===ri?' active':'');
+  });
+  // All 8 chips
+  document.getElementById('l3-chips').innerHTML=PRINCIPLES.map(p=>chipHTML(p,3)).join('');
+  document.getElementById('l3-grid').innerHTML=round.map((sc,i)=>`
+    <div class="scenario-card" id="l3-card-${i}"
+      ondragover="dover(event)" ondragleave="dleave(event)" ondrop="dropScen(event,${i})">
+      <div class="scenario-header">
+        <span class="scenario-num">Scenario</span>
+        <div class="scenario-drop" id="sdz-${i}">Drop principle here</div>
+      </div>
+      <div class="scenario-body"><div class="scenario-text">${sc.text}</div></div>
+      <div class="scenario-footer">
+        <div class="toggle-wrap">
+          <span class="toggle-label left">Upheld</span>
+          <button class="toggle-track" id="tog-${i}" onclick="doToggle(${i})"><div class="toggle-thumb"></div></button>
+          <span class="toggle-label right">Violated</span>
+        </div>
+      </div>
+      <div class="explanation" id="exp-${i}"></div>
+    </div>`).join('');
+  document.getElementById('l3-submit').disabled=true;
+  document.getElementById('l3-banner').classList.remove('show');
+}
+
+function doToggle(ci){
+  const card=document.getElementById('l3-card-'+ci);
+  if(card.classList.contains('correct'))return;
+  const st=state[3];
+  if(card.classList.contains('violated')){card.classList.replace('violated','upheld');st.toggles[ci]='upheld';}
+  else if(card.classList.contains('upheld')){card.classList.replace('upheld','violated');st.toggles[ci]='violated';}
+  else{card.classList.add('upheld');st.toggles[ci]='upheld';}
+  checkReady(3);
+}
+
+function submitL3(){
+  const round=state[3].rounds[state[3].roundIdx];
+  let allOk=true;
+  round.forEach((sc,i)=>{
+    const card=document.getElementById('l3-card-'+i);
+    if(card.classList.contains('correct'))return;
+    const ap=state[3].assignments[i];const at=state[3].toggles[i];
+    const pOk=ap===sc.answer||(sc.alt&&sc.alt.includes(ap));
+    const tOk=at===sc.status;
+    if(pOk&&tOk){
+      card.classList.add('correct');
+      const exp=document.getElementById('exp-'+i);
+      exp.innerHTML='<strong>Why this answer?</strong> '+sc.exp;
+      exp.classList.add('show');
+    }else{
+      card.classList.add('wrong');allOk=false;
+      if(!pOk&&ap){flyBack(ap,3);state[3].assignments[i]=null;renderSDZ(i,null);}
+      if(!tOk){card.classList.remove('upheld','violated');state[3].toggles[i]=undefined;}
+      setTimeout(()=>card.classList.remove('wrong'),500);
+    }
+  });
+  if(allOk){
+    document.getElementById('l3-submit').disabled=true;
+    document.getElementById('l3-banner').classList.add('show');
+  }else{
+    document.getElementById('l3-submit').disabled=true;
+    checkReady(3);
+  }
+}
+
+function nextRoundL3(){
+  state[3].roundIdx++;
+  if(state[3].roundIdx>=4){
+    document.getElementById('l3-layout').style.display='none';
+    document.getElementById('l3-round-ind').style.display='none';
+    document.getElementById('l3-complete').classList.add('show');
+  }else{
+    document.getElementById('l3-banner').classList.remove('show');
+    renderRound3();
+  }
+}
+
+// ── LEVEL SWITCH ──
+function switchLevel(n){
+  document.querySelectorAll('.level-panel').forEach((p,i)=>p.classList.toggle('active',i===n-1));
+  document.querySelectorAll('.level-tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  if(n===1&&state[1].rounds.length===0)initL(1);
+  if(n===2&&state[2].rounds.length===0)initL(2);
+  if(n===3&&state[3].rounds.length===0)initL3();
+}
+
+initL(1);
 </script>
 </body>
 </html>
