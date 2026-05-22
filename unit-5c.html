@@ -12,22 +12,17 @@
   #topbar {
     position: sticky; top: 0; z-index: 100;
     background: #1a2a4a; color: #fff;
-    display: flex; align-items: center; gap: 0;
-    padding: 0;
+    display: flex; align-items: center; gap: 0; padding: 0;
   }
   #score-display {
     padding: 10px 20px; font-size: 1.1em; font-weight: bold;
-    background: #c8a84b; color: #1a1a1a; white-space: nowrap;
-    min-width: 160px;
+    background: #c8a84b; color: #1a1a1a; white-space: nowrap; min-width: 160px;
   }
-  #nav-tabs {
-    display: flex; flex-wrap: wrap; flex: 1;
-  }
+  #nav-tabs { display: flex; flex-wrap: wrap; flex: 1; }
   .nav-tab {
     padding: 10px 12px; cursor: pointer; font-size: 0.8em;
     border-right: 1px solid #2a3a5a; color: #aaa;
-    transition: background 0.2s;
-    user-select: none;
+    transition: background 0.2s; user-select: none;
   }
   .nav-tab:hover { background: #2a3a5a; color: #fff; }
   .nav-tab.active { background: #c8a84b; color: #1a1a1a; font-weight: bold; }
@@ -35,32 +30,20 @@
   .nav-tab.done::after { content: ' ✓'; }
 
   /* LAYOUT */
-  #game-area {
-    display: flex; gap: 0; max-width: 1100px; margin: 0 auto; padding: 20px;
-  }
+  #game-area { display: flex; gap: 0; max-width: 1100px; margin: 0 auto; padding: 20px; }
   #main-panel { flex: 1; }
-  #sidebar {
-    width: 160px; flex-shrink: 0; padding-left: 20px;
-  }
+  #sidebar { width: 160px; flex-shrink: 0; padding-left: 20px; }
 
-  /* CANDIDATE SILHOUETTE PROGRESS */
-  #candidate-figure {
-    position: sticky; top: 60px;
-    text-align: center;
-  }
+  /* SIDEBAR FIGURE */
+  #candidate-figure { position: sticky; top: 60px; text-align: center; }
   #candidate-figure h3 { font-size: 0.8em; color: #666; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-  #figure-svg { width: 120px; height: 200px; }
-  #progress-label { font-size: 0.75em; color: #666; margin-top: 6px; }
+  #progress-label { text-align: center; font-size: 0.72em; color: #888; margin-top: 4px; }
 
   /* SECTION CARD */
-  .section-card {
-    background: #fff; border: 2px solid #ddd; border-radius: 6px;
-    padding: 24px; margin-bottom: 20px;
-    display: none;
-  }
+  .section-card { background: #fff; border: 2px solid #ddd; border-radius: 6px; padding: 24px; margin-bottom: 20px; display: none; }
   .section-card.active { display: block; }
   .section-card h2 { font-size: 1.3em; color: #1a2a4a; margin-bottom: 4px; }
-  .section-card .section-prompt { font-style: italic; color: #555; margin-bottom: 16px; font-size: 1em; }
+  .section-prompt { font-style: italic; color: #555; margin-bottom: 16px; font-size: 1em; }
   .section-instructions { background: #f0f4ff; border-left: 3px solid #1a2a4a; padding: 10px 14px; margin-bottom: 16px; font-size: 0.9em; color: #333; }
 
   /* OPTIONS */
@@ -68,8 +51,7 @@
   .option-btn {
     background: #f9f6f0; border: 2px solid #ccc; border-radius: 5px;
     padding: 12px 16px; cursor: pointer; text-align: left;
-    transition: border-color 0.15s, background 0.15s;
-    position: relative;
+    transition: border-color 0.15s, background 0.15s; position: relative;
   }
   .option-btn:hover { border-color: #1a2a4a; background: #eef2ff; }
   .option-btn.selected { border-color: #1a2a4a; background: #dce8ff; }
@@ -83,30 +65,22 @@
     padding: 2px 7px; border-radius: 10px; font-weight: bold;
   }
 
-  /* SECTION 3 MODE TOGGLE */
+  /* MODE TOGGLE */
   .mode-toggle { display: flex; gap: 10px; margin-bottom: 14px; }
-  .mode-btn {
-    padding: 8px 16px; border: 2px solid #ccc; border-radius: 4px;
-    cursor: pointer; font-size: 0.9em; background: #f9f6f0;
-  }
+  .mode-btn { padding: 8px 16px; border: 2px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 0.9em; background: #f9f6f0; }
   .mode-btn.active { border-color: #1a2a4a; background: #1a2a4a; color: #fff; }
 
   /* SUBMIT BUTTON */
   .submit-btn {
     margin-top: 16px; padding: 12px 28px;
     background: #1a2a4a; color: #fff; border: none;
-    border-radius: 5px; font-size: 1em; cursor: pointer;
-    font-family: Georgia, serif;
+    border-radius: 5px; font-size: 1em; cursor: pointer; font-family: Georgia, serif;
   }
   .submit-btn:hover { background: #2a3a5a; }
   .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
 
-  /* REVEAL AREA */
-  .reveal-area {
-    margin-top: 20px; padding: 16px;
-    border: 2px solid #1a2a4a; border-radius: 5px;
-    background: #f0f4ff; display: none;
-  }
+  /* REVEAL */
+  .reveal-area { margin-top: 20px; padding: 16px; border: 2px solid #1a2a4a; border-radius: 5px; background: #f0f4ff; display: none; }
   .reveal-area.show { display: block; }
   .reveal-area h3 { color: #1a2a4a; margin-bottom: 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 1px; }
   .reveal-item { margin-bottom: 12px; padding: 10px; background: #fff; border-radius: 4px; border-left: 4px solid #1a2a4a; }
@@ -116,12 +90,12 @@
   .score-pos { color: #2a7a2a; }
   .score-neg { color: #c00; }
 
-  /* COIN FLIP ANIMATION */
+  /* COIN FLIP */
   .flip-container { text-align: center; margin: 10px 0; }
   .coin {
-    display: inline-block; width: 60px; height: 60px; line-height: 60px;
-    border-radius: 50%; font-size: 1.8em; background: #c8a84b;
-    animation: spin 0.6s ease-out;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; border-radius: 50%; font-size: 1.8em;
+    background: #c8a84b; animation: spin 0.6s ease-out;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   @keyframes spin {
@@ -131,10 +105,7 @@
   }
 
   /* COMBO REVEAL */
-  .combo-reveal {
-    margin-top: 12px; padding: 12px 16px; border-radius: 5px;
-    display: none;
-  }
+  .combo-reveal { margin-top: 12px; padding: 12px 16px; border-radius: 5px; display: none; }
   .combo-reveal.show { display: block; }
   .combo-bonus { background: #e6f9e6; border: 2px solid #2a7a2a; }
   .combo-penalty { background: #fff0f0; border: 2px solid #c00; }
@@ -142,29 +113,31 @@
   .combo-bonus h4 { color: #2a7a2a; }
   .combo-penalty h4 { color: #c00; }
 
-  /* FROZEN SECTION VIEW */
-  .frozen-view { background: #f9f6f0; border: 2px solid #aaa; border-radius: 5px; padding: 16px; }
+  /* FROZEN */
+  .frozen-view { background: #f9f6f0; border: 2px solid #aaa; border-radius: 5px; padding: 16px; margin-top: 16px; }
   .frozen-view .frozen-selection { font-weight: bold; color: #1a2a4a; margin-bottom: 8px; }
   .frozen-view .frozen-reveal { font-size: 0.9em; color: #444; margin-bottom: 6px; }
   .frozen-view .frozen-score { font-size: 1.1em; font-weight: bold; }
 
+  /* PREV/NEXT */
+  .section-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e0dcd4; }
+  .nav-arrow-btn { padding: 10px 22px; border: 2px solid #1a2a4a; border-radius: 5px; background: #fff; color: #1a2a4a; font-size: 0.9em; cursor: pointer; font-family: Georgia, serif; transition: background 0.15s, color 0.15s; }
+  .nav-arrow-btn:hover { background: #1a2a4a; color: #fff; }
+  .nav-arrow-btn:disabled { border-color: #ccc; color: #ccc; cursor: default; background: #fff; }
+  .nav-arrow-btn.next-btn { background: #1a2a4a; color: #fff; }
+  .nav-arrow-btn.next-btn:hover { background: #2a3a5a; }
+
   /* FINAL SCREEN */
   #final-section { display: none; }
   #final-section.active { display: block; }
-  .final-card {
-    text-align: center; padding: 40px 30px;
-    background: #1a2a4a; color: #fff; border-radius: 8px;
-  }
+  .final-card { text-align: center; padding: 40px 30px; background: #1a2a4a; color: #fff; border-radius: 8px; }
   .final-card .tier-label { font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; color: #c8a84b; margin-bottom: 8px; }
   .final-card .outcome-headline { font-size: 2em; font-weight: bold; margin-bottom: 12px; }
   .final-card .outcome-sub { font-size: 1.1em; color: #ccc; margin-bottom: 20px; }
   .final-card .final-score { font-size: 3em; font-weight: bold; color: #c8a84b; margin: 20px 0; }
-  .final-card .outcome-text { font-size: 0.95em; color: #ddd; max-width: 500px; margin: 0 auto 24px; line-height: 1.6; }
-  .play-again-btn {
-    padding: 12px 30px; background: #c8a84b; color: #1a1a1a;
-    border: none; border-radius: 5px; font-size: 1em; cursor: pointer;
-    font-family: Georgia, serif; font-weight: bold;
-  }
+  .final-card .outcome-text { font-size: 0.95em; color: #ddd; max-width: 500px; margin: 0 auto 16px; line-height: 1.6; }
+  .final-card .candidate-bio { font-size: 0.9em; color: #c8d8f0; max-width: 520px; margin: 0 auto 24px; line-height: 1.7; font-style: italic; border-top: 1px solid #2a4a7a; padding-top: 16px; }
+  .play-again-btn { padding: 12px 30px; background: #c8a84b; color: #1a1a1a; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-family: Georgia, serif; font-weight: bold; }
 
   /* SCORE POP */
   @keyframes scorePop {
@@ -174,67 +147,44 @@
   }
   .score-pop { animation: scorePop 0.5s ease-out forwards; }
 
-  /* LOADING SCREEN */
-  #loading-screen {
-    display: none; position: fixed; inset: 0;
-    background: #1a2a4a; color: #fff;
-    flex-direction: column; align-items: center; justify-content: center;
-    z-index: 999; font-size: 1.5em; text-align: center;
+  /* SEGMENT LIGHT */
+  @keyframes segmentLight {
+    0% { opacity: 0.25; }
+    40% { opacity: 1; filter: brightness(1.3); }
+    100% { opacity: 1; }
   }
+  .seg-lit { animation: segmentLight 0.6s ease-out forwards; }
+
+  /* LOADING */
+  #loading-screen { display: none; position: fixed; inset: 0; background: #1a2a4a; color: #fff; flex-direction: column; align-items: center; justify-content: center; z-index: 999; font-size: 1.5em; text-align: center; }
   #loading-screen.show { display: flex; }
   .loading-flag { font-size: 4em; margin-bottom: 20px; animation: wave 1s infinite; }
   @keyframes wave { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
 
-  @keyframes segmentLight {
-    0%   { opacity: 0.25; }
-    40%  { opacity: 1; filter: brightness(1.3); }
-    100% { opacity: 1; }
-  }
-  .seg-lit {
-    animation: segmentLight 0.6s ease-out forwards;
-  }
-    background: #c00; color: #fff; font-size: 0.7em; padding: 2px 8px;
-    border-radius: 3px; vertical-align: middle; margin-left: 8px;
-    font-family: monospace; letter-spacing: 1px;
-  }
+  .beta-badge { background: #c00; color: #fff; font-size: 0.7em; padding: 2px 8px; border-radius: 3px; vertical-align: middle; margin-left: 8px; font-family: monospace; letter-spacing: 1px; }
 
-  /* PREV / NEXT NAV */
-  .section-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 24px; padding-top: 16px; border-top: 1px solid #e0dcd4;
-  }
-  .nav-arrow-btn {
-    padding: 10px 22px; border: 2px solid #1a2a4a; border-radius: 5px;
-    background: #fff; color: #1a2a4a; font-size: 0.9em; cursor: pointer;
-    font-family: Georgia, serif; transition: background 0.15s, color 0.15s;
-  }
-  .nav-arrow-btn:hover { background: #1a2a4a; color: #fff; }
-  .nav-arrow-btn:disabled { border-color: #ccc; color: #ccc; cursor: default; background: #fff; }
-  .nav-arrow-btn.next-btn {
-    background: #1a2a4a; color: #fff;
-  }
-  .nav-arrow-btn.next-btn:hover { background: #2a3a5a; }
+  /* MAP */
+  #state-selected-display { font-size: 0.9em; color: #888; font-style: italic; margin-bottom: 8px; min-height: 1.4em; }
 </style>
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
 <div id="loading-screen">
   <div class="loading-flag">🇺🇸</div>
   <div>You are running for President!</div>
-  <div style="font-size:0.6em; margin-top:10px; color:#aaa;">Counting the votes...</div>
+  <div style="font-size:0.6em;margin-top:10px;color:#aaa;">Counting the votes...</div>
 </div>
 
 <!-- TOP BAR -->
 <div id="topbar">
   <div id="score-display">Score: <span id="score-value">0</span></div>
   <div id="nav-tabs">
-    <div class="nav-tab active" data-section="1" onclick="goToSection(1)">1. Age</div>
+    <div class="nav-tab active" data-section="1" onclick="goToSection(1)">1. Name / State / Age</div>
     <div class="nav-tab" data-section="2" onclick="goToSection(2)">2. Biography</div>
-    <div class="nav-tab" data-section="3" onclick="goToSection(3)">3. Experience</div>
-    <div class="nav-tab" data-section="4" onclick="goToSection(4)">4. Personality</div>
+    <div class="nav-tab" data-section="3" onclick="goToSection(3)">3. Personality</div>
+    <div class="nav-tab" data-section="4" onclick="goToSection(4)">4. Political Experience</div>
     <div class="nav-tab" data-section="5" onclick="goToSection(5)">5. Expertise</div>
-    <div class="nav-tab" data-section="6" onclick="goToSection(6)">6. Position</div>
+    <div class="nav-tab" data-section="6" onclick="goToSection(6)">6. Politics</div>
     <div class="nav-tab" data-section="7" onclick="goToSection(7)">7. Weakness</div>
     <div class="nav-tab" data-section="8" onclick="goToSection(8)">8. Submit</div>
   </div>
@@ -242,599 +192,275 @@
 
 <!-- GAME AREA -->
 <div id="game-area">
-  <div id="main-panel">
+<div id="main-panel">
 
-    <!-- INTRO -->
-    <div id="intro-card" style="background:#fff;border:2px solid #ddd;border-radius:6px;padding:24px;margin-bottom:20px;">
-      <h1 style="color:#1a2a4a;font-size:1.6em;margin-bottom:8px;">Build a Presidential Candidate <span class="beta-badge">BETA</span></h1>
-      <p style="margin-bottom:10px;">You will work through multiple sections to build as strong a presidential <em>candidate</em> as possible. You aren't trying to build someone who is actually good at <em>being</em> president you want to be the person who the American voters will find the most <em>appealing</em>.</p>
-      <p style="margin-bottom:10px;">This is a game of <strong>skill</strong> as well as <strong>luck.</strong> You can choose the safe option or you can roll the dice on riskier traits. Just like in real life, becoming president has a lot to do with luck and being the right person for that moment in time.</p>
-      <p style="font-size:0.9em;color:#666;">Navigate using the tabs above. Complete all 7 sections, then submit your candidate in Section 8.</p>
+<!-- INTRO -->
+<div id="intro-card" style="background:#fff;border:2px solid #ddd;border-radius:6px;padding:24px;margin-bottom:20px;">
+  <h1 style="color:#1a2a4a;font-size:1.6em;margin-bottom:8px;">Build a Presidential Candidate <span class="beta-badge">BETA</span></h1>
+  <p style="margin-bottom:10px;">You will work through multiple sections to build as strong a presidential <em>candidate</em> as possible. You are not trying to build someone who is actually good at <em>being</em> president. You want to be the person American voters will find the most <em>appealing</em>.</p>
+  <p style="margin-bottom:10px;">This is a game of <strong>skill</strong> as well as <strong>luck.</strong> You can choose the safe option or you can roll the dice on riskier traits. Just like in real life, becoming president has a lot to do with luck and being the right person for that moment in time.</p>
+  <p style="font-size:0.9em;color:#666;">Navigate using the tabs above. Complete all 7 sections, then submit your candidate in Section 8.</p>
+</div>
+
+<!-- SECTION 1: NAME / HOME STATE / AGE -->
+<div class="section-card active" id="section-1">
+  <h2>Section 1: Name, Home State, Age</h2>
+  <p class="section-prompt">"Who are you, where are you from, how old are you?"</p>
+
+  <div style="margin-bottom:18px;">
+    <label for="candidate-name" style="display:block;font-weight:bold;color:#1a2a4a;margin-bottom:6px;font-size:0.95em;">Candidate Name</label>
+    <input type="text" id="candidate-name" placeholder="Enter your candidate's name" maxlength="40"
+      style="padding:10px 14px;border:2px solid #ccc;border-radius:5px;font-size:1em;font-family:Georgia,serif;width:100%;max-width:360px;color:#1a1a1a;"
+      oninput="updateCandidateName(this.value)">
+  </div>
+
+  <div style="margin-bottom:18px;">
+    <div style="font-weight:bold;color:#1a2a4a;margin-bottom:6px;font-size:0.95em;">Home State</div>
+    <div style="font-size:0.85em;color:#666;margin-bottom:8px;">Click your state on the map to select it.</div>
+    <div id="state-selected-display">No state selected</div>
+    <div style="max-width:620px;border:2px solid #ddd;border-radius:6px;overflow:hidden;background:#eef2f8;">
+      <svg id="us-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;cursor:pointer;"></svg>
     </div>
-
-    <!-- SECTION 1: AGE -->
-    <div class="section-card active" id="section-1">
-      <h2>Section 1: Name, Home State, Age</h2>
-      <p class="section-prompt">"Who are you, where are you from, how old are you?"</p>
-      <div style="margin-bottom:18px;">
-        <label for="candidate-name" style="display:block;font-weight:bold;color:#1a2a4a;margin-bottom:6px;font-size:0.95em;">Candidate Name</label>
-        <input type="text" id="candidate-name" placeholder="Enter your candidate's name" maxlength="40"
-          style="padding:10px 14px;border:2px solid #ccc;border-radius:5px;font-size:1em;font-family:Georgia,serif;width:100%;max-width:360px;color:#1a1a1a;"
-          oninput="updateCandidateName(this.value)">
-      </div>
-
-      <div style="margin-bottom:18px;">
-        <div style="font-weight:bold;color:#1a2a4a;margin-bottom:6px;font-size:0.95em;">Home State</div>
-        <div style="font-size:0.85em;color:#666;margin-bottom:10px;">Click your state on the map to select it.</div>
-        <div id="state-selected-display" style="font-size:0.9em;color:#888;font-style:italic;margin-bottom:8px;">No state selected</div>
-        <div style="max-width:620px;border:2px solid #ddd;border-radius:6px;overflow:hidden;background:#eef2f8;">
-          <svg id="us-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;cursor:pointer;">
-        </div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:0.78em;color:#555;">
-          <span><span style="display:inline-block;width:12px;height:12px;background:#2a6496;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Large Swing State</span>
-          <span><span style="display:inline-block;width:12px;height:12px;background:#5a8a5a;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Large Safe State</span>
-          <span><span style="display:inline-block;width:12px;height:12px;background:#8a7a3a;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Mid-size State</span>
-          <span><span style="display:inline-block;width:12px;height:12px;background:#888;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Small State</span>
-        </div>
-      </div>
-      <div style="font-weight:bold;color:#1a2a4a;margin-bottom:10px;font-size:0.95em;">Age: click on the age you want to be when running for president</div>
-      <div class="options-grid" id="s1-options">
-        <div class="option-btn" data-s="1" data-key="35" onclick="selectS1(this)">
-          <div class="opt-title">Age 35–44</div>
-          <div class="opt-desc">This would make you one of, if not <em>the</em> youngest president in US history. Your youth could be a major asset but you might also seem too young and inexperienced to the voters.</div>
-          <div class="opt-risk">High risk, high reward</div>
-        </div>
-        <div class="option-btn" data-s="1" data-key="45" onclick="selectS1(this)">
-          <div class="opt-title">Age 45–54</div>
-          <div class="opt-desc">This is still pretty young for a presidential candidate, your youth could be a major asset if running against an older opponent.</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-s="1" data-key="55" onclick="selectS1(this)">
-          <div class="opt-title">Age 55–64</div>
-          <div class="opt-desc">This may be the sweet spot you're not too old but you don't seem too young and inexperienced.</div>
-          <div class="opt-risk">No luck involved</div>
-        </div>
-        <div class="option-btn" data-s="1" data-key="65" onclick="selectS1(this)">
-          <div class="opt-title">Age 65–74</div>
-          <div class="opt-desc">No one will accuse you of being too young but some voters might see you as too old and establishment.</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-s="1" data-key="75" onclick="selectS1(this)">
-          <div class="opt-title">Age 75+</div>
-          <div class="opt-desc">You've been in Washington for decades, you've seen it all, but let's face it your age is going to be a nonstop issue on the campaign trail.</div>
-          <div class="opt-risk">No luck involved</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s1-submit" onclick="submitS1()" disabled>Lock In Age &amp; Home State</button>
-      <div class="reveal-area" id="s1-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" disabled>← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(2)">Next →</button>
-      </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:0.78em;color:#555;">
+      <span><span style="display:inline-block;width:12px;height:12px;background:#2a6496;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Large Swing State</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:#5a8a5a;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Large Safe State</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:#8a7a3a;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Mid-size State</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:#888;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Small State</span>
     </div>
+  </div>
 
-    <!-- SECTION 2: BIOGRAPHY -->
-    <div class="section-card" id="section-2">
-      <h2>Section 2: Biography / Early Career / Education</h2>
-      <p class="section-prompt">"What background / early career do you think will be the biggest asset as you run for the Presidency?"</p>
-      <div class="section-instructions">Pick <strong>two different</strong> backgrounds. Your scores from both will add together.</div>
-      <div class="options-grid" id="s2-options">
-        <div class="option-btn" data-key="law" onclick="selectS2(this)"><div class="opt-title">Law School</div><div class="opt-desc">You went to a good law school and landed a job with a big-time law firm.</div></div>
-        <div class="option-btn" data-key="biz" onclick="selectS2(this)"><div class="opt-title">Business School</div><div class="opt-desc">You went to one of the top business schools and earned an MBA.</div></div>
-        <div class="option-btn" data-key="ivy" onclick="selectS2(this)"><div class="opt-title">Ivy Leaguer</div><div class="opt-desc">You went to one of the best universities in the world and earned a graduate degree no less.</div></div>
-        <div class="option-btn" data-key="entrepreneur" onclick="selectS2(this)"><div class="opt-title">Entrepreneur</div><div class="opt-desc">You started multiple businesses and became successful without ever stepping foot on a university campus.</div></div>
-        <div class="option-btn" data-key="military" onclick="selectS2(this)"><div class="opt-title">Military Service</div><div class="opt-desc">You served your country in the armed forces before going to college and earning a degree.</div></div>
-        <div class="option-btn" data-key="medical" onclick="selectS2(this)"><div class="opt-title">Medical Background</div><div class="opt-desc">You went to Med School and worked in the medical field as a doctor / nurse practitioner.</div></div>
-        <div class="option-btn" data-key="educator" onclick="selectS2(this)"><div class="opt-title">Educator</div><div class="opt-desc">You have a graduate degree in education and served as a teacher or professor.</div></div>
-        <div class="option-btn" data-key="pubservice" onclick="selectS2(this)"><div class="opt-title">Public Service</div><div class="opt-desc">You have a background in public service State Department, AmeriCorps, Peace Corps, other.</div></div>
-        <div class="option-btn" data-key="farmer" onclick="selectS2(this)"><div class="opt-title">Farmer / Rancher / Fisherman</div><div class="opt-desc">You worked the land and have legit blue-collar credibility.</div></div>
-        <div class="option-btn" data-key="family" onclick="selectS2(this)"><div class="opt-title">Powerful Family</div><div class="opt-desc">You come from a powerful and wealthy family you're a true 'blue blood.'</div></div>
-      </div>
-      <button class="submit-btn" id="s2-submit" onclick="submitS2()" disabled>Lock In My Background</button>
-      <div class="reveal-area" id="s2-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(1)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(3)">Next →</button>
-      </div>
+  <div style="font-weight:bold;color:#1a2a4a;margin-bottom:10px;font-size:0.95em;">Age: click on the age you want to be when running for president</div>
+  <div class="options-grid" id="s1-options">
+    <div class="option-btn" data-key="35" onclick="selectS1(this)">
+      <div class="opt-title">Age 35-44</div>
+      <div class="opt-desc">This would make you one of, if not the youngest president in US history. Your youth could be a major asset, but you might also seem too young and inexperienced to the voters.</div>
+      <div class="opt-risk">High risk, high reward</div>
     </div>
-
-    <!-- SECTION 3: EXPERIENCE -->
-    <div class="section-card" id="section-3">
-      <h2>Section 3: Experience / Political Career</h2>
-      <p class="section-prompt">"What previous political positions best prepare someone to become a winning candidate and successful president?"</p>
-      <div class="section-instructions">
-        <strong>Choose your mode first:</strong> Pick two <em>different</em> positions to diversify your background, OR double up on one position to increase your chances of a better outcome (or lock in guaranteed scores on some options).
-      </div>
-      <div class="mode-toggle">
-        <div class="mode-btn active" id="s3-mode-two" onclick="setS3Mode('two')">Pick Two Different Positions</div>
-        <div class="mode-btn" id="s3-mode-double" onclick="setS3Mode('double')">Double Up on One Position</div>
-      </div>
-      <div class="options-grid" id="s3-options">
-        <div class="option-btn" data-key="vp" onclick="selectS3(this)">
-          <div class="opt-title">Vice President</div>
-          <div class="opt-desc">This is the highest level of experience below being president, but now you have to defend the record of the president you served with. You have experience but it comes with baggage.</div>
-          <div class="opt-risk">Luck plays a role — doubling up changes the odds</div>
-        </div>
-        <div class="option-btn" data-key="gov" onclick="selectS3(this)">
-          <div class="opt-title">Governor</div>
-          <div class="opt-desc">Being Governor is like being president of a state. Run a big state well and you're looking like a presidential hopeful. Run a small state poorly and you seem totally unqualified.</div>
-          <div class="opt-risk">Luck plays a role — doubling up changes the odds</div>
-        </div>
-        <div class="option-btn" data-key="senator" onclick="selectS3(this)">
-          <div class="opt-title">Senator</div>
-          <div class="opt-desc">The role of Senator is pretty prestigious, especially if you were on important committees or getting major legislation passed. But if you weren't, you might not seem ready for the job.</div>
-          <div class="opt-risk">Luck plays a role — doubling up changes the odds</div>
-        </div>
-        <div class="option-btn" data-key="rep" onclick="selectS3(this)">
-          <div class="opt-title">House Representative</div>
-          <div class="opt-desc">The House is called the lower chamber for a reason unless you served for a long time and have some serious accomplishments to your name it's a pretty big leap to the presidency.</div>
-          <div class="opt-risk">Luck plays a role — doubling up changes the odds</div>
-        </div>
-        <div class="option-btn" data-key="sos" onclick="selectS3(this)">
-          <div class="opt-title">Secretary of State</div>
-          <div class="opt-desc">In the 1800s the Secretary of State was seen as the 'President in Waiting.' 6 past presidents have had this job prior to becoming president.</div>
-          <div class="opt-risk">No luck involved — doubling up increases your score</div>
-        </div>
-        <div class="option-btn" data-key="cabinet" onclick="selectS3(this)">
-          <div class="opt-title">Cabinet Member</div>
-          <div class="opt-desc">Working in the Executive Branch seems like it could be a good stepping stone to the White House, after all the President is the Chief Executive.</div>
-          <div class="opt-risk">No luck involved — doubling up increases your score</div>
-        </div>
-        <div class="option-btn" data-key="outsider" onclick="selectS3(this)">
-          <div class="opt-title">Total Outsider</div>
-          <div class="opt-desc">You have very little political experience. You can run against the Washington establishment. The voters are frustrated with politics and politicians, but will they see you as totally unqualified or just the change we need?</div>
-          <div class="opt-risk">High risk, high reward — doubling up improves your odds</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s3-submit" onclick="submitS3()" disabled>Lock In My Experience</button>
-      <div class="reveal-area" id="s3-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(2)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(4)">Next →</button>
-      </div>
+    <div class="option-btn" data-key="45" onclick="selectS1(this)">
+      <div class="opt-title">Age 45-54</div>
+      <div class="opt-desc">This is still pretty young for a presidential candidate. Your youth could be a major asset if running against an older opponent.</div>
+      <div class="opt-risk">Luck plays a role</div>
     </div>
-
-    <!-- SECTION 4: PERSONALITY -->
-    <div class="section-card" id="section-4">
-      <h2>Section 4: Special Skills — Personality Traits</h2>
-      <p class="section-prompt">"What traits and strengths are the most important?"</p>
-      <div class="section-instructions">Pick <strong>two different</strong> traits. Watch out some combinations trigger hidden bonuses or penalties!</div>
-      <div class="options-grid" id="s4-options">
-        <div class="option-btn" data-key="communicator" onclick="selectS4(this)">
-          <div class="opt-title">Great Communicator</div>
-          <div class="opt-desc">You don't just read off the teleprompter when you speak people feel something. You know how to debate and can talk circles around your opponent.</div>
-        </div>
-        <div class="option-btn" data-key="telegenic" onclick="selectS4(this)">
-          <div class="opt-title">Telegenic</div>
-          <div class="opt-desc">What can we say, the camera loves you. You look the part, you're great on TV and video. You don't have to always say the right thing you look good while saying it.</div>
-        </div>
-        <div class="option-btn" data-key="character" onclick="selectS4(this)">
-          <div class="opt-title">High Character</div>
-          <div class="opt-desc">You are seen as honest with high integrity. You care about human rights and voters believe you will do the right thing.</div>
-        </div>
-        <div class="option-btn" data-key="relatable" onclick="selectS4(this)">
-          <div class="opt-title">Down to Earth / Relatable</div>
-          <div class="opt-desc">You're the candidate that the average voter sees as a normal person. They think they could sit down and have a beer with you they might not agree with you on every issue but they feel like they could talk to you.</div>
-        </div>
-        <div class="option-btn" data-key="intelligence" onclick="selectS4(this)">
-          <div class="opt-title">Intelligence</div>
-          <div class="opt-desc">You are the smartest person in the room and people know it. You can discuss a wide array of topics with ease and you can make your opponent sound like a simpleton.</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s4-submit" onclick="submitS4()" disabled>Lock In My Traits</button>
-      <div class="reveal-area" id="s4-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(3)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(5)">Next →</button>
-      </div>
+    <div class="option-btn" data-key="55" onclick="selectS1(this)">
+      <div class="opt-title">Age 55-64</div>
+      <div class="opt-desc">This may be the sweet spot. You are not too old, but you do not seem too young and inexperienced.</div>
+      <div class="opt-risk">No luck involved</div>
     </div>
-
-    <!-- SECTION 5: EXPERTISE -->
-    <div class="section-card" id="section-5">
-      <h2>Section 5: Areas of Expertise</h2>
-      <p class="section-prompt">"What type of expert would the perfect candidate be?"</p>
-      <div class="section-instructions">Pick <strong>one</strong> area of expertise.</div>
-      <div class="options-grid" id="s5-options">
-        <div class="option-btn" data-key="policy" onclick="selectS5(this)">
-          <div class="opt-title">Policy Wonk</div>
-          <div class="opt-desc">You're an expert in public policy you have a plan to solve almost any problem with the stats and research to back it up.</div>
-        </div>
-        <div class="option-btn" data-key="foreign" onclick="selectS5(this)">
-          <div class="opt-title">Foreign Policy Chops</div>
-          <div class="opt-desc">You have experience dealing with foreign affairs you know about all the major problems and conflicts all over the world and can speak on them with confidence.</div>
-        </div>
-        <div class="option-btn" data-key="milexpert" onclick="selectS5(this)">
-          <div class="opt-title">Military Experience</div>
-          <div class="opt-desc">You have served in the military at a high level you know how the Pentagon works and have credibility within the armed services.</div>
-        </div>
-        <div class="option-btn" data-key="econ" onclick="selectS5(this)">
-          <div class="opt-title">Economics Expert</div>
-          <div class="opt-desc">You understand the economy on a higher level than other candidates which matters, because the economy is the #1 issue for most voters.</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s5-submit" onclick="submitS5()" disabled>Lock In My Expertise</button>
-      <div class="reveal-area" id="s5-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(4)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(6)">Next →</button>
-      </div>
+    <div class="option-btn" data-key="65" onclick="selectS1(this)">
+      <div class="opt-title">Age 65-74</div>
+      <div class="opt-desc">No one will accuse you of being too young, but some voters might see you as too old and establishment.</div>
+      <div class="opt-risk">Luck plays a role</div>
     </div>
-
-    <!-- SECTION 6: POLITICAL POSITION -->
-    <div class="section-card" id="section-6">
-      <h2>Section 6: Political Position</h2>
-      <p class="section-prompt">"What kind of politician is best suited to run for president?"</p>
-      <div class="section-instructions">Pick <strong>one</strong> political position.</div>
-      <div class="options-grid" id="s6-options">
-        <div class="option-btn" data-key="centrist" onclick="selectS6(this)">
-          <div class="opt-title">Bipartisan Centrist</div>
-          <div class="opt-desc">You're such a centrist you really don't fit in either party you might seem like the best of both worlds or you might make nobody happy.</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-key="moderate" onclick="selectS6(this)">
-          <div class="opt-title">Moderate</div>
-          <div class="opt-desc">Like most successful presidential candidates you're a moderate you fit with your party but you aren't seen as extreme. You may not get the base fired up but you can grab many undecided voters.</div>
-          <div class="opt-risk">No luck involved</div>
-        </div>
-        <div class="option-btn" data-key="partisan" onclick="selectS6(this)">
-          <div class="opt-title">Hyper Partisan</div>
-          <div class="opt-desc">You are a bit of an extremist. The hardcore members of your party love you and will show up to support you but you might alienate independent voters as well.</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-key="populist" onclick="selectS6(this)">
-          <div class="opt-title">Populist Outsider</div>
-          <div class="opt-desc">You make big promises and run as a 'non-politician.' You get people who hate politics to show up on election day, but many voters will see you as unserious and full of empty promises.</div>
-          <div class="opt-risk">High risk, high reward</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s6-submit" onclick="submitS6()" disabled>Lock In My Position</button>
-      <div class="reveal-area" id="s6-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(5)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(7)">Next →</button>
-      </div>
+    <div class="option-btn" data-key="75" onclick="selectS1(this)">
+      <div class="opt-title">Age 75+</div>
+      <div class="opt-desc">You have been in Washington for decades and you have seen it all, but let's face it, your age is going to be a nonstop issue on the campaign trail.</div>
+      <div class="opt-risk">No luck involved</div>
     </div>
-
-    <!-- SECTION 7: WEAKNESS -->
-    <div class="section-card" id="section-7">
-      <h2>Section 7: Weaknesses &amp; Disadvantages</h2>
-      <p class="section-prompt">"Everyone has a weakness which drawback will cost you the least?"</p>
-      <div class="section-instructions">You <strong>must</strong> pick one weakness. Choose wisely or luckily.</div>
-      <div class="options-grid" id="s7-options">
-        <div class="option-btn" data-key="scandal" onclick="selectS7(this)">
-          <div class="opt-title">Scandal In Your Past</div>
-          <div class="opt-desc">You have a minor scandal from your past that you just can't seem to live down. Can you finally move past this scandal and become president?</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-key="gaff" onclick="selectS7(this)">
-          <div class="opt-title">Gaff Prone</div>
-          <div class="opt-desc">You have a tendency to 'put your foot in your mouth' and make small mistakes that become week-long stories.</div>
-          <div class="opt-risk">Luck plays a role</div>
-        </div>
-        <div class="option-btn" data-key="norm" onclick="selectS7(this)">
-          <div class="opt-title">Outside the Norm</div>
-          <div class="opt-desc">You don't necessarily fit the stereotype after all only one past president was non-white, ALL have been Christian and we've never had a woman president. Can you be the one to break the mold?</div>
-          <div class="opt-risk">High risk, high reward</div>
-        </div>
-      </div>
-      <button class="submit-btn" id="s7-submit" onclick="submitS7()" disabled>Lock In My Weakness</button>
-      <div class="reveal-area" id="s7-reveal"></div>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(6)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" onclick="goToSection(8)">Next →</button>
-      </div>
-    </div>
-
-    <!-- SECTION 8: SUBMIT -->
-    <div class="section-card" id="section-8">
-      <h2>Section 8: Submit Your Candidate</h2>
-      <p class="section-prompt">"Will you win your primary? Will you win the presidency? Are you a great candidate?"</p>
-      <div id="s8-checklist" style="margin-bottom:20px;"></div>
-      <button class="submit-btn" id="s8-submit" onclick="submitFinal()" disabled>Submit My Candidate</button>
-      <div class="section-nav">
-        <button class="nav-arrow-btn" onclick="goToSection(7)">← Previous</button>
-        <button class="nav-arrow-btn next-btn" disabled>Next →</button>
-      </div>
-    </div>
-
-    <!-- FINAL RESULT -->
-    <div class="section-card" id="final-section">
-      <div class="final-card" id="final-card">
-        <!-- filled by JS -->
-      </div>
-    </div>
-
-  </div><!-- end main-panel -->
-
-  <!-- SIDEBAR -->
-  <div id="sidebar">
-    <div id="candidate-figure">
-      <h3>Your Candidate</h3>
-      <div id="sidebar-name" style="font-size:0.85em;color:#1a2a4a;font-weight:bold;margin-bottom:10px;min-height:1.2em;text-align:center;"></div>
-      <div style="text-align:center;margin-bottom:12px;">
-        <div style="font-size:0.7em;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:2px;">Total Score</div>
-        <div id="sidebar-score" style="font-size:2em;font-weight:bold;color:#1a2a4a;line-height:1;">0</div>
-        <div style="font-size:0.7em;color:#aaa;">out of 600</div>
-      </div>
-      <svg id="figure-svg" viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:240px;display:block;margin:0 auto;">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2.5" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- SEGMENT 7: Flag pin (tie detail) — section 7 -->
-        <!-- Tie -->
-        <polygon id="seg-tie" points="60,68 55,78 60,105 65,78"
-          fill="#1a2a4a" stroke="#0a1a3a" stroke-width="0.5" opacity="0.2"/>
-        <!-- Pin dot -->
-        <circle id="seg-pin" cx="60" cy="80" r="4"
-          fill="#888" stroke="#666" stroke-width="0.5" opacity="0.2"/>
-
-        <!-- SEGMENT 1: Feet — section 1 -->
-        <rect id="seg-feet-l" x="30" y="210" width="22" height="18" rx="6"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-        <rect id="seg-feet-r" x="68" y="210" width="22" height="18" rx="6"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-
-        <!-- SEGMENT 2: Legs — section 2 -->
-        <rect id="seg-leg-l" x="33" y="158" width="20" height="56" rx="7"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-        <rect id="seg-leg-r" x="67" y="158" width="20" height="56" rx="7"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-
-        <!-- SEGMENT 3: Torso — section 3 -->
-        <rect id="seg-torso" x="28" y="68" width="64" height="94" rx="10"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-
-        <!-- SEGMENT 4: Arms — section 4 -->
-        <rect id="seg-arm-l" x="8" y="72" width="18" height="70" rx="8"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-        <rect id="seg-arm-r" x="94" y="72" width="18" height="70" rx="8"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-
-        <!-- SEGMENT 5: Shoulders — section 5 -->
-        <ellipse id="seg-shoulders" cx="60" cy="72" rx="38" ry="12"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-
-        <!-- SEGMENT 6: Head — section 6 -->
-        <!-- Neck -->
-        <rect id="seg-neck" x="50" y="42" width="20" height="16" rx="4"
-          fill="#ccc" stroke="#aaa" stroke-width="1" opacity="0.25"/>
-        <!-- Head -->
-        <ellipse id="seg-head" cx="60" cy="28" rx="22" ry="26"
-          fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
-        <!-- Face details (always subtle) -->
-        <ellipse cx="52" cy="25" rx="3" ry="3.5" fill="#aaa" opacity="0.15"/>
-        <ellipse cx="68" cy="25" rx="3" ry="3.5" fill="#aaa" opacity="0.15"/>
-        <path d="M 52 34 Q 60 40 68 34" fill="none" stroke="#aaa" stroke-width="1.5" opacity="0.15"/>
-
-        <!-- Suit lapels (always visible, just outline) -->
-        <path d="M 44 68 L 52 90 L 60 72 L 68 90 L 76 68" fill="none" stroke="#999" stroke-width="1" opacity="0.2"/>
-      </svg>
-      <div id="progress-label" style="text-align:center;font-size:0.72em;color:#888;margin-top:4px;">0 / 7 sections</div>
-    </div>
+  </div>
+  <button class="submit-btn" id="s1-submit" onclick="submitS1()" disabled>Lock In Name, State &amp; Age</button>
+  <div class="reveal-area" id="s1-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" disabled>Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(2)">Next</button>
   </div>
 </div>
 
+<!-- SECTION 2: BIOGRAPHY -->
+<div class="section-card" id="section-2">
+  <h2>Section 2: Biography / Early Career / Education</h2>
+  <p class="section-prompt">"What background or early career do you think will be the biggest asset as you run for the Presidency?"</p>
+  <div class="section-instructions">Pick <strong>two different</strong> backgrounds. Your scores from both add together.</div>
+  <div class="options-grid" id="s2-options">
+    <div class="option-btn" data-key="law" onclick="selectS2(this)"><div class="opt-title">Law School</div><div class="opt-desc">You went to a good law school and landed a job with a big-time law firm.</div></div>
+    <div class="option-btn" data-key="biz" onclick="selectS2(this)"><div class="opt-title">Business School</div><div class="opt-desc">You went to one of the top business schools and earned an MBA.</div></div>
+    <div class="option-btn" data-key="ivy" onclick="selectS2(this)"><div class="opt-title">Ivy Leaguer</div><div class="opt-desc">You went to one of the best universities in the world and earned a graduate degree no less.</div></div>
+    <div class="option-btn" data-key="entrepreneur" onclick="selectS2(this)"><div class="opt-title">Entrepreneur</div><div class="opt-desc">You started multiple businesses and became successful without ever stepping foot on a university campus.</div></div>
+    <div class="option-btn" data-key="military" onclick="selectS2(this)"><div class="opt-title">Military Service</div><div class="opt-desc">You served your country in the armed forces before going to college and earning a degree.</div></div>
+    <div class="option-btn" data-key="medical" onclick="selectS2(this)"><div class="opt-title">Medical Background</div><div class="opt-desc">You went to medical school and worked in the medical field as a doctor or nurse practitioner.</div></div>
+    <div class="option-btn" data-key="educator" onclick="selectS2(this)"><div class="opt-title">Educator</div><div class="opt-desc">You have a graduate degree in education and served as a teacher or professor.</div></div>
+    <div class="option-btn" data-key="media" onclick="selectS2(this)"><div class="opt-title">Media Figure</div><div class="opt-desc">You have a background working in the media — TV, movies, and so on.</div></div>
+    <div class="option-btn" data-key="farmer" onclick="selectS2(this)"><div class="opt-title">Farmer / Rancher / Fisherman</div><div class="opt-desc">You worked the land and have legit blue-collar credibility.</div></div>
+    <div class="option-btn" data-key="family" onclick="selectS2(this)"><div class="opt-title">Powerful Family</div><div class="opt-desc">You come from a powerful and wealthy family. You are a true blue blood.</div></div>
+  </div>
+  <button class="submit-btn" id="s2-submit" onclick="submitS2()" disabled>Lock In My Background</button>
+  <div class="reveal-area" id="s2-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(1)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(3)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 3: PERSONALITY -->
+<div class="section-card" id="section-3">
+  <h2>Section 3: Special Skills — Personality Traits</h2>
+  <p class="section-prompt">"What traits and strengths are the most important?"</p>
+  <div class="section-instructions">Pick <strong>two different</strong> traits. Some combinations trigger hidden bonuses or penalties!</div>
+  <div class="options-grid" id="s3-options">
+    <div class="option-btn" data-key="communicator" onclick="selectS3(this)"><div class="opt-title">Great Communicator</div><div class="opt-desc">You do not just read off the teleprompter. When you speak, people feel something. You know how to debate and can talk circles around your opponent.</div></div>
+    <div class="option-btn" data-key="telegenic" onclick="selectS3(this)"><div class="opt-title">Telegenic</div><div class="opt-desc">What can we say — the camera loves you. You look the part, you are great on TV and video. You do not have to always say the right thing; you look good while saying it.</div></div>
+    <div class="option-btn" data-key="character" onclick="selectS3(this)"><div class="opt-title">High Character</div><div class="opt-desc">You are seen as honest with high integrity. You care about human rights and voters believe you will do the right thing.</div></div>
+    <div class="option-btn" data-key="relatable" onclick="selectS3(this)"><div class="opt-title">Down to Earth / Relatable</div><div class="opt-desc">You are the candidate the average voter sees as a normal person. They think they could sit down and have a beer with you. They might not agree with you on every issue, but they feel like they could talk to you.</div></div>
+    <div class="option-btn" data-key="intelligence" onclick="selectS3(this)"><div class="opt-title">Intelligence</div><div class="opt-desc">You are the smartest person in the room and people know it. You can discuss a wide array of topics with ease, and you can make your opponent sound like a simpleton.</div></div>
+  </div>
+  <button class="submit-btn" id="s3-submit" onclick="submitS3()" disabled>Lock In My Traits</button>
+  <div class="reveal-area" id="s3-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(2)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(4)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 4: POLITICAL EXPERIENCE -->
+<div class="section-card" id="section-4">
+  <h2>Section 4: Political Experience</h2>
+  <p class="section-prompt">"What previous political positions best prepare someone to become a winning candidate and successful president?"</p>
+  <div class="section-instructions">Choose two different positions to diversify your background, OR double up on one position to improve your odds or lock in better outcomes.</div>
+  <div class="mode-toggle">
+    <div class="mode-btn active" id="s4-mode-two" onclick="setS4Mode('two')">Pick Two Different Positions</div>
+    <div class="mode-btn" id="s4-mode-double" onclick="setS4Mode('double')">Double Up on One Position</div>
+  </div>
+  <div class="options-grid" id="s4-options">
+    <div class="option-btn" data-key="vp" onclick="selectS4exp(this)"><div class="opt-title">Vice President</div><div class="opt-desc">This is the highest level of experience below being president, but now you have to defend the record of the president you served with. You have experience, but it comes with baggage.</div><div class="opt-risk">Luck plays a role — doubling up changes the odds</div></div>
+    <div class="option-btn" data-key="gov" onclick="selectS4exp(this)"><div class="opt-title">Governor</div><div class="opt-desc">Being Governor is like being president of a state. Run a big state well and you look like a presidential hopeful. Run a small state poorly and you seem totally unqualified.</div><div class="opt-risk">Luck plays a role — doubling up changes the odds</div></div>
+    <div class="option-btn" data-key="senator" onclick="selectS4exp(this)"><div class="opt-title">Senator</div><div class="opt-desc">The role of Senator is pretty prestigious, especially if you were on important committees or getting major legislation passed. But if you were not, you might not seem ready for the job.</div><div class="opt-risk">Luck plays a role — doubling up guarantees the best outcome</div></div>
+    <div class="option-btn" data-key="rep" onclick="selectS4exp(this)"><div class="opt-title">House Representative</div><div class="opt-desc">The House is called the lower chamber for a reason. Unless you served for a long time and have serious accomplishments to your name, it is a pretty big leap to the presidency.</div><div class="opt-risk">Luck plays a role — doubling up guarantees the best outcome</div></div>
+    <div class="option-btn" data-key="sos" onclick="selectS4exp(this)"><div class="opt-title">Secretary of State</div><div class="opt-desc">In the 1800s the Secretary of State was seen as the President in Waiting. Six past presidents have had this job prior to becoming president.</div><div class="opt-risk">No luck involved — doubling up increases your score</div></div>
+    <div class="option-btn" data-key="cabinet" onclick="selectS4exp(this)"><div class="opt-title">Cabinet Member</div><div class="opt-desc">Working in the Executive Branch seems like it could be a good stepping stone to the White House. After all, the President is the Chief Executive.</div><div class="opt-risk">No luck involved — doubling up increases your score</div></div>
+    <div class="option-btn" data-key="outsider" onclick="selectS4exp(this)"><div class="opt-title">Total Outsider</div><div class="opt-desc">You have very little political experience. You can run against the Washington establishment. The voters are frustrated with politics and politicians, but will they see you as totally unqualified or just the change we need?</div><div class="opt-risk">High risk, high reward — doubling up improves your odds</div></div>
+  </div>
+  <button class="submit-btn" id="s4exp-submit" onclick="submitS4exp()" disabled>Lock In My Political Experience</button>
+  <div class="reveal-area" id="s4exp-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(3)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(5)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 5: EXPERTISE -->
+<div class="section-card" id="section-5">
+  <h2>Section 5: Areas of Expertise</h2>
+  <p class="section-prompt">"What type of expert would the perfect candidate be?"</p>
+  <div class="section-instructions">Pick <strong>one</strong> area of expertise.</div>
+  <div class="options-grid" id="s5-options">
+    <div class="option-btn" data-key="policy" onclick="selectS5(this)"><div class="opt-title">Policy Wonk</div><div class="opt-desc">You are an expert in public policy. You have a plan to solve almost any problem, with the stats and research to back it up.</div></div>
+    <div class="option-btn" data-key="foreign" onclick="selectS5(this)"><div class="opt-title">Foreign Policy Chops</div><div class="opt-desc">You have experience dealing with foreign affairs. You know about all the major problems and conflicts all over the world, and you can speak on them with confidence.</div></div>
+    <div class="option-btn" data-key="milexpert" onclick="selectS5(this)"><div class="opt-title">Military Experience</div><div class="opt-desc">You have served in the military at a high level. You know how the Pentagon works and have credibility within the armed services.</div></div>
+    <div class="option-btn" data-key="econ" onclick="selectS5(this)"><div class="opt-title">Economics Expert</div><div class="opt-desc">You understand the economy on a higher level than other candidates, which matters, because the economy is the number one issue for most voters.</div></div>
+    <div class="option-btn" data-key="realworld" onclick="selectS5(this)"><div class="opt-title">Real World Experience</div><div class="opt-desc">You actually had a normal person job not that long ago. Unlike many politicians who are decades removed from the real world, you are actually in touch with real America.</div></div>
+  </div>
+  <button class="submit-btn" id="s5-submit" onclick="submitS5()" disabled>Lock In My Expertise</button>
+  <div class="reveal-area" id="s5-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(4)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(6)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 6: POLITICS -->
+<div class="section-card" id="section-6">
+  <h2>Section 6: Political Position</h2>
+  <p class="section-prompt">"What kind of politician is best suited to run for president?"</p>
+  <div class="section-instructions">Pick <strong>one</strong> political position.</div>
+  <div class="options-grid" id="s6-options">
+    <div class="option-btn" data-key="centrist" onclick="selectS6(this)"><div class="opt-title">Independent Centrist</div><div class="opt-desc">You are such a centrist you really do not fit in either party. You might seem like the best of both worlds, or you might make nobody happy.</div><div class="opt-risk">Luck plays a role</div></div>
+    <div class="option-btn" data-key="moderate" onclick="selectS6(this)"><div class="opt-title">Moderate</div><div class="opt-desc">Like most successful presidential candidates, you are a moderate. You fit with your party but you are not seen as extreme. You may not get the base fired up, but you can grab many undecided voters.</div><div class="opt-risk">No luck involved</div></div>
+    <div class="option-btn" data-key="partisan" onclick="selectS6(this)"><div class="opt-title">Hyper Partisan</div><div class="opt-desc">You are a bit of an extremist. The hardcore members of your party love you and will show up to support you, but you might alienate independent voters as well.</div><div class="opt-risk">Luck plays a role</div></div>
+    <div class="option-btn" data-key="populist" onclick="selectS6(this)"><div class="opt-title">Populist Outsider</div><div class="opt-desc">You make big promises and run as a non-politician. You get people who hate politics to show up on election day, but many voters will see you as unserious and full of empty promises.</div><div class="opt-risk">High risk, high reward</div></div>
+  </div>
+  <button class="submit-btn" id="s6-submit" onclick="submitS6()" disabled>Lock In My Position</button>
+  <div class="reveal-area" id="s6-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(5)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(7)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 7: WEAKNESS -->
+<div class="section-card" id="section-7">
+  <h2>Section 7: Weaknesses &amp; Disadvantages</h2>
+  <p class="section-prompt">"Everyone has a weakness. Which drawback will cost you the least?"</p>
+  <div class="section-instructions">You <strong>must</strong> pick one weakness.</div>
+  <div class="options-grid" id="s7-options">
+    <div class="option-btn" data-key="scandal" onclick="selectS7(this)"><div class="opt-title">Scandal In Your Past</div><div class="opt-desc">You have a minor scandal from your past that you just cannot seem to live down. Can you finally move past this scandal and become president?</div><div class="opt-risk">Luck plays a role</div></div>
+    <div class="option-btn" data-key="gaff" onclick="selectS7(this)"><div class="opt-title">Gaff Prone</div><div class="opt-desc">You have a tendency to put your foot in your mouth and make small mistakes that become week-long stories.</div><div class="opt-risk">Luck plays a role</div></div>
+    <div class="option-btn" data-key="norm" onclick="selectS7(this)"><div class="opt-title">Outside the Norm</div><div class="opt-desc">You do not necessarily fit the stereotype. After all, only one past president was non-white, all have been Christian, and we have never had a woman president. Can you be the one to break the mold?</div><div class="opt-risk">High risk — the only weakness with a positive upside</div></div>
+  </div>
+  <button class="submit-btn" id="s7-submit" onclick="submitS7()" disabled>Lock In My Weakness</button>
+  <div class="reveal-area" id="s7-reveal"></div>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(6)">Previous</button>
+    <button class="nav-arrow-btn next-btn" onclick="goToSection(8)">Next</button>
+  </div>
+</div>
+
+<!-- SECTION 8: SUBMIT -->
+<div class="section-card" id="section-8">
+  <h2>Section 8: Submit Your Candidate</h2>
+  <p class="section-prompt">"Will you win your primary? Will you win the presidency? Are you a great candidate?"</p>
+  <div id="s8-checklist" style="margin-bottom:20px;"></div>
+  <button class="submit-btn" id="s8-submit" onclick="submitFinal()" disabled>Run For Office!</button>
+  <div class="section-nav">
+    <button class="nav-arrow-btn" onclick="goToSection(7)">Previous</button>
+    <button class="nav-arrow-btn next-btn" disabled>Next</button>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div class="section-card" id="final-section">
+  <div class="final-card" id="final-card"></div>
+</div>
+
+</div><!-- end main-panel -->
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div id="candidate-figure">
+    <h3>Your Candidate</h3>
+    <div id="sidebar-name" style="font-size:0.85em;color:#1a2a4a;font-weight:bold;margin-bottom:10px;min-height:1.2em;text-align:center;"></div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <div style="font-size:0.7em;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:2px;">Total Score</div>
+      <div id="sidebar-score" style="font-size:2em;font-weight:bold;color:#1a2a4a;line-height:1;">0</div>
+      <div style="font-size:0.7em;color:#aaa;">out of 600</div>
+    </div>
+    <svg id="figure-svg" viewBox="0 0 120 250" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:250px;display:block;margin:0 auto;">
+      <defs>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <ellipse id="seg-feet-l" cx="41" cy="232" rx="13" ry="7" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <ellipse id="seg-feet-r" cx="79" cy="232" rx="13" ry="7" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path id="seg-leg-l" d="M33,148 Q30,175 28,225 L54,225 Q52,175 50,148 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path id="seg-leg-r" d="M70,148 Q68,175 66,225 L92,225 Q90,175 87,148 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path id="seg-torso" d="M28,75 Q20,80 18,105 Q16,130 20,150 L100,150 Q104,130 102,105 Q100,80 92,75 Q80,70 70,72 L65,85 Q60,90 55,85 L50,72 Q40,70 28,75 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path id="seg-arm-l" d="M18,78 Q8,85 5,110 Q3,130 8,148 Q14,155 20,150 Q18,130 20,105 Q22,88 28,78 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path id="seg-arm-r" d="M102,78 Q112,85 115,110 Q117,130 112,148 Q106,155 100,150 Q102,130 100,105 Q98,88 92,78 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <rect id="seg-cuff-l" x="5" y="144" width="16" height="10" rx="4" fill="#ccc" stroke="#aaa" stroke-width="1" opacity="0.25"/>
+      <rect id="seg-cuff-r" x="99" y="144" width="16" height="10" rx="4" fill="#ccc" stroke="#aaa" stroke-width="1" opacity="0.25"/>
+      <path id="seg-shoulders" d="M28,75 Q20,68 18,78 Q30,72 42,70 Q50,68 60,68 Q70,68 78,70 Q90,72 102,78 Q100,68 92,75 Q80,65 60,64 Q40,65 28,75 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path d="M48,68 L52,58 L60,62 L68,58 L72,68 Q66,72 60,70 Q54,72 48,68 Z" fill="#ddd" stroke="#bbb" stroke-width="1" opacity="0.3"/>
+      <rect id="seg-neck" x="51" y="46" width="18" height="20" rx="5" fill="#ccc" stroke="#aaa" stroke-width="1" opacity="0.25"/>
+      <path id="seg-head" d="M38,30 Q36,10 60,8 Q84,10 82,30 Q84,50 60,56 Q36,50 38,30 Z" fill="#ccc" stroke="#aaa" stroke-width="1.5" opacity="0.25"/>
+      <path d="M40,24 Q42,10 60,8 Q78,10 80,24 Q72,14 60,14 Q48,14 40,24 Z" fill="#bbb" opacity="0.2"/>
+      <ellipse cx="52" cy="28" rx="3" ry="2.5" fill="#999" opacity="0.2"/>
+      <ellipse cx="68" cy="28" rx="3" ry="2.5" fill="#999" opacity="0.2"/>
+      <path d="M 53 38 Q 60 43 67 38" fill="none" stroke="#aaa" stroke-width="1.5" opacity="0.2"/>
+      <path d="M38,28 Q34,32 36,38 Q38,40 40,36" fill="none" stroke="#aaa" stroke-width="1.5" opacity="0.2"/>
+      <path d="M82,28 Q86,32 84,38 Q82,40 80,36" fill="none" stroke="#aaa" stroke-width="1.5" opacity="0.2"/>
+      <path id="seg-tie" d="M56,68 L53,80 L60,112 L67,80 L64,68 Q60,72 56,68 Z" fill="#555" stroke="#333" stroke-width="0.5" opacity="0.2"/>
+      <path d="M56,68 L60,74 L64,68 Q60,65 56,68 Z" fill="#444" stroke="#222" stroke-width="0.5" opacity="0.2"/>
+      <circle id="seg-pin" cx="35" cy="90" r="4.5" fill="#888" stroke="#666" stroke-width="1" opacity="0.2"/>
+      <circle cx="35" cy="90" r="2" fill="#aaa" opacity="0.15"/>
+      <path d="M48,68 L40,85 L28,80" fill="none" stroke="#bbb" stroke-width="1.2" opacity="0.25"/>
+      <path d="M72,68 L80,85 L92,80" fill="none" stroke="#bbb" stroke-width="1.2" opacity="0.25"/>
+      <line x1="60" y1="90" x2="60" y2="145" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,4" opacity="0.2"/>
+    </svg>
+    <div id="progress-label" style="text-align:center;font-size:0.72em;color:#888;margin-top:4px;">0 / 7 sections</div>
+  </div>
+</div>
+</div><!-- end game-area -->
 <script>
-// ============================================================
-// STATE
-// ============================================================
-const state = {
-  currentSection: 1,
-  scores: {},
-  selections: {},
-  totalScore: 0,
-  candidateName: '',
-  sectionsComplete: new Set()
-};
-
-// ============================================================
-// NAVIGATION
-// ============================================================
-function goToSection(n) {
-  // Hide all section cards
-  document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
-  document.getElementById('final-section').classList.remove('active');
-
-  if (n === 8) {
-    document.getElementById('section-8').classList.add('active');
-  } else if (n === 'final') {
-    document.getElementById('final-section').classList.add('active');
-  } else {
-    const card = document.getElementById('section-' + n);
-    if (card) card.classList.add('active');
-  }
-
-  // Update nav tabs
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const tab = document.querySelector(`.nav-tab[data-section="${n}"]`);
-  if (tab) tab.classList.add('active');
-
-  state.currentSection = n;
-
-  // If section is already complete, show frozen view
-  if (state.sectionsComplete.has(n)) {
-    showFrozenSection(n);
-  }
-
-  // Update section 8 checklist
-  if (n === 8) updateS8Checklist();
-}
-
-// ============================================================
-// SCORE MANAGEMENT
-// ============================================================
-function addScore(points, sectionNum) {
-  state.totalScore += points;
-  state.scores[sectionNum] = (state.scores[sectionNum] || 0) + points;
-  animateScore();
-}
-
-function animateScore() {
-  const el = document.getElementById('score-value');
-  el.textContent = state.totalScore;
-  el.classList.remove('score-pop');
-  void el.offsetWidth;
-  el.classList.add('score-pop');
-  // Also update sidebar score
-  const sb = document.getElementById('sidebar-score');
-  if (sb) {
-    sb.textContent = state.totalScore;
-    sb.classList.remove('score-pop');
-    void sb.offsetWidth;
-    sb.classList.add('score-pop');
-  }
-  updateFigure();
-}
-
-function updateCandidateName(val) {
-  state.candidateName = val.trim();
-  const nameEl = document.getElementById('sidebar-name');
-  if (nameEl) nameEl.textContent = state.candidateName || '';
-}
-
-// Section -> segment IDs to light up
-const sectionSegments = {
-  1: ['seg-feet-l','seg-feet-r'],
-  2: ['seg-leg-l','seg-leg-r'],
-  3: ['seg-torso'],
-  4: ['seg-arm-l','seg-arm-r'],
-  5: ['seg-shoulders'],
-  6: ['seg-head','seg-neck'],
-  7: ['seg-tie','seg-pin']
-};
-
-const segmentColor = '#c8a84b';   // gold when lit
-const segmentStroke = '#a07830';  // darker gold border
-
-function lightSegment(sectionNum) {
-  const ids = sectionSegments[sectionNum];
-  if (!ids) return;
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.setAttribute('fill', segmentColor);
-    el.setAttribute('stroke', segmentStroke);
-    el.setAttribute('opacity', '1');
-    el.classList.remove('seg-lit');
-    void el.offsetWidth;
-    el.classList.add('seg-lit');
-    // Special: pin gets a red fill
-    if (id === 'seg-pin') {
-      el.setAttribute('fill', '#c03030');
-      el.setAttribute('stroke', '#901010');
-    }
-  });
-}
-
-function updateFigure() {
-  document.getElementById('progress-label').textContent =
-    state.sectionsComplete.size + ' / 7 sections';
-}
-
-function resetFigure() {
-  const allSegs = Object.values(sectionSegments).flat();
-  allSegs.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('seg-lit');
-    el.setAttribute('fill', '#ccc');
-    el.setAttribute('stroke', '#aaa');
-    el.setAttribute('opacity', '0.25');
-    if (id === 'seg-pin') el.setAttribute('fill', '#888');
-  });
-}
-
-function markSectionDone(n) {
-  state.sectionsComplete.add(n);
-  const tab = document.querySelector(`.nav-tab[data-section="${n}"]`);
-  if (tab) tab.classList.add('done');
-  lightSegment(n);
-  updateFigure();
-}
-
-// ============================================================
-// PROBABILITY HELPERS
-// ============================================================
-function roll(probability) {
-  // probability is a float 0-1; returns true if the "good" outcome hits
-  return Math.random() < probability;
-}
-
-function coinFlipHTML(outcome, label) {
-  const symbol = outcome
-    ? '🦅'
-    : '<span style="font-size:1.4em;font-weight:bold;color:#c00;line-height:60px;">✗</span>';
-  return `<div class="flip-container"><div class="coin">${symbol}</div></div>
-  <div style="text-align:center;font-size:0.85em;color:#666;margin-bottom:8px;">${label}</div>`;
-}
-
-// ============================================================
-// FROZEN VIEW
-// ============================================================
-function showFrozenSection(n) {
-  if (!state.selections[n]) return;
-  const sel = state.selections[n];
-  const card = document.getElementById('section-' + n);
-  if (!card) return;
-
-  // Hide interactive elements, show frozen view
-  const existing = card.querySelector('.frozen-view');
-  if (existing) existing.remove();
-
-  const fv = document.createElement('div');
-  fv.className = 'frozen-view';
-  fv.innerHTML = sel.frozenHTML;
-  card.appendChild(fv);
-
-  // Disable interactive elements
-  card.querySelectorAll('.option-btn, .submit-btn, .mode-btn').forEach(el => {
-    el.style.pointerEvents = 'none'; el.style.opacity = '0.5';
-  });
-}
-
-// ============================================================
-// SECTION 1: AGE + HOME STATE
-// ============================================================
-let s1Selection = null;
-let s1StateSelection = null;
-
-// State tier assignments
-const stateTiers = {
-  // Large Swing +15
-  PA:'swing', MI:'swing', WI:'swing', AZ:'swing', GA:'swing', NV:'swing', NC:'swing',
-  // Large Safe +10
-  CA:'safe', TX:'safe', NY:'safe', FL:'safe', IL:'safe', OH:'safe',
-  // Mid-size +5
-  CO:'mid', VA:'mid', OR:'mid', WA:'mid', KY:'mid', IN:'mid',
-  TN:'mid', MO:'mid', MD:'mid', NJ:'mid', MA:'mid',
-  // Small -5
-  VT:'small', WY:'small', ND:'small', SD:'small', MT:'small', ID:'small',
-  AK:'small', HI:'small', RI:'small', DE:'small', NE:'small', UT:'small',
-  AR:'small', MS:'small', AL:'small', OK:'small', LA:'small', WV:'small',
-  KS:'small', MN:'small', NH:'small', ME:'small', IA:'small', NM:'small',
-  SC:'small', CT:'small'
-};
-
-const tierColors = { swing:'#2a6496', safe:'#5a8a5a', mid:'#8a7a3a', small:'#aaa' };
-const tierScores = { swing:15, safe:10, mid:5, small:-5 };
-const tierLabels = {
-  swing:'Large Swing State',
-  safe:'Large Safe State',
-  mid:'Mid-size State',
-  small:'Small State'
-};
-const tierReveal = {
-  swing: "You hail from a major battleground state. Those electoral votes are up for grabs and voters there will pay close attention to your campaign.",
-  safe: "You come from a large, powerful state. The name recognition and resources help, though your home state's electoral votes may already be spoken for.",
-  mid: "A solid mid-size state gives you a respectable base without making you a household name nationally.",
-  small: "Coming from a small state means fewer electoral votes at home base and less national name recognition right out of the gate."
-};
-
-// Full US state path data (simplified but accurate SVG paths)
 const statePaths = {
   AK: `M153.081,528.795L153.533,527.542L153.955,527.717ZM148.289,546.092L148.692,545.514L149.278,545.901L149.259,544.935L150.805,543.778L151.429,542.942L151.199,542.279L152.399,541.695L151.9,543.846L152.438,543.318L153.312,544.256L153.898,543.823L153.571,545.317L152.649,544.834L152.851,545.475L151.525,545.177L151.314,546.075L150.027,546.671ZM144.485,557.56L145.618,557.021L146.185,557.83L145.023,557.948ZM142.833,551.343L143.457,550.265L145.081,549.136L146.06,549.226L146.435,550.321L146.55,549.215L146.243,547.996L147.098,547.406L147.693,547.844L148.682,547.715L148.164,546.85L149.614,547.575L148.884,546.884L150.459,547.058L150.402,547.738L151.103,547.625L152.063,546.8L152.793,548.412L152.207,548.198L152.14,549.541L153.398,549.35L152.688,550.855L151.045,550.265L151.641,551.18L150.776,552.079L149.374,552.736L150.584,552.944L149.182,553.528L148.846,554.174L148.413,553.505L148.625,552.657L147.27,555.134L146.387,555.842L145.378,556.033L146.608,554.556L146.079,554.46L146.771,552.933L144.764,555.275L143.842,554.174L143.822,552.73L142.775,551.927ZM142.641,558.358L143.784,557.117L144.37,557.47L142.929,558.588ZM138.617,562.862L139.298,562.227L139.27,563.356ZM122.452,568.585L122.538,567.737L123.018,568.433ZM121.741,566.703L122.384,566.276L122.298,567.871L121.702,567.759ZM119.042,568.422L119.801,567.562L119.445,567.04L120.041,566.473L121.069,566.737L120.79,567.338ZM116.737,565.26L117.428,564.693L119.023,565.226L118.879,565.979L118.129,565.209L118.005,566.815L117.361,566.142L116.862,566.664ZM118.398,540.667L118.59,539.836L120.118,539.14L119.176,540.813ZM112.117,566.265L112.491,565.844L113.5,566.529L112.76,566.821ZM109.668,567.388L110.551,567.248L110.061,568.203ZM117.111,502.602L118.168,502.416L118.197,502.984ZM107.478,570.724L107.545,570.399L109.476,571.443L108.966,571.735ZM96.73,571.741L97.998,571.685L97.863,572.111ZM94.905,570.292L95.174,569.977L96.067,570.78L95.318,571.415ZM92.965,570.747L94.05,570.393L94.761,571.437L93.061,571.527ZM96.336,524.886L98.238,525.324L99.17,524.544L100.447,524.577L101.369,524.122L101.465,525.015L102.214,524.993L102.656,525.891L102.743,528.419L101.043,528.469L100.274,529.182L99.611,528.284L98.853,528.16L96.528,526.021ZM84.109,575.329L86.04,574.757L86.462,574.981L88.451,573.134L89.229,573.69L89.402,573.201L88.403,572.83L87.99,572.213L88.643,571.437L90.429,571.258L90.285,571.926L90.938,572.263L91.591,571.516L92.196,572.213L90.458,573.544L92.485,572.864L92.417,573.448L91.543,573.993L90.266,574.212L89.152,575.391L87.433,575.167L86.558,575.672L85.022,576.02ZM102.502,484.276L104.539,483.44L107.026,482.176L110.474,480.671L112.472,480.02L114.95,479.548L116.67,479.727L116.698,480.772L115.949,482.659L116.257,483.687L118.062,483.962L119.359,483.9L120.387,484.501L121.193,484.22L122.058,484.754L123.124,483.238L124.795,483.462L124.469,482.659L123.326,482.075L122.125,482.328L122.384,481.103L121.405,479.424L120.78,479.25L120.483,478.307L121.453,477.734L122.212,479.059L121.923,480.036L123.22,481.749L123.988,481.536L122.548,479.57L122.951,478.374L123.816,477.7L123.047,477.122L120.963,477.414L117.486,475.807L117.592,474.842L117.188,472.668L114.067,468.529L112.636,467.569L112.078,466.468L110.686,465.221L111.656,465.025L112.203,464.132L112.722,461.767L115.094,462.351L118.081,462.295L120.243,461.037L121.193,459.942L121.75,457.729L122.327,456.314L124.536,453.686L125.727,452.9L127.216,453.315L128.503,452.86L130.155,451.67L131.739,450.075L132.988,449.581L134.227,450.327L136.513,449.811L137.426,449.12L139.049,446.919L139.75,446.89L142.045,447.856L142.218,448.418L141.027,449.373L141.114,450.294L141.844,450.412L142.189,449.564L143.044,448.94L143.419,448.075L144.447,448.968L144.543,450.44L145.532,450.872L146.262,450.007L147.904,449.727L150.469,450.4L149.864,451.411L150.008,451.995L151.814,452.338L151.439,453.27L153.321,453.596L153.802,452.967L155.175,452.894L155.329,453.259L157.576,452.316L159.363,453.04L159.805,452.855L160.544,453.669L160.89,453.315L162.331,454.281L163.714,454.472L164.396,454.174L167.066,454.017L168.353,454.854L169.602,455.225L170.456,455.028L172.176,453.647L173.77,453.158L179.062,455.651L180.253,455.792L193.873,524.499L195.698,524.763L195.794,524.077L197.744,524.633L198.55,523.257L200.731,522.64L200.769,524.695L201.547,525.268L202.892,525.605L203.43,526.56L208.117,529.508L209.327,531.799L211.162,529.379L212.064,529.093L212.257,528.11L211.872,526.807L212.506,526.633L212.055,525.7L213.409,524.824L214.831,523.359L216.953,524.594L217.107,525.661L217.798,526.571L218.817,526.526L220.469,527.7L221.333,528.834L223.148,529.3L225.54,530.912L225.338,531.311L226.952,532.659L227.672,533.613L228.825,534.478L230.813,536.511L232.676,538.174L232.513,539.19L233.858,539.083L233.992,540.437L235.154,540.594L235.798,541.993L236.758,541.566L239.208,542.346L240.495,542.189L242.06,542.638L242.483,543.279L243.808,542.975L244.644,544.278L244.548,545.508L245.124,546.783L246.498,548.704L246.017,551.748L245.095,553.702L244.452,553.112L244.01,553.534L242.272,550.945L242.905,549.906L242.291,548.21L241.455,546.749L240.744,546.412L241.955,547.991L242.281,550.203L241.983,551.006L240.792,551.096L239.419,550.664L238.41,549.681L238.631,548.726L238.132,546.85L238.122,548.625L237.709,549.181L237.969,550.024L236.893,549.675L236.461,548.923L236.691,547.805L236.23,546.261L236.374,545.048L235.788,546.339L236.211,546.974L235.337,547.895L234.511,546.688L233.541,546.648L233.253,545.907L233.675,544.857L234.444,544.52L233.887,543.565L234.684,543.52L232.849,542.745L232.609,541.841L231.581,541.543L230.256,540.437L227.893,540.049L227.73,538.69L227.019,537.163L226.26,537.034L226.145,536.371L228.249,536.697L226.356,535.798L225.751,535.865L223.859,534.332L223.321,532.76L223.187,533.462L221.247,533.67L220.113,532.086L218.019,529.918L216.8,527.554L215.628,526.863L215.368,527.385L216.675,528.402L217.04,529.547L218.538,531.569L219.767,534.563L218.5,534.293L217.904,533.456L217.097,533.462L216.146,534.102L215.647,532.378L214.581,531.131L214.12,531.749L213.025,531.378L212.583,530.491L212.266,531.159L211.354,530.862L211.286,531.361L212.564,531.44L213.832,532.299L214.389,532.305L215.637,534.248L214.485,535.214L213.861,535.231L213.457,536.096L212.189,535.079L211.555,535.248L209.462,534.259L207.752,533.192L207.579,532.552L205.908,531.519L204.477,531.272L203.218,530.648L201.134,530.109L199.261,529.306L199.578,528.452L200.164,528.553L199.53,526.638L199.617,525.319L199.079,527.11L197.35,528.508L195.112,528.587L192.951,527.975L193.383,526.958L192.192,527.469L188.561,527.189L187.543,527.279L182.549,528.823L181.3,530.541L181.704,529.385L182.424,528.514L183.029,528.413L181.934,527.66L179.677,527.531L180.253,527.116L179.379,526.902L179.725,525.83L178.313,527.026L176.392,526.032L175.633,526.273L176.373,525.212L175.028,526.234L175.201,527.015L173.04,527.874L173.175,526.329L173.76,526.419L176.046,525.173L175.547,524.313L174.606,525.111L175.019,524.156L173.415,524.83L172.627,524.448L174.423,523.443L173.107,523.875L172.291,522.847L172.637,521.584L171.494,523.106L171.023,521.764L170.735,523.201L170.072,523.684L169.602,523.123L168.833,524.257L167.344,524.555L167.863,522.409L167.085,522.516L166.557,524.858L167.517,524.97L166.874,527.026L167.69,526.049L168.324,527.138L167.777,528.756L169.054,529.997L168.305,530.968L167.508,531.086L167.037,529.564L166.787,531.069L166.096,531.333L164.242,530.991L163.224,532.035L163.522,531.109L163.032,529.997L162.993,531.541L161.937,531.389L162.071,533.726L160.938,532.653L161.351,533.535L159.872,535.529L159.545,535.641L159.027,534.259L158.921,535.506L158.393,535.54L157.471,537.101L156.309,537.258L155.905,536.747L155.233,537.663L154.628,537.708L153.725,537.017L154.032,535.748L155.415,535.22L157.346,532.883L156.856,532.951L155.435,534.091L154.013,533.119L154.57,531.114L155.627,529.598L156.04,527.161L155.473,525.891L156.846,525.251L159.113,523.314L159.834,524.313L160.554,524.555L161.341,523.724L163.781,524.223L161.428,523.342L160.15,522.37L161.389,520.562L162.331,520.034L161.649,519.731L160.756,520.607L160.439,521.735L158.7,521.786L158.037,521.427L156.722,522.381L156.251,523.398L155.127,523.712L154.003,524.937L154.388,525.841L153.859,525.846L152.217,527.61L152.515,528.452L150.699,530.143L151.333,530.906L150.459,532.384L148.942,532.524L149.739,532.788L149.566,533.81L146.896,534.95L147.021,535.764L145.542,536.292L145.378,538.915L145.743,538.505L146.944,538.651L148.308,539.297L148.75,540.066L148.308,540.982L147.242,541.976L146.387,542.015L145.762,542.897L145.993,543.75L145.157,545.559L144.149,546.143L143.15,546.154L141.546,546.895L141.613,547.564L140.701,547.811L140.768,548.614L139.558,548.181L139.02,549.889L137.771,549.743L137.839,550.686L137.08,550.4L135.658,551.731L136.542,551.422L136.503,552.579L135.553,554.045L134.208,554.146L132.834,555.555L132.143,554.808L130.827,556.639L130.606,556.128L129.838,556.847L129.953,557.611L128.983,557.195L128.07,557.42L127.34,558.442L128.829,559.38L127.273,560.357L127.072,561.155L126.505,560.222L126.457,561.272L125.64,560.879L125.371,561.374L122.855,561.778L122.596,563.188L121.674,563.828L122.365,562.053L121.328,561.75L120.406,562.57L118.917,563.328L118.216,564.226L116.862,563.699L115.181,564.799L114.009,564.631L114.835,562.789L113.769,562.761L113.125,564.423L112.194,565.614L111.598,565.383L111.858,566.316L110.983,565.844L110.551,566.81L109.629,566.45L109.648,564.934L109.216,564.485L108.746,565.063L109.245,565.76L109.13,567.001L107.91,567.175L107.103,565.664L106.402,566.091L107.113,566.945L105.518,567.798L106.306,568.107L106.719,569.028L105.605,568.208L104.404,569.073L102.262,568.691L101.1,569.191L100.927,569.663L99.602,570.011L98.747,569.674L98.488,568.427L99.631,567.961L100.485,566.658L103.549,565.704L105.096,565.855L105.835,567.242L106.114,565.411L108.006,565.243L109.504,563.401L111.108,561.817L113.164,560.548L115.911,559.947L117.409,559.975L116.775,561.452L117.275,562.143L117.448,561.042L118.677,561.329L119.522,562.154L119.801,561.682L118.37,560.402L119.426,558.476L121.981,556.465L123.182,555.982L125.679,554.483L126.812,554.971L126.889,553.534L128.186,551.748L129.492,550.922L131.106,549.462L131.816,545.267L132.575,544.935L132.028,544.121L132.489,542.425L134.121,540.948L134.333,539.718L133.929,539.763L129.857,541.448L128.387,540.044L128.695,538.466L127.542,539.409L127.091,540.65L127.59,542.296L126.783,542.942L126.149,542.638L125.083,539.993L123.864,538.617L123.086,539.69L122.596,538.836L121.606,538.235L121.712,537.359L119.926,538.398L117.534,539.415L117.342,539.976L115.767,540.662L115.142,539.797L115.901,538.982L116.016,537.522L115.248,535.141L115.747,534.366L116.785,533.653L115.699,530.075L114.893,528.284L114.432,528.413L114.249,529.48L113.481,529.446L111.944,530.221L109.735,530.407L108.092,529.851L108.025,528.402L107.372,527.902L106.479,526.082L105.566,525.605L105.077,524.802L105.826,524.207L104.318,524.111L106.037,522.741L106.085,521.589L105.518,520.741L106.277,520.567L105.451,519.141L105.038,519.82L104.385,519.641L104.385,518.293L103.559,517.636L103.53,516.984L104.222,516.501L103.741,515.973L102.848,516.136L103.05,515.21L104.251,515.17L103.492,513.929L105.077,513.985L104.865,512.761L105.355,511.789L108.899,508.229L108.89,507.471L110.081,505.269L110.926,504.534L111.925,504.331L113.231,504.876L114.441,506.387L115.392,506.336L116.823,505.252L118.379,503.495L119.157,503.893L120.627,504.067L122.163,503.809L123.604,501.922L123.239,499.49L123.278,498.39L122.48,497.075L121.722,496.806L122.183,496.025L123.364,496.385L124.132,495.649L124.267,494.857L123.134,493.195L122.423,494.234L121.51,494.015L119.82,494.632L118.494,495.598L117.486,497.025L117.448,495.694L116.573,494.515L116.084,494.835L116.881,495.784L116.151,495.744L115.142,494.891L112.501,494.627L110.465,495.138L106.777,493.346L106.21,492.094L106.623,491.207L105.912,490.112L105.528,488.859L106.258,489.196L107.391,488.168L106.853,487.59L104.126,486.478L102.541,484.889ZM78.068,577.464L79.701,576.239L79.883,575.419L80.748,574.919L81.862,575.251L81.574,574.627L82.208,573.69L83.831,573.347L84.695,573.875L84.263,574.818L82.15,575.464L81.026,576.649L77.789,577.694ZM81.449,549.288L82.572,549.614L82.14,550.08ZM73.832,576.582L74.937,576.481L75.062,577.289L73.909,577.037ZM79.922,544.632L81.065,544.452L80.392,545.07ZM69.702,577.447L70.768,576.964L70.73,577.694L69.798,577.93ZM87.116,496.811L87.903,495.188L88.124,496.053L90.179,497.44L91.812,496.873L92.878,497.806L92.811,498.743L94.31,500.069L96.932,501.209L96.106,502.18L94.406,501.754L93.167,503.113L92.782,501.928L91.399,499.979L90.016,498.625L89.267,498.356L87.855,498.889L87.087,498.216ZM61.192,577.452L62.143,577.003L62.633,577.334L62.057,577.873ZM76.694,517.703L77.444,517.125L77.338,517.849L79.297,519.95L77.597,519.096ZM54.507,576.745L55.535,577.273L56.428,577.183L57.485,577.946L59.262,578.486L57.177,578.379L54.834,577.435ZM48.62,575.678L50.166,575.942L53.585,575.812L53.547,575.021L54.536,574.521L55.199,575.453L53.989,576.093L54.354,576.733L52.654,576.981L51.174,576.677ZM44.902,574.01L45.805,574.616L45.258,575.301L44.72,574.981ZM44.124,575.739L45.412,575.498L45.383,576.015L44.326,576.262ZM40.302,575.947L41.666,574.942L42.107,573.92L43.135,574.088L42.665,575.099L44,575.329L43.683,576.25L42.885,575.93L41.099,576.357ZM37.363,574.246L39.802,574.307L40.138,573.538L40.753,573.965L39.985,575.032L39.245,575.15L38.813,574.571ZM35.557,572.179L36.834,572.387L37.19,573.493L36.104,574.616L35.605,573.628L36.268,573.734ZM25.933,567.489L26.826,567.54L27.143,568.096L26.173,568.495ZM21.236,568.281L22.37,568.955L23.196,570.983L22.36,569.545ZM15.973,563.788L17.519,563.704L18.191,562.957L18.489,563.468L16.203,564.479ZM1.729,552.433L3.17,552.343L3.054,553.556ZM0,547.047L0.932,546.929L2.805,548.019L3.496,549.788L2.805,549.187L2.344,549.451L1.172,549.102L0.701,547.451ZM241.282,553.23L242.06,552.568L242.55,553.022L242.06,553.685ZM240.418,552.854L240.552,551.95L240.11,550.978L240.994,551.253L241.522,552.652ZM238.699,550.832L238.833,550.405L239.745,550.933L239.774,552.337ZM232.004,546.221L232.167,545.84L232.984,546.828ZM231.543,545.373L231.86,544.469L233.224,544.537L233.339,545.424L232.571,545.952ZM230.717,552.73L230.717,551.933L231.985,551.439L232.619,551.916L232.379,552.77L231.466,553.702L231.399,552.747ZM229.468,549.131L230.054,547.345L229.449,547.182L229.516,546.053L231.255,545.772L233.003,547.552L234.29,547.906L235.279,548.681L236.874,550.439L235.587,550.209L235.433,550.978L236.172,550.523L237.508,551.253L237.7,552.343L238.449,551.759L238.718,552.287L238.554,553.893L239.064,553.382L239.755,555.027L239.678,555.769L238.497,556.033L237.517,555.87L238.017,555.14L236.662,554.69L236.307,553.225L235.75,553.663L236.019,554.662L235.222,554.544L234.761,553.388L233.915,553.337L235.683,555.567L236.23,555.044L237.095,556.044L236.413,555.92L237.066,556.813L236.221,556.926L234.424,555.482L233.541,553.635L232.628,554.011L232.398,553.286L233.714,552.146L232.59,551.259L230.333,550.271L230.803,549.726L230.631,548.344L230.016,549.518ZM227.374,550.203L228.335,550.024L227.893,550.686ZM225.127,543.509L225.502,542.706L226.404,542.526L227.077,543.245L226.808,542.099L226.155,541.768L226.635,541.077L228.998,541.083L229.891,540.768L231.14,541.959L233.08,543.054L232.206,544.054L230.851,544.194L230.794,544.89L229.843,544.829L228.978,545.469L228.546,544.801L228.604,548.4L228.085,549.226L227.346,548.552L226.693,546.918L226.683,545.531L226.145,545.508ZM219.671,532.906L220.824,533.591L221.151,534.332L221.631,533.967L223.158,533.782L223.312,534.383L224.973,535.995L225.55,537.269L224.474,536.062L223.629,535.714L224.157,536.624L225.29,537.421L226.116,539.185L224.407,542.29L223.994,542.391L223.398,541.055L223.753,539.645L222.927,538.943L222.005,537.578L221.871,536.775L220.248,534.226ZM219.038,541.257L219.691,539.493L221.362,540.145L222.217,539.965L222.591,541.122L224.531,544.626L225.53,547.968L225.607,548.721L224.906,548.389L222.495,545.626L220.545,544.739L221.122,544.66L221.083,543.352L220.382,542.975L220.555,541.717L219.864,542.037ZM218.673,542.313L218.817,541.448L219.95,542.172L219.988,543.75L219.162,544.093L219.297,543.054ZM214.514,538.095L214.283,536.983L214.869,536.264L214.494,535.405L215.311,535.967L216.252,535.472L216.809,534.652L218.384,535.399L220.401,535.489L220.834,536.354L220.123,536.848L220.949,537.152L222.121,539.286L221.131,539.814L218.874,538.864L219.287,540.224L218.961,541.24L218.183,541.145L216.924,540.061L216.492,540.145L215.513,538.595ZM168.824,532.091L169.189,531.019L170.552,529.407L171.455,527.318L172.089,528.166L170.322,530.867L170.773,531.199ZM168.43,528.649L168.852,526.846L169.602,525.981L169.563,527.593L169.169,529.255Z`,
   AL: `M667.563,472.82L671.212,471.938L671.28,471.466L672.25,472.196L671.702,472.696L670.991,472.455L668.533,473.016ZM661.55,370.209L661.483,369.951L675.064,368.889L685.072,368.193L702.812,366.463L706.616,366.121L707.288,368.754L710.419,379.644L719.121,410.931L719.717,411.262L719.534,411.964L720.447,412.689L721.061,415.413L721.849,416.659L723.117,417.805L723.511,419.293L724.154,419.883L723.712,422.118L724.999,422.489L725.835,423.146L725.259,424.174L723.904,425.173L723.155,426.223L723.491,427.24L723.549,428.84L723.28,430.464L722.396,432.755L723.069,434.99L723.04,435.81L724.442,437.27L724.942,439.427L724.577,440.55L724.769,441.331L724.461,442.853L724.673,444.301L724.269,444.751L724.625,446.66L726.123,448.182L726.997,450.412L710.765,452.383L699.335,453.568L687.982,454.528L679.626,455.337L679.857,456.028L679.213,458.218L680.884,459.791L681.317,460.672L683.756,461.93L684.083,462.857L683.324,465.53L684.035,466.614L684.89,467.114L683.92,467.659L683.583,469.051L682.805,469.731L683.372,470.017L682.469,470.573L679.972,471.455L676.668,472.23L674.372,472.376L674.805,471.652L675.631,472.056L677.926,471.36L678.08,470.725L676.265,469.023L675.083,468.434L674.44,466.805L674.862,465.687L674.584,464.019L674.065,463.166L672.701,462.688L671.789,463.626L672,464.311L671.318,466.586L671.433,469.433L671.001,470.691L669.993,470.854L669.993,470.18L668.6,469.557L667.591,469.905L667.274,469.534L666.151,470.034L664.864,459.409L662.607,441.623L662.107,437.422L662.376,426.88L662.895,397.806L663.269,381.632L663.519,372.298L662.472,371.725Z`,
@@ -941,6 +567,148 @@ const stateLabels = {
   WY: [346,192],
 };
 
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  currentSection: 1,
+  scores: {},
+  selections: {},
+  totalScore: 0,
+  candidateName: '',
+  homeState: '',
+  sectionsComplete: new Set()
+};
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function goToSection(n) {
+  document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('final-section').classList.remove('active');
+  const card = document.getElementById(n === 'final' ? 'final-section' : 'section-' + n);
+  if (card) card.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const tab = document.querySelector(`.nav-tab[data-section="${n}"]`);
+  if (tab) tab.classList.add('active');
+  state.currentSection = n;
+  if (n === 8) updateS8Checklist();
+}
+
+// ============================================================
+// SCORE
+// ============================================================
+function addScore(points, sectionNum) {
+  state.totalScore += points;
+  state.scores[sectionNum] = (state.scores[sectionNum] || 0) + points;
+  animateScore();
+}
+
+function animateScore() {
+  const el = document.getElementById('score-value');
+  el.textContent = state.totalScore;
+  el.classList.remove('score-pop'); void el.offsetWidth; el.classList.add('score-pop');
+  const sb = document.getElementById('sidebar-score');
+  if (sb) { sb.textContent = state.totalScore; sb.classList.remove('score-pop'); void sb.offsetWidth; sb.classList.add('score-pop'); }
+  updateFigure();
+}
+
+function updateCandidateName(val) {
+  state.candidateName = val.trim();
+  const el = document.getElementById('sidebar-name');
+  if (el) el.textContent = state.candidateName || '';
+}
+
+// ============================================================
+// FIGURE SEGMENTS
+// ============================================================
+const sectionSegments = {
+  1: ['seg-feet-l','seg-feet-r'],
+  2: ['seg-leg-l','seg-leg-r'],
+  3: ['seg-torso'],
+  4: ['seg-arm-l','seg-arm-r','seg-cuff-l','seg-cuff-r'],
+  5: ['seg-shoulders'],
+  6: ['seg-head','seg-neck'],
+  7: ['seg-tie','seg-pin']
+};
+const segColor = '#c8a84b', segStroke = '#a07830';
+
+function lightSegment(n) {
+  (sectionSegments[n] || []).forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.setAttribute('fill', id === 'seg-pin' ? '#c03030' : segColor);
+    el.setAttribute('stroke', id === 'seg-pin' ? '#901010' : segStroke);
+    el.setAttribute('opacity','1');
+    el.classList.remove('seg-lit'); void el.offsetWidth; el.classList.add('seg-lit');
+  });
+}
+
+function updateFigure() {
+  document.getElementById('progress-label').textContent = state.sectionsComplete.size + ' / 7 sections';
+}
+
+function resetFigure() {
+  Object.values(sectionSegments).flat().forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('seg-lit');
+    el.setAttribute('fill', id === 'seg-pin' ? '#888' : '#ccc');
+    el.setAttribute('stroke', '#aaa'); el.setAttribute('opacity','0.25');
+  });
+}
+
+function markSectionDone(n) {
+  state.sectionsComplete.add(n);
+  const tab = document.querySelector(`.nav-tab[data-section="${n}"]`);
+  if (tab) tab.classList.add('done');
+  lightSegment(n); updateFigure();
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function coinFlipHTML(good, label) {
+  const sym = good ? '🦅' : '<span style="font-size:1.4em;font-weight:bold;color:#c00;line-height:60px;">✗</span>';
+  return `<div class="flip-container"><div class="coin">${sym}</div></div>
+  <div style="text-align:center;font-size:0.85em;color:#666;margin-bottom:8px;">${label}</div>`;
+}
+
+function comboRevealHTML(type, title, text, points) {
+  const cls = type === 'bonus' ? 'combo-bonus' : 'combo-penalty';
+  const sc = points > 0 ? 'score-pos' : 'score-neg';
+  return `<div class="combo-reveal show ${cls}">
+    <h4>${title}</h4>
+    <p style="font-size:0.9em;margin-bottom:6px;">${text}</p>
+    <div class="${sc}" style="font-weight:bold;font-size:1.1em;">${points > 0 ? '+' : ''}${points} points</div>
+  </div>`;
+}
+
+// ============================================================
+// MAP
+// ============================================================
+const stateTiers = {
+  PA:'swing',MI:'swing',WI:'swing',AZ:'swing',GA:'swing',NV:'swing',NC:'swing',
+  CA:'safe',TX:'safe',NY:'safe',FL:'safe',IL:'safe',OH:'safe',TN:'safe',
+  CO:'mid',VA:'mid',OR:'mid',WA:'mid',KY:'mid',IN:'mid',MO:'mid',MD:'mid',NJ:'mid',MA:'mid',
+  AL:'mid',LA:'mid',MN:'mid',SC:'mid',
+  VT:'small',WY:'small',ND:'small',SD:'small',MT:'small',ID:'small',
+  AK:'small',HI:'small',RI:'small',DE:'small',NE:'small',UT:'small',
+  AR:'small',MS:'small',OK:'small',WV:'small',KS:'small',NH:'small',
+  ME:'small',IA:'small',NM:'small',CT:'small'
+};
+const tierColors = { swing:'#2a6496', safe:'#5a8a5a', mid:'#8a7a3a', small:'#aaa' };
+const tierScores = { swing:15, safe:10, mid:5, small:-5 };
+const tierLabels = { swing:'Large Swing State', safe:'Large Safe State', mid:'Mid-size State', small:'Small State' };
+const tierReveal = {
+  swing: "You hail from a major battleground state. Those electoral votes are up for grabs, and voters there will pay close attention to your campaign.",
+  safe: "You come from a large, powerful state. The name recognition and resources help, though your home state's electoral votes may already be spoken for.",
+  mid: "A solid mid-size state gives you a respectable base without making you a household name nationally.",
+  small: "Coming from a small state means fewer electoral votes at home base and less national name recognition right out of the gate."
+};
+const superSwingStates = ['PA','GA','AZ'];
+
+
 function buildUSMap() {
   const svg = document.getElementById('us-map');
   if (!svg) return;
@@ -949,163 +717,149 @@ function buildUSMap() {
     const tier = stateTiers[abbr] || 'small';
     const color = tierColors[tier];
     const lp = stateLabels[abbr];
-    html += `<path id="state-${abbr}" d="${d}" fill="${color}" stroke="#fff" stroke-width="1"
-      opacity="0.75" style="cursor:pointer;transition:opacity 0.15s;"
-      onclick="selectState('${abbr}')" onmouseover="hoverState('${abbr}',true)" onmouseout="hoverState('${abbr}',false)"/>`;
-    if (lp) {
-      html += `<text x="${lp[0]}" y="${lp[1]}" font-size="9" fill="#fff" text-anchor="middle"
-        font-family="Arial,sans-serif" font-weight="bold" pointer-events="none"
-        style="text-shadow:0 1px 2px rgba(0,0,0,0.5)">${abbr}</text>`;
-    }
+    html += `<path id="state-${abbr}" d="${d}" fill="${color}" stroke="#fff" stroke-width="1" opacity="0.75" style="cursor:pointer;transition:opacity 0.15s;" onclick="selectState('${abbr}')" onmouseover="hoverState('${abbr}',true)" onmouseout="hoverState('${abbr}',false)"/>`;
+    if (lp) html += `<text x="${lp[0]}" y="${lp[1]}" font-size="9" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" pointer-events="none">${abbr}</text>`;
   }
   svg.innerHTML = html;
 }
 
 function hoverState(abbr, over) {
-  if (s1StateSelection === abbr) return;
-  const el = document.getElementById('state-' + abbr);
+  if (state.homeState === abbr) return;
+  const el = document.getElementById('state-'+abbr);
   if (el) el.setAttribute('opacity', over ? '1' : '0.75');
 }
 
+let s1StateSelection = null;
+
 function selectState(abbr) {
   if (state.sectionsComplete.has(1)) return;
-  // Deselect previous
   if (s1StateSelection) {
-    const prev = document.getElementById('state-' + s1StateSelection);
-    if (prev) {
-      prev.setAttribute('opacity', '0.75');
-      prev.setAttribute('stroke', '#fff');
-      prev.setAttribute('stroke-width', '1.5');
-    }
+    const prev = document.getElementById('state-'+s1StateSelection);
+    if (prev) { prev.setAttribute('opacity','0.75'); prev.setAttribute('stroke','#fff'); prev.setAttribute('stroke-width','1'); }
   }
   s1StateSelection = abbr;
-  const el = document.getElementById('state-' + abbr);
-  if (el) {
-    el.setAttribute('opacity', '1');
-    el.setAttribute('stroke', '#1a1a1a');
-    el.setAttribute('stroke-width', '3');
-  }
+  const el = document.getElementById('state-'+abbr);
+  if (el) { el.setAttribute('opacity','1'); el.setAttribute('stroke','#1a1a1a'); el.setAttribute('stroke-width','3'); }
   const tier = stateTiers[abbr];
-  const display = document.getElementById('state-selected-display');
-  if (display) display.innerHTML = `<strong style="color:#1a2a4a">${abbr}</strong> <span style="color:#666">(${tierLabels[tier]})</span>`;
+  document.getElementById('state-selected-display').innerHTML =
+    `<strong style="color:#1a2a4a">${abbr}</strong> <span style="color:#666">(${tierLabels[tier]})</span>`;
   checkS1Ready();
 }
 
+// ============================================================
+// SECTION 1
+// ============================================================
+let s1AgeSelection = null;
+
 function checkS1Ready() {
-  document.getElementById('s1-submit').disabled = !(s1Selection && s1StateSelection);
+  document.getElementById('s1-submit').disabled = !(s1AgeSelection && s1StateSelection);
 }
 
 function selectS1(el) {
   if (state.sectionsComplete.has(1)) return;
   document.querySelectorAll('#s1-options .option-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
-  s1Selection = el.dataset.key;
+  s1AgeSelection = el.dataset.key;
   checkS1Ready();
 }
 
 function submitS1() {
-  if (!s1Selection || !s1StateSelection || state.sectionsComplete.has(1)) return;
-  const reveals = {
-    '35': [
-      { prob: 0.25, text: 'Your youth is exactly what voters want right now.', score: 85 },
-      { prob: 0.75, text: 'You are seen as <em>just too young</em> by the voters.', score: 25 }
-    ],
-    '45': [
-      { prob: 0.5, text: 'Your youth is exactly what voters want right now.', score: 80 },
-      { prob: 0.5, text: 'You are seen as a little light on experience for some voters.', score: 45 }
-    ],
-    '55': [{ prob: 1, text: 'Definitely a safe bet to run a candidate in this age range.', score: 75 }],
-    '65': [
-      { prob: 0.5, text: 'You are seen as stately and experienced. You might be a little old, but voters trust you.', score: 60 },
-      { prob: 0.5, text: "You're being painted as past your prime. The voters want a fresh face.", score: 20 }
-    ],
-    '75': [{ prob: 1, text: 'Many voters see you as way too old and campaigning is taking its toll on your health.', score: 5 }]
+  if (!s1AgeSelection || !s1StateSelection || state.sectionsComplete.has(1)) return;
+  const ageData = {
+    '35': { opts: [{p:0.25,text:"Your youth is exactly what voters want right now.",s:85},{p:0.75,text:"You are seen as just too young by the voters.",s:25}], label:'35-44' },
+    '45': { opts: [{p:0.5,text:"Your youth is exactly what voters want right now.",s:80},{p:0.5,text:"You are seen as a little light on experience for some voters.",s:45}], label:'45-54' },
+    '55': { opts: [{p:1,text:"Definitely a safe bet to run a candidate in this age range.",s:75}], label:'55-64' },
+    '65': { opts: [{p:0.5,text:"You are seen as stately and experienced. You might be a little old, but voters trust you.",s:60},{p:0.5,text:"You are being painted as past your prime. The voters want a fresh face.",s:20}], label:'65-74' },
+    '75': { opts: [{p:1,text:"Many voters see you as way too old, and campaigning is taking its toll on your health.",s:5}], label:'75+' }
   };
-
-  const options = reveals[s1Selection];
+  const ad = ageData[s1AgeSelection];
   let ageResult;
-  if (options.length === 1) {
-    ageResult = options[0];
-  } else {
-    const r = Math.random();
-    let cumulative = 0;
-    for (const o of options) {
-      cumulative += o.prob;
-      if (r < cumulative) { ageResult = o; break; }
-    }
-  }
+  if (ad.opts.length === 1) { ageResult = ad.opts[0]; }
+  else { const r = Math.random(); let c = 0; for (const o of ad.opts) { c += o.p; if (r < c) { ageResult = o; break; } } }
+  const needsFlip = ad.opts.length > 1;
 
-  const needsFlip = options.length > 1;
-  const ageLabels = { '35':'35-44','45':'45-54','55':'55-64','65':'65-74','75':'75+' };
-  const ageLabel = ageLabels[s1Selection];
-
-  // State result
   const stateTier = stateTiers[s1StateSelection];
   const stateScore = tierScores[stateTier];
-  const stateText = tierReveal[stateTier];
+  const isSuper = superSwingStates.includes(s1StateSelection);
+  const swingBonus = isSuper ? 20 : 0;
 
-  const revealEl = document.getElementById('s1-reveal');
-  revealEl.innerHTML = `
-    <h3>Section 1 Results</h3>
-    ${needsFlip ? coinFlipHTML(ageResult.score >= 60, ageResult.score >= 60 ? 'Lucky!' : 'Unlucky...') : ''}
+  let html = `<h3>Section 1 Results</h3>
+    ${needsFlip ? coinFlipHTML(ageResult.s >= 60, ageResult.s >= 60 ? 'Lucky!' : 'Unlucky...') : ''}
     <div class="reveal-item">
-      <div class="reveal-label">Age: ${ageLabel}</div>
+      <div class="reveal-label">Age: ${ad.label}</div>
       <div class="reveal-text">${ageResult.text}</div>
-      <div class="reveal-score score-pos score-pop">+${ageResult.score} points</div>
+      <div class="reveal-score score-pos score-pop">+${ageResult.s} points</div>
     </div>
     <div class="reveal-item">
       <div class="reveal-label">Home State: ${s1StateSelection} (${tierLabels[stateTier]})</div>
-      <div class="reveal-text">${stateText}</div>
+      <div class="reveal-text">${tierReveal[stateTier]}</div>
       <div class="reveal-score ${stateScore >= 0 ? 'score-pos' : 'score-neg'} score-pop">${stateScore >= 0 ? '+' : ''}${stateScore} points</div>
-    </div>
-    <div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: +${ageResult.score + stateScore}</div>`;
-  revealEl.classList.add('show');
+    </div>`;
+  if (isSuper) {
+    html += comboRevealHTML('bonus', 'Super Swing State Bonus!',
+      `${s1StateSelection} is one of the most important swing states in the entire electoral college. The last few presidential elections have come down to a few hundred thousand votes in states like this one.`, 20);
+  }
+  html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: +${ageResult.s + stateScore + swingBonus}</div>`;
 
-  addScore(ageResult.score, 1);
-  addScore(stateScore, 1);
+  const revealEl = document.getElementById('s1-reveal');
+  revealEl.innerHTML = html; revealEl.classList.add('show');
+  addScore(ageResult.s, 1); addScore(stateScore, 1);
+  if (swingBonus) addScore(swingBonus, 1);
   state.homeState = s1StateSelection;
   markSectionDone(1);
   document.getElementById('s1-submit').disabled = true;
-
   state.selections[1] = {
-    frozenHTML: `<div class="frozen-selection">Age: ${ageLabel} | Home State: ${s1StateSelection}</div>
-    <div class="frozen-reveal">${ageResult.text}</div>
-    <div class="frozen-reveal">${stateText}</div>
-    <div class="frozen-score score-pos">Section total: ${ageResult.score + stateScore >= 0 ? '+' : ''}${ageResult.score + stateScore}</div>`
+    ageKey: s1AgeSelection, ageLabel: ad.label, ageText: ageResult.text, ageScore: ageResult.s,
+    stateAbbr: s1StateSelection, stateTier, stateScore, swingBonus,
+    frozenHTML: `<div class="frozen-selection">Age: ${ad.label} | Home State: ${s1StateSelection}</div>
+      <div class="frozen-reveal">${ageResult.text}</div>
+      <div class="frozen-reveal">${tierReveal[stateTier]}</div>
+      ${isSuper ? '<div class="frozen-reveal" style="color:#2a7a2a;font-weight:bold;">Super Swing State Bonus: +20</div>' : ''}
+      <div class="frozen-score score-pos">Section total: +${ageResult.s + stateScore + swingBonus}</div>`
   };
 }
-
-// Build map on page load
-document.addEventListener('DOMContentLoaded', buildUSMap);
 
 // ============================================================
 // SECTION 2: BIOGRAPHY
 // ============================================================
 let s2Selections = [];
-
 const s2Data = {
-  law: { label: 'Law School', text: 'Many presidents have had a background in law and knowledge of the law is pretty important, but lawyers aren\'t exactly popular.', score: 40 },
-  biz: { label: 'Business School', text: 'You did great at a fancy business school but voters care more about real world success.', score: 35 },
-  ivy: { label: 'Ivy Leaguer', text: "Graduating from Harvard shows you're smart and you work hard, but you might also seem nerdy or stuck up to the average voter it's a mixed bag.", score: 35 },
-  entrepreneur: { label: 'Entrepreneur', text: "Voters love a success story and trust business leaders on economic issues but your lack of a formal education might concern some voters.", score: 45 },
-  military: { label: 'Military Service', text: 'The majority of US presidents have had some military experience and voters love veterans this is a major asset.', score: 50 },
-  medical: { label: 'Medical Background', text: 'Healthcare is a <em>huge</em> issue in America and doctors are <em>highly</em> trusted by the voters.', score: 45 },
-  educator: { label: 'Educator', text: "Teachers are pretty trusted and popular in the US, not to mention education is an important issue, but should a teacher really run the country?", score: 40 },
-  pubservice: { label: 'Public Service', text: 'Working for the Foreign Service or AmeriCorps is pretty awesome, but <em>most voters don\'t actually know what that means.</em>', score: 35 },
-  farmer: { label: 'Farmer / Rancher / Fisherman', text: "Proving you understand the 'working man' and know about our natural resources is a huge benefit.", score: 45 },
-  family: { label: 'Powerful Family', text: "People <em>say</em> they don't like Nepo-babies, but some of our most popular presidents have come from rich and powerful families.", score: 40 }
+  law:         { label:'Law School',              score:40, text:"Many presidents have had a background in law, and knowledge of the law is pretty important, but lawyers are not exactly popular.", bio:"law" },
+  biz:         { label:'Business School',         score:35, text:"You did great at a fancy business school, but voters care more about real world success.", bio:"business" },
+  ivy:         { label:'Ivy Leaguer',             score:35, text:"Graduating from Harvard shows you are smart and you work hard, but you might also seem nerdy or stuck up to the average voter. It is a mixed bag.", bio:"an Ivy League education" },
+  entrepreneur:{ label:'Entrepreneur',            score:45, text:"Voters love a success story and trust business leaders on economic issues, but your lack of a formal education might concern some voters.", bio:"entrepreneurship" },
+  military:    { label:'Military Service',        score:50, text:"The majority of US presidents have had some military experience, and voters love veterans. This is a major asset.", bio:"military service" },
+  medical:     { label:'Medical Background',      score:45, text:"Healthcare is a huge issue in America, and doctors are highly trusted by the voters.", bio:"medicine" },
+  educator:    { label:'Educator',                score:40, text:"Teachers are pretty trusted and popular in the US. Not to mention education is an important issue, but should a teacher really run the country?", bio:"education" },
+  media:       { label:'Media Figure',            score:45, text:"Voters recognize your face, but will they take you seriously?", bio:"media" },
+  farmer:      { label:'Farmer / Rancher / Fisherman', score:45, text:"Proving you understand the working man and know about our natural resources is a huge benefit.", bio:"agriculture" },
+  family:      { label:'Powerful Family',         score:40, text:"People say they do not like Nepo-babies, but some of our most popular presidents have come from rich and powerful families.", bio:"a privileged upbringing" }
 };
+
+const bioCombos = {
+  'ivy+farmer':        "an Ivy League education and roots in agriculture",
+  'family+entrepreneur': "a privileged upbringing that they parlayed into entrepreneurship",
+  'family+farmer':     "a privileged upbringing with deep roots in agriculture",
+  'ivy+entrepreneur':  "an Ivy League education and entrepreneurship",
+  'biz+farmer':        "business and agriculture",
+  'law+farmer':        "law and agriculture",
+  'media+farmer':      "media and agriculture",
+};
+
+function getBioText(keys) {
+  const sorted = [...keys].sort().join('+');
+  if (bioCombos[sorted]) return bioCombos[sorted];
+  return keys.map(k => s2Data[k].bio).join(' and ');
+}
 
 function selectS2(el) {
   if (state.sectionsComplete.has(2)) return;
   const key = el.dataset.key;
   if (el.classList.contains('selected')) {
-    el.classList.remove('selected');
-    s2Selections = s2Selections.filter(k => k !== key);
+    el.classList.remove('selected'); s2Selections = s2Selections.filter(k => k !== key);
   } else {
     if (s2Selections.length >= 2) return;
-    el.classList.add('selected');
-    s2Selections.push(key);
+    el.classList.add('selected'); s2Selections.push(key);
   }
   document.getElementById('s2-submit').disabled = s2Selections.length !== 2;
 }
@@ -1114,268 +868,211 @@ function submitS2() {
   if (s2Selections.length !== 2 || state.sectionsComplete.has(2)) return;
   let html = '<h3>Biography Results</h3>';
   let total = 0;
-  let frozenHTML = '<div class="frozen-selection">Selected:</div>';
-
   for (const key of s2Selections) {
     const d = s2Data[key];
-    html += `<div class="reveal-item">
-      <div class="reveal-label">${d.label}</div>
-      <div class="reveal-text">${d.text}</div>
-      <div class="reveal-score score-pos score-pop">+${d.score} points</div>
-    </div>`;
-    frozenHTML += `<div class="frozen-reveal"><strong>${d.label}:</strong> ${d.text} <span class="score-pos">+${d.score}</span></div>`;
-    total += d.score;
-    addScore(d.score, 2);
+    html += `<div class="reveal-item"><div class="reveal-label">${d.label}</div><div class="reveal-text">${d.text}</div><div class="reveal-score score-pos score-pop">+${d.score} points</div></div>`;
+    total += d.score; addScore(d.score, 2);
   }
-
+  // Elitist penalty
+  let elitistPenalty = 0;
+  if (s2Selections.includes('ivy') && s2Selections.includes('family')) {
+    elitistPenalty = -15;
+    html += comboRevealHTML('penalty','Elitist Penalty!',
+      'You come from a powerful family AND went to an elite university. You are seen by many as an out-of-touch elite.', -15);
+    addScore(-15, 2); total -= 15;
+  }
   html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: +${total}</div>`;
-  frozenHTML += `<div class="frozen-score score-pos">Total: +${total}</div>`;
-
   const revealEl = document.getElementById('s2-reveal');
-  revealEl.innerHTML = html;
-  revealEl.classList.add('show');
+  revealEl.innerHTML = html; revealEl.classList.add('show');
   markSectionDone(2);
   document.getElementById('s2-submit').disabled = true;
-  state.selections[2] = { frozenHTML };
+  state.selections[2] = { keys: [...s2Selections], total,
+    frozenHTML: `<div class="frozen-selection">Selected: ${s2Selections.map(k=>s2Data[k].label).join(', ')}</div>
+      ${s2Selections.map(k=>`<div class="frozen-reveal"><strong>${s2Data[k].label}:</strong> ${s2Data[k].text} <span class="score-pos">+${s2Data[k].score}</span></div>`).join('')}
+      ${elitistPenalty ? '<div class="frozen-reveal" style="color:#c00">Elitist Penalty: -15</div>' : ''}
+      <div class="frozen-score score-pos">Total: +${total}</div>`
+  };
+  checkCrossSectionCombos(2);
 }
 
 // ============================================================
-// SECTION 3: EXPERIENCE
+// SECTION 3: PERSONALITY
 // ============================================================
-let s3Mode = 'two'; // 'two' or 'double'
 let s3Selections = [];
+const s3Data = {
+  communicator: { label:'Great Communicator', score:45, text:"Being a great communicator is a huge part of the job of being president, but being a slick talker might make you seem like just another politician.", bio:"a gifted communicator" },
+  telegenic:    { label:'Telegenic',           score:40, text:"The American people love a president who looks the part — think JFK — but looks are not everything.", bio:"a natural on camera" },
+  character:    { label:'High Character',      score:30, text:"Voters appreciate your honesty and integrity, but in a cutthroat political world, being the good guy only goes so far.", bio:"a person of genuine integrity" },
+  relatable:    { label:'Down to Earth / Relatable', score:50, text:"Authenticity is everything. Voters hate politicians and want to vote for someone who understands people like them.", bio:"remarkably down to earth" },
+  intelligence: { label:'Intelligence',        score:35, text:"Smarts are valuable, but you might sound condescending or professorial to the average voter.", bio:"one of the sharpest minds in the race" }
+};
+const s3Combos = {
+  'communicator+relatable': { type:'bonus', title:'Generational Talent Bonus!', text:'You are a great speaker AND you are relatable, a powerful combination that makes you a rare talent even among politicians. Think Ronald Reagan or Barack Obama.', points:20, bioOverride:"a gifted communicator who is remarkably down to earth" },
+  'communicator+telegenic': { type:'penalty', title:'Slick Politician Penalty!', text:"You are a talker and you look good on screen, maybe a little too good. You give off slick politician vibes and you just do not seem real. Think Gavin Newsom or Mitt Romney.", points:-20 },
+  'character+intelligence': { type:'penalty', title:'Weak Leader Penalty!', text:"Politics is a cut-throat game and your combo of smarts and honesty makes you seem like a pushover. Voters want a strong leader, not just a good guy. Think Jimmy Carter or Al Gore.", points:-20 }
+};
 
-function setS3Mode(mode) {
-  if (state.sectionsComplete.has(3)) return;
-  s3Mode = mode;
-  document.getElementById('s3-mode-two').classList.toggle('active', mode === 'two');
-  document.getElementById('s3-mode-double').classList.toggle('active', mode === 'double');
-  // Reset selections on mode change
-  s3Selections = [];
-  document.querySelectorAll('#s3-options .option-btn').forEach(b => {
-    b.classList.remove('selected', 'doubled');
-    const badge = b.querySelector('.double-badge');
-    if (badge) badge.remove();
-  });
-  document.getElementById('s3-submit').disabled = true;
+function getS3ComboKey(keys) {
+  return s3Combos[[...keys].sort().join('+')] || null;
 }
 
 function selectS3(el) {
   if (state.sectionsComplete.has(3)) return;
   const key = el.dataset.key;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected'); s3Selections = s3Selections.filter(k => k !== key);
+  } else {
+    if (s3Selections.length >= 2) return;
+    el.classList.add('selected'); s3Selections.push(key);
+  }
+  document.getElementById('s3-submit').disabled = s3Selections.length !== 2;
+}
 
-  if (s3Mode === 'double') {
-    // Select or deselect single option for doubling
-    document.querySelectorAll('#s3-options .option-btn').forEach(b => {
-      b.classList.remove('selected', 'doubled');
-      const badge = b.querySelector('.double-badge');
-      if (badge) badge.remove();
+function submitS3() {
+  if (s3Selections.length !== 2 || state.sectionsComplete.has(3)) return;
+  let html = '<h3>Personality Trait Results</h3>';
+  let total = 0;
+  for (const key of s3Selections) {
+    const d = s3Data[key];
+    html += `<div class="reveal-item"><div class="reveal-label">${d.label}</div><div class="reveal-text">${d.text}</div><div class="reveal-score score-pos score-pop">+${d.score} points</div></div>`;
+    addScore(d.score, 3); total += d.score;
+  }
+  const combo = getS3ComboKey(s3Selections);
+  if (combo) {
+    html += comboRevealHTML(combo.type, combo.title, combo.text, combo.points);
+    addScore(combo.points, 3); total += combo.points;
+  }
+  html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: ${total >= 0 ? '+' : ''}${total}</div>`;
+  const revealEl = document.getElementById('s3-reveal');
+  revealEl.innerHTML = html; revealEl.classList.add('show');
+  markSectionDone(3);
+  document.getElementById('s3-submit').disabled = true;
+  state.selections[3] = { keys: [...s3Selections], combo, total,
+    frozenHTML: `<div class="frozen-selection">Selected: ${s3Selections.map(k=>s3Data[k].label).join(', ')}</div>
+      ${s3Selections.map(k=>`<div class="frozen-reveal"><strong>${s3Data[k].label}:</strong> ${s3Data[k].text} <span class="score-pos">+${s3Data[k].score}</span></div>`).join('')}
+      ${combo ? `<div class="frozen-reveal" style="color:${combo.type==='bonus'?'#2a7a2a':'#c00'}">${combo.title} ${combo.points > 0 ? '+' : ''}${combo.points}</div>` : ''}
+      <div class="frozen-score ${total>=0?'score-pos':'score-neg'}">Total: ${total>=0?'+':''}${total}</div>`
+  };
+  checkCrossSectionCombos(3);
+}
+
+// ============================================================
+// SECTION 4: POLITICAL EXPERIENCE
+// ============================================================
+let s4expMode = 'two';
+let s4expSelections = [];
+
+function setS4Mode(mode) {
+  if (state.sectionsComplete.has(4)) return;
+  s4expMode = mode;
+  document.getElementById('s4-mode-two').classList.toggle('active', mode === 'two');
+  document.getElementById('s4-mode-double').classList.toggle('active', mode === 'double');
+  s4expSelections = [];
+  document.querySelectorAll('#s4-options .option-btn').forEach(b => {
+    b.classList.remove('selected','doubled');
+    const badge = b.querySelector('.double-badge'); if (badge) badge.remove();
+  });
+  document.getElementById('s4exp-submit').disabled = true;
+}
+
+function selectS4exp(el) {
+  if (state.sectionsComplete.has(4)) return;
+  const key = el.dataset.key;
+  if (s4expMode === 'double') {
+    document.querySelectorAll('#s4-options .option-btn').forEach(b => {
+      b.classList.remove('selected','doubled');
+      const badge = b.querySelector('.double-badge'); if (badge) badge.remove();
     });
-    if (s3Selections[0] === key) {
-      s3Selections = [];
-      document.getElementById('s3-submit').disabled = true;
-    } else {
+    if (s4expSelections[0] === key) { s4expSelections = []; document.getElementById('s4exp-submit').disabled = true; }
+    else {
       el.classList.add('doubled');
-      const badge = document.createElement('div');
-      badge.className = 'double-badge';
-      badge.textContent = 'DOUBLED';
-      el.appendChild(badge);
-      s3Selections = [key];
-      document.getElementById('s3-submit').disabled = false;
+      const badge = document.createElement('div'); badge.className = 'double-badge'; badge.textContent = 'DOUBLED'; el.appendChild(badge);
+      s4expSelections = [key]; document.getElementById('s4exp-submit').disabled = false;
     }
   } else {
-    // Pick two different
-    if (el.classList.contains('selected')) {
-      el.classList.remove('selected');
-      s3Selections = s3Selections.filter(k => k !== key);
-    } else {
-      if (s3Selections.length >= 2) return;
-      el.classList.add('selected');
-      s3Selections.push(key);
-    }
-    document.getElementById('s3-submit').disabled = s3Selections.length !== 2;
+    if (el.classList.contains('selected')) { el.classList.remove('selected'); s4expSelections = s4expSelections.filter(k => k !== key); }
+    else { if (s4expSelections.length >= 2) return; el.classList.add('selected'); s4expSelections.push(key); }
+    document.getElementById('s4exp-submit').disabled = s4expSelections.length !== 2;
   }
 }
 
-function getS3Result(key, doubled) {
+const s4Labels = { vp:'Vice President', gov:'Governor', senator:'Senator', rep:'House Representative', sos:'Secretary of State', cabinet:'Cabinet Member', outsider:'Total Outsider' };
+const s4BioPhrases = {
+  vp: { single:'Vice President of the United States', doubled:'a two-term Vice President of the United States' },
+  gov: { single:'state Governor', doubled:'a two-term Governor' },
+  senator: { single:'United States Senator', doubled:'a long-serving United States Senator' },
+  rep: { single:'member of the House of Representatives', doubled:'a senior member of the House of Representatives' },
+  sos: { single:'Secretary of State', doubled:'Secretary of State' },
+  cabinet: { single:'member of the President\'s Cabinet', doubled:'a long-serving member of the President\'s Cabinet' },
+  outsider: { single:'a political outsider with no elected experience', doubled:'a true outsider who has never held elected office' }
+};
+
+function getS4expResult(key, doubled) {
   const r = Math.random();
   switch(key) {
     case 'vp':
-      if (doubled) {
-        // No bad outcome; 2/5 great, 3/5 okay
-        if (r < 0.4) return { text: "You were V.P. for 8 years, your administration was popular and you can take credit for some of the accomplishments.", score: 90, good: true };
-        else return { text: "You were V.P. for a fairly popular president but some voters are ready for a change.", score: 45, good: null };
-      } else {
-        if (r < 1/3) return { text: "You were V.P. to an unpopular president and now you have to run from his record. You thought this was your path to the presidency now you're going down with the ship!", score: 10, good: false };
-        else if (r < 2/3) return { text: "You were V.P. for 8 years, your administration was popular and you can take credit for some of the accomplishments.", score: 90, good: true };
-        else return { text: "You were V.P. for a fairly popular president but some voters are ready for a change.", score: 45, good: null };
-      }
+      if (doubled) return r < 0.4 ? {text:"You were V.P. for 8 years, your administration was popular, and you can take credit for some of the accomplishments.",s:90,good:true} : {text:"You were V.P. for a fairly popular president, but some voters are ready for a change.",s:45,good:null};
+      if (r < 1/3) return {text:"You were V.P. to an unpopular president and now you have to run from his record. You thought this was your path to the presidency, now you are going down with the ship!",s:10,good:false};
+      if (r < 2/3) return {text:"You were V.P. for 8 years, your administration was popular, and you can take credit for some of the accomplishments.",s:90,good:true};
+      return {text:"You were V.P. for a fairly popular president, but some voters are ready for a change.",s:45,good:null};
     case 'gov':
-      if (doubled) {
-        if (r < 0.4) return { text: "You were governor of a large state, with a good reputation and a lot of electoral votes.", score: 90, good: true };
-        else return { text: "You were governor of a fairly large state. Voters from your state have a positive view of you but most voters aren't very familiar with you.", score: 45, good: null };
-      } else {
-        if (r < 0.2) return { text: "You were governor of a small state that is seen as poorly run.", score: 10, good: false };
-        else if (r < 0.4) return { text: "You were governor of a large state, with a good reputation and a lot of electoral votes.", score: 90, good: true };
-        else return { text: "You were governor of a fairly large state. Voters from your state have a positive view of you but most voters aren't very familiar with you.", score: 45, good: null };
-      }
+      if (doubled) return r < 0.4 ? {text:"You were governor of a large state, with a good reputation and a lot of electoral votes.",s:90,good:true} : {text:"You were governor of a fairly large state. Voters from your state have a positive view of you, but most voters are not very familiar with you.",s:45,good:null};
+      if (r < 0.2) return {text:"You were governor of a small state that is seen as poorly run.",s:10,good:false};
+      if (r < 0.4) return {text:"You were governor of a large state, with a good reputation and a lot of electoral votes.",s:90,good:true};
+      return {text:"You were governor of a fairly large state. Voters from your state have a positive view of you, but most voters are not very familiar with you.",s:45,good:null};
     case 'senator':
-      if (doubled) return { text: "You were a 'lion of the Senate' you served on the most important committees, got major legislation passed and held serious hearings.", score: 85, good: true };
-      if (r < 0.5) return { text: "You were a 'lion of the Senate' you served on the most important committees, got major legislation passed and held serious hearings.", score: 85, good: true };
-      else return { text: "You were a junior senator, you worked on some important bills but nothing major. Luckily, you don't have a long voting record that can be used against you.", score: 40, good: null };
+      if (doubled) return {text:"You were a lion of the Senate. You served on the most important committees, got major legislation passed, and held serious hearings.",s:85,good:true};
+      return r < 0.5 ? {text:"You were a lion of the Senate. You served on the most important committees, got major legislation passed, and held serious hearings.",s:85,good:true} : {text:"You were a junior senator. You worked on some important bills, but nothing major. Luckily, you do not have a long voting record that can be used against you.",s:40,good:null};
     case 'rep':
-      if (doubled) return { text: "You held leadership positions in the House and got major legislation passed. Voters recognize your name and you can point to ways that you delivered for them.", score: 65, good: true };
-      if (r < 0.5) return { text: "You held leadership positions in the House and got major legislation passed. Voters recognize your name and you can point to ways that you delivered for them.", score: 65, good: true };
-      else return { text: "You were in Congress for a <em>long</em> time and have a long voting record that can be used against you. To many voters you're just another politician you're part of the problem.", score: 10, good: false };
+      if (doubled) return {text:"You held leadership positions in the House and got major legislation passed. Voters recognize your name and you can point to ways that you delivered for them.",s:65,good:true};
+      return r < 0.5 ? {text:"You held leadership positions in the House and got major legislation passed. Voters recognize your name and you can point to ways that you delivered for them.",s:65,good:true} : {text:"You were in Congress for a long time and have a long voting record that can be used against you. To many voters, you are just another politician. You are part of the problem.",s:10,good:false};
     case 'sos':
-      return { text: "It's not the early 1800s anymore and it's been a loooong time since this pathway to the presidency worked out.", score: doubled ? 30 : 15, good: null };
+      return {text:"It is not the early 1800s anymore, and it has been a loooong time since this pathway to the presidency worked out.",s:doubled?30:15,good:null};
     case 'cabinet':
-      return { text: "It's been almost 100 years since the last time a member of the cabinet became president and he (Herbert Hoover) wasn't exactly popular in the end.", score: doubled ? 20 : 10, good: null };
+      return {text:"It has been almost 100 years since the last time a member of the cabinet became president, and he (Herbert Hoover) was not exactly popular in the end.",s:doubled?20:10,good:null};
     case 'outsider':
-      if (doubled) {
-        if (r < 0.4) return { text: "You can run as the solution to politics as usual you are radical change the voters are looking for.", score: 90, good: true };
-        else return { text: "You are seen as too inexperienced and not a serious option for the presidency.", score: 10, good: false };
-      } else {
-        if (r < 0.2) return { text: "You can run as the solution to politics as usual you are radical change the voters are looking for.", score: 90, good: true };
-        else return { text: "You are seen as too inexperienced and not a serious option for the presidency.", score: 10, good: false };
-      }
+      if (doubled) return r < 0.4 ? {text:"You can run as the solution to politics as usual. You are radical change that the voters are looking for.",s:90,good:true} : {text:"You are seen as too inexperienced and not a serious option for the presidency.",s:10,good:false};
+      return r < 0.2 ? {text:"You can run as the solution to politics as usual. You are radical change that the voters are looking for.",s:90,good:true} : {text:"You are seen as too inexperienced and not a serious option for the presidency.",s:10,good:false};
   }
 }
 
-const s3Labels = { vp:'Vice President', gov:'Governor', senator:'Senator', rep:'House Representative', sos:'Secretary of State', cabinet:'Cabinet Member', outsider:'Total Outsider' };
-
-function submitS3() {
-  if (state.sectionsComplete.has(3)) return;
-  const doubled = s3Mode === 'double';
-  const revealEl = document.getElementById('s3-reveal');
-  let html = '<h3>Experience Results</h3>';
-  let total = 0;
-  let frozenHTML = `<div class="frozen-selection">Mode: ${doubled ? 'Doubled Up' : 'Two Positions'}</div>`;
-
-  const keys = doubled ? [s3Selections[0]] : s3Selections;
-
-  for (const key of keys) {
-    const result = getS3Result(key, doubled);
-    const needsFlip = !['sos','cabinet'].includes(key);
-    html += `
-      ${needsFlip ? coinFlipHTML(result.good === true, result.good === true ? 'Good outcome!' : result.good === false ? 'Bad outcome...' : 'Middle outcome') : ''}
-      <div class="reveal-item">
-        <div class="reveal-label">${s3Labels[key]}${doubled ? ' (Doubled)' : ''}</div>
-        <div class="reveal-text">${result.text}</div>
-        <div class="reveal-score score-pos score-pop">+${result.score} points</div>
-      </div>`;
-    frozenHTML += `<div class="frozen-reveal"><strong>${s3Labels[key]}:</strong> ${result.text} <span class="score-pos">+${result.score}</span></div>`;
-    total += result.score;
-    addScore(result.score, 3);
-  }
-
-  html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: +${total}</div>`;
-  frozenHTML += `<div class="frozen-score score-pos">Total: +${total}</div>`;
-
-  revealEl.innerHTML = html;
-  revealEl.classList.add('show');
-  markSectionDone(3);
-  document.getElementById('s3-submit').disabled = true;
-  state.selections[3] = { frozenHTML };
-}
-
-// ============================================================
-// SECTION 4: PERSONALITY TRAITS + COMBOS
-// ============================================================
-let s4Selections = [];
-
-const s4Data = {
-  communicator: { label: 'Great Communicator', score: 45, text: 'Being a great communicator is a huge part of the job of being president, but being a slick talker might make you seem like just another politician.' },
-  telegenic: { label: 'Telegenic', score: 40, text: 'The American people love a president who looks the part think JFK but looks aren\'t everything.' },
-  character: { label: 'High Character', score: 30, text: 'Voters appreciate your honesty and integrity, but in a cutthroat political world, being the \'good guy\' only goes so far.' },
-  relatable: { label: 'Down to Earth / Relatable', score: 50, text: 'Authenticity is everything voters hate politicians and want to vote for someone who thinks understands people like <em>them</em>.' },
-  intelligence: { label: 'Intelligence', score: 35, text: 'Smarts are valuable but you might sound condescending or professorial to the average voter.' }
-};
-
-const s4Combos = {
-  'communicator+relatable': { type: 'bonus', title: 'Generational Talent Bonus!', text: 'You are a great speaker <strong>and</strong> you are relatable a powerful combination that makes you a rare talent even among politicians. Think Ronald Reagan or Barack Obama.', points: 20 },
-  'communicator+telegenic': { type: 'penalty', title: 'Slick Politician Penalty!', text: "You're a talker and you look good on screen maybe a little too good. You give off slick politician vibes and you just don't seem real. Think Gavin Newsom or Mitt Romney.", points: -20 },
-  'character+intelligence': { type: 'penalty', title: 'Weak Leader Penalty!', text: "Politics is a cut-throat game and your combo of smarts and honesty makes you seem like a pushover. Voters want a strong leader not just a 'good guy.' Think Jimmy Carter or Al Gore.", points: -20 }
-};
-
-function getComboKey(keys) {
-  const sorted = [...keys].sort().join('+');
-  return s4Combos[sorted] || null;
-}
-
-function selectS4(el) {
+function submitS4exp() {
   if (state.sectionsComplete.has(4)) return;
-  const key = el.dataset.key;
-  if (el.classList.contains('selected')) {
-    el.classList.remove('selected');
-    s4Selections = s4Selections.filter(k => k !== key);
-  } else {
-    if (s4Selections.length >= 2) return;
-    el.classList.add('selected');
-    s4Selections.push(key);
-  }
-  document.getElementById('s4-submit').disabled = s4Selections.length !== 2;
-}
-
-function submitS4() {
-  if (s4Selections.length !== 2 || state.sectionsComplete.has(4)) return;
-  let html = '<h3>Personality Trait Results</h3>';
+  const doubled = s4expMode === 'double';
+  const keys = doubled ? [s4expSelections[0]] : s4expSelections;
+  let html = '<h3>Political Experience Results</h3>';
   let total = 0;
-  let frozenHTML = '<div class="frozen-selection">Selected:</div>';
-
-  for (const key of s4Selections) {
-    const d = s4Data[key];
-    html += `<div class="reveal-item">
-      <div class="reveal-label">${d.label}</div>
-      <div class="reveal-text">${d.text}</div>
-      <div class="reveal-score score-pos score-pop">+${d.score} points</div>
-    </div>`;
-    frozenHTML += `<div class="frozen-reveal"><strong>${d.label}:</strong> ${d.text} <span class="score-pos">+${d.score}</span></div>`;
-    total += d.score;
+  const results = [];
+  for (const key of keys) {
+    const result = getS4expResult(key, doubled);
+    const needsFlip = !['sos','cabinet'].includes(key);
+    html += `${needsFlip ? coinFlipHTML(result.good === true, result.good === true ? 'Good outcome!' : result.good === false ? 'Bad outcome...' : 'Middle outcome') : ''}
+      <div class="reveal-item"><div class="reveal-label">${s4Labels[key]}${doubled?' (Doubled)':''}</div><div class="reveal-text">${result.text}</div><div class="reveal-score score-pos score-pop">+${result.s} points</div></div>`;
+    addScore(result.s, 4); total += result.s; results.push({key, result, doubled});
   }
-
-  // Check for combo
-  const combo = getComboKey(s4Selections);
-  let comboHTML = '';
-  if (combo) {
-    const comboPoints = combo.points;
-    total += comboPoints;
-    const cls = combo.type === 'bonus' ? 'combo-bonus' : 'combo-penalty';
-    const scoreClass = comboPoints > 0 ? 'score-pos' : 'score-neg';
-    comboHTML = `<div class="combo-reveal show ${cls}">
-      <h4>${combo.title}</h4>
-      <p style="font-size:0.9em;margin-bottom:6px;">${combo.text}</p>
-      <div class="${scoreClass}" style="font-weight:bold;font-size:1.1em;">${comboPoints > 0 ? '+' : ''}${comboPoints} points</div>
-    </div>`;
-    frozenHTML += `<div class="frozen-reveal" style="color:${comboPoints>0?'#2a7a2a':'#c00'}"><strong>${combo.title}</strong> ${comboPoints > 0 ? '+' : ''}${comboPoints}</div>`;
-  }
-
-  html += comboHTML;
-  html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: ${total > 0 ? '+' : ''}${total}</div>`;
-  frozenHTML += `<div class="frozen-score ${total>0?'score-pos':'score-neg'}">Total: ${total>0?'+':''}${total}</div>`;
-
-  // Add all scores at once
-  for (const key of s4Selections) addScore(s4Data[key].score, 4);
-  if (combo) addScore(combo.points, 4);
-
-  const revealEl = document.getElementById('s4-reveal');
-  revealEl.innerHTML = html;
-  revealEl.classList.add('show');
+  html += `<div style="font-size:1.1em;font-weight:bold;color:#2a7a2a;margin-top:10px;">Section Total: +${total}</div>`;
+  const revealEl = document.getElementById('s4exp-reveal');
+  revealEl.innerHTML = html; revealEl.classList.add('show');
   markSectionDone(4);
-  document.getElementById('s4-submit').disabled = true;
-  state.selections[4] = { frozenHTML };
+  document.getElementById('s4exp-submit').disabled = true;
+  state.selections[4] = { keys, doubled, results, total,
+    frozenHTML: `<div class="frozen-selection">Mode: ${doubled?'Doubled Up':'Two Positions'}</div>
+      ${results.map(r=>`<div class="frozen-reveal"><strong>${s4Labels[r.key]}${r.doubled?' (Doubled)':''}:</strong> ${r.result.text} <span class="score-pos">+${r.result.s}</span></div>`).join('')}
+      <div class="frozen-score score-pos">Total: +${total}</div>`
+  };
+  checkCrossSectionCombos(4);
 }
 
 // ============================================================
 // SECTION 5: EXPERTISE
 // ============================================================
 let s5Selection = null;
-
 const s5Data = {
-  policy: { label: 'Policy Wonk', score: 15, text: "Knowing policy will make you seem qualified but most voters can't tell the difference between great policy and empty promises plus policy wonks usually sound like nerds." },
-  foreign: { label: 'Foreign Policy Chops', score: 20, text: "Foreign Policy is important, but most Americans care more about local issues than problems 10,000 miles away." },
-  milexpert: { label: 'Military Experience', score: 25, text: "When the world seems scary a leader with military experience can be reassuring but during times of peace voters may not care as much." },
-  econ: { label: 'Economics Expert', score: 15, text: "Voters care about the economy, unfortunately they don't understand it. They can't tell the difference between an expert and someone who just says stuff." }
+  policy:    { label:'Policy Wonk',             score:25, text:"Knowing policy will make you seem qualified, but most voters cannot tell the difference between great policy and empty promises. Plus, policy wonks usually sound like nerds.", bio:"a policy expert with a plan for every problem" },
+  foreign:   { label:'Foreign Policy Chops',    score:25, text:"Foreign Policy is important, but most Americans care more about local issues than problems 10,000 miles away.", bio:"an authority on foreign policy and international affairs" },
+  milexpert: { label:'Military Experience',     score:30, text:"When the world seems scary, a leader with military experience can be reassuring, but during times of peace voters may not care as much.", bio:"a leader with deep military expertise" },
+  econ:      { label:'Economics Expert',        score:20, text:"Voters care about the economy. Unfortunately, they do not understand it. They cannot tell the difference between an expert and someone who just says stuff.", bio:"an expert on the American economy" },
+  realworld: { label:'Real World Experience',   score:30, text:"Your lack of traditional expertise worries some, but most voters love the idea of a candidate who understands what they are going through!", bio:"a candidate who never lost touch with everyday Americans" }
 };
 
 function selectS5(el) {
@@ -1391,221 +1088,262 @@ function submitS5() {
   const d = s5Data[s5Selection];
   const revealEl = document.getElementById('s5-reveal');
   revealEl.innerHTML = `<h3>Expertise Result</h3>
-    <div class="reveal-item">
-      <div class="reveal-label">${d.label}</div>
-      <div class="reveal-text">${d.text}</div>
-      <div class="reveal-score score-pos score-pop">+${d.score} points</div>
-    </div>`;
+    <div class="reveal-item"><div class="reveal-label">${d.label}</div><div class="reveal-text">${d.text}</div><div class="reveal-score score-pos score-pop">+${d.score} points</div></div>`;
   revealEl.classList.add('show');
   addScore(d.score, 5);
   markSectionDone(5);
   document.getElementById('s5-submit').disabled = true;
-  state.selections[5] = {
-    frozenHTML: `<div class="frozen-selection">Selected: ${d.label}</div>
-    <div class="frozen-reveal">${d.text}</div>
-    <div class="frozen-score score-pos">+${d.score} points</div>`
+  state.selections[5] = { key: s5Selection,
+    frozenHTML: `<div class="frozen-selection">Selected: ${d.label}</div><div class="frozen-reveal">${d.text}</div><div class="frozen-score score-pos">+${d.score} points</div>`
   };
+  checkCrossSectionCombos(5);
 }
 
 // ============================================================
 // SECTION 6: POLITICAL POSITION
 // ============================================================
 let s6Selection = null;
+const s6Labels = { centrist:'Independent Centrist', moderate:'Moderate', partisan:'Hyper Partisan', populist:'Populist Outsider' };
+const s6Bio = { centrist:'an independent centrist who refuses to be boxed in by either party', moderate:'a moderate who believes in bringing people together', partisan:'a fighter who makes no apologies for their convictions', populist:'a populist outsider who promises to shake up Washington' };
 
 function selectS6(el) {
   if (state.sectionsComplete.has(6)) return;
   document.querySelectorAll('#s6-options .option-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  s6Selection = el.dataset.key;
+  el.classList.add('selected'); s6Selection = el.dataset.key;
   document.getElementById('s6-submit').disabled = false;
 }
 
 function getS6Result(key) {
   const r = Math.random();
   switch(key) {
-    case 'centrist':
-      if (r < 0.25) return { text: "You manage to grab support from independents and from voters in both parties. Your bipartisan approach is just what the public wants right now.", score: 70, good: true };
-      else return { text: "You are so 'middle of the road' voters don't think you stand for anything. Your party isn't excited by you and you aren't grabbing many voters from the other team either.", score: 20, good: false };
-    case 'moderate':
-      return { text: "This is the safe bet you may not be the most exciting but you don't alienate the independent and undecided voters.", score: 70, good: null };
-    case 'partisan':
-      if (r < 0.25) return { text: "Your radical views get voters excited and drive high turnout.", score: 75, good: true };
-      else return { text: "You are seen as too extreme your supporters love you but moderates and independent voters are hesitant to vote for you.", score: 10, good: false };
-    case 'populist':
-      if (r < 1/6) return { text: "Your big promises get many first time voters to the polls but you didn't lose the establishment voters.", score: 85, good: true };
-      else return { text: "You are seen as manipulative and full of empty promises even your own party sees you as a dangerous demagogue.", score: 10, good: false };
+    case 'centrist': return r < 0.25 ? {text:"You manage to grab support from independents and from voters in both parties. Your bipartisan approach is just what the public wants right now.",s:70,good:true} : {text:"You are so middle of the road that voters do not think you stand for anything. Your party is not excited by you, and you are not grabbing many voters from the other team either.",s:20,good:false};
+    case 'moderate': return {text:"This is the safe bet. You may not be the most exciting, but you do not alienate the independent and undecided voters.",s:70,good:null};
+    case 'partisan': return r < 0.25 ? {text:"Your radical views get voters excited and drive high turnout.",s:75,good:true} : {text:"You are seen as too extreme. Your supporters love you, but moderates and independent voters are hesitant to vote for you.",s:10,good:false};
+    case 'populist': return r < 1/6 ? {text:"Your big promises get many first-time voters to the polls, but you did not lose the establishment voters.",s:85,good:true} : {text:"You are seen as manipulative and full of empty promises. Even your own party sees you as a dangerous demagogue.",s:10,good:false};
   }
 }
-
-const s6Labels = { centrist:'Bipartisan Centrist', moderate:'Moderate', partisan:'Hyper Partisan', populist:'Populist Outsider' };
 
 function submitS6() {
   if (!s6Selection || state.sectionsComplete.has(6)) return;
   const result = getS6Result(s6Selection);
   const needsFlip = s6Selection !== 'moderate';
-  const label = s6Labels[s6Selection];
-
   const revealEl = document.getElementById('s6-reveal');
   revealEl.innerHTML = `<h3>Political Position — Result</h3>
-    ${needsFlip ? coinFlipHTML(result.good === true, result.good === true ? 'It worked!' : 'Didn\'t land...') : ''}
-    <div class="reveal-item">
-      <div class="reveal-label">${label}</div>
-      <div class="reveal-text">${result.text}</div>
-      <div class="reveal-score score-pos score-pop">+${result.score} points</div>
-    </div>`;
+    ${needsFlip ? coinFlipHTML(result.good === true, result.good === true ? 'It worked!' : 'Did not land...') : ''}
+    <div class="reveal-item"><div class="reveal-label">${s6Labels[s6Selection]}</div><div class="reveal-text">${result.text}</div><div class="reveal-score score-pos score-pop">+${result.s} points</div></div>`;
   revealEl.classList.add('show');
-  addScore(result.score, 6);
+  addScore(result.s, 6);
   markSectionDone(6);
   document.getElementById('s6-submit').disabled = true;
-  state.selections[6] = {
-    frozenHTML: `<div class="frozen-selection">Selected: ${label}</div>
-    <div class="frozen-reveal">${result.text}</div>
-    <div class="frozen-score score-pos">+${result.score} points</div>`
+  state.selections[6] = { key: s6Selection, result,
+    frozenHTML: `<div class="frozen-selection">Selected: ${s6Labels[s6Selection]}</div><div class="frozen-reveal">${result.text}</div><div class="frozen-score score-pos">+${result.s} points</div>`
   };
+  checkCrossSectionCombos(6);
 }
 
 // ============================================================
 // SECTION 7: WEAKNESS
 // ============================================================
 let s7Selection = null;
+const s7Labels = { scandal:'Scandal In Your Past', gaff:'Gaff Prone', norm:'Outside the Norm' };
 
 function selectS7(el) {
   if (state.sectionsComplete.has(7)) return;
   document.querySelectorAll('#s7-options .option-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  s7Selection = el.dataset.key;
+  el.classList.add('selected'); s7Selection = el.dataset.key;
   document.getElementById('s7-submit').disabled = false;
 }
 
 function getS7Result(key) {
   const r = Math.random();
   switch(key) {
-    case 'scandal':
-      if (r < 0.5) return { text: "You address the scandal head-on, take ownership and the American people forgive you and move on.", score: -10, good: true };
-      else return { text: "Your scandal-filled past follows you like a stench and many voters can't move past it.", score: -35, good: false };
-    case 'gaff':
-      if (r < 0.5) return { text: "You make gaffs and the media flips out, but real voters don't really care too much. You play it off with a good sense of humor and it makes you more popular.", score: -5, good: true };
-      else return { text: "Your constant gaffs make voters think you are dumb or in mental decline. It becomes a major problem for your campaign to constantly work to cover for you.", score: -25, good: false };
-    case 'norm':
-      if (r < 1/3) return { text: "Just like JFK addressing his Catholic faith or Barack Hussein Obama becoming the first Black President, you own your differences and the American people accept you.", score: 20, good: true };
-      else return { text: "The American voters just aren't as comfortable voting for someone like you it's unfortunate but it is costing you support. If you address it too much you're accused of making it your whole campaign, if you ignore it you're accused of running from who you are it's a no-win scenario.", score: -30, good: false };
+    case 'scandal': return r < 0.5 ? {text:"You address the scandal head-on, take ownership, and the American people forgive you and move on.",s:-10,good:true,bio:"After confronting a past scandal head-on, they have largely put the controversy behind them."} : {text:"Your scandal-filled past follows you like a stench, and many voters cannot move past it.",s:-35,good:false,bio:"A lingering scandal continues to follow them on the campaign trail, raising questions about their character."};
+    case 'gaff': return r < 0.5 ? {text:"You make gaffs and the media flips out, but real voters do not really care too much. You play it off with a good sense of humor, and it makes you more popular.",s:-5,good:true,bio:"Despite a reputation for the occasional verbal stumble, voters have largely found their gaffs endearing rather than disqualifying."} : {text:"Your constant gaffs make voters think you are dumb or in mental decline. It becomes a major problem for your campaign to constantly work to cover for you.",s:-25,good:false,bio:"A pattern of gaffs has dogged the campaign, giving opponents steady ammunition and raising doubts about their fitness for office."};
+    case 'norm': return r < 1/3 ? {text:"Just like JFK addressing his Catholic faith or Barack Hussein Obama becoming the first Black President, you own your differences and the American people accept you.",s:20,good:true,bio:"They have made history simply by running, and voters have responded to their groundbreaking candidacy with enthusiasm."} : {text:"The American voters are just not as comfortable voting for someone like you. It is unfortunate, but it is costing you support. If you address it too much you are accused of making it your whole campaign. If you ignore it you are accused of running from who you are. It is a no-win scenario.",s:-30,good:false,bio:"They face real headwinds as a candidate who does not fit the traditional presidential mold, and the campaign has struggled to find the right way to address it."};
   }
 }
-
-const s7Labels = { scandal:'Scandal In Your Past', gaff:'Gaff Prone', norm:'Outside the Norm' };
 
 function submitS7() {
   if (!s7Selection || state.sectionsComplete.has(7)) return;
   const result = getS7Result(s7Selection);
-  const label = s7Labels[s7Selection];
-  const scoreClass = result.score >= 0 ? 'score-pos' : 'score-neg';
-
+  const sc = result.s >= 0 ? 'score-pos' : 'score-neg';
   const revealEl = document.getElementById('s7-reveal');
   revealEl.innerHTML = `<h3>Weakness — Result</h3>
     ${coinFlipHTML(result.good, result.good ? 'You got lucky!' : 'Bad luck...')}
-    <div class="reveal-item">
-      <div class="reveal-label">${label}</div>
-      <div class="reveal-text">${result.text}</div>
-      <div class="reveal-score ${scoreClass} score-pop">${result.score >= 0 ? '+' : ''}${result.score} points</div>
-    </div>`;
+    <div class="reveal-item"><div class="reveal-label">${s7Labels[s7Selection]}</div><div class="reveal-text">${result.text}</div><div class="reveal-score ${sc} score-pop">${result.s >= 0 ? '+' : ''}${result.s} points</div></div>`;
   revealEl.classList.add('show');
-  addScore(result.score, 7);
+  addScore(result.s, 7);
   markSectionDone(7);
   document.getElementById('s7-submit').disabled = true;
-  state.selections[7] = {
-    frozenHTML: `<div class="frozen-selection">Selected: ${label}</div>
-    <div class="frozen-reveal">${result.text}</div>
-    <div class="frozen-score ${scoreClass}">${result.score >= 0 ? '+' : ''}${result.score} points</div>`
+  state.selections[7] = { key: s7Selection, result,
+    frozenHTML: `<div class="frozen-selection">Selected: ${s7Labels[s7Selection]}</div><div class="frozen-reveal">${result.text}</div><div class="frozen-score ${sc}">${result.s >= 0 ? '+' : ''}${result.s} points</div>`
   };
+  checkCrossSectionCombos(7);
+}
+
+
+// ============================================================
+// CROSS-SECTION COMBOS
+// ============================================================
+function checkCrossSectionCombos(triggeredSection) {
+  const done = state.sectionsComplete;
+  const sel = state.selections;
+
+  // ULTIMATE OUTSIDER: Total Outsider (s4) + Real World Experience (s5) + Populist Outsider (s6)
+  if (done.has(4) && done.has(5) && done.has(6)) {
+    const hasOutsider = sel[4] && sel[4].keys.includes('outsider');
+    const hasRealWorld = sel[5] && sel[5].key === 'realworld';
+    const hasPopulist = sel[6] && sel[6].key === 'populist';
+    if (hasOutsider && hasRealWorld && hasPopulist && !state.ultimateOutsiderAwarded) {
+      state.ultimateOutsiderAwarded = true;
+      addScore(25, triggeredSection);
+      showCrossCombo(triggeredSection, 'bonus', 'Ultimate Outsider Bonus!',
+        'You are a total Washington outsider with real-world experience. As the ultimate outsider, you connect with the average voter and benefit from the voters\' frustration with politics as usual!', 25);
+    }
+  }
+
+  // MILITARIST PENALTY: Military bio (s2) + Total Outsider (s4) + Military Expert (s5) + Populist OR Hyper Partisan (s6)
+  if (done.has(2) && done.has(4) && done.has(5) && done.has(6)) {
+    const hasMilBio = sel[2] && sel[2].keys.includes('military');
+    const hasOutsider = sel[4] && sel[4].keys.includes('outsider');
+    const hasMilExpert = sel[5] && sel[5].key === 'milexpert';
+    const hasExtreme = sel[6] && (sel[6].key === 'populist' || sel[6].key === 'partisan');
+    if (hasMilBio && hasOutsider && hasMilExpert && hasExtreme && !state.militaristAwarded) {
+      state.militaristAwarded = true;
+      addScore(-35, triggeredSection);
+      showCrossCombo(triggeredSection, 'penalty', 'Militarist Penalty!',
+        'Your combination of a military background, no political experience, and extreme politics has many voters worried you are a wannabe dictator.', -35);
+    }
+  }
+
+  // EGG HEAD PENALTY: Ivy Leaguer (s2) + Intelligence (s3)
+  if (done.has(2) && done.has(3)) {
+    const hasIvy = sel[2] && sel[2].keys.includes('ivy');
+    const hasIntelligence = sel[3] && sel[3].keys.includes('intelligence');
+    if (hasIvy && hasIntelligence && !state.eggHeadAwarded) {
+      state.eggHeadAwarded = true;
+      addScore(-20, triggeredSection);
+      showCrossCombo(triggeredSection, 'penalty', 'Egg Head Penalty!',
+        'You went to an Ivy League school and you are highly intelligent. The voters know you are smart, but many are worried you are a nerd who lacks common sense.', -20);
+    }
+  }
+
+  // UNQUALIFIED PENALTY: No law/biz/ivy/educator in bio (s2) AND Real World Experience (s5)
+  if (done.has(2) && done.has(5)) {
+    const bioKeys = sel[2] ? sel[2].keys : [];
+    const hasEliteEdu = ['law','biz','ivy','educator','medical'].some(k => bioKeys.includes(k));
+    const hasRealWorld = sel[5] && sel[5].key === 'realworld';
+    if (!hasEliteEdu && hasRealWorld && !state.unqualifiedAwarded) {
+      state.unqualifiedAwarded = true;
+      addScore(-20, triggeredSection);
+      showCrossCombo(triggeredSection, 'penalty', 'Unqualified Penalty!',
+        'Your lack of an elite education and no traditional area of expertise has many voters worried you are not qualified to run the country!', -20);
+    }
+  }
+}
+
+function showCrossCombo(sectionNum, type, title, text, points) {
+  // Append to whatever section's reveal area triggered this
+  const revealEl = document.getElementById(`s${sectionNum === 4 ? '4exp' : sectionNum}-reveal`);
+  if (!revealEl) return;
+  const div = document.createElement('div');
+  div.innerHTML = comboRevealHTML(type, title, text, points);
+  revealEl.appendChild(div.firstChild);
 }
 
 // ============================================================
-// SECTION 8: SUBMIT
+// SECTION 8 + FINAL
 // ============================================================
 function updateS8Checklist() {
-  const sections = [
-    { n:1, label:'Age' }, { n:2, label:'Biography' }, { n:3, label:'Experience' },
-    { n:4, label:'Personality Traits' }, { n:5, label:'Expertise' },
-    { n:6, label:'Political Position' }, { n:7, label:'Weakness' }
-  ];
+  const labels = { 1:'Name / Home State / Age', 2:'Biography', 3:'Personality Traits', 4:'Political Experience', 5:'Areas of Expertise', 6:'Political Position', 7:'Weakness' };
   let html = '<div style="margin-bottom:16px;font-size:0.95em;">';
   let allDone = true;
-  for (const s of sections) {
-    const done = state.sectionsComplete.has(s.n);
+  for (let n = 1; n <= 7; n++) {
+    const done = state.sectionsComplete.has(n);
     if (!done) allDone = false;
     html += `<div style="padding:6px 0;border-bottom:1px solid #eee;">
-      <span style="color:${done?'#2a7a2a':'#c00'}">${done ? '✓' : '✗'}</span>
-      <span style="margin-left:8px;color:${done?'#333':'#aaa'}">Section ${s.n}: ${s.label}</span>
-      ${done ? `<span style="float:right;color:#2a7a2a;font-weight:bold;">+${state.scores[s.n] || 0}</span>` : ''}
+      <span style="color:${done?'#2a7a2a':'#c00'}">${done?'✓':'✗'}</span>
+      <span style="margin-left:8px;color:${done?'#333':'#aaa'}">Section ${n}: ${labels[n]}</span>
+      ${done ? `<span style="float:right;color:#2a7a2a;font-weight:bold;">${state.scores[n] >= 0 ? '+' : ''}${state.scores[n] || 0}</span>` : ''}
     </div>`;
   }
-  html += `</div>`;
-  html += `<div style="font-size:1.1em;font-weight:bold;margin-bottom:16px;">Total Score: ${state.totalScore}</div>`;
+  html += `</div><div style="font-size:1.1em;font-weight:bold;margin-bottom:16px;">Total Score: ${state.totalScore}</div>`;
   document.getElementById('s8-checklist').innerHTML = html;
   document.getElementById('s8-submit').disabled = !allDone;
 }
 
 function submitFinal() {
   if (state.sectionsComplete.size < 7) return;
+  document.getElementById('loading-screen').classList.add('show');
+  setTimeout(() => { document.getElementById('loading-screen').classList.remove('show'); showFinalResult(); }, 2200);
+}
 
-  // Show loading screen
-  const loading = document.getElementById('loading-screen');
-  loading.classList.add('show');
+function buildBio() {
+  const name = state.candidateName || 'This candidate';
+  const s1 = state.selections[1] || {};
+  const s2 = state.selections[2] || {};
+  const s3 = state.selections[3] || {};
+  const s4 = state.selections[4] || {};
+  const s5 = state.selections[5] || {};
+  const s6 = state.selections[6] || {};
+  const s7 = state.selections[7] || {};
 
-  setTimeout(() => {
-    loading.classList.remove('show');
-    showFinalResult();
-  }, 2200);
+  const ageText = { '35':'one of the youngest presidential candidates in American history', '45':'a relatively young candidate by presidential standards', '55':'a candidate in the prime of their political career', '65':'a seasoned and experienced candidate', '75':'one of the oldest candidates ever to seek the presidency' }[s1.ageKey] || 'a candidate';
+  const stateText = s1.stateAbbr || 'their home state';
+
+  const bioText = s2.keys ? getBioText(s2.keys) : 'a varied background';
+
+  let expText;
+  if (s4.doubled) {
+    expText = s4BioPhrases[s4.keys[0]].doubled + ', and they were seen as a success in that role';
+  } else if (s4.keys && s4.keys.length === 2) {
+    expText = s4BioPhrases[s4.keys[0]].single + ' and ' + s4BioPhrases[s4.keys[1]].single;
+  } else if (s4.keys && s4.keys.length === 1) {
+    expText = s4BioPhrases[s4.keys[0]].single;
+  } else { expText = 'various roles'; }
+
+  const combo = s3.combo;
+  let traitText;
+  if (combo && combo.bioOverride) { traitText = combo.bioOverride; }
+  else if (s3.keys) { traitText = s3.keys.map(k => s3Data[k].bio).join(' and '); }
+  else { traitText = 'notable personal qualities'; }
+
+  const expertText = s5.key ? s5Data[s5.key].bio : 'broad expertise';
+  const posText = s6.key ? s6Bio[s6.key] : 'a defined political position';
+
+  // Weakness bio sentence — replace placeholder with candidate name
+  let weakBio = '';
+  if (s7.result) {
+    weakBio = s7.result.good === false
+      ? 'Unfortunately, ' + s7.result.bio.charAt(0).toLowerCase() + s7.result.bio.slice(1)
+      : s7.result.bio;
+  }
+  weakBio = weakBio.replace(/Their/g, name).replace(/their/g, 'their');
+
+  return `${name} is ${ageText} and a native of ${stateText}. With a background in ${bioText}, ${name} previously served as ${expText}. Known for being ${traitText}, their reputation as ${expertText} has made them a serious contender running as ${posText}. ${weakBio}`;
 }
 
 function showFinalResult() {
   const score = state.totalScore;
   let tier, headline, sub, text;
+  if (score <= 250) { tier='Tier 1'; headline='You Were a Terrible Candidate!'; sub='You Lost the Primary!'; text="Not even your own party wanted you to run. You lost your primary and do not even get to run in the general election. Maybe in four years things will be different."; }
+  else if (score <= 350) { tier='Tier 2'; headline='You Were a Pretty Bad Candidate.'; sub='You Got Crushed in the General Election!'; text="You won the primary, but you got absolutely crushed in the general election. You just were not the candidate the voters wanted."; }
+  else if (score <= 440) { tier='Tier 3'; headline='You Were a Decent Candidate.'; sub='You Lost a Tight Race!'; text="You won the primary, you ran a good campaign, it was a close race, but it just was not your time."; }
+  else if (score <= 540) { tier='Tier 4'; headline='You Were a Good Candidate.'; sub="You Won a Tight Race — You're President!"; text="You won the election! It was a super close race, but you did it. You are the next President of the United States!"; }
+  else if (score <= 580) { tier='Tier 5'; headline='You Were a Great Candidate!'; sub='You Won in a Landslide!!'; text="You won the general election in a landslide! You are the next President of the United States and you come in with a mandate from the American people."; }
+  else { tier='Tier 6'; headline='You Were the Perfect Candidate!'; sub='You Won 48 Out of 50 States!'; text="You crushed your opponent and you now come into office with a powerful mandate from the American people. You are truly the perfect candidate!!"; }
 
-  if (score <= 250) {
-    tier = 'Tier 1';
-    headline = 'You Were a Terrible Candidate!';
-    sub = 'You Lost the Primary!';
-    text = "Not even your own party wanted you to run. You lost your primary and don't even get to run in the general election. Maybe in four years things will be different and you will be your party's pick to run.";
-  } else if (score <= 370) {
-    tier = 'Tier 2';
-    headline = 'You Were a Pretty Bad Candidate.';
-    sub = 'You Got Crushed in the General Election!';
-    text = "You won the primary but you got absolutely crushed in the general election. You just weren't the candidate the voters wanted.";
-  } else if (score <= 470) {
-    tier = 'Tier 3';
-    headline = 'You Were a Decent Candidate.';
-    sub = 'You Lost a Tight Race!';
-    text = "You won the primary, you ran a good campaign it was a close race but it just wasn't your time.";
-  } else if (score <= 540) {
-    tier = 'Tier 4';
-    headline = 'You Were a Good Candidate.';
-    sub = "You Won a Tight Race You're President!";
-    text = "You won the election! It was a super close race but you did it you're the next President of the United States!";
-  } else if (score <= 580) {
-    tier = 'Tier 5';
-    headline = 'You Were a Great Candidate!';
-    sub = 'You Won in a Landslide!!';
-    text = "You won the general election in a landslide! You are the next President of the United States and you come in with a mandate from the American People. You were clearly a great candidate!!";
-  } else {
-    tier = 'Tier 6';
-    headline = 'You Were the Perfect Candidate!';
-    sub = 'You Won 48 Out of 50 States!';
-    text = "You crushed your opponent and you now come into office with a powerful mandate from the American people. You are truly the perfect candidate!!";
-  }
-
-  const finalCard = document.getElementById('final-card');
-  finalCard.innerHTML = `
+  const bio = buildBio();
+  document.getElementById('final-card').innerHTML = `
     <div class="tier-label">${tier}</div>
     <div class="outcome-headline">${headline}</div>
     <div class="outcome-sub">${sub}</div>
     <div class="final-score">${score}</div>
     <div style="font-size:0.85em;color:#aaa;margin-bottom:16px;">out of 600 possible points</div>
     <div class="outcome-text">${text}</div>
-    <button class="play-again-btn" onclick="resetGame()">Play Again</button>
-  `;
+    <div class="candidate-bio">${bio}</div>
+    <button class="play-again-btn" onclick="resetGame()">Play Again</button>`;
 
-  // Show final section
   document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
   document.getElementById('final-section').classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -1615,65 +1353,41 @@ function showFinalResult() {
 // RESET
 // ============================================================
 function resetGame() {
-  state.currentSection = 1;
-  state.scores = {};
-  state.selections = {};
-  state.totalScore = 0;
-  state.candidateName = '';
-  state.homeState = '';
-  state.sectionsComplete.clear();
+  Object.assign(state, { currentSection:1, scores:{}, selections:{}, totalScore:0, candidateName:'', homeState:'',
+    ultimateOutsiderAwarded:false, militaristAwarded:false, eggHeadAwarded:false, unqualifiedAwarded:false,
+    sectionsComplete: new Set() });
+  s1AgeSelection = null; s1StateSelection = null;
+  s2Selections = []; s3Selections = []; s4expMode = 'two'; s4expSelections = [];
+  s5Selection = null; s6Selection = null; s7Selection = null;
 
-  s1Selection = null;
-  s1StateSelection = null;
   document.getElementById('candidate-name').value = '';
   document.getElementById('sidebar-name').textContent = '';
   document.getElementById('sidebar-score').textContent = '0';
-  resetFigure();
   document.getElementById('state-selected-display').innerHTML = 'No state selected';
-  // Reset map highlights
+
+  document.querySelectorAll('.option-btn').forEach(b => {
+    b.classList.remove('selected','doubled'); b.style.pointerEvents=''; b.style.opacity='';
+    const badge = b.querySelector('.double-badge'); if (badge) badge.remove();
+  });
+  document.querySelectorAll('.submit-btn').forEach(b => b.disabled = true);
+  document.querySelectorAll('.reveal-area').forEach(r => { r.classList.remove('show'); r.innerHTML=''; });
+  document.querySelectorAll('.frozen-view').forEach(f => f.remove());
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('done','active'));
+  document.getElementById('s4-mode-two').classList.add('active');
+  document.getElementById('s4-mode-double').classList.remove('active');
+
   document.querySelectorAll('#us-map path').forEach(p => {
     const abbr = p.id.replace('state-','');
     const tier = stateTiers[abbr] || 'small';
     p.setAttribute('fill', tierColors[tier]);
-    p.setAttribute('opacity','0.75');
-    p.setAttribute('stroke','#fff');
-    p.setAttribute('stroke-width','1.5');
+    p.setAttribute('opacity','0.75'); p.setAttribute('stroke','#fff'); p.setAttribute('stroke-width','1');
   });
 
-  s1Selection = null;
-  s2Selections = [];
-  s3Mode = 'two';
-  s3Selections = [];
-  s4Selections = [];
-  s5Selection = null;
-  s6Selection = null;
-  s7Selection = null;
-
-  // Re-enable all buttons, clear selections
-  document.querySelectorAll('.option-btn').forEach(b => {
-    b.classList.remove('selected','doubled');
-    b.style.pointerEvents = '';
-    b.style.opacity = '';
-    const badge = b.querySelector('.double-badge');
-    if (badge) badge.remove();
-  });
-  document.querySelectorAll('.submit-btn').forEach(b => b.disabled = true);
-  document.querySelectorAll('.reveal-area').forEach(r => {
-    r.classList.remove('show');
-    r.innerHTML = '';
-  });
-  document.querySelectorAll('.frozen-view').forEach(f => f.remove());
-  document.querySelectorAll('.nav-tab').forEach(t => {
-    t.classList.remove('done','active');
-  });
-
-  // Reset S3 mode toggle
-  document.getElementById('s3-mode-two').classList.add('active');
-  document.getElementById('s3-mode-double').classList.remove('active');
-
-  animateScore();
+  animateScore(); resetFigure(); updateFigure();
   goToSection(1);
 }
+
+document.addEventListener('DOMContentLoaded', buildUSMap);
 </script>
 </body>
 </html>
