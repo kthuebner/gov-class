@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levels &amp; Branches of Government | Blue Valley Academy Gov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4EFE1;
+    --parchment-deep:#ece3cd;
+    --ink:#2c2620;
+    --ink-soft:#5b5346;
+    --rule:#c9bd9f;
+    --exec:#c1852f;
+    --exec-deep:#96631d;
+    --leg:#5f7a52;
+    --leg-deep:#455d3a;
+    --jud:#6a5490;
+    --jud-deep:#4d3c6c;
+    --paper:#fffcf4;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, #fbf7ea 0%, transparent 60%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Lora', serif;
+    -webkit-font-smoothing:antialiased;
+    padding:32px 18px 70px;
+  }
+  h1,h2,.eyebrow,.legend-item,.hint{font-family:'Oswald',sans-serif;}
+
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  header.top{text-align:center; margin-bottom:26px;}
+  .eyebrow{
+    letter-spacing:.18em; text-transform:uppercase; font-size:12.5px;
+    color:var(--ink-soft); font-weight:600; margin:0 0 10px;
+  }
+  h1{
+    font-size:clamp(26px,4.2vw,42px); line-height:1.05; margin:0 0 10px;
+    font-weight:600; letter-spacing:.01em;
+  }
+  header.top p.sub{
+    font-family:'Lora',serif; font-style:italic; color:var(--ink-soft);
+    font-size:15.5px; margin:0 auto; max-width:600px;
+  }
+  .legend{display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-top:18px;}
+  .legend-item{
+    display:flex; align-items:center; gap:8px; font-size:12.5px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:500;
+  }
+  .swatch{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  .swatch.exec{background:var(--exec);}
+  .swatch.leg{background:var(--leg);}
+  .swatch.jud{background:var(--jud);}
+
+  .hint{
+    text-align:center; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin:6px 0 22px; font-weight:500;
+  }
+
+  /* ---- image + hotspots ---- */
+  .diagram-frame{
+    position:relative;
+    max-width:960px;
+    margin:0 auto;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 14px 40px rgba(44,38,32,.18);
+    border:1px solid var(--rule);
+    background:#fff;
+  }
+  .diagram-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  .hotspot{
+    position:absolute;
+    border:2px solid transparent;
+    border-radius:50%;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .hotspot:hover, .hotspot:focus-visible{
+    outline:none;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.04) inset;
+  }
+  .hotspot.exec:hover, .hotspot.exec:focus-visible{ border-color:var(--exec); background:rgba(193,133,47,.14); }
+  .hotspot.leg:hover, .hotspot.leg:focus-visible{ border-color:var(--leg); background:rgba(95,122,82,.14); }
+  .hotspot.jud:hover, .hotspot.jud:focus-visible{ border-color:var(--jud); background:rgba(106,84,144,.14); }
+
+  .hotspot.round{border-radius:50%;}
+  .hotspot.pill{border-radius:22%;}
+
+  /* ---- modal ---- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(30,26,20,.55);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    z-index:50; opacity:0; pointer-events:none; transition:opacity .18s ease;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .modal{
+    background:var(--paper); max-width:520px; width:100%;
+    border-radius:18px; padding:30px 28px 26px; position:relative;
+    max-height:86vh; overflow-y:auto;
+    box-shadow:0 30px 60px rgba(20,16,10,.35);
+    border-top:8px solid var(--ink);
+    transform:translateY(14px); transition:transform .18s ease;
+  }
+  .overlay.open .modal{transform:translateY(0);}
+  .modal.exec{border-top-color:var(--exec);}
+  .modal.leg{border-top-color:var(--leg);}
+  .modal.jud{border-top-color:var(--jud);}
+  .modal-close{
+    position:absolute; top:14px; right:16px; background:none; border:none; cursor:pointer;
+    font-size:22px; line-height:1; color:var(--ink-soft); font-family:'Oswald',sans-serif;
+    padding:4px 8px; border-radius:8px;
+  }
+  .modal-close:hover{background:var(--parchment-deep); color:var(--ink);}
+  .modal-eyebrow{
+    font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:.16em;
+    font-size:11.5px; font-weight:600; margin:0 0 6px;
+  }
+  .modal.exec .modal-eyebrow{color:var(--exec-deep);}
+  .modal.leg .modal-eyebrow{color:var(--leg-deep);}
+  .modal.jud .modal-eyebrow{color:var(--jud-deep);}
+  .modal h2{font-size:24px; margin:0 0 14px; line-height:1.15; font-weight:600; padding-right:20px;}
+  .modal p.desc{font-size:15.5px; line-height:1.55; color:var(--ink); margin:0 0 20px;}
+  .officeholders{display:flex; flex-direction:column; gap:10px;}
+  .officeholder{
+    display:flex; gap:12px; align-items:flex-start; background:var(--parchment);
+    border:1px solid var(--rule); border-radius:10px; padding:11px 13px;
+  }
+  .oh-mark{flex:0 0 auto; width:8px; height:8px; border-radius:50%; margin-top:6px;}
+  .modal.exec .oh-mark{background:var(--exec);}
+  .modal.leg .oh-mark{background:var(--leg);}
+  .modal.jud .oh-mark{background:var(--jud);}
+  .oh-name{font-family:'Oswald',sans-serif; font-weight:600; font-size:14.5px;}
+  .oh-role{font-family:'Lora',serif; font-size:13px; color:var(--ink-soft); margin-top:1px;}
+  .note-box{
+    margin-top:18px; font-size:12.5px; color:var(--ink-soft); font-style:italic;
+    border-top:1px dashed var(--rule); padding-top:12px;
+  }
+
+  footer{
+    max-width:820px; margin:34px auto 0; text-align:center; color:var(--ink-soft);
+    font-size:12.5px; line-height:1.6;
+  }
+  footer strong{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Blue Valley Academy &middot; American Government</p>
+    <h1>Levels &amp; Branches of Government</h1>
+    <p class="sub">Federal, State, and Local &mdash; and how the same three branches show up at every level. Click any bubble below.</p>
+    <div class="legend">
+      <span class="legend-item"><span class="swatch exec"></span>Executive</span>
+      <span class="legend-item"><span class="swatch leg"></span>Legislative</span>
+      <span class="legend-item"><span class="swatch jud"></span>Judicial</span>
+    </div>
+  </header>
+
+  <p class="hint">Click a bubble to learn what it does &amp; who holds it</p>
+
+  <div class="diagram-frame" id="diagramFrame">
+    <img src="government-levels-diagram.png" alt="Diagram of Federal, State, and Local levels of government across the Executive, Legislative, and Judicial branches, for Overland Park, Kansas." draggable="false">
+
+    <button class="hotspot exec round" data-key="fed-exec"
+      style="left:6.04%; top:0%; width:27.5%; height:41.85%;" aria-label="The President and The Cabinet"></button>
+
+    <button class="hotspot exec round" data-key="state-exec"
+      style="left:8.96%; top:41.85%; width:18.33%; height:32.41%;" aria-label="The Governor of Kansas"></button>
+
+    <button class="hotspot exec round" data-key="local-exec"
+      style="left:10.42%; top:83.89%; width:12.92%; height:16.11%;" aria-label="Mayor or City Manager"></button>
+
+    <button class="hotspot leg round" data-key="fed-leg"
+      style="left:36.35%; top:0%; width:32.92%; height:43.52%;" aria-label="The United States Congress"></button>
+
+    <button class="hotspot leg round" data-key="state-leg"
+      style="left:36.35%; top:43.52%; width:32.92%; height:25.93%;" aria-label="The State Legislature"></button>
+
+    <button class="hotspot leg pill" data-key="local-leg-county"
+      style="left:26.46%; top:84.44%; width:15.73%; height:15.56%;" aria-label="County Commission"></button>
+
+    <button class="hotspot leg pill" data-key="local-leg-city"
+      style="left:42.5%; top:68.89%; width:21.88%; height:31.11%;" aria-label="City Council or Commission"></button>
+
+    <button class="hotspot jud round" data-key="fed-jud"
+      style="left:69.69%; top:0%; width:28.23%; height:43.70%;" aria-label="The Supreme Court and The Federal Courts"></button>
+
+    <button class="hotspot jud round" data-key="state-jud"
+      style="left:75.0%; top:43.70%; width:18.54%; height:32.04%;" aria-label="Kansas Supreme Court"></button>
+
+    <button class="hotspot jud pill" data-key="local-jud-district"
+      style="left:70.52%; top:76.11%; width:10.21%; height:16.30%;" aria-label="District Courts"></button>
+
+    <button class="hotspot jud pill" data-key="local-jud-county"
+      style="left:81.04%; top:84.26%; width:7.71%; height:15.74%;" aria-label="County Courts"></button>
+
+    <button class="hotspot jud pill" data-key="local-jud-municipal"
+      style="left:89.06%; top:89.63%; width:8.85%; height:10.37%;" aria-label="Municipal Courts"></button>
+  </div>
+
+  <footer>
+    Officeholders reflect <strong>Overland Park, Kansas &mdash; Johnson County</strong> (Kansas House District 8 &amp; Senate District 8) and are current as of <strong>July 2026</strong>. Update at the start of each school year, since terms and elected officials change.
+  </footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <p class="modal-eyebrow" id="modalEyebrow"></p>
+    <h2 id="modalTitle"></h2>
+    <p class="desc" id="modalDesc"></p>
+    <div class="officeholders" id="modalOfficeholders"></div>
+    <p class="note-box" id="modalNote" style="display:none;"></p>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  "fed-exec": {
+    branch:"exec", tier:"Federal &middot; Executive",
+    title:"The President &amp; The Cabinet",
+    desc:"The President enforces and carries out federal laws, serves as commander-in-chief of the armed forces, and directs foreign policy. The Cabinet is made up of the heads of the major federal departments (State, Defense, Treasury, and more), each appointed by the President and confirmed by the Senate, who advise the President and run the day-to-day work of the executive branch.",
+    people:[
+      {name:"Donald Trump", role:"President of the United States"},
+      {name:"JD Vance", role:"Vice President of the United States"}
+    ]
+  },
+  "fed-leg": {
+    branch:"leg", tier:"Federal &middot; Legislative",
+    title:"The United States Congress",
+    desc:"Congress writes and passes federal laws, controls federal taxing and spending, and can declare war. It is split into two chambers: the Senate, where every state gets two members regardless of population, and the House of Representatives, where seats are based on each state's population.",
+    people:[
+      {name:"Sharice Davids", role:"U.S. Representative, Kansas's 3rd District (covers Overland Park)"},
+      {name:"Jerry Moran", role:"U.S. Senator, Kansas"},
+      {name:"Roger Marshall", role:"U.S. Senator, Kansas"}
+    ]
+  },
+  "fed-jud": {
+    branch:"jud", tier:"Federal &middot; Judicial",
+    title:"The Supreme Court &amp; The Federal Courts",
+    desc:"Federal courts interpret federal law and the U.S. Constitution and resolve disputes that cross state lines or involve the federal government. The Supreme Court sits at the top of this system; its rulings on constitutional questions are final unless overturned by a later Court or a constitutional amendment.",
+    people:[
+      {name:"John G. Roberts, Jr.", role:"Chief Justice of the United States"},
+      {name:"Eric F. Melgren", role:"Chief Judge, U.S. District Court for the District of Kansas"}
+    ]
+  },
+  "state-exec": {
+    branch:"exec", tier:"State &middot; Executive",
+    title:"The Governor of Kansas",
+    desc:"The Governor enforces state laws, oversees state agencies, proposes the state budget, and can veto bills passed by the Kansas Legislature. The Legislature can override a veto with a two-thirds vote in both chambers.",
+    people:[
+      {name:"Laura Kelly", role:"Governor of Kansas"}
+    ]
+  },
+  "state-leg": {
+    branch:"leg", tier:"State &middot; Legislative",
+    title:"The State Legislature",
+    desc:"The Kansas Legislature writes state laws and sets the state budget. Like Congress, it has two chambers: the Kansas Senate and the Kansas House of Representatives. The representative and senator below serve the district that includes this school.",
+    people:[
+      {name:"Chris Croft", role:"Kansas State Representative, House District 8"},
+      {name:"Cindy Holscher", role:"Kansas State Senator, Senate District 8"}
+    ]
+  },
+  "state-jud": {
+    branch:"jud", tier:"State &middot; Judicial",
+    title:"The Kansas Supreme Court",
+    desc:"The Kansas Supreme Court is the state's highest court. It hears appeals from lower Kansas courts and decides whether state laws and lower court rulings follow the Kansas Constitution.",
+    people:[
+      {name:"Eric S. Rosen", role:"Chief Justice, Kansas Supreme Court"}
+    ]
+  },
+  "local-exec": {
+    branch:"exec", tier:"Local &middot; Executive",
+    title:"Mayor &amp; City Manager",
+    desc:"Overland Park uses a mayor-council-manager system. The Mayor is elected citywide, presides over City Council meetings, and signs city ordinances and contracts. A professional City Manager, hired by the Council, runs the city's day-to-day operations and departments.",
+    people:[
+      {name:"Curt Skoog", role:"Mayor of Overland Park"},
+      {name:"Lori Curtis Luther", role:"Overland Park City Manager"}
+    ]
+  },
+  "local-leg-county": {
+    branch:"leg", tier:"Local &middot; Legislative",
+    title:"Johnson County Commission",
+    desc:"The Board of County Commissioners passes county ordinances, sets the county budget, and oversees county-level services (like parks, health, and law enforcement in unincorporated areas). It has seven members: six represent geographic districts, and the chair is elected countywide.",
+    people:[
+      {name:"Mike Kelly", role:"Chairman, Johnson County Board of County Commissioners"}
+    ]
+  },
+  "local-leg-city": {
+    branch:"leg", tier:"Local &middot; Legislative",
+    title:"Overland Park City Council",
+    desc:"The City Council passes local ordinances, approves the city budget, and oversees city departments and services. Overland Park's 12-member Council has two representatives elected from each of the city's six wards.",
+    people:[
+      {name:"Melissa Cheatham", role:"City Council President, Ward 2"}
+    ]
+  },
+  "local-jud-district": {
+    branch:"jud", tier:"Local &middot; Judicial",
+    title:"District Courts",
+    desc:"Kansas District Courts are where most serious criminal cases, civil lawsuits, family law matters, and probate cases are heard. Johnson County is part of the state's 10th Judicial District.",
+    people:[
+      {name:"James Charles Droege", role:"Chief Judge, Johnson County District Court (10th Judicial District)"}
+    ]
+  },
+  "local-jud-county": {
+    branch:"jud", tier:"Local &middot; Judicial",
+    title:"County Courts",
+    desc:"Kansas doesn't run a separate 'county court' tier the way some states do &mdash; county-level judicial business (like district court administration, records, and probate filings) runs through the same District Court system shown to the left, rather than a distinct court of its own.",
+    people:[],
+    note:"This is a good example of where a diagram can imply a clean, separate box for every level even when the real system is messier. Worth discussing: why might a state choose to combine these functions instead of keeping them separate?"
+  },
+  "local-jud-municipal": {
+    branch:"jud", tier:"Local &middot; Judicial",
+    title:"Municipal Courts",
+    desc:"Municipal Court handles violations of city ordinances within Overland Park &mdash; things like traffic tickets, DUI, and other city code violations. It only has authority over cases that both happen inside city limits and involve a city ordinance violation, not state law.",
+    people:[
+      {name:"Ryan Dixon", role:"Presiding Judge, Overland Park Municipal Court"}
+    ]
+  }
+};
+
+const overlay = document.getElementById('overlay');
+const modal = document.getElementById('modal');
+const modalEyebrow = document.getElementById('modalEyebrow');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalOfficeholders = document.getElementById('modalOfficeholders');
+const modalNote = document.getElementById('modalNote');
+
+function openModal(key){
+  const d = DATA[key];
+  if(!d) return;
+  modal.className = 'modal ' + d.branch;
+  modalEyebrow.innerHTML = d.tier;
+  modalTitle.innerHTML = d.title;
+  modalDesc.innerHTML = d.desc;
+  modalOfficeholders.innerHTML = '';
+  d.people.forEach(p=>{
+    const row = document.createElement('div');
+    row.className = 'officeholder';
+    row.innerHTML = '<span class="oh-mark"></span><span><span class="oh-name">'+p.name+'</span><br><span class="oh-role">'+p.role+'</span></span>';
+    modalOfficeholders.appendChild(row);
+  });
+  if(d.note){
+    modalNote.style.display = 'block';
+    modalNote.innerHTML = d.note;
+  } else {
+    modalNote.style.display = 'none';
+  }
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.hotspot').forEach(btn=>{
+  btn.addEventListener('click', ()=> openModal(btn.dataset.key));
+});
+document.getElementById('modalClose').addEventListener('click', closeModal);
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
