@@ -190,7 +190,7 @@ body {
     <div class="level-intro"><h2>Match Each Principle to Its Definition</h2><p>Drag a principle from the sidebar onto the correct definition card. Place all four, then click Check Answers.</p></div>
     <div class="round-indicator"><span class="round-label">Round</span><div class="round-pip active" id="l1-pip-1"></div><div class="round-pip" id="l1-pip-2"></div></div>
     <div class="game-layout" id="l1-layout">
-      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l1-chips"></div></div>
+      <div class="sidebar" ondragover="dover(event)" ondragleave="dleave(event)" ondrop="dropSidebar(event,1)"><div class="sidebar-title">Principles</div><div id="l1-chips"></div></div>
       <div>
         <div class="card-grid" id="l1-grid"></div>
         <div class="submit-row"><button class="btn-submit" id="l1-submit" disabled onclick="submitL(1)">Check Answers</button></div>
@@ -206,7 +206,7 @@ body {
     <div class="level-intro"><h2>Match Each Principle to an Example</h2><p>Each card shows a principle in action. Drag the correct principle onto it. Place all four, then click Check Answers.</p></div>
     <div class="round-indicator"><span class="round-label">Round</span><div class="round-pip active" id="l2-pip-1"></div><div class="round-pip" id="l2-pip-2"></div></div>
     <div class="game-layout" id="l2-layout">
-      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l2-chips"></div></div>
+      <div class="sidebar" ondragover="dover(event)" ondragleave="dleave(event)" ondrop="dropSidebar(event,2)"><div class="sidebar-title">Principles</div><div id="l2-chips"></div></div>
       <div>
         <div class="card-grid" id="l2-grid"></div>
         <div class="submit-row"><button class="btn-submit" id="l2-submit" disabled onclick="submitL(2)">Check Answers</button></div>
@@ -222,7 +222,7 @@ body {
     <div class="level-intro"><h2>Scenario Challenge</h2><p>Drag the principle that best fits each scenario. Flip the toggle: upheld or violated? Set all four cards, then click Check Answers.</p></div>
     <div class="round-indicator" id="l3-round-ind"><span class="round-label">Round</span><div class="round-pip active" id="l3-pip-1"></div><div class="round-pip" id="l3-pip-2"></div><div class="round-pip" id="l3-pip-3"></div></div>
     <div class="game-layout" id="l3-layout">
-      <div class="sidebar"><div class="sidebar-title">Principles</div><div id="l3-chips"></div></div>
+      <div class="sidebar" ondragover="dover(event)" ondragleave="dleave(event)" ondrop="dropSidebar(event,3)"><div class="sidebar-title">Principles</div><div id="l3-chips"></div></div>
       <div>
         <div class="card-grid" id="l3-grid"></div>
         <div class="submit-row"><button class="btn-submit" id="l3-submit" disabled onclick="submitL3()">Check Answers</button></div>
@@ -470,13 +470,27 @@ function dropScen(e,ci){
 
 function renderDZ(ci,lv,p){
   const z=document.getElementById('dz-'+lv+'-'+ci);if(!z)return;
-  if(p){z.classList.add('has-chip');z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}`;}
-  else{z.classList.remove('has-chip');z.innerHTML='Drop here';}
+  if(p){
+    z.classList.add('has-chip');
+    z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}<span style="margin-left:7px;opacity:0.55;font-weight:700;cursor:pointer;font-size:1em;" title="Clear selection">&times;</span>`;
+    z.onclick=()=>clearDZ(ci,lv);
+  } else {
+    z.classList.remove('has-chip');
+    z.innerHTML='Drop here';
+    z.onclick=null;
+  }
 }
 function renderSDZ(ci,p){
   const z=document.getElementById('sdz-'+ci);if(!z)return;
-  if(p){z.classList.add('has-chip');z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}`;}
-  else{z.classList.remove('has-chip');z.innerHTML='Drop principle here';}
+  if(p){
+    z.classList.add('has-chip');
+    z.innerHTML=`<img src="${ICONS[p]}" alt="">${p}<span style="margin-left:6px;opacity:0.5;font-weight:700;cursor:pointer;font-size:1em;" title="Clear selection">&times;</span>`;
+    z.onclick=()=>clearDZ(ci,3);
+  } else {
+    z.classList.remove('has-chip');
+    z.innerHTML='Drop principle here';
+    z.onclick=null;
+  }
 }
 
 function checkReady(lv){
@@ -653,6 +667,46 @@ function nextRoundL3(){
     document.getElementById('l3-banner').classList.remove('show');
     renderRound3();
   }
+}
+
+// ── CLEAR ──
+function clearDZ(ci,lv){
+  if(lv===3){
+    const st=state[3];
+    if(!st.assignments[ci]) return;
+    st.assignments[ci]=null;
+    renderSDZ(ci,null);
+  } else {
+    const st=state[lv];
+    const p=st.assignments[ci];
+    if(!p) return;
+    const chip=document.getElementById(chipId(p,lv));
+    if(chip) chip.classList.remove('used');
+    st.assignments[ci]=null;
+    renderDZ(ci,lv,null);
+  }
+  checkReady(lv);
+}
+
+function dropSidebar(e,lv){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if(!dragP) return;
+  if(lv===3){
+    const st=state[3];
+    for(const[k,v] of Object.entries(st.assignments)){
+      if(v===dragP){ st.assignments[k]=null; renderSDZ(k,null); }
+    }
+  } else {
+    const st=state[lv];
+    for(const[k,v] of Object.entries(st.assignments)){
+      if(v===dragP){ st.assignments[k]=null; renderDZ(k,lv,null); }
+    }
+    const chip=document.getElementById(chipId(dragP,lv));
+    if(chip) chip.classList.remove('used');
+  }
+  dragP=null;
+  checkReady(lv);
 }
 
 // ── LEVEL SWITCH ──
