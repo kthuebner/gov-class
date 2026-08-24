@@ -31,29 +31,10 @@ body{
   -webkit-text-size-adjust:100%;
 }
 
-/* ---------- Header ---------- */
-header{
-  padding:22px 24px 14px;
-  border-bottom:1px solid var(--rule);
-  background:var(--paper);
-}
-.head-inner{max-width:1500px;margin:0 auto}
-.eyebrow{
-  font-family:'Oswald',sans-serif;
-  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ink-soft);margin:0 0 4px;
-}
-h1{
-  font-family:'Oswald',sans-serif;
-  font-weight:600;font-size:clamp(1.5rem,3.4vw,2.25rem);
-  letter-spacing:.01em;margin:0 0 6px;text-transform:uppercase;
-}
-.lede{margin:0;max-width:70ch;color:var(--ink-soft);font-size:.95rem}
-
 /* ---------- Controls ---------- */
 .controls{
   display:flex;flex-wrap:wrap;gap:8px;align-items:center;
-  padding:12px 24px;background:var(--paper);
+  padding:14px 24px;background:var(--paper);
   border-bottom:1px solid var(--rule);
   position:sticky;top:0;z-index:40;
 }
@@ -208,7 +189,6 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
 }
 
 @media (max-width:640px){
-  header{padding:16px 16px 12px}
   .controls,.viewer-wrap,.rail-wrap{padding-left:14px;padding-right:14px}
   .panel-head,.panel-body,.panel-foot{padding-left:18px;padding-right:18px}
   .hint{display:none}
@@ -220,13 +200,6 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
 </head>
 <body>
 
-<header>
-  <div class="head-inner">
-    <p class="eyebrow">Unit 4: The Legislative Branch</p>
-    <h1>How a Bill Becomes a Law</h1>
-    <p class="lede">Follow the path from left to right. Hover over any step to light it up, click it to open the details, and use the overview button when you want to see the whole process at once.</p>
-  </div>
-</header>
 
 <div class="controls">
   <div class="controls-inner">
