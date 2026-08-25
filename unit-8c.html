@@ -38,7 +38,7 @@ body{
   border-bottom:1px solid var(--rule);
   position:sticky;top:0;z-index:40;
 }
-.controls-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.controls-inner{max-width:1900px;margin:0 auto;width:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 button{font-family:'Oswald',sans-serif;cursor:pointer}
 .btn{
   background:var(--paper);border:1px solid var(--rule);color:var(--ink);
@@ -56,7 +56,7 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
 }
 
 /* ---------- Viewer ---------- */
-.viewer-wrap{max-width:1500px;margin:0 auto;padding:18px 24px 0}
+.viewer-wrap{max-width:1900px;margin:0 auto;padding:16px 20px 26px}
 .viewer{
   position:relative;overflow:auto;
   background:#eaeaea;border:1px solid var(--rule);border-radius:4px;
@@ -113,28 +113,6 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
 .viewer.no-image .img-fallback{display:block}
 .viewer.no-image .stage{display:none}
 
-/* ---------- Rail ---------- */
-.rail-wrap{max-width:1500px;margin:0 auto;padding:14px 24px 34px}
-.rail{
-  display:flex;gap:6px;align-items:stretch;overflow-x:auto;padding-bottom:6px;
-}
-.chip{
-  flex:0 0 auto;background:var(--paper);border:1px solid var(--rule);
-  border-bottom:3px solid var(--chip,#bfb298);
-  border-radius:3px;padding:6px 11px;min-width:74px;text-align:left;
-  transition:transform .12s,border-color .12s,background .12s;
-}
-.chip:hover{background:#f0e8d6;transform:translateY(-2px)}
-.chip.current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.chip .n{
-  display:block;font-family:'Oswald',sans-serif;font-size:.68rem;
-  letter-spacing:.14em;text-transform:uppercase;opacity:.72;
-}
-.chip .t{
-  display:block;font-family:'Oswald',sans-serif;font-size:.8rem;line-height:1.2;
-  white-space:nowrap;
-}
-
 /* ---------- Modal ---------- */
 .overlay{
   position:fixed;inset:0;background:rgba(30,27,22,.62);
@@ -189,7 +167,7 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
 }
 
 @media (max-width:640px){
-  .controls,.viewer-wrap,.rail-wrap{padding-left:14px;padding-right:14px}
+  .controls,.viewer-wrap{padding-left:12px;padding-right:12px}
   .panel-head,.panel-body,.panel-foot{padding-left:18px;padding-right:18px}
   .hint{display:none}
 }
@@ -221,8 +199,6 @@ button{font-family:'Oswald',sans-serif;cursor:pointer}
   </div>
 </div>
 
-<div class="rail-wrap">
-  <div class="rail" id="rail"></div>
 </div>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
@@ -505,17 +481,6 @@ ALL.forEach(node=>{
   stage.appendChild(el);
 });
 
-/* ---------- Rail ---------- */
-const rail = document.getElementById('rail');
-NODES.forEach((node,i)=>{
-  const c = document.createElement('button');
-  c.className='chip'; c.type='button'; c.dataset.id=node.id;
-  c.style.setProperty('--chip', PHASE[node.phase].color);
-  c.innerHTML = '<span class="n">'+node.rail.n+'</span><span class="t">'+node.rail.t+'</span>';
-  c.addEventListener('click', ()=>{ current=i; focusNode(node.id); openNode(node.id); });
-  rail.appendChild(c);
-});
-
 /* ---------- Zoom and panning ---------- */
 let mode = 'focus';           // 'focus' or 'overview'
 let dimOn = false;            // spotlight dimming turns on after the first move
@@ -523,7 +488,9 @@ let current = 0;              // index into NODES
 
 function fitWidth(){ return viewer.clientWidth; }
 function focusWidth(){
-  const w = Math.max(fitWidth()*1.9, 1400);
+  // Push to the image's native width where there is room, so the card text
+  // on the diagram itself stays readable.
+  const w = Math.max(fitWidth()*2.4, 1700);
   return Math.min(w, IMG_W);
 }
 function applyMode(scrollToCurrent){
@@ -534,7 +501,7 @@ function applyMode(scrollToCurrent){
   if(mode==='overview'){
     viewer.style.height = Math.ceil(stageH) + 'px';
   }else{
-    const avail = Math.max(320, Math.min(window.innerHeight*0.62, 640));
+    const avail = Math.max(360, Math.min(window.innerHeight*0.86, 860));
     viewer.style.height = Math.ceil(Math.min(stageH, avail)) + 'px';
   }
   document.getElementById('zoomBtn').textContent =
@@ -559,9 +526,6 @@ function focusNode(id, dim){
 function highlight(id, dim){
   const on = (dim===undefined) ? true : !!dim;
   stage.querySelectorAll('.hot').forEach(h=>h.classList.toggle('lit', on && h.dataset.id===id));
-  rail.querySelectorAll('.chip').forEach(c=>c.classList.toggle('current', c.dataset.id===id));
-  const chip = rail.querySelector('.chip[data-id="'+id+'"]');
-  if(chip) chip.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
 }
 
 /* drag to pan */
