@@ -126,6 +126,39 @@
   .ghost{position:fixed;z-index:999;pointer-events:none;width:240px;
     transform:translate(-50%,-50%) rotate(-1.2deg);box-shadow:0 10px 24px rgba(43,39,35,.3);opacity:.97;}
 
+  .score{margin-top:14px;border:1.5px solid var(--line);border-top:4px solid var(--brick);
+    border-radius:4px;background:var(--paper);padding:16px 18px 18px;}
+  .score[hidden]{display:none;}
+  .scorehead{display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid var(--line);}
+  .scorehead .big{font-family:'Oswald',sans-serif;font-weight:600;line-height:1;
+    color:var(--brick-dark);white-space:nowrap;}
+  .scorehead .big b{font-size:3.1rem;font-weight:600;}
+  .scorehead .big span{font-size:1.4rem;color:var(--muted);margin-left:4px;}
+  .scorehead .meta{flex:1 1 260px;}
+  .scorehead .pct{font-family:'Oswald',sans-serif;text-transform:uppercase;
+    letter-spacing:.07em;font-size:.86rem;margin-bottom:5px;}
+  .scorehead .note{font-size:.93rem;line-height:1.45;color:var(--muted);}
+  .sbtns{display:flex;flex-direction:column;gap:6px;flex:0 0 auto;}
+  .combined{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);
+    font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.07em;
+    font-size:.86rem;color:var(--muted);}
+  .combined b{color:var(--brick-dark);font-size:1.15rem;font-weight:600;}
+  .combined .pend{font-family:'Lora',serif;text-transform:none;letter-spacing:0;font-size:.9rem;}
+  .again{appearance:none;border:1.5px solid var(--brick-dark);background:var(--brick);color:#fff;
+    padding:8px 15px;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;
+    border-radius:3px;cursor:pointer;white-space:nowrap;}
+  .again:hover{background:var(--brick-dark);}
+  .again:focus-visible{outline:2.5px solid var(--ink);outline-offset:2px;}
+  .breakdown{list-style:none;margin:0;padding:0;display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:5px 16px;}
+  .breakdown li{font-size:.88rem;line-height:1.4;display:flex;gap:8px;align-items:baseline;}
+  .breakdown .tag{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:.65rem;
+    letter-spacing:.07em;padding:2px 6px;border-radius:2px;white-space:nowrap;flex:0 0 auto;
+    min-width:82px;text-align:center;}
+  .tag.first{background:var(--green);color:#fff;}
+  .tag.retry{background:var(--sand);color:var(--brick-dark);}
+  .tag.shown{background:var(--muted);color:#fff;}
   .recap{margin-top:14px;border:1.5px solid var(--line);border-top:4px solid var(--green);
     border-radius:4px;background:var(--paper);padding:14px 16px 16px;}
   .recap[hidden]{display:none;}
@@ -177,6 +210,22 @@
   <p class="status" id="status" aria-live="polite"></p>
 
   <div class="tray" id="tray"></div>
+
+  <section class="score" id="score" hidden>
+    <div class="scorehead">
+      <div class="big"><b id="scoreNum">0</b><span id="scoreOf">/ 12</span></div>
+      <div class="meta">
+        <div class="pct" id="scorePct"></div>
+        <div class="note" id="scoreNote"></div>
+      </div>
+      <div class="sbtns">
+        <button class="again" id="againBtn" type="button">Try again</button>
+        <button class="btn" id="goBtn" type="button"></button>
+      </div>
+    </div>
+    <ul class="breakdown" id="breakdown"></ul>
+    <div class="combined" id="combined"></div>
+  </section>
 
   <section class="recap" id="recap" hidden>
     <h2 id="recapTitle"></h2>
@@ -294,13 +343,20 @@
       prompt=document.getElementById("prompt"), qnum=document.getElementById("qnum"),
       qtext=document.getElementById("qtext"),
       tab1=document.getElementById("tab1"), tab2=document.getElementById("tab2"),
-      revealBtn=document.getElementById("revealBtn");
+      revealBtn=document.getElementById("revealBtn"),
+      score=document.getElementById("score"), scoreNum=document.getElementById("scoreNum"),
+      scoreOf=document.getElementById("scoreOf"), scorePct=document.getElementById("scorePct"),
+      scoreNote=document.getElementById("scoreNote"), breakdown=document.getElementById("breakdown"),
+      combined=document.getElementById("combined"), goBtn=document.getElementById("goBtn");
 
   var HINT1 = "Drag each term onto the blurred label it belongs to, in any order. On a touchscreen, tap a card and then tap the label.";
   var HINT2 = "Read the question, then click the body on the chart that handles it.";
 
   var level=1, slots={}, cards={}, nodes={}, placed=0, misses=0, picked=null;
-  var order=[], qi=0, answered=0, qmiss=0, locked=false;
+  var order=[], qi=0, answered=0, qmiss=0, locked=false, curWrong=0;
+  /* Per item outcome for both levels: first | retry | shown. Kept across a level
+     switch so the two can be added into one combined score. */
+  var RES={1:{},2:{}}, DONE={1:false,2:false}, L1WRONG={};
 
   function item(k){ for (var i=0;i<L1.length;i++) if (L1[i].key===k) return L1[i]; return null; }
   function node(k){ for (var i=0;i<NODES.length;i++) if (NODES[i].key===k) return NODES[i]; return null; }
@@ -449,22 +505,17 @@
   function tryPlace(d,slot){
     if (!d) return;
     if (slot.dataset.key===d.key){
+      RES[1][d.key]=L1WRONG[d.key]?"retry":"first";
       fillSlot(slots[d.key],d,false);
       cards[d.key].classList.add("gone");
       placed++; clearPick(); updateCount();
       if (placed===L1.length){
-        showRecap(1);
-        say("All twelve labeled. "+(misses===0?"<strong>No misses.</strong> ":"Finished with <strong>"+misses+" miss"+(misses===1?"":"es")+"</strong>. ")+
-            "Every branch repeats at all three levels.","good");
-        var b=document.createElement("button");
-        b.className="nextbtn"; b.type="button"; b.textContent="Go to Level 2";
-        b.addEventListener("click",function(){ setLevel(2); });
-        status.appendChild(b);
+        showScore(1); showRecap(1);
       } else {
         say("<strong>"+d.title+"</strong> is right. "+d.text,"good");
       }
     } else {
-      misses++;
+      misses++; L1WRONG[d.key]=(L1WRONG[d.key]||0)+1;
       slot.classList.remove("wrong"); void slot.offsetWidth; slot.classList.add("wrong");
       clearPick();
       say("Not there. <strong>"+d.title+"</strong> belongs somewhere else on the chart.","bad");
@@ -493,12 +544,13 @@
     });
     tray.hidden=true; tray.innerHTML="";
     order=shuffle(QUESTIONS.map(function(q){ return q.key; }));
-    qi=0; answered=0; qmiss=0; locked=false;
+    qi=0; answered=0; qmiss=0; locked=false; curWrong=0;
     prompt.hidden=false;
     askQuestion();
   }
 
   function askQuestion(){
+    curWrong=0;
     var q=qOf(order[qi]);
     qnum.textContent="Question "+(qi+1)+" of "+order.length;
     qtext.textContent=q.q;
@@ -510,13 +562,13 @@
     if (level!==2||locked) return;
     var want=order[qi], q=qOf(want);
     if (key===want){
-      locked=true; answered++; updateCount();
+      locked=true; answered++; RES[2][want]=(curWrong===0?"first":"retry"); updateCount();
       var el=nodes[key];
       el.classList.remove("hitok"); void el.offsetWidth; el.classList.add("hitok","solved");
       say("<strong>"+node(want).name.replace(/^the /,"The ")+".</strong> "+q.why,"good");
       nextControl();
     } else {
-      qmiss++;
+      qmiss++; curWrong++;
       var bad=nodes[key];
       bad.classList.remove("hitbad"); void bad.offsetWidth; bad.classList.add("hitbad");
       say("That is <strong>"+node(key).name+"</strong>. Look again at which level and which branch the question is describing.","bad");
@@ -529,16 +581,80 @@
     b.textContent=(qi+1<order.length)?"Next question":"See results";
     b.addEventListener("click",function(){
       if (qi+1<order.length){ qi++; locked=false; askQuestion(); }
-      else {
-        showRecap(2);
-        say("All "+order.length+" answered. "+(qmiss===0?"<strong>No misses.</strong>":"Finished with <strong>"+qmiss+" miss"+(qmiss===1?"":"es")+"</strong>.")+
-            " The same three branches appear at all three levels, doing the same kind of work on a smaller scale.","good");
-      }
+      else { showScore(2); showRecap(2); }
     });
     status.appendChild(b);
   }
 
   /* ---------------- shared ---------------- */
+
+  function firstOf(n){
+    var c=0, r=RES[n];
+    for (var k in r) if (r[k]==="first") c++;
+    return c;
+  }
+
+  function showScore(n){
+    DONE[n]=true;
+    var items = (n===1)
+      ? L1.map(function(d){ return {key:d.key,name:d.title}; })
+      : order.map(function(k){ return {key:k,name:node(k).name}; });
+    var total=items.length, first=0, retry=0, shown=0;
+    items.forEach(function(it){
+      var r=RES[n][it.key];
+      if (r==="first") first++; else if (r==="retry") retry++; else shown++;
+    });
+    var pct=Math.round(first/total*100);
+    scoreNum.textContent=first;
+    scoreOf.textContent="/ "+total;
+    scorePct.textContent=(n===1?"Level 1: ":"Level 2: ")+pct+"% correct on the first try";
+
+    var note;
+    if (first===total) note=(n===1)
+      ? "Every label on the first drop. You know this chart."
+      : "Every one on the first click. You can read this chart cold.";
+    else if (pct>=83) note=(n===1)
+      ? "Strong. Go back to the "+(total-first)+" you did not get first time and check which row and which column they sit in."
+      : "Strong. Go back to the "+(total-first)+" you did not get first time and ask which level the question was pointing at.";
+    else if (pct>=58) note="You have the branches down. The misses are usually about level: federal, state, or local.";
+    else note="Worth another pass. Work down one column at a time, then try again.";
+    if (retry&&shown) note+=" You got "+retry+" after a second look, and had "+shown+" shown to you.";
+    else if (retry) note+=" You got "+retry+" after a second look.";
+    else if (shown) note+=" You had "+shown+" shown to you.";
+    scoreNote.textContent=note;
+
+    breakdown.innerHTML="";
+    items.forEach(function(it){
+      var r=RES[n][it.key]||"shown", li=document.createElement("li"), t=document.createElement("span");
+      t.className="tag "+r;
+      t.textContent=(r==="first")?"First try":(r==="retry")?"After a miss":"Shown";
+      li.appendChild(t);
+      var nm=it.name.replace(/^the /,"");
+      li.appendChild(document.createTextNode(nm.charAt(0).toUpperCase()+nm.slice(1)));
+      breakdown.appendChild(li);
+    });
+
+    var other=(n===1)?2:1;
+    goBtn.textContent=(other===2)?"Go to Level 2":"Back to Level 1";
+    goBtn.onclick=function(){ setLevel(other); };
+
+    if (DONE[1]&&DONE[2]){
+      var c=firstOf(1)+firstOf(2), ct=L1.length+QUESTIONS.length;
+      combined.innerHTML="Combined score <b>"+c+" / "+ct+"</b> &nbsp;"+Math.round(c/ct*100)+"% across both levels";
+    } else {
+      combined.innerHTML='<span class="pend">Finish Level '+other+' and this card will add the two together for a combined score out of '+(L1.length+QUESTIONS.length)+'.</span>';
+    }
+
+    if (n===1){
+      qnum.textContent=""; qtext.textContent="";
+      say("All "+total+" labeled. Every branch repeats at all three levels.","good");
+    } else {
+      qnum.textContent="Level 2 complete";
+      qtext.textContent="All "+total+" answered. Your results are below.";
+      say("Level 2 complete. The same three branches appear at all three levels, doing the same kind of work on a smaller scale.","good");
+    }
+    score.hidden=false;
+  }
 
   function updateCount(){
     count.innerHTML = (level===1)
@@ -573,31 +689,34 @@
       clearPick();
       L1.forEach(function(d){
         if (!slots[d.key].dataset.done){
+          RES[1][d.key]="shown";
           fillSlot(slots[d.key],d,true);
           if (cards[d.key]) cards[d.key].classList.add("gone");
         }
       });
-      placed=L1.length; updateCount(); showRecap(1);
-      say("Answers shown. The printed labels are back on the chart.","");
+      placed=L1.length; updateCount(); showScore(1); showRecap(1);
     } else {
       if (locked) return;
       var want=order[qi];
       var el=nodes[want];
       el.classList.add("solved");
-      locked=true; answered++; qmiss++; updateCount();
+      locked=true; answered++; RES[2][want]="shown"; updateCount();
       say("The answer is <strong>"+node(want).name+"</strong>. "+qOf(want).why,"");
       nextControl();
     }
   });
 
   document.getElementById("resetBtn").addEventListener("click",function(){ setLevel(level); });
+  document.getElementById("againBtn").addEventListener("click",function(){ setLevel(2); });
   tab1.addEventListener("click",function(){ setLevel(1); });
   tab2.addEventListener("click",function(){ setLevel(2); });
 
   function setLevel(n){
     level=n;
     placed=0; misses=0; picked=null;
-    recap.hidden=true;
+    RES[n]={}; DONE[n]=false;
+    if (n===1) L1WRONG={};
+    recap.hidden=true; score.hidden=true;
     tab1.setAttribute("aria-selected",n===1?"true":"false");
     tab2.setAttribute("aria-selected",n===2?"true":"false");
     if (n===1){
