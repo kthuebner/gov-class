@@ -158,9 +158,16 @@ section{padding-block:40px 8px}
 .split .sr{background:var(--red);color:var(--bg);justify-content:flex-end;padding-inline:12px}
 .split .su{flex:1;justify-content:center;color:var(--muted);font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.12em}
 .verdict{display:flex;justify-content:space-between;align-items:baseline;gap:8px 20px;flex-wrap:wrap;margin:14px 0 4px}
-.verdict strong{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:26px;font-weight:600}
+.verdict strong{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:22px;font-weight:600}
 .verdict span{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
-.breakdown{display:grid;gap:8px;margin-top:20px}
+.tg{display:grid;gap:8px}
+.tg + .tg{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule)}
+.tg-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tg-head h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:16px;margin:0}
+.tg-part{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--amber)}
+.compare{margin:20px 0 0;padding:12px 16px;background:var(--panel);border-radius:3px;font-size:15px}
+.bd-title{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--muted);margin:22px 0 0;text-align:center}
+.breakdown{display:grid;gap:8px;margin-top:10px}
 .bd-row{display:grid;grid-template-columns:3.5ch 1fr 9.5rem 1fr 3.5ch;align-items:center;gap:10px;font-variant-numeric:tabular-nums}
 .bd-row .n{font-family:var(--display);font-weight:600;font-size:16px}
 .bd-row .n.l{color:var(--blue);text-align:right} .bd-row .n.r{color:var(--red)}
@@ -174,9 +181,19 @@ section{padding-block:40px 8px}
 .btn{border:1px solid var(--ink);background:transparent;border-radius:3px;padding:7px 16px;font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:13px;cursor:pointer}
 .btn.warn{border-color:var(--red);color:var(--red)}
 
+/* section totals */
+.sec-tally{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;max-width:720px;margin:14px auto 0;padding:10px 16px;background:var(--panel);border:1px solid var(--rule);border-radius:3px}
+.sec-tally .tb-split{flex:1 1 80px;height:12px}
+.st-name{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:12.5px;color:var(--ink);font-weight:600}
+.st-lean{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--amber);font-weight:600}
+.st-open{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.st-clear{background:none;border:1px solid var(--rule);border-radius:3px;padding:2px 10px;font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--muted);cursor:pointer}
+
 /* sticky tally bar */
 .tallybar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--panel);border-top:1px solid var(--rule);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 18px rgba(40,30,15,.06)}
-.tb-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.tb-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px 22px}
+.tb-group{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
+a.tb-label{text-decoration:none}
 .tb-label{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--muted);white-space:nowrap}
 .tb-n{font-family:var(--display);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums;min-width:2ch}
 .tb-n.l{color:var(--blue);text-align:right} .tb-n.r{color:var(--red)}
@@ -187,22 +204,47 @@ section{padding-block:40px 8px}
 .tb-link{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:12px;white-space:nowrap}
 
 /* critical section */
-.critical{margin-top:48px;background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:30px clamp(18px,4vw,40px)}
-.critical h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.critical{margin-top:48px;background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:24px clamp(18px,4vw,36px)}
+.critical h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:21px;margin:0 0 6px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .critical h2 .ico{width:40px;height:40px}
-.critical > p.intro{max-width:68ch;color:var(--muted);margin:0 0 20px}
-.issues{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px}
-.issue h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:16px;font-weight:600;margin:0 0 6px;color:var(--amber)}
-.issue p{margin:0;font-size:15.5px}
+.critical > p.intro{max-width:68ch;color:var(--muted);margin:0 0 18px;font-size:15px}
+.issues{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 28px}
+.issue h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:14.5px;font-weight:600;margin:0 0 6px;color:var(--amber)}
+.issue p{margin:0;font-size:14px;line-height:1.5}
 .discuss{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
 .discuss h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:16px;margin:0 0 10px}
-.discuss ol{margin:0;padding-left:1.3em;display:grid;gap:8px;max-width:72ch}
+.discuss ol{margin:0;padding-left:1.3em;display:grid;gap:6px;max-width:72ch;font-size:14.5px}
 
 /* sources */
 footer{margin-top:44px;border-top:1px solid var(--rule);padding-top:22px;font-size:14px;color:var(--muted)}
 footer h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:15px;color:var(--ink);margin:0 0 10px}
 footer ol{padding-left:1.3em;margin:0 0 18px;display:grid;gap:6px}
 footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* gas and brakes */
+.gb-grid{display:grid;grid-template-columns:1fr minmax(0,1.1fr) 1fr;gap:18px;align-items:stretch}
+.gb-card{border:1px solid var(--rule);border-radius:3px;padding:18px 18px 16px;text-align:center}
+.gb-card.gas{background:var(--blue-soft)} .gb-card.brake{background:var(--red-soft)}
+.gb-card .ico{width:52px;height:52px}
+.gb-card h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:24px;margin:4px 0 0;font-weight:700}
+.gb-card.gas h3,.gb-card.gas .who{color:var(--blue)} .gb-card.brake h3,.gb-card.brake .who{color:var(--red)}
+.gb-card .who{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:600;margin:2px 0 10px}
+.gb-card p{margin:0;font-size:15px;text-align:left}
+.gb-card .short{font-weight:600;margin-bottom:8px;text-align:center}
+.gb-mid{display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:center;padding:8px 6px}
+.gb-mid p{margin:0}
+.gb-mid .one{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:18px;color:var(--amber);font-weight:600}
+.gb-note{text-align:center;font-size:13.5px;color:var(--muted);font-style:italic;margin:14px auto 0;max-width:70ch}
+
+/* part 2: issues */
+.colhead{display:grid;grid-template-columns:44px 1fr 12rem 1fr 44px;font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:14px;font-weight:600;padding-bottom:8px;border-bottom:2px solid var(--rule)}
+.colhead .l{grid-column:2;text-align:right;padding-right:18px;color:var(--blue)}
+.colhead .m{grid-column:3;text-align:center;color:var(--muted);font-size:12px;font-weight:500;align-self:end}
+.colhead .r{grid-column:4;padding-left:18px;color:var(--red)}
+.colhead small{display:block;font-weight:400;font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.issues-sec .cell.left,.issues-sec .cell.right{font-size:15px;line-height:1.45}
+.disclaimer{max-width:560px;margin:0 auto 22px;border:2px solid var(--red);color:var(--ink);background:var(--bg);padding:12px 18px;text-align:center;transform:rotate(-1deg);font-size:15px}
+.disclaimer strong{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;color:var(--red);display:block;font-size:14px;margin-bottom:2px}
 
 /* part 2: two-axis compass */
 :root{--auth:#A49D91;--lib:#A9CB97;--tint-l:#E6EDF6;--tint-r:#F8E7E3}
@@ -224,12 +266,16 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .compass .pinit{fill:#fff;font-size:14px;font-weight:700;letter-spacing:.02em}
 .compass .tag-t{fill:#fff;font-size:18px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .compass .place:hover .pname{text-decoration:underline}
+.compass .fac-t{font-size:14px;font-weight:500;letter-spacing:.03em}
+.compass .fac-L rect.pill{fill:var(--blue-soft);stroke:var(--blue)} .compass .fac-L text{fill:var(--blue)}
+.compass .fac-R rect.pill{fill:var(--red-soft);stroke:var(--red)} .compass .fac-R text{fill:var(--red)}
+.compass .fac-C rect.pill{fill:var(--panel);stroke:#7E6FA3} .compass .fac-C text{fill:var(--ink)}
 .scroll-hint{display:none;font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0;font-style:italic}
 .place-detail{margin-top:16px;border-top:2px solid var(--amber);background:var(--panel);padding:18px clamp(14px,3vw,28px);min-height:7.5em}
 .place-detail h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:20px;margin:0 0 2px}
 .place-detail .pos{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--amber);margin-bottom:8px}
 .place-detail p{margin:0;max-width:78ch;font-size:15.5px}
-.axis-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 28px;margin-top:26px}
+.axis-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;margin-top:26px}
 .axis-cards h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:16px;font-weight:600;margin:0 0 6px;color:var(--amber)}
 .axis-cards p{margin:0;font-size:15px}
 @media (max-width:720px){.axis-cards{grid-template-columns:1fr}.scroll-hint{display:block}}
@@ -241,6 +287,7 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .rows::before,.rows::after{display:none}
   .axis{display:none}
   .ex-inner,.issues,footer .credit{grid-template-columns:1fr}
+  .st-name{flex-basis:100%;text-align:center}
   .critical h2{font-size:20px;letter-spacing:.1em}
   .sec-head h2{font-size:18px;gap:8px}
   .dashes i{width:9px}
@@ -248,7 +295,13 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .chip{white-space:normal}
   .core .word{letter-spacing:.03em}
   .bd-row{grid-template-columns:3ch 1fr 6.5rem 1fr 3ch;gap:6px}
-  .tb-label,.tb-count{display:none}
+  .tb-inner{gap:8px 12px}
+  .tb-group{gap:5px}
+  .tb-label{font-size:11px;letter-spacing:.08em}
+  .tb-n{font-size:15px}
+  .tb-inner > .tb-link{display:none}
+  .gb-grid,.colhead{grid-template-columns:1fr}
+  .colhead{display:none}
   .how{flex-direction:column;align-items:center}
 }
 @media (prefers-reduced-motion:reduce){
@@ -262,7 +315,7 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   <header>
     <div class="eyebrow"><span class="dashes"><i></i><i></i><i></i><i></i><i></i></span>Unit 7 &middot; American Politics<span class="dashes"><i></i><i></i><i></i><i></i><i></i></span></div>
     <h1><span class="l">Left</span><span class="and">and</span><span class="r">Right</span></h1>
-    <p class="lede">A readable version of the Information is Beautiful graphic that explains the political spectrum through values and beliefs. The graphic's text is kept as written, except for the Parties and Religion rows, which are updated for an American audience. The polling is updated, and a section at the end looks at where the graphic falls short.</p>
+    <p class="lede">Part 1 is a readable version of the Information is Beautiful graphic that explains the political spectrum through values and beliefs. Part 2 shows where today's two major parties stand on the issues, and Part 3 adds a second axis. The graphic's text is kept as written, except for the Parties and Religion rows, which are updated for an American audience. The polling is updated, and a section at the end looks at where the graphic falls short.</p>
     <div class="how">
       <span><span class="chk l demo" style="opacity:1;background:var(--blue);cursor:default" aria-hidden="true"><svg viewBox="0 0 16 16" style="visibility:visible"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>Click the side of each row you agree with more. Click again to clear it.</span>
       <span><span class="ex-btn demo" aria-hidden="true" style="cursor:default"><span class="q">?</span></span>Click a label marked with ? to open a definition.</span>
@@ -270,48 +323,41 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     </div>
   </header>
 
-  <main id="content"></main>
+  <div id="intro"></div>
 
-  <section id="tally" aria-live="polite"></section>
+  <div class="part-divider"><span class="dashes"><i></i><i></i><i></i><i></i><i></i></span>Part 1 &middot; Values and Beliefs<span class="dashes"><i></i><i></i><i></i><i></i><i></i></span></div>
+  <main id="content"></main>
 
   <section class="critical" id="critical">
     <h2><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle class="accf" cx="20" cy="20" r="11"/><path d="M28 28l12 12"/><path d="M15 17a6 6 0 0 1 5-4"/></svg>Read It Critically</h2>
-    <p class="intro">This graphic is popular because it is clear and memorable. That clarity comes at a cost. Every choice about which words to use and which traits to include is an argument. Before you accept it as a description of real people, look at how it was built.</p>
+    <p class="intro">Clear, memorable charts are also arguments. Before you accept this one, think about three things.</p>
     <div class="issues">
       <div class="issue">
         <h3>It started as a British chart</h3>
-        <p>The graphic comes from a British designer. Its party row originally listed Labour, the British left party, and ran from Communism on the left to Nationalist on the right. This version swaps in American groups, but a single row still cannot show how far apart these groups really are. American parties are broad coalitions, and each one holds people who disagree with parts of this chart.</p>
-      </div>
-      <div class="issue">
-        <h3>The family section is one theory</h3>
-        <p>The nurturing parent and strict parent models come from linguist George Lakoff's book <em>Moral Politics</em> (1996). It is an influential theory, but a contested one, and Lakoff wrote openly as a progressive. Jonathan Haidt's Moral Foundations Theory is a leading alternative that explains the same divide in different terms. The graphic presents the theory as fact.</p>
-      </div>
-      <div class="issue">
-        <h3>Who would describe themselves this way?</h3>
-        <p>Many words on the right side are ones conservatives would reject: exclusive, aggression, militancy, respect and fear, survival of the fittest. The left side mostly gets words its own supporters would choose: fulfilled, creates potential, inclusive. There are jabs in the other direction too. "Tax and spend" is a phrase critics of the left use, and "interfere" is not a neutral verb. A fair comparison lets each side describe itself.</p>
-      </div>
-      <div class="issue">
-        <h3>Some labels do not fit</h3>
-        <p>"Equity" sits on the right, but in current American usage the word is strongly associated with the left. The original Religion row called the left's religion "scientific," which is hard to define, so that row has been rewritten here. The urban and rural job lists are stereotypes. Plenty of teachers are conservative, and plenty of police officers are liberal.</p>
+        <p>The designer is British, and the original party row listed Labour and Communism. This version swaps in American groups, but American parties are broad coalitions, and each includes people who disagree with parts of this chart.</p>
       </div>
       <div class="issue">
         <h3>Generalization or stereotype?</h3>
-        <p>A generalization describes a pattern in a group, is backed by evidence, and allows for exceptions: "Most Republicans favor the death penalty" (Pew puts it at 84%). A stereotype is a fixed, oversimplified image applied to everyone in a group, often with no evidence: "Liberals oppose the death penalty," when about half of Democrats actually support it. Three questions help tell them apart. Is it based on data? Does it allow for exceptions? Would you assume it about a person you just met? This graphic often slides from the first into the second by presenting a tendency as if it defined every member of a side.</p>
+        <p>A generalization describes a pattern, is backed by data, and allows exceptions: "Most Republicans favor the death penalty" (84%, Pew). A stereotype applies a fixed image to everyone: "Liberals oppose the death penalty," when about half of Democrats support it. Ask: Is it based on data? Does it allow exceptions? Would you assume it about someone you just met?</p>
       </div>
       <div class="issue">
         <h3>Averages hide the middle</h3>
-        <p>Pew measures party identification, not ideology. Within each party there are real splits. Pew found that moderate and liberal Republicans are about evenly divided on abortion, and Democrats are almost evenly split on the death penalty. A two-sided chart also leaves out libertarians, populists, and independents, who often mix positions from both columns.</p>
+        <p>Each party has real internal splits, and many people hold views from both columns. Libertarians, populists, and independents often land on both sides. Part 3 shows one way to see them.</p>
       </div>
     </div>
     <div class="discuss">
       <h3>Questions for discussion</h3>
       <ol>
-        <li>Pick three rows from the chart. Rewrite each side in words its own supporters would use. What changed, and why does it matter?</li>
+        <li>Pick a row and rewrite each side in words its own supporters would use. What changed?</li>
         <li>Find one row that reads as a fair generalization and one that reads as a stereotype. What makes the difference?</li>
-        <li>Where do your own views land? Did you find yourself in both columns? What does that say about using a single left to right line to describe people?</li>
+        <li>Did you land in both columns? What does that say about describing people with one line?</li>
       </ol>
     </div>
   </section>
+
+  <div id="issues"></div>
+
+  <section id="tally" aria-live="polite"></section>
 
   <div id="part2"></div>
 
@@ -328,18 +374,15 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     </ol>
     <div class="credit">
       <div><strong style="color:var(--ink)">Original graphic.</strong> "Left vs. Right" by David McCandless and Stephanie Posavec, <a href="https://informationisbeautiful.net" target="_blank" rel="noopener">Information is Beautiful</a>. Created 2009, revised 2015, updated 2024. Original sources listed: Encyclopedia Britannica, Wikipedia, New Scientist, Pew Research.</div>
-      <div><strong style="color:var(--ink)">This version.</strong> Text transcribed with American spelling. The Parties and Religion rows are rewritten. Polling replaced with the Pew figures above; "Left" and "Right" in the polling section mean Democrats and Democratic leaners, and Republicans and Republican leaners.</div>
+      <div><strong style="color:var(--ink)">This version.</strong> Text transcribed with American spelling. The Parties and Religion rows are rewritten. The gas and brakes framing and Part 2 are adapted from the Unit 7 slide deck. Polling replaced with the Pew figures above; "Left" and "Right" in the polling section mean Democrats and Democratic leaners, and Republicans and Republican leaners.</div>
     </div>
   </footer>
 </div>
 
 <div class="tallybar" role="region" aria-label="Your tally">
   <div class="tb-inner">
-    <span class="tb-label">Your picks</span>
-    <span class="tb-n l" id="tbL">0</span>
-    <div class="tb-split" aria-hidden="true"><i class="il" id="tbIL" style="width:0"></i><i class="ir" id="tbIR" style="width:0"></i></div>
-    <span class="tb-n r" id="tbR">0</span>
-    <span class="tb-count" id="tbCount"></span>
+    <div class="tb-group"><a class="tb-label" href="#tally">Values</a><span class="tb-n l" id="tbL-values">0</span><div class="tb-split" aria-hidden="true"><i class="il" id="tbIL-values" style="width:0"></i><i class="ir" id="tbIR-values" style="width:0"></i></div><span class="tb-n r" id="tbR-values">0</span></div>
+    <div class="tb-group"><a class="tb-label" href="#tally">Issues</a><span class="tb-n l" id="tbL-issues">0</span><div class="tb-split" aria-hidden="true"><i class="il" id="tbIL-issues" style="width:0"></i><i class="ir" id="tbIR-issues" style="width:0"></i></div><span class="tb-n r" id="tbR-issues">0</span></div>
     <a class="tb-link" href="#tally">Results</a>
   </div>
 </div>
@@ -355,6 +398,10 @@ const ICONS = {
   chart: '<path d="M7 7v34h35"/><rect x="12" y="27" width="5" height="14"/><rect class="accf" x="20.5" y="17" width="5" height="24"/><rect x="29" y="22" width="5" height="19"/><rect class="accf" x="37.5" y="12" width="4" height="29"/>',
   ballot: '<path class="accf" d="M16 30V7h16v23"/><path d="M20 17.5l3 3 5.5-6"/><rect x="7" y="26" width="34" height="15" rx="2"/><path d="M14 30h20"/>',
   scale: '<path d="M24 9v31"/><path d="M15 41h18"/><circle cx="24" cy="8" r="1.8"/><path d="M9 14h30"/><path d="M9 14l-5 11M9 14l5 11"/><path class="accf" d="M3.5 25a5.5 3 0 0 0 11 0z"/><path d="M39 14l-5 11M39 14l5 11"/><path class="accf" d="M33.5 25a5.5 3 0 0 0 11 0z"/>',
+  car: '<path class="accf" d="M4 32v-6l3-2 5-9h19l7 9h4l2 2v6z"/><path d="M13 16.5l-3 7.5h13v-7.5M26 16.5v7.5h10"/><circle cx="13" cy="33" r="4.5" style="fill:var(--bg)"/><circle cx="35" cy="33" r="4.5" style="fill:var(--bg)"/>',
+  gas: '<rect class="accf" x="17" y="5" width="14" height="30" rx="3"/><path d="M21 11v18M27 11v18"/><path d="M24 35v6M13 43h22"/>',
+  brake: '<rect class="accf" x="7" y="13" width="34" height="18" rx="3"/><path d="M12 18.5h24M12 22h24M12 25.5h24"/><path d="M24 31v10M13 43h22"/>',
+  podiums: '<path d="M5 43h38"/><circle cx="15" cy="10" r="4"/><circle cx="33" cy="10" r="4"/><path class="accf" d="M8 23h14l-2 20H10z"/><path class="accf" d="M26 23h14l-2 20h-10z"/><path d="M15 23v-7M33 23v-7"/><path d="M13 32h4M31 32h4"/>',
   lens: '<circle class="accf" cx="20" cy="20" r="11"/><path d="M28 28l12 12"/><path d="M15 17a6 6 0 0 1 5-4"/>'
 };
 const icon = n => '<svg class="ico" viewBox="0 0 48 48" aria-hidden="true">' + ICONS[n] + '</svg>';
@@ -363,11 +410,10 @@ const CHECK = '<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
 /* ---------- Explainers: [term, definition] pairs plus context ---------- */
 const EX = {
   labels: { def: [
-      ["Liberal", "In American usage, favoring an active government that expands individual rights and reduces inequality. In much of Europe the word means nearly the opposite on economics: free markets and limited government. That older meaning is called classical liberalism."],
-      ["Progressive", "Favoring reform and change to address social problems. The label goes back to the Progressive Era (about 1890 to 1920), when reformers in both parties took on monopolies and political corruption."],
-      ["Conservative", "Favoring established institutions and gradual change. Edmund Burke's Reflections on the Revolution in France (1790) is often called the founding text."],
+      ["Progressives and liberals", "Tend to push for social, political, and economic change (progress) in order to fix injustice and inequality in society. They often support more government intervention to promote social welfare, regulate industries, and advance civil rights and social justice causes."],
+      ["Conservatives", "Usually want to keep (conserve) traditional values, institutions, and social structures. They often want less government involvement in the economy, focus on individual responsibility, and keep established cultural norms and hierarchies."],
       ["Traditional", "Valuing customs, religion, and social arrangements passed down over generations."]],
-    ctx: "Most Americans do not use these labels consistently. Many call themselves moderate, and many hold liberal views on some issues and conservative views on others." },
+    ctx: "Progressive and liberal are technically not perfect synonyms, but for our purposes we use them interchangeably. In much of Europe, \"liberal\" means nearly the opposite on economics: free markets and limited government, an older meaning called classical liberalism. Most Americans do not use these labels consistently. Many call themselves moderate, and many hold liberal views on some issues and conservative views on others." },
   parties: { def: [
       ["Democratic socialist", "Someone who supports democratic elections and civil liberties combined with public ownership or strong public control of major industries and a large safety net. Keeping elections and rights is what separates it from communism. The Democratic Socialists of America (DSA) is the best-known U.S. group."],
       ["Progressive", "The reform-minded wing of the Democratic Party, pushing for larger changes on issues like health care, climate, and inequality. The label goes back to the Progressive Era (about 1890 to 1920), when reformers in both parties took on monopolies and corruption."],
@@ -394,8 +440,9 @@ const EX = {
       ["Tax and spend", "A label critics use for raising taxes to pay for government programs. Supporters would not describe themselves this way, and \"Don't tax and spend\" is the graphic's own invention."]],
     ctx: "Real debates are usually about which rules and how many, not all or nothing. Deregulation has crossed party lines: Jimmy Carter, a Democrat, signed the Airline Deregulation Act of 1978." },
   progress: { def: [
+      ["Progress", "Change meant to fix problems, injustice, or inequality."],
       ["Status quo", "Latin for \"the state in which.\" The existing state of affairs."]],
-    ctx: "\"Evolution\" presents change as natural improvement, and \"status quo\" can sound like standing still. A conservative would say the goal is to protect what works and change it carefully, not to stop all change." },
+    ctx: "This row uses the gas and brakes idea from the top of the page. The original graphic said \"Evolution\" versus \"Status quo,\" which made one side sound like it wanted no change at all. A society needs both pedals: all gas risks change that comes too fast (revolution), and all brake risks standing still." },
   ethics: { def: [
       ["Ethics", "Principles of right and wrong worked out through reasoning, often shared rules like a professional code."],
       ["Morals", "Beliefs about right and wrong held by a person or community, often rooted in religion or tradition."]],
@@ -412,19 +459,19 @@ const EX = {
   parent: { def: [
       ["Nurturing parent model", "George Lakoff's idea that liberals picture good government as a caring parent who builds empathy and responsibility to others."],
       ["Strict father model", "Lakoff's idea that conservatives picture good government as a strict parent who teaches self-discipline through rules, rewards, and punishment."]],
-    ctx: "This whole section comes from Lakoff's book Moral Politics (1996). It is one theory, written by a progressive, and it is contested. Jonathan Haidt's Moral Foundations Theory offers another explanation: people weigh values like care, fairness, loyalty, authority, and sanctity differently." },
+    ctx: "This section draws on Lakoff's book Moral Politics (1996), and political scientists have found strong support for the link. Views on child-rearing, such as whether children should be obedient or independent, are among the best predictors of political attitudes (see Stenner, The Authoritarian Dynamic, and Hetherington and Weiler, Authoritarianism and Polarization in American Politics). Jonathan Haidt's Moral Foundations Theory offers another explanation: people weigh values like care, fairness, loyalty, authority, and sanctity differently." },
   relationship: { def: [
       ["Respect and fear", "In the strict parent model, \"fear\" means fear of consequences, not fear of the parent as a person."]],
-    ctx: "Would a parent who sets firm rules describe the relationship as built on fear? This is one of the places where the graphic's wording tilts." },
+    ctx: "In survey research this shows up as how much a person values obedience and respect for authority in children, compared with curiosity and independence." },
   religion: { def: [
       ["Secular", "Not connected to religion, or organizing public life without reference to religion."],
       ["Religiously unaffiliated", "Describing yourself as atheist, agnostic, or \"nothing in particular.\" Researchers often call this group the \"nones.\""],
       ["Religious attendance", "How often a person goes to worship services. It is one of the strongest predictors of party in the United States."]],
     ctx: "The original graphic called the left's religion \"scientific, non-organized, unconventional\" and the right's \"theistic, organized, conventional.\" This row has been rewritten as a generalization based on survey patterns: people who attend services weekly lean Republican, and the unaffiliated lean Democratic. The pattern has many exceptions. Many Democrats are devout, including most Black Protestants, and many Republicans rarely attend services." },
   rights: { def: [
-      ["Positive rights", "Rights that require others, usually government, to provide something, such as a public education. \"Others must observe.\""],
-      ["Negative rights", "Rights that require others to leave you alone, such as free speech or property. \"Others must not interfere.\""]],
-    ctx: "The Bill of Rights is written mostly as negative rights: \"Congress shall make no law...\" Many debates today, such as whether health care is a right, are really arguments about positive rights." },
+      ["Positive rights", "Rights that require others, usually government, to provide something, such as a public education."],
+      ["Negative rights", "Rights that require others to leave you alone, such as free speech or property."]],
+    ctx: "The original graphic put this as \"others must observe\" versus \"others must not interfere.\" The Bill of Rights is written mostly as negative rights: \"Congress shall make no law...\" Many debates today, such as whether health care is a right, are really arguments about positive rights." },
   criminals: { def: [
       ["Structural explanation", "Crime is shaped by conditions like poverty, schools, and neighborhoods."],
       ["Individual responsibility", "People choose their actions and should be held accountable for them."]],
@@ -441,6 +488,26 @@ const EX = {
       ["Negative liberty", "Freedom from interference by others."],
       ["Positive liberty", "The freedom and ability to act and reach your potential."]],
     ctx: "Philosopher Isaiah Berlin drew this distinction in 1958. Negative liberty is usually tied to the right and positive liberty to the left. Here the wording is flipped: the left column (\"freedom from\") sounds like negative liberty, and the right column (\"the chance to achieve\") sounds like positive liberty." },
+  civil: { def: [
+      ["Affirmative action", "Policies that consider race, sex, or other background in admissions, hiring, or contracting to make up for past or present discrimination."],
+      ["DEI", "Diversity, equity, and inclusion. Programs in schools, businesses, and government meant to support people from underrepresented groups."]],
+    ctx: "In Students for Fair Admissions v. Harvard (2023), the Supreme Court ruled that colleges may not use race as a factor in admissions. Debate over DEI programs in government, business, and universities has grown since then." },
+  lgbt: { def: [
+      ["Transgender", "Describes people whose gender identity differs from the sex they were assigned at birth. Often shortened to trans."],
+      ["Gender-affirming care", "Medical and mental health care that supports a person's gender identity. For minors it can include counseling, puberty blockers, or hormones."]],
+    ctx: "The Supreme Court made same-sex marriage legal nationwide in Obergefell v. Hodges (2015). In United States v. Skrmetti (2025), it upheld a Tennessee law banning gender-affirming medical care for minors. States now have laws on both sides of this issue." },
+  deficit: { def: [
+      ["Deficit", "The gap in a single year when the government spends more than it collects in taxes."],
+      ["National debt", "The total of all past deficits that the government still owes."]],
+    ctx: "Both parties say the deficit is too large, and both have added to it when in power. The disagreement is over the fix: Democrats lean toward raising taxes on the wealthy, and Republicans lean toward cutting spending." },
+  immig: { def: [
+      ["Pathway to citizenship", "A legal route for people living in the country without legal status to eventually become citizens."],
+      ["Dreamers and DACA", "Dreamers are people brought to the U.S. illegally as children. DACA, created in 2012, protects many of them from deportation, but it does not grant citizenship."]],
+    ctx: "Border security has support in both parties. The sharpest disagreement is over what to do about the millions of people already living in the country without legal status." },
+  world: { def: [
+      ["NATO", "The North Atlantic Treaty Organization, a military alliance formed in 1949. Members promise to defend each other if attacked."],
+      ["Isolationism", "The belief that a country should stay out of other nations' conflicts and alliances."]],
+    ctx: "Isolationism has a long history in American politics, especially before World War II. Today's debate often centers on how much aid to send to allies such as Ukraine and Israel." },
   party: { def: [
       ["Party identification", "The party a person says they belong to or lean toward."],
       ["Ideology", "A person's overall set of political ideas, such as liberal, moderate, or conservative."]],
@@ -467,7 +534,7 @@ const SECTIONS = [
     ["Support", "Workers", "Employers"],
     ["Trade", "Fair trade", "Free trade", {ex:"trade"}],
     ["Economy", 'Regulates economy, business and industry <span class="tag">= Tax and spend</span>', 'Deregulated economy, business and industry <span class="tag">= Don\'t tax and spend</span>', {ex:"economy"}],
-    ["Social progress", "Evolution", "Status quo", {ex:"progress"}]
+    ["Social progress", '<span class="tag">Gas:</span> push for progress and change', '<span class="tag">Brake:</span> conserve what is working and change carefully', {ex:"progress"}]
   ]},
   { key: "soc", title: "Society &amp; Culture", icon: "community", rows: [
     ["Community based on", "Ethics", "Morals", {ex:"ethics"}],
@@ -492,10 +559,9 @@ const SECTIONS = [
   ]},
   { key: "bel", title: "Beliefs", icon: "cloud", core: true, rows: [
     ["Religion", "More likely to be secular or religiously unaffiliated", "More likely to be religious and attend services regularly", {ex:"religion"}],
-    ["Rights", "Others must observe", "Others must not interfere", {ex:"rights"}],
+    ["Rights", "Include things people should be guaranteed, such as education or health care", "Mean being free from interference, such as free speech or owning property", {ex:"rights"}],
     ["Criminals", "Social and economic victims", "Choose to be criminals", {ex:"criminals"}],
     ["Society", '<q>One for all and all for one</q>', '<q>Survival of the fittest</q>', {ex:"society"}],
-    ["Priority", "Protect minorities", "Immigration control"],
     ["Equality is", "A level playing field", "Opportunity", {ex:"equality"}],
     ["Freedom is", "Freedom from power abuse and inequality", "The chance to achieve or fail", {ex:"freedom"}]
   ]},
@@ -521,6 +587,21 @@ const SECTIONS = [
   ]}
 ];
 
+/* ---------- Part 2: where the parties stand (from the Unit 7 slide deck) ---------- */
+const ISSUES = { key: "iss", group: "issues", title: "Where the Parties Stand", icon: "podiums", rows: [
+  ["Role of government", "The federal government needs to be big to tackle problems.", "The federal government should be much smaller. More should be left to the state governments."],
+  ["The economy", "Support higher taxes on wealthy individuals and corporations to fund public programs and reduce inequality.", "Cutting regulations and taxes, and keeping the government out of things, will help the economy grow."],
+  ["Social welfare", "Government programs provide a safety net and expand opportunity, especially for people facing structural disadvantages.", "Too much government aid can create dependency. Families, communities, and markets often do a better job."],
+  ["Environment", "Climate change is a man-made emergency that needs to be addressed! More environmental regulation is needed.", "Environmental regulations have gotten out of hand. Climate change is not an emergency, and might not even be man-made."],
+  ["Taxes", "Taxes should be raised on corporations and the wealthy, but lowered for the middle class and the poor.", "Taxes should be cut. Corporations and the wealthy pay more than their fair share."],
+  ["Military spending", "The U.S. spends too much on our military.", "The U.S. should continue to have the most powerful, cutting-edge military."],
+  ["Civil rights", "More action is needed, including affirmative action type programs to help people from marginalized groups.", "Affirmative action should be done away with, as well as DEI and other programs that help certain groups more than others.", {ex:"civil"}],
+  ["LGBT+ rights", "Gay rights need to be protected even more. More needs to be done to protect trans rights. Decisions about gender-affirming care for youth should be left to families and doctors.", "Gay rights are fine as they are, or they should be rolled back. Trans individuals do not need protection. Gender-affirming care for minors should be eliminated.", {ex:"lgbt"}],
+  ["Deficits and spending", "The deficit is way too large, but we like to increase spending! Solution: tax the rich and cut military spending.", "The deficit is way too large, but we still like to cut taxes! Solution: slash government spending.", {ex:"deficit"}],
+  ["Immigration", "Increase border security, and yes to a pathway to citizenship or legal status for people who came here as children.", "Fully close the border. No pathway to citizenship for people who have been here a long time.", {ex:"immig"}],
+  ["U.S. role in the world", "Democrats have become the party of strong support for Ukraine and other allies, such as NATO. Democrats are somewhat questioning U.S. support for Israel.", "Republicans have traditionally advocated a strong U.S. role in global affairs, but some have recently become more isolationist, such as opposing more military aid to Ukraine. Republicans largely continue to support Israel.", {ex:"world"}]
+]};
+
 /* ---------- Build ---------- */
 const dashes = '<span class="dashes"><i></i><i></i><i></i><i></i><i></i></span>';
 const plain = s => (s && s.chips ? s.chips.join(", ") : String(s)).replace(/<[^>]+>/g, "").replace(/&middot;/g, "and").replace(/&amp;/g, "&");
@@ -545,8 +626,9 @@ function pollCell(side, pct) {
     '<div class="track"><div class="bar" style="width:' + pct + '%"></div></div></div></div>';
 }
 
-document.getElementById("content").innerHTML = SECTIONS.map(s => {
-  let html = '<section class="' + (s.poll ? "poll" : "") + '" id="sec-' + s.key + '"><div class="sec-head"><div class="sec-title">' + icon(s.icon) + '<h2>' + dashes + s.title + dashes + '</h2></div></div>';
+function buildSection(s) {
+  let html = '<section class="' + (s.poll ? "poll" : s.group === "issues" ? "issues-sec" : "") + '" id="sec-' + s.key + '"><div class="sec-head"><div class="sec-title">' + icon(s.icon) + '<h2>' + dashes + s.title + dashes + '</h2></div></div>';
+  if (s.pre) html += s.pre;
   if (s.note) html += '<p class="sec-note">' + s.note + '</p>';
   if (s.noteEx) html += '<div class="note-ex">' + exButton(s.noteEx[0], s.noteEx[1], "ex-" + s.key + "-note") + '</div>' + exPanel(s.noteEx[0], "ex-" + s.key + "-note");
   html += '<div class="rows">';
@@ -560,7 +642,7 @@ document.getElementById("content").innerHTML = SECTIONS.map(s => {
       const o = r[3] || {};
       const id = s.key + "-" + i;
       const scored = o.tally !== false;
-      if (scored) ITEMS.push({ id, sec: s.key });
+      if (scored) ITEMS.push({ id, sec: s.key, group: s.group || "values" });
       const exId = "ex-" + id;
       const label = o.ex ? exButton(o.ex, r[0], exId) : r[0];
       return '<div class="row' + (scored ? ' pickable" data-id="' + id : '') + '">' +
@@ -573,24 +655,60 @@ document.getElementById("content").innerHTML = SECTIONS.map(s => {
     }).join("");
   }
   html += '</div>';
+  if (!s.poll && !s.core) html += '<div class="sec-tally" data-sec="' + s.key + '"></div>';
   if (s.poll) html += '<div class="axis" aria-hidden="true"><div class="a-l"><span>100%</span><span>0</span></div><div class="a-r"><span>0</span><span>100%</span></div></div>';
   if (s.core) {
-    ITEMS.push({ id: "core", sec: s.key });
+    ITEMS.push({ id: "core", sec: s.key, group: "values" });
     html += '<div class="core" data-id="core">' +
       '<button type="button" class="cl" data-side="L" aria-pressed="false" aria-label="Core value: Equality">' + '<span class="chk l" aria-hidden="true">' + CHECK + '</span><small>Core value</small><span class="word">Equality</span></button>' +
       '<button type="button" class="cr" data-side="R" aria-pressed="false" aria-label="Core value: Freedom">' + '<span class="chk r" aria-hidden="true">' + CHECK + '</span><small>Core value</small><span class="word">Freedom</span></button>' +
-      '</div><p class="core-q">But which is best? Pick one.</p>';
+      '</div><p class="core-q">But which is best? Pick one.</p><div class="sec-tally" data-sec="' + s.key + '"></div>';
   }
   return html + '</section>';
-}).join("");
+}
+document.getElementById("content").innerHTML = SECTIONS.map(buildSection).join("");
+
+ISSUES.pre = '<p class="sec-note">A super simplified view of the Democratic and Republican platforms on eleven issues. Click the side you agree with more; these picks get their own score in your tally.</p>' +
+  '<div class="disclaimer"><strong>Disclaimer</strong>Not all Democrats or Republicans see things the same way, and making a super simplified chart like this will inevitably have some shortcomings. Just keep that in mind!</div>' +
+  '<div class="colhead" aria-hidden="true"><span class="l">Democratic Party<small>super simplified</small></span><span class="m">Issue</span><span class="r">Republican Party<small>super simplified</small></span></div>';
+document.getElementById("issues").innerHTML = '<div class="part-divider">' + dashes + 'Part 2 &middot; The Parties Today' + dashes + '</div>' + buildSection(ISSUES);
+
+/* ---------- Gas and brakes opener (from the Unit 7 slide deck) ---------- */
+document.getElementById("intro").innerHTML =
+  '<section id="gas-brakes"><div class="sec-head"><div class="sec-title">' + icon("car") + '<h2>' + dashes + 'Gas and Brakes' + dashes + '</h2></div></div>' +
+  '<div class="gb-grid">' +
+    '<div class="gb-card gas">' + icon("gas") + '<h3>Gas</h3><div class="who">Progressives and liberals</div><p class="short">Tend to push for progress, or change.</p><p>They push for social, political, and economic change in order to fix injustice and inequality in society, and often support more government intervention to promote social welfare, regulate industries, and advance civil rights.</p></div>' +
+    '<div class="gb-mid"><p>Just like a car needs both gas and brakes, a functioning democratic society needs both conservatism and progressivism.</p><p>You don\'t want your society to stand still and stagnate, but you also don\'t want it to change too much too quickly (revolution).</p><p class="one">Would you want a car with only one pedal?</p></div>' +
+    '<div class="gb-card brake">' + icon("brake") + '<h3>Brake</h3><div class="who">Conservatives</div><p class="short">Want to conserve, or keep, what is good and what is working.</p><p>They usually want to keep traditional values, institutions, and social structures, and often want less government involvement in the economy, a focus on individual responsibility, and established cultural norms.</p></div>' +
+  '</div><p class="gb-note">Progressive and liberal are technically not perfect synonyms, but for our purposes we use them interchangeably.</p></section>';
 
 /* ---------- Tally state (kept only in this browser) ---------- */
-const KEY = "left-right-tally-v1";
+const KEY = "left-right-tally-v2";
 let picks = {};
 try { picks = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { picks = {}; }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} };
 
 const TALLY_SECS = SECTIONS.filter(s => ITEMS.some(it => it.sec === s.key));
+const GROUPS = [
+  { key: "values", part: "Part 1", title: "Values and Beliefs" },
+  { key: "issues", part: "Part 2", title: "Where the Parties Stand" }
+];
+function stats(g) {
+  const its = ITEMS.filter(it => it.group === g);
+  let L = 0, R = 0;
+  its.forEach(it => { if (picks[it.id] === "L") L++; else if (picks[it.id] === "R") R++; });
+  return { L, R, total: its.length, done: L + R };
+}
+function verdictFor(st) {
+  if (st.done < 5) return "Pick a side on a few more rows";
+  const share = st.L / st.done;
+  return share >= 0.65 ? "Leans left" : share <= 0.35 ? "Leans right" : "Mixed";
+}
+function splitBar(st) {
+  return st.done
+    ? '<div class="sl" style="flex-basis:' + (st.L / st.total * 100) + '%">' + (st.L ? "Left " + st.L : "") + '</div><div class="su">' + (st.total - st.done ? (st.total - st.done) + " open" : "") + '</div><div class="sr" style="flex-basis:' + (st.R / st.total * 100) + '%">' + (st.R ? "Right " + st.R : "") + '</div>'
+    : '<div class="su">No picks yet</div>';
+}
 
 function render() {
   document.querySelectorAll("[data-id]").forEach(el => {
@@ -601,29 +719,47 @@ function render() {
     el.querySelectorAll(".core .chk").forEach(c => c.setAttribute("aria-pressed", String(c.classList.contains(p === "L" ? "l" : "r") && !!p)));
   });
 
-  const total = ITEMS.length;
-  let L = 0, R = 0;
-  ITEMS.forEach(it => { if (picks[it.id] === "L") L++; else if (picks[it.id] === "R") R++; });
-  const done = L + R;
+  // per-section totals
+  document.querySelectorAll(".sec-tally").forEach(box => {
+    const its = ITEMS.filter(it => it.sec === box.dataset.sec);
+    if (!its.length) { box.hidden = true; return; }
+    let l = 0, r = 0;
+    its.forEach(it => { if (picks[it.id] === "L") l++; else if (picks[it.id] === "R") r++; });
+    const n = its.length, done = l + r;
+    const lean = done < 2 ? (done ? "Keep going" : "No picks yet") : l / done >= 0.65 ? "Leans left" : l / done <= 0.35 ? "Leans right" : "Mixed";
+    const title = (SECTIONS.concat([ISSUES]).find(s => s.key === box.dataset.sec) || {}).title || "";
+    box.innerHTML = '<span class="st-name">' + title + ' total</span>' +
+      '<span class="tb-n l">' + l + '</span><div class="tb-split" aria-hidden="true"><i class="il" style="width:' + (l / n * 100) + '%"></i><i class="ir" style="width:' + (r / n * 100) + '%"></i></div><span class="tb-n r">' + r + '</span>' +
+      '<span class="st-lean">' + lean + '</span><span class="st-open">' + done + ' of ' + n + '</span>' +
+      (done ? '<button type="button" class="st-clear" data-clear="' + box.dataset.sec + '">Clear section</button>' : '');
+  });
 
-  // sticky bar
-  document.getElementById("tbL").textContent = L;
-  document.getElementById("tbR").textContent = R;
-  document.getElementById("tbIL").style.width = (L / total * 100) + "%";
-  document.getElementById("tbIR").style.width = (R / total * 100) + "%";
-  document.getElementById("tbCount").textContent = done + " of " + total + " rows";
+  const S = {};
+  GROUPS.forEach(g => {
+    const st = S[g.key] = stats(g.key);
+    document.getElementById("tbL-" + g.key).textContent = st.L;
+    document.getElementById("tbR-" + g.key).textContent = st.R;
+    document.getElementById("tbIL-" + g.key).style.width = (st.L / st.total * 100) + "%";
+    document.getElementById("tbIR-" + g.key).style.width = (st.R / st.total * 100) + "%";
+  });
 
-  // results section
-  let verdict;
-  if (done < 5) verdict = "Pick a side on a few more rows";
-  else {
-    const share = L / done;
-    verdict = share >= 0.65 ? "Your picks lean left" : share <= 0.35 ? "Your picks lean right" : "Your picks are mixed";
+  const groupsHTML = GROUPS.map(g => {
+    const st = S[g.key];
+    const pl = st.done ? Math.round(st.L / st.done * 100) : 0;
+    return '<div class="tg"><div class="tg-head"><span class="tg-part">' + g.part + '</span><h3>' + g.title + '</h3></div>' +
+      '<div class="split" role="img" aria-label="' + g.title + ': ' + st.L + ' left, ' + st.R + ' right, ' + (st.total - st.done) + ' open">' + splitBar(st) + '</div>' +
+      '<div class="verdict"><strong>' + verdictFor(st) + '</strong><span>' + st.done + ' of ' + st.total + ' rows answered' + (st.done ? ' &middot; ' + pl + '% left, ' + (100 - pl) + '% right' : '') + '</span></div></div>';
+  }).join("");
+
+  let compare = "";
+  const v = S.values, i = S.issues;
+  if (v.done >= 5 && i.done >= 5) {
+    const vp = Math.round(v.L / v.done * 100), ip = Math.round(i.L / i.done * 100);
+    compare = '<p class="compare">Your values picks are ' + vp + '% left and your issue picks are ' + ip + '% left. ' +
+      (Math.abs(vp - ip) >= 20
+        ? 'That is a big gap. Many people react differently to broad descriptions of values than to specific party positions. Which score feels more like you?'
+        : 'Your two scores are close, so your values and your issue positions point the same direction.') + '</p>';
   }
-  const pl = done ? Math.round(L / done * 100) : 0, pr = done ? 100 - pl : 0;
-  const bars = done
-    ? '<div class="sl" style="flex-basis:' + (L / total * 100) + '%">' + (L ? "Left " + L : "") + '</div><div class="su">' + (total - done ? (total - done) + " open" : "") + '</div><div class="sr" style="flex-basis:' + (R / total * 100) + '%">' + (R ? "Right " + R : "") + '</div>'
-    : '<div class="su">No picks yet</div>';
 
   const maxSec = Math.max(...TALLY_SECS.map(s => ITEMS.filter(it => it.sec === s.key).length));
   const breakdown = TALLY_SECS.map(s => {
@@ -636,10 +772,9 @@ function render() {
 
   document.getElementById("tally").innerHTML =
     '<div class="sec-head"><div class="sec-title">' + icon("scale") + '<h2>' + dashes + 'Your Tally' + dashes + '</h2></div></div>' +
-    '<div class="tally-card"><div class="split" role="img" aria-label="' + L + ' left, ' + R + ' right, ' + (total - done) + ' open">' + bars + '</div>' +
-    '<div class="verdict"><strong>' + verdict + '</strong><span>' + done + ' of ' + total + ' rows answered' + (done ? ' &middot; ' + pl + '% left, ' + pr + '% right' : '') + '</span></div>' +
-    '<div class="breakdown">' + breakdown + '</div>' +
-    '<p class="tally-note">This tally measures how you react to the graphic\'s descriptions, not where you would land on a tested survey. The wording is not neutral (see Read It Critically below), and loaded words can push you away from a side you might otherwise agree with. For a research-based comparison, try Pew\'s <a href="https://www.pewresearch.org/politics/quiz/political-typology/" target="_blank" rel="noopener">Political Typology Quiz</a>. Your picks are saved only in this browser.</p>' +
+    '<div class="tally-card">' + groupsHTML + compare +
+    '<p class="bd-title">Part 1 by section</p><div class="breakdown">' + breakdown + '</div>' +
+    '<p class="tally-note">Part 1 measures how you react to the graphic\'s descriptions, which are not neutral (see Read It Critically above). Part 2 measures how you react to a simplified version of each party\'s positions. Neither is a tested survey. For a research-based comparison, try Pew\'s <a href="https://www.pewresearch.org/politics/quiz/political-typology/" target="_blank" rel="noopener">Political Typology Quiz</a>. Your picks are saved only in this browser.</p>' +
     '<div class="tally-actions"><button type="button" class="btn warn" id="resetBtn">Clear my picks</button></div></div>';
 }
 
@@ -661,6 +796,11 @@ document.addEventListener("click", e => {
   if (sideEl && holder) {
     const id = holder.dataset.id, side = sideEl.dataset.side;
     if (picks[id] === side) delete picks[id]; else picks[id] = side;
+    save(); render();
+    return;
+  }
+  if (e.target.dataset && e.target.dataset.clear) {
+    ITEMS.filter(it => it.sec === e.target.dataset.clear).forEach(it => delete picks[it.id]);
     save(); render();
     return;
   }
@@ -698,13 +838,25 @@ const PLACES = [
     text:"Organized around Andrew Jackson in 1828, with roots in Thomas Jefferson's Democratic-Republicans. Generally favors a larger government role in the economy through regulation and the safety net. Generally opposes government limits on choices like abortion and same-sex marriage, while supporting stricter gun laws." },
   { id:"rep", type:"party", name:"Republican Party", short:"R", x:620, y:238, labelAbove:true, color:"#CC2B2B", pos:"Center right",
     text:"Founded in 1854 by opponents of the spread of slavery. Generally favors lower taxes, less regulation, and a smaller federal role in the economy. Generally supports more government action on abortion restrictions, immigration enforcement, and law and order, while opposing most new gun restrictions." },
-  { id:"con", type:"party", name:"Constitution Party", short:"C", x:770, y:215, color:"#7A2E3A", pos:"Right, socially authoritarian",
+  { id:"con", type:"party", name:"Constitution Party", short:"C", x:795, y:192, color:"#7A2E3A", pos:"Right, socially authoritarian",
     text:"Founded in 1992 as the U.S. Taxpayers Party and renamed in 1999. Favors a strict reading of the Constitution, a much smaller federal government, and socially conservative policies rooted in Christian principles." },
   { id:"grn", type:"party", name:"Green Party", short:"G", x:255, y:440, color:"#2E8B57", pos:"Left, socially libertarian",
     text:"The Green Party of the United States became a national party in 2001. It emphasizes environmental protection, social justice, grassroots democracy, and nonviolence. Its presidential candidates usually win less than 1% of the national vote." },
   { id:"lib", type:"party", name:"Libertarian Party", short:"L", x:600, y:460, color:"#B58A12", pos:"Center right, most libertarian of the major third parties",
     text:"Founded in 1971. Favors minimal government in both the economy and personal life: low taxes and little regulation, plus few limits on personal choices. Founder David Nolan drew one of the first two-axis charts, the Nolan Chart, to show why libertarians do not fit on a single left to right line." }
 ];
+
+// Groups within the parties (from slide 38), drawn as pills
+PLACES.push(
+  { id:"prog", type:"faction", side:"L", name:"Progressive Democrats", x:262, y:386, pos:"Left wing of the Democratic Party",
+    text:"Progressives push the Democratic Party toward bigger changes, such as government-run health insurance, aggressive climate action, and higher taxes on the wealthy. In Congress, many belong to the Congressional Progressive Caucus, founded in 1991." },
+  { id:"mod", type:"faction", side:"C", name:"moderates", x:500, y:372, pos:"Center",
+    text:"Moderates mix positions from both sides or put compromise ahead of ideology. Many independents describe themselves this way. In Congress, the bipartisan Problem Solvers Caucus, formed in 2017, is one example of moderates organizing across party lines." },
+  { id:"cons", type:"faction", side:"R", name:"Conservative Republicans", x:728, y:272, pos:"Center right to right",
+    text:"The conservative core of the Republican Party: lower taxes, less regulation, a strong military, and traditional social values. Most Republican voters describe themselves as conservative." },
+  { id:"fc", type:"faction", side:"R", name:"Freedom Caucus", x:655, y:160, pos:"Right, toward the authoritarian side on social issues",
+    text:"The House Freedom Caucus, founded in 2015, is a bloc of the most conservative House Republicans. It pushes for deep spending cuts and has often clashed with its own party's leaders in Congress." }
+);
 
 function compassSVG() {
   let s = '<svg class="compass" viewBox="0 0 1000 640" role="group" aria-label="Two-axis chart of American parties and ideologies">';
@@ -731,7 +883,12 @@ function compassSVG() {
   // places
   PLACES.forEach(p => {
     s += '<g class="place" data-place="' + p.id + '" tabindex="0" role="button" aria-label="' + p.name + '">';
-    if (p.type === "ideology") {
+    if (p.type === "faction") {
+      const w = p.name.length * 7.6 + 26;
+      s += '<g class="fac-' + p.side + '"><rect class="ring" x="' + (p.x - w/2 - 4) + '" y="' + (p.y - 17) + '" width="' + (w + 8) + '" height="34" rx="17"/>';
+      s += '<rect class="pill" x="' + (p.x - w/2) + '" y="' + (p.y - 13) + '" width="' + w + '" height="26" rx="13" stroke-width="1.5"/>';
+      s += '<text class="fac-t" x="' + p.x + '" y="' + (p.y + 5) + '" text-anchor="middle">' + p.name + '</text></g>';
+    } else if (p.type === "ideology") {
       const w = p.name.length * 13.5 + 26, rx = p.anchor === "end" ? p.x - w : p.x;
       s += '<rect class="ring" x="' + (rx-4) + '" y="' + (p.y-4) + '" width="' + (w+8) + '" height="44" rx="3"/>';
       s += '<rect x="' + rx + '" y="' + p.y + '" width="' + w + '" height="36" rx="2" fill="' + p.color + '" transform="rotate(-2 ' + (rx + w/2) + ' ' + (p.y+18) + ')"/>';
@@ -749,14 +906,15 @@ function compassSVG() {
 }
 
 document.getElementById("part2").innerHTML =
-  '<div class="part-divider">' + dashes + 'Part 2' + dashes + '</div>' +
+  '<div class="part-divider">' + dashes + 'Part 3 &middot; Two Axes' + dashes + '</div>' +
   '<section><div class="sec-head"><div class="sec-title">' + icon("compass") + '<h2>' + dashes + 'Beyond Left and Right' + dashes + '</h2></div></div>' +
-  '<p class="sec-note">A single line mixes two separate questions: how much should government run the economy, and how much should it control personal life? Adding a second axis gives each question its own direction. Click any party or ideology to see why it sits where it does.</p>' +
+  '<p class="sec-note">A single line mixes two separate questions: how much should government run the economy, and how much should it control personal life? Adding a second axis gives each question its own direction. Click any party, group, or ideology to see why it sits where it does.</p>' +
   '<div class="compass-wrap">' + compassSVG() + '</div><p class="scroll-hint">Scroll sideways to see the whole chart.</p>' +
   '<div class="place-detail" id="placeDetail" aria-live="polite"></div>' +
   '<div class="axis-cards">' +
-    '<div><h3>Left and right: the economy</h3><p>The horizontal line is the same spectrum from Part 1. Moving left means more government direction of the economy and more redistribution. Moving right means freer markets, lower taxes, and less regulation.</p></div>' +
+    '<div><h3>Left and right: the economy</h3><p>The horizontal line is the same spectrum from Parts 1 and 2. Moving left means more government direction of the economy and more redistribution. Moving right means freer markets, lower taxes, and less regulation.</p></div>' +
     '<div><h3>Up and down: control</h3><p>The vertical line measures how much power the state should have over individual lives. Up is more authority and control; down is more personal freedom and less government. This is the question a single line leaves out.</p></div>' +
+    '<div><h3>Both major parties are centrist</h3><p>Compared with the full range of ideas on this chart, the Democratic and Republican parties both sit close to the center. From inside either party the other can look extreme ("You\'re extreme!"), but the ideologies near the edges have few followers in either major party.</p></div>' +
     '<div><h3>Read this chart critically too</h3><p>Placements are approximate and debated, and a party\'s candidates spread across the chart. Putting communism and fascism in the top corners suggests the extremes meet in authoritarian control, an idea called horseshoe theory that many scholars dispute. Two axes are better than one, but they are still a simplification.</p></div>' +
   '</div></section>';
 
@@ -765,7 +923,7 @@ function showPlace(id) {
   document.querySelectorAll(".compass .place").forEach(g => g.classList.toggle("on", g.dataset.place === id));
   document.getElementById("placeDetail").innerHTML = p
     ? '<h3 style="color:' + (p.id === "dem" ? "var(--blue)" : p.id === "rep" ? "var(--red)" : "var(--ink)") + '">' + p.name + '</h3><div class="pos">' + p.pos + '</div><p>' + p.text + '</p>'
-    : '<h3>How to read the chart</h3><div class="pos">Two questions, two directions</div><p>Left and right still describe views on the economy. Up and down describe views on government control over personal life. The Democratic and Republican parties sit near the center, where most voters are. Third parties and ideologies spread out toward the edges. Click a party or ideology on the chart to learn more.</p>';
+    : '<h3>How to read the chart</h3><div class="pos">Two questions, two directions</div><p>Left and right still describe views on the economy. Up and down describe views on government control over personal life. The Democratic and Republican parties sit near the center, where most voters are. Third parties and ideologies spread out toward the edges. Circles are parties, and rounded labels are groups within the two major parties. Click any of them to learn more.</p>';
 }
 document.getElementById("part2").addEventListener("click", e => {
   const g = e.target.closest(".place");
