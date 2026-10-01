@@ -544,10 +544,9 @@ const EX = {
       ["Tariff", "A tax on imported goods."]],
     ctx: "The original graphic put fair trade on the left and free trade on the right. Free trade was a core Republican position for decades, but since 2016 many Republicans, led by Donald Trump, have embraced tariffs to protect American industry. This row reflects that shift. Some Democrats support tariffs too, especially to protect union jobs." },
   economy: { def: [
-      ["Regulation", "Rules government sets for businesses, such as safety standards, environmental limits, and banking rules."],
-      ["Deregulation", "Removing or loosening those rules."],
-      ["Tax and spend", "A label critics use for raising taxes to pay for government programs. Supporters would not describe themselves this way, and \"Don't tax and spend\" is the graphic's own invention."]],
-    ctx: "Real debates are usually about which rules and how many, not all or nothing. Deregulation has crossed party lines: Jimmy Carter, a Democrat, signed the Airline Deregulation Act of 1978." },
+      ["Public programs", "Services the government pays for, such as schools, roads, health coverage, and food assistance."],
+      ["Tradeoff", "Giving up some of one thing to get more of another. More public services cost more money, and lower taxes leave less to spend."]],
+    ctx: "The original graphic labeled the two sides \"tax and spend\" and \"don't tax and spend,\" phrases mostly used by critics. Every government faces this tradeoff. Pew found that 74% of Democrats would rather have a bigger government providing more services, compared with 20% of Republicans (April 2024)." },
   progress: { def: [
       ["Progress", "Change meant to fix problems, injustice, or inequality."],
       ["Status quo", "Latin for \"the state in which.\" The existing state of affairs."],
@@ -555,9 +554,9 @@ const EX = {
       ["Preservation", "Caution about change, because long-standing institutions may hold wisdom that is hard to see."]],
     ctx: "This row combines the graphic's \"Social progress\" and \"Outlook\" rows using the gas and brakes idea from the top of the page. A society needs both pedals: all gas risks change that comes too fast (revolution), and all brake risks standing still. Conservatives often cite \"Chesterton's fence\": do not tear down a fence until you know why it was put up." },
   ethics: { def: [
-      ["Ethics", "Principles of right and wrong worked out through reasoning, often shared rules like a professional code."],
-      ["Morals", "Beliefs about right and wrong held by a person or community, often rooted in religion or tradition."]],
-    ctx: "Philosophers often use these words interchangeably. The graphic's split suggests the left reasons its way to right and wrong while the right inherits it. Many people on both sides do both." },
+      ["Moral absolutes", "The view that some actions are right or wrong in every situation, often rooted in religion or tradition."],
+      ["Situational ethics", "The view that whether an action is right or wrong depends on the situation, the people involved, and the consequences."]],
+    ctx: "The original graphic contrasted \"ethics\" on the left with \"morals\" on the right. Both of these views are positions within ethics, the study of right and wrong. Surveys find conservatives are more likely to say there are clear standards of right and wrong that apply to everyone, and liberals are more likely to say it depends on the situation. Most people use both, depending on the issue." },
   character: { def: [
       ["Multicultural", "Recognizing and supporting many cultures within one society."],
       ["Traditional roles", "Customary expectations for men and women, parents and children, passed down over generations."],
@@ -634,17 +633,17 @@ const SECTIONS = [
   { key: "gov", title: "Government", icon: "capitol", rows: [
     ["Labels", "Liberal &middot; Progressive", "Conservative &middot; Traditional", {ex:"labels", tally:false}],
     ["Parties on the spectrum", {chips:["Democratic Socialist","Progressive","Democrat"]}, {chips:["Republican","Conservative","Nationalist"]}, {ex:"parties", tally:false}],
-    ["Pillars", {chips:["Equality","Idealism","Egalitarian","Looks to the future","Progressive nature"]}, {chips:["Equity","Pragmatism","Meritocracy","Looks to the past","Conservative nature"]}, {ex:"pillars"}],
+    ["Pillars", {chips:["Equality","Idealism","Egalitarian","Progressive nature"]}, {chips:["Equity","Pragmatism","Meritocracy","Conservative nature"]}, {ex:"pillars"}],
     ["Government's role", "Government should step in to fix social problems and protect people from unfair treatment", "Government should mostly stay out of social life; families, churches, and communities should lead", {ex:"govrole"}],
     ["Focus", "Society", "Individual"],
-    ["Goal", "Personal freedom", "Economic freedom"],
+    ["Which freedom matters more?", "I should decide what to do with my body", "I should decide what to do with my money"],
     ["Support", "Workers", "Employers"],
     ["Trade", "Trade deals should protect workers and the environment", "Tariffs to protect American jobs and industry", {ex:"trade"}],
-    ["Economy", 'Regulates economy, business and industry <span class="tag">= Tax and spend</span>', 'Deregulated economy, business and industry <span class="tag">= Don\'t tax and spend</span>', {ex:"economy"}]
+    ["Taxes and spending", "Government should generally provide more public programs and services, even if that requires higher taxes.", "Government should generally keep taxes and government spending lower, even if that means fewer public programs and services.", {ex:"economy"}]
   ]},
   { key: "soc", title: "Society &amp; Culture", icon: "community", rows: [
-    ["Community based on", "Ethics", "Morals", {ex:"ethics"}],
-    ["Social progress", '<span class="tag">Gas:</span> push for progress and change. <q>The world can be improved. Bring in the new.</q>', '<span class="tag">Brake:</span> conserve what is working and change carefully. <q>Protect the good things about the world.</q>', {ex:"progress"}],
+    ["Right and wrong", "Depend on context: weigh the situation, the people involved, and the consequences", "Are clear and rules-based: some things are always right and some are always wrong", {ex:"ethics"}],
+    ["Social progress", '<span class="tag">Gas:</span> Society should be more willing to change longstanding traditions and institutions. <q>The world can be improved. Bring in the new.</q>', '<span class="tag">Brake:</span> Society should be more cautious about changing longstanding traditions and institutions. <q>Protect the good things about the world.</q>', {ex:"progress"}],
     ["Character", "Inclusive, multicultural, roles open to change", "Traditional roles, established hierarchy, shared national identity", {ex:"character"}]
   ]},
   { key: "fam", title: "Family", icon: "family", rows: [
@@ -654,7 +653,7 @@ const SECTIONS = [
     ["Result", "Creates potential", "Builds character"]
   ]},
   { key: "adult", title: "Life as an Adult", icon: "briefcase", rows: [
-    ["Setting", "Urban", "Rural"],
+    ["Setting", "Urban/suburban environments tend to offer more diverse communities and lifestyles.", "Rural/small-town environments tend to offer more close-knit communities and traditional lifestyles."],
     ["Becomes", "Fulfilled adult", "Self-reliant adult"],
     ["Success is", "Finding fulfillment and making a positive difference", "Hard work that pays off, providing for your family, and financial independence"],
     ["Vocations", "Teacher, scientist, professor, architect, media", "Police, military, stockbroker, business, judge"]
@@ -1156,7 +1155,7 @@ const QUIZ = [
   ["fam-0", "Which sounds more like good parenting?"],
   ["fam-1", "Which qualities matter most in a child?"],
   ["fam-2", "What should education focus on?"],
-  ["adult-0", "Where would you rather live?", "In a city", "In a small town or the country"],
+  ["adult-0", "Which kind of place appeals to you more?"],
   ["adult-2", "What does success mean to you?"],
   ["adult-3", "Which group of careers appeals to you more?"],
   ["bel-1", "What are rights mainly about?", "Rights include things people should be guaranteed, such as education or health care", "Rights mean being free from interference, such as free speech or owning property"],
