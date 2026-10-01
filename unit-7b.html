@@ -206,6 +206,46 @@ section{padding-block:40px 8px}
 .data-h{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:17px;font-weight:600;text-align:center;margin:34px 0 4px}
 .data-sub{text-align:center;color:var(--muted);font-size:14px;margin:0 auto 14px;max-width:70ch}
 
+/* tabs */
+.tabs{display:flex;justify-content:center;gap:6px;margin:22px auto 0;border-bottom:1px solid var(--rule)}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:10px 18px;font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--amber)}
+.tabs button:hover{color:var(--ink)}
+
+/* blind quiz */
+.quiz{max-width:780px;margin:0 auto;padding-block:30px 10px;text-align:center}
+.quiz .ico{width:56px;height:56px}
+.quiz h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:26px;margin:8px 0 10px;text-wrap:balance;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.quiz .q-intro{max-width:60ch;margin:0 auto 22px;color:var(--muted);font-size:16px}
+.q-progress{display:flex;gap:4px;margin:0 auto 18px;max-width:620px}
+.q-progress i{flex:1;height:5px;border-radius:1px;background:var(--rule)}
+.q-progress i.done{background:var(--amber)}
+.q-progress i.now{background:var(--ink)}
+.q-meta{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;color:var(--amber);margin-bottom:6px}
+.q-prompt{font-family:var(--body);font-size:clamp(20px,3vw,26px);font-weight:600;line-height:1.3;margin:0 auto 20px;max-width:34ch;text-wrap:balance}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.q-opt{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:2px solid var(--rule);border-radius:4px;padding:18px 18px 18px 14px;font:inherit;font-size:16.5px;line-height:1.45;color:var(--ink);cursor:pointer;text-align:left;transition:border-color .12s,background-color .12s}
+.q-opt:hover{border-color:var(--amber)}
+.q-opt.picked{border-color:var(--ink);background:var(--amber-soft)}
+.q-opt .k{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:14px;color:var(--muted)}
+.q-opt.picked .k{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.q-opt q{font-style:italic}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.q-link{background:none;border:0;font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--muted);cursor:pointer;padding:6px 4px}
+.q-link:hover{color:var(--ink)}
+.q-link[disabled]{visibility:hidden}
+.q-start{margin-top:4px}
+.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.q-results{text-align:left;margin-top:22px}
+.q-results .tg{margin-bottom:18px}
+.q-list{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--rule)}
+.q-list li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14.5px}
+.q-list .side{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;align-self:start;margin-top:2px;text-align:center;min-width:62px}
+.q-list .side.L{background:var(--blue);color:var(--bg)} .q-list .side.R{background:var(--red);color:var(--bg)} .q-list .side.S{background:var(--panel);color:var(--muted);border:1px solid var(--rule)}
+.q-list .what{color:var(--muted);font-size:12.5px;font-family:var(--display);text-transform:uppercase;letter-spacing:.1em}
+.q-done-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+@media (max-width:720px){.q-opts{grid-template-columns:1fr}.tabs button{padding:10px 10px;font-size:13px;letter-spacing:.1em}}
+
 /* section totals */
 .sec-tally{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;max-width:720px;margin:14px auto 0;padding:10px 16px;background:var(--panel);border:1px solid var(--rule);border-radius:3px}
 .sec-tally .tb-split{flex:1 1 80px;height:12px}
@@ -372,12 +412,19 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     <h1><span class="l">Left</span><span class="and">and</span><span class="r">Right</span></h1>
     <p class="lede">This tool is an exploration of values, beliefs, and viewpoints, and how they connect to politics and policy. It <strong>won't</strong> tell you whether you are a Democrat or a Republican, liberal or conservative. Everyone holds a mix of beliefs and slightly different values, and as you click through you will probably agree with some viewpoints from both columns.</p>
     <p class="lede">The goal is to give you a sense of the values behind the political spectrum and the ideas that shape different political coalitions. Keep in mind that these are based on generalizations and statistics. They aren't wild stereotypes, but they aren't perfect either.</p>
-    <div class="how">
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Page sections">
+    <button type="button" role="tab" id="tabbtn-explore" aria-selected="true" data-tab="explore">Explore the Chart</button>
+    <button type="button" role="tab" id="tabbtn-quiz" aria-selected="false" data-tab="quiz">Blind Quiz</button>
+  </nav>
+
+  <div id="tab-explore">
+    <div class="how" style="margin-top:22px">
       <span><span class="chk l demo" style="opacity:1;background:var(--blue);cursor:default" aria-hidden="true"><svg viewBox="0 0 16 16" style="visibility:visible"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>Click the side of each row you agree with more. Click again to clear it.<span class="chk r demo" style="opacity:1;background:var(--red);cursor:default" aria-hidden="true"><svg viewBox="0 0 16 16" style="visibility:visible"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></span>
       <span><span class="ex-btn demo" aria-hidden="true" style="cursor:default"><span class="q">?</span></span>Click a label marked with ? to open a definition.</span>
       <span><a class="tb-link" href="#tally">Your tally</a>&nbsp;builds as you go.</span>
     </div>
-  </header>
 
   <div id="intro"></div>
 
@@ -435,6 +482,9 @@ footer .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
       <div><strong style="color:var(--ink)">This version.</strong> Text transcribed with American spelling. Several rows are rewritten or combined to fit an American classroom. The gas and brakes framing and Part 2 are adapted from the Unit 7 slide deck. All survey data comes from the Pew Research Center sources above, which compare Democrats and Democratic leaners with Republicans and Republican leaners.</div>
     </div>
   </footer>
+  </div>
+
+  <div id="tab-quiz" hidden><section class="quiz" id="quiz" aria-live="polite"></section></div>
 </div>
 
 <div class="tallybar" role="region" aria-label="Your tally">
@@ -455,6 +505,7 @@ const ICONS = {
   cloud: '<path class="accf" d="M15 32h19a7 7 0 0 0 .8-14 10 10 0 0 0-19.1 2.2A6 6 0 0 0 15 32z"/><circle cx="13" cy="37.5" r="2.4"/><circle cx="8" cy="42" r="1.5"/><path d="M19 24h11M19 27.5h7"/>',
   chart: '<path d="M7 7v34h35"/><rect x="12" y="27" width="5" height="14"/><rect class="accf" x="20.5" y="17" width="5" height="24"/><rect x="29" y="22" width="5" height="19"/><rect class="accf" x="37.5" y="12" width="4" height="29"/>',
   ballot: '<path class="accf" d="M16 30V7h16v23"/><path d="M20 17.5l3 3 5.5-6"/><rect x="7" y="26" width="34" height="15" rx="2"/><path d="M14 30h20"/>',
+  eye: '<path d="M4 24s7-12 20-12 20 12 20 12-7 12-20 12S4 24 4 24z"/><circle class="accf" cx="24" cy="24" r="6"/><path d="M8 40L40 8"/>',
   scale: '<path d="M24 9v31"/><path d="M15 41h18"/><circle cx="24" cy="8" r="1.8"/><path d="M9 14h30"/><path d="M9 14l-5 11M9 14l5 11"/><path class="accf" d="M3.5 25a5.5 3 0 0 0 11 0z"/><path d="M39 14l-5 11M39 14l5 11"/><path class="accf" d="M33.5 25a5.5 3 0 0 0 11 0z"/>',
   car: '<path class="accf" d="M4 32v-6l3-2 5-9h19l7 9h4l2 2v6z"/><path d="M13 16.5l-3 7.5h13v-7.5M26 16.5v7.5h10"/><circle cx="13" cy="33" r="4.5" style="fill:var(--bg)"/><circle cx="35" cy="33" r="4.5" style="fill:var(--bg)"/>',
   gas: '<rect class="accf" x="17" y="5" width="14" height="30" rx="3"/><path d="M21 11v18M27 11v18"/><path d="M24 35v6M13 43h22"/>',
@@ -1093,6 +1144,115 @@ document.getElementById("part2").addEventListener("keydown", e => {
 });
 document.getElementById("placeDetail").innerHTML = '<h3>How to read the chart</h3><div class="pos">Two questions, two directions</div><p>Left and right still describe views on the economy. Up and down describe views on government control over personal life. The Democratic and Republican parties sit near the center, where most voters are, and third parties and ideologies spread out toward the edges. Circles and icons are parties, and rounded labels are groups within the two major parties. Click any of them, or any part of the spectrum, for a definition.</p>';
 
+
+/* ---------- Blind quiz: 20 rows from the chart, sides shuffled, no colors ---------- */
+// [row id, question, optional quiz wording for left, optional quiz wording for right]
+const QUIZ = [
+  ["gov-3", "What should the government's role be in social life?"],
+  ["gov-6", "When workers and employers disagree, whose side do you usually start on?", "Workers", "Employers"],
+  ["gov-7", "Which trade policy sounds better to you?"],
+  ["soc-1", "How should society approach change?"],
+  ["soc-2", "Which describes the kind of society you want?"],
+  ["fam-0", "Which sounds more like good parenting?"],
+  ["fam-1", "Which qualities matter most in a child?"],
+  ["fam-2", "What should education focus on?"],
+  ["adult-0", "Where would you rather live?", "In a city", "In a small town or the country"],
+  ["adult-2", "What does success mean to you?"],
+  ["adult-3", "Which group of careers appeals to you more?"],
+  ["bel-1", "What are rights mainly about?", "Rights include things people should be guaranteed, such as education or health care", "Rights mean being free from interference, such as free speech or owning property"],
+  ["bel-2", "Why do most people commit crimes?", "They are often victims of social and economic conditions", "They choose to commit crimes"],
+  ["bel-5", "What does freedom mean to you?"],
+  ["votes-0", "Which matters more?", "Fairness", "Upholding order"],
+  ["votes-1", "Who should government focus on helping?"],
+  ["iss-2", "Which is closer to your view on social welfare?"],
+  ["iss-3", "Which is closer to your view on the environment?"],
+  ["iss-4", "Which is closer to your view on taxes?"],
+  ["iss-9", "Which is closer to your view on immigration?"]
+];
+function rowById(id) {
+  const [key, n] = [id.slice(0, id.lastIndexOf("-")), +id.slice(id.lastIndexOf("-") + 1)];
+  const sec = key === "iss" ? ISSUES : SECTIONS.find(s => s.key === key);
+  return { sec, row: sec.rows[n] };
+}
+const cleanOpt = s => {
+  s = String(s).replace(/<span class="tag">[^<]*<\/span>\s*/g, "").trim();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+let qz = { i: 0, flip: [], ans: [], done: false, started: false };
+function quizStart() {
+  qz = { i: 0, flip: QUIZ.map(() => Math.random() < 0.5), ans: QUIZ.map(() => null), done: false, started: true };
+  drawQuiz();
+}
+function drawQuiz() {
+  const el = document.getElementById("quiz");
+  if (!qz.started) {
+    el.innerHTML = icon("eye") + '<h2>' + dashes + 'Blind Quiz' + dashes + '</h2>' +
+      '<p class="q-intro">Twenty questions, one at a time. The two answers show up in a random order with no colors and no labels, so you react to the idea instead of the side. When you finish, your answers fill in the chart on the Explore tab.</p>' +
+      '<button type="button" class="btn solid q-start" data-q="start">Start the quiz</button>';
+    return;
+  }
+  if (qz.done) { drawResults(el); return; }
+  const q = QUIZ[qz.i], d = rowById(q[0]);
+  const L = q[2] || cleanOpt(d.row[1]), Rt = q[3] || cleanOpt(d.row[2]);
+  const opts = qz.flip[qz.i] ? [["R", Rt], ["L", L]] : [["L", L], ["R", Rt]];
+  el.innerHTML = '<div class="q-progress" aria-hidden="true">' + QUIZ.map((_, k) => '<i class="' + (k < qz.i ? "done" : k === qz.i ? "now" : "") + '"></i>').join("") + '</div>' +
+    '<div class="q-meta">Question ' + (qz.i + 1) + ' of ' + QUIZ.length + ' &middot; ' + d.sec.title + '</div>' +
+    '<h3 class="q-prompt">' + q[1] + '</h3>' +
+    '<div class="q-opts">' + opts.map((o, k) => '<button type="button" class="q-opt' + (qz.ans[qz.i] === o[0] ? " picked" : "") + '" data-q="pick" data-side="' + o[0] + '"><span class="k">' + "AB"[k] + '</span><span>' + o[1] + '</span></button>').join("") + '</div>' +
+    '<div class="q-nav"><button type="button" class="q-link" data-q="back"' + (qz.i ? "" : " disabled") + '>&larr; Back</button><button type="button" class="q-link" data-q="skip">Skip &rarr;</button></div>';
+}
+function quizFinish() {
+  QUIZ.forEach((q, k) => { if (qz.ans[k]) picks[q[0]] = qz.ans[k]; else delete picks[q[0]]; });
+  save(); render();
+  qz.done = true; drawQuiz();
+}
+function drawResults(el) {
+  const groups = GROUPS.map(g => {
+    const its = QUIZ.map((q, k) => ({ id: q[0], a: qz.ans[k] })).filter(x => (x.id.startsWith("iss-") ? "issues" : "values") === g.key);
+    const st = { L: its.filter(x => x.a === "L").length, R: its.filter(x => x.a === "R").length, total: its.length };
+    st.done = st.L + st.R;
+    const pl = st.done ? Math.round(st.L / st.done * 100) : 0;
+    return '<div class="tg"><div class="tg-head"><span class="tg-part">' + g.part + '</span><h3>' + g.title + '</h3></div>' +
+      '<div class="split">' + splitBar(st) + '</div><div class="verdict"><strong>' + (st.done < 3 ? "Not enough answers" : st.L / st.done >= 0.65 ? "Leans left" : st.L / st.done <= 0.35 ? "Leans right" : "Mixed") + '</strong><span>' + st.done + ' of ' + st.total + ' answered' + (st.done ? ' &middot; ' + pl + '% left, ' + (100 - pl) + '% right' : '') + '</span></div></div>';
+  }).join("");
+  const list = QUIZ.map((q, k) => {
+    const d = rowById(q[0]), a = qz.ans[k];
+    const txt = a ? (a === "L" ? (q[2] || cleanOpt(d.row[1])) : (q[3] || cleanOpt(d.row[2]))) : "Skipped";
+    return '<li><span class="side ' + (a || "S") + '">' + (a === "L" ? "Left" : a === "R" ? "Right" : "Skip") + '</span><span><span class="what">' + d.sec.title + '</span><br>' + txt + '</span></li>';
+  }).join("");
+  el.innerHTML = icon("scale") + '<h2>' + dashes + 'Your Blind Results' + dashes + '</h2>' +
+    '<p class="q-intro">Your answers are now checked on the Explore tab, and your tally there has been updated. Here is which side each answer came from. Any surprises?</p>' +
+    '<div class="q-results">' + groups + '<ul class="q-list">' + list + '</ul></div>' +
+    '<div class="q-done-actions"><button type="button" class="btn solid" data-q="chart">See it on the chart</button><button type="button" class="btn" data-q="start">Retake with a new order</button></div>';
+}
+function showTab(name) {
+  const quiz = name === "quiz";
+  document.getElementById("tab-explore").hidden = quiz;
+  document.getElementById("tab-quiz").hidden = !quiz;
+  document.querySelector(".tallybar").hidden = quiz;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
+  if (quiz) drawQuiz();
+}
+document.querySelector(".tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-tab]");
+  if (b) showTab(b.dataset.tab);
+});
+document.getElementById("quiz").addEventListener("click", e => {
+  const b = e.target.closest("[data-q]");
+  if (!b) return;
+  const act = b.dataset.q;
+  if (act === "start") quizStart();
+  else if (act === "pick") {
+    qz.ans[qz.i] = b.dataset.side;
+    b.classList.add("picked");
+    setTimeout(() => { if (qz.i < QUIZ.length - 1) { qz.i++; drawQuiz(); } else quizFinish(); }, 180);
+  } else if (act === "skip") {
+    qz.ans[qz.i] = null;
+    if (qz.i < QUIZ.length - 1) { qz.i++; drawQuiz(); } else quizFinish();
+  } else if (act === "back" && qz.i > 0) { qz.i--; drawQuiz(); }
+  else if (act === "chart") { showTab("explore"); document.getElementById("tally").scrollIntoView(); }
+});
+if (location.hash === "#quiz") showTab("quiz");
 
 render();
 </script>
