@@ -3,902 +3,1349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 1: Ideas About Government</title>
+<title>Unit 1 Review Game — Ideas About Government</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --parchment: #f5f0e8;
-    --parchment-dark: #e8e0cc;
-    --parchment-mid: #ede5d0;
-    --ink: #1a1408;
-    --ink-light: #3d3320;
-    --ink-faded: #6b5e40;
-    --accent: #6080c0;
-    --accent-dark: #3a5a9a;
-    --accent-light: #8aaae0;
-    --accent-pale: #dce6f5;
-    --red-violation: #8b2020;
-    --red-pale: #fdf0f0;
-    --green-uphold: #1a5c2e;
-    --green-pale: #edf7f0;
-    --gold: #b8952a;
-    --gold-pale: #f5f0dc;
-    --border: rgba(96,128,192,0.25);
-    --shadow: rgba(26,20,8,0.12);
-  }
+:root {
+  --parchment: #f5f0e8;
+  --parchment-dark: #e8e0cc;
+  --parchment-mid: #ede5d0;
+  --ink: #1a1408;
+  --ink-light: #3d3320;
+  --ink-faded: #6b5e40;
+  --accent: #6080c0;
+  --accent-dark: #3a5a9a;
+  --accent-light: #8aaae0;
+  --accent-pale: #dce6f5;
+  --gold: #b8952a;
+  --gold-pale: #f5f0dc;
+  --green: #1a5c2e;
+  --green-pale: #edf7f0;
+  --green-bright: #2a8a46;
+  --red: #8b2020;
+  --red-pale: #fdf0f0;
+  --border: rgba(96,128,192,0.25);
+  --shadow: rgba(26,20,8,0.12);
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    background-color: var(--parchment);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    color: var(--ink);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 16px;
-    line-height: 1.7;
-  }
+body {
+  background: var(--parchment);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-  /* ── HEADER ── */
-  .site-header {
-    background: var(--accent-dark);
-    background-image: linear-gradient(135deg, #2a3f7a 0%, #3a5a9a 50%, #4a6aaa 100%);
-    color: #fff;
-    text-align: center;
-    padding: 3rem 2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .site-header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
-    background-size: 60px 60px;
-  }
-  .unit-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 0.6rem;
-    position: relative;
-  }
-  .site-header h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #fff;
-    position: relative;
-    line-height: 1.1;
-  }
-  .header-rule {
-    width: 80px; height: 2px;
-    background: var(--accent-light);
-    margin: 1.2rem auto 1rem;
-    position: relative;
-  }
-  .header-sub {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.8);
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
+/* ── HEADER ── */
+.site-header {
+  background: linear-gradient(135deg, #2a3f7a 0%, #3a5a9a 50%, #4a6aaa 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+.unit-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+.site-header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+}
+.header-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  position: relative;
+  margin-top: 0.4rem;
+}
 
-  /* ── NAV ── */
-  .page-nav {
-    background: var(--accent);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px var(--shadow);
-  }
-  .page-nav a {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    padding: 0.75rem 1.4rem;
-    border-right: 1px solid rgba(255,255,255,0.15);
-    transition: background 0.2s, color 0.2s;
-  }
-  .page-nav a:last-child { border-right: none; }
-  .page-nav a:hover { background: var(--accent-dark); color: #fff; }
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  background: var(--accent-dark);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.progress-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.progress-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent-light);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.progress-score {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
-  /* ── MAIN CONTENT ── */
-  .page-content { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+/* ── SLIDER CONTAINER ── */
+.slider-viewport {
+  overflow: hidden;
+  position: relative;
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  width: 500%; /* 5 sections */
+}
+.slide {
+  width: 20%; /* 100% / 5 */
+  flex-shrink: 0;
+  padding: 2.5rem 1.5rem 4rem;
+  min-height: calc(100vh - 140px);
+}
 
-  /* ── SECTION HEADERS ── */
-  .section-block { margin: 3.5rem 0 0; }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.8rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid var(--accent);
-  }
-  .section-number {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    opacity: 0.25;
-    flex-shrink: 0;
-  }
-  .section-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.1rem;
-  }
-  .section-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  .section-intro {
-    font-family: 'Lora', serif;
-    font-size: 1.02rem;
-    color: var(--ink-faded);
-    margin-bottom: 2rem;
-    max-width: 780px;
-  }
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--accent);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.25;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.section-label-sm {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.1rem;
+}
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.section-intro {
+  font-family: 'Lora', serif;
+  font-size: 0.97rem;
+  color: var(--ink-faded);
+  max-width: 900px;
+  margin: 0 auto 1.8rem;
+  line-height: 1.6;
+}
 
-  /* ── TYPES OF GOVERNMENT GRID ── */
-  .gov-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  @media (max-width: 720px) { .gov-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .gov-grid { grid-template-columns: 1fr; } }
+/* ── NEXT BUTTON ── */
+.next-btn {
+  display: block;
+  margin: 2rem auto 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.next-btn.ready {
+  opacity: 1;
+  pointer-events: auto;
+}
+.next-btn.ready:hover { background: var(--accent-dark); }
 
-  .gov-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent);
-    border-radius: 0 0 4px 4px;
-    padding: 1.2rem 1.3rem;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  .gov-card.hybrid { border-top-color: var(--gold); }
-  .gov-card-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    margin-bottom: 0.3rem;
-  }
-  .gov-card.hybrid .gov-card-title { color: #7a6010; }
-  .gov-card-subtitle {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.82rem;
-    font-style: italic;
-    color: var(--ink-faded);
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--parchment-dark);
-  }
-  .gov-card p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
-  .gov-card .example {
-    font-size: 0.85rem; color: var(--ink-faded); font-style: italic;
-    margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--parchment-dark);
-  }
-  .legitimacy-tag {
-    display: inline-block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--accent-pale);
-    color: var(--accent-dark);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    margin-bottom: 0.6rem;
-  }
-  .gov-card.hybrid .legitimacy-tag { background: var(--gold-pale); color: #7a6010; }
+/* ── FEEDBACK TOAST ── */
+.feedback {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--green);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.5rem;
+  border-radius: 3px;
+  transition: transform 0.3s ease;
+  z-index: 200;
+  pointer-events: none;
+}
+.feedback.show { transform: translateX(-50%) translateY(0); }
+.feedback.wrong { background: var(--red); }
 
-  /* ── PRINCIPLE FLIP CARDS ── */
-  .flip-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-  @media (max-width: 900px) { .flip-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .flip-grid { grid-template-columns: 1fr; } }
+/* ════════════════════════════════
+   SECTION 1 — VOCAB MATCH
+════════════════════════════════ */
+.match-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.match-col-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 0.3rem;
+}
+.match-col { display: flex; flex-direction: column; gap: 0.5rem; }
 
-  .flip-card {
-    height: 170px;
-    perspective: 1000px;
-    cursor: pointer;
-  }
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transform-style: preserve-3d;
-  }
-  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back {
-    position: absolute; inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 4px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 1rem; text-align: center;
-    box-shadow: 0 2px 8px var(--shadow);
-  }
-  .flip-front {
-    background: var(--accent-dark);
-    background-image: linear-gradient(135deg, #2a3f7a, #4a6aaa);
-    border: 1px solid var(--border);
-  }
-  .flip-front-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.8rem; font-weight: 700;
-    color: rgba(255,255,255,0.15); line-height: 1; margin-bottom: 0.3rem;
-  }
-  .flip-front-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1rem; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: #fff; line-height: 1.2;
-  }
-  .flip-hint { font-family: 'Source Serif 4', serif; font-size: 0.7rem; color: rgba(255,255,255,0.4); font-style: italic; margin-top: 0.5rem; }
-  .flip-back {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent);
-    transform: rotateY(180deg);
-    justify-content: flex-start; align-items: flex-start; text-align: left;
-    padding: 1rem 1.1rem;
-  }
-  .flip-back-label {
-    font-family: 'Oswald', sans-serif; font-size: 0.62rem;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.15rem;
-  }
-  .flip-back-def { font-size: 0.85rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 0.6rem; }
-  .flip-back-example {
-    font-size: 0.78rem; color: var(--ink-faded); font-style: italic;
-    border-top: 1px solid var(--parchment-dark); padding-top: 0.5rem; line-height: 1.4;
-  }
+.match-item {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  line-height: 1.4;
+  user-select: none;
+}
+.match-item:hover { border-color: var(--accent-light); background: var(--accent-pale); }
+.match-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-pale);
+  transform: scale(1.01);
+}
+.match-item.matched {
+  border-color: var(--green);
+  background: var(--green-pale);
+  cursor: default;
+  pointer-events: none;
+  color: var(--green);
+}
+.match-item.matched-wrong {
+  border-color: var(--red);
+  background: var(--red-pale);
+  animation: shake 0.35s ease;
+}
+.match-item.term { font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.03em; }
 
-  #principles { padding-bottom: 2.5rem; }
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
 
-  /* ── SCENARIO FLIP CARDS ── */
-  .scenarios-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-  }
-  @media (max-width: 800px) { .scenarios-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px) { .scenarios-grid { grid-template-columns: 1fr; } }
+/* ════════════════════════════════
+   SECTION 2 — DRAG & DROP TYPES
+════════════════════════════════ */
+.drag-layout {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.drag-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  background: var(--parchment-mid);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  min-height: 70px;
+}
+.drag-card {
+  background: var(--accent-dark);
+  background-image: linear-gradient(135deg, #2a3f7a, #4a6aaa);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  border-radius: 3px;
+  cursor: grab;
+  user-select: none;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+.drag-card:active { cursor: grabbing; transform: scale(1.04); }
+.drag-card.dragging { opacity: 0.45; }
+.drag-card.placed-correct {
+  background: linear-gradient(135deg, #1a5c2e, #2a8a46);
+  cursor: default;
+}
+.drag-card.placed-wrong {
+  background: linear-gradient(135deg, #8b2020, #b03030);
+  animation: shake 0.35s ease;
+}
 
-  /* instruction legend */
-  .scenario-legend {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faded);
-  }
-  .legend-dot {
-    width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
-  }
-  .legend-dot.green { background: var(--green-uphold); }
-  .legend-dot.red { background: var(--red-violation); }
+.drop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+@media (max-width: 640px) { .drop-grid { grid-template-columns: 1fr; } }
 
-  /* scenario card flip container */
-  .sc-flip {
-    height: 300px;
-    perspective: 1200px;
-    cursor: pointer;
-  }
-  .sc-flip-inner {
-    position: relative;
-    width: 100%; height: 100%;
-    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transform-style: preserve-3d;
-  }
-  .sc-flip.flipped .sc-flip-inner { transform: rotateY(180deg); }
+.drop-zone {
+  background: #fff;
+  border: 2px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  min-height: 90px;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+.drop-zone.over { border-color: var(--accent); background: var(--accent-pale); }
+.drop-zone.correct { border-color: var(--green); background: var(--green-pale); border-style: solid; }
+.drop-zone.wrong-drop { border-color: var(--red); background: var(--red-pale); }
 
-  .sc-face {
-    position: absolute; inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px var(--shadow);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-  }
+.drop-zone-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 0.4rem;
+}
+.drop-zone-claim {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+.drop-zone-slot {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
 
-  /* GREEN side — principle upheld */
-  .sc-face.sc-green {
-    background: var(--green-pale);
-    border: 1px solid rgba(26,92,46,0.2);
-    border-top: 4px solid var(--green-uphold);
-  }
-  .sc-face-header {
-    padding: 0.6rem 1rem;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .sc-face.sc-green .sc-face-header { background: var(--green-uphold); }
-  .sc-face.sc-red .sc-face-header { background: var(--red-violation); }
+/* for section 3 power sort -- three columns */
+.power-drop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) { .power-drop-grid { grid-template-columns: 1fr; } }
 
-  .sc-face-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
-  }
-  .sc-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: rgba(255,255,255,0.55);
-  }
-  .sc-body {
-    padding: 1rem 1.1rem;
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .sc-text {
-    font-size: 0.9rem; color: var(--ink-light); line-height: 1.55;
-    flex: 1;
-  }
-  .sc-prompt {
-    margin-top: 0.8rem;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.7rem;
-    border-radius: 2px;
-    align-self: flex-start;
-  }
-  .sc-face.sc-green .sc-prompt {
-    background: rgba(26,92,46,0.1);
-    color: var(--green-uphold);
-    border-left: 3px solid var(--green-uphold);
-  }
-  .sc-face.sc-red .sc-prompt {
-    background: rgba(139,32,32,0.08);
-    color: var(--red-violation);
-    border-left: 3px solid var(--red-violation);
-  }
-  .sc-flip-hint {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.68rem; font-style: italic;
-    color: rgba(255,255,255,0.5);
-  }
+.power-drop-zone {
+  background: #fff;
+  border: 2px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.8rem;
+  min-height: 180px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.power-drop-zone.over { border-color: var(--accent); background: var(--accent-pale); }
+.power-drop-zone-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  text-align: center;
+}
+.power-drop-cards { display: flex; flex-direction: column; gap: 0.4rem; min-height: 100px; }
+.power-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  background: var(--parchment-mid);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  min-height: 70px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.power-card {
+  background: var(--ink-light);
+  color: #fff;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 3px;
+  cursor: grab;
+  user-select: none;
+  line-height: 1.35;
+  max-width: 240px;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.power-card:active { cursor: grabbing; transform: scale(1.03); }
+.power-card.dragging { opacity: 0.4; }
+.power-card.placed-correct { background: var(--green); cursor: default; }
+.power-card.placed-wrong { background: var(--red); animation: shake 0.35s ease; }
 
-  /* RED side — principle violated */
-  .sc-face.sc-red {
-    background: var(--red-pale);
-    border: 1px solid rgba(139,32,32,0.15);
-    border-top: 4px solid var(--red-violation);
-    transform: rotateY(180deg);
-  }
+/* ════════════════════════════════
+   SECTION 4 — PRINCIPLES MC
+════════════════════════════════ */
+.mc-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.mc-progress-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.mc-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 0 0 4px 4px;
+  padding: 1.8rem;
+  box-shadow: 0 2px 10px var(--shadow);
+  margin-bottom: 1rem;
+}
+.mc-principle-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 0.5rem;
+}
+.mc-question {
+  font-size: 1rem;
+  color: var(--ink-light);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+.mc-options { display: flex; flex-direction: column; gap: 0.55rem; }
+.mc-option {
+  background: var(--parchment-mid);
+  border: 2px solid var(--border);
+  border-radius: 3px;
+  padding: 0.7rem 1rem;
+  font-size: 0.92rem;
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  line-height: 1.4;
+  text-align: left;
+  width: 100%;
+}
+.mc-option:hover:not(:disabled) { border-color: var(--accent-light); background: var(--accent-pale); }
+.mc-option.correct { border-color: var(--green); background: var(--green-pale); color: var(--green); font-weight: 600; pointer-events: none; }
+.mc-option.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); pointer-events: none; }
+.mc-option.reveal { border-color: var(--green); background: var(--green-pale); color: var(--green); pointer-events: none; opacity: 0.75; }
+.mc-option:disabled { pointer-events: none; }
 
-  /* ── FOOTER ── */
-  .page-footer {
-    background: var(--ink);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.82rem;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+/* ════════════════════════════════
+   SCORE PAGE
+════════════════════════════════ */
+.score-page {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.score-big {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  color: var(--accent-dark);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.score-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink-faded);
+  margin-bottom: 2rem;
+}
+.score-breakdown {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--parchment-dark);
+  font-size: 0.92rem;
+  color: var(--ink-light);
+}
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-family: 'Source Serif 4', serif; }
+.score-row-val {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--accent-dark);
+}
 
-  @media (max-width: 700px) {
-    .page-nav a { font-size: 0.72rem; padding: 0.65rem 0.9rem; }
-  }
+/* attempt boxes */
+.attempt-boxes {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.attempt-box {
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: border-color 0.3s, background 0.3s;
+}
+.attempt-box.done {
+  border-color: var(--green);
+  background: var(--green-pale);
+}
+.attempt-box-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+.attempt-box.done .attempt-box-num { color: var(--green); }
+.attempt-check {
+  font-size: 2.4rem;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+  color: var(--green);
+}
+.attempt-box.done .attempt-check {
+  opacity: 1;
+  transform: scale(1);
+}
+.attempt-score {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-faded);
+}
+.attempt-box.done .attempt-score { color: var(--green); }
+
+.play-again-btn {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 3rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.play-again-btn:hover { background: var(--accent-dark); }
+
+/* ── FOOTER ── */
+.page-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 1.2rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .match-area { grid-template-columns: 1fr; }
+  .drop-grid { grid-template-columns: 1fr; }
+  .slide { padding: 1.5rem 1rem 3rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div class="unit-label">American Government &mdash; Unit 1</div>
-  <h1>Ideas About Government</h1>
-  <div class="header-rule"></div>
-  <p class="header-sub">Where does government come from? Who should rule? And what makes a government legitimate?</p>
+  <div class="unit-label">American Government — Unit 1</div>
+  <h1>Ideas About Government — Review Game</h1>
+  <p class="header-sub">Four sections — 30 questions — how well do you know Unit 1?</p>
 </header>
 
-<!-- NAV -->
-<nav class="page-nav">
-  <a href="#types">Types of Government</a>
-  <a href="#principles">Key Principles</a>
-  <a href="#scenarios">Scenario Challenge</a>
-</nav>
+<div class="progress-wrap">
+  <span class="progress-label" id="section-label">Section 1 of 4</span>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <span class="progress-score" id="score-display">Score: 0 / 30</span>
+</div>
 
-<main class="page-content">
+<div class="slider-viewport">
+<div class="slider-track" id="slider-track">
 
-  <!-- ════════════════════════════════════════════
-       SECTION 1 — TYPES OF GOVERNMENT
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="types">
-    <div class="section-header">
-      <div class="section-number">01</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section One</span>
-        <h2 class="section-title">Types of Government</h2>
+<!-- ═══════════════════════════════════════
+     SLIDE 1 — VOCAB MATCH
+═══════════════════════════════════════ -->
+<div class="slide" id="slide-0">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div>
+      <span class="section-label-sm">Section One</span>
+      <h2 class="section-title">Vocabulary Match</h2>
+    </div>
+  </div>
+  <p class="section-intro">Click a term on the left, then click its matching definition on the right. Match all 10 pairs to continue.</p>
+
+  <div class="match-area" id="match-area">
+    <div>
+      <div class="match-col-label">Terms</div>
+      <div class="match-col" id="terms-col"></div>
+    </div>
+    <div>
+      <div class="match-col-label">Definitions</div>
+      <div class="match-col" id="defs-col"></div>
+    </div>
+  </div>
+
+  <button class="next-btn" id="next-0" onclick="nextSlide(0)">Next Section &rarr;</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 2 — TYPES OF GOVERNMENT DRAG-DROP
+═══════════════════════════════════════ -->
+<div class="slide" id="slide-1">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div>
+      <span class="section-label-sm">Section Two</span>
+      <h2 class="section-title">Types of Government</h2>
+    </div>
+  </div>
+  <p class="section-intro">Drag each type of government to its matching claim to legitimacy. Get all 6 correct to continue.</p>
+
+  <div class="drag-layout">
+    <div class="drag-bank" id="gov-bank"></div>
+    <div class="drop-grid" id="gov-drop-grid"></div>
+  </div>
+
+  <button class="next-btn" id="next-1" onclick="nextSlide(1)">Next Section &rarr;</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3 — POWER STRUCTURE SORT
+═══════════════════════════════════════ -->
+<div class="slide" id="slide-2">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div>
+      <span class="section-label-sm">Section Three</span>
+      <h2 class="section-title">Power Structure Sort</h2>
+    </div>
+  </div>
+  <p class="section-intro">Drag each card into the correct column — Unitary, Federal, or Confederal. Get all 6 correct to continue.</p>
+
+  <div class="power-bank" id="power-bank"></div>
+  <div class="power-drop-grid" id="power-drop-grid"></div>
+
+  <button class="next-btn" id="next-2" onclick="nextSlide(2)">Next Section &rarr;</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 4 — KEY PRINCIPLES MC
+═══════════════════════════════════════ -->
+<div class="slide" id="slide-3">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div>
+      <span class="section-label-sm">Section Four</span>
+      <h2 class="section-title">Key Principles of American Democracy</h2>
+    </div>
+  </div>
+  <p class="section-intro">Eight principles — eight questions. Choose the best definition for each one.</p>
+
+  <div class="mc-container">
+    <div class="mc-progress-label" id="mc-progress">Question 1 of 8</div>
+    <div class="mc-card" id="mc-card">
+      <div class="mc-principle-name" id="mc-name"></div>
+      <div class="mc-question" id="mc-question"></div>
+      <div class="mc-options" id="mc-options"></div>
+    </div>
+  </div>
+
+  <button class="next-btn" id="next-3" onclick="goToScore()">See My Score &rarr;</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5 — SCORE PAGE
+═══════════════════════════════════════ -->
+<div class="slide" id="slide-4">
+  <div class="score-page">
+    <div class="score-big" id="final-score-num">—</div>
+    <div class="score-sub" id="final-score-sub">out of 30 points</div>
+
+    <div class="score-breakdown">
+      <div class="score-row">
+        <span class="score-row-label">Vocabulary Match (10 pairs)</span>
+        <span class="score-row-val" id="breakdown-vocab">—</span>
+      </div>
+      <div class="score-row">
+        <span class="score-row-label">Types of Government (6 matches)</span>
+        <span class="score-row-val" id="breakdown-types">—</span>
+      </div>
+      <div class="score-row">
+        <span class="score-row-label">Power Structure Sort (6 cards)</span>
+        <span class="score-row-val" id="breakdown-power">—</span>
+      </div>
+      <div class="score-row">
+        <span class="score-row-label">Key Principles (8 questions)</span>
+        <span class="score-row-val" id="breakdown-principles">—</span>
       </div>
     </div>
-    <p class="section-intro">Every government can be categorized by who holds power and how that authority is justified. The key question is not just who rules, but what claim they make to make that rule legitimate.</p>
 
-    <div class="gov-grid">
-      <div class="gov-card">
-        <div class="gov-card-title">Democracy / Republic</div>
-        <div class="gov-card-subtitle">Rule by the People</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Popular Sovereignty</div>
-        <p>Government derives its authority from the people. Citizens elect leaders who govern on their behalf. Widely considered the only truly legitimate form of government.</p>
-        <p class="example">Examples: United States, most of Europe, India, Japan.</p>
+    <div class="attempt-boxes" id="attempt-boxes">
+      <div class="attempt-box" id="attempt-1">
+        <span class="attempt-box-num">Attempt 1</span>
+        <span class="attempt-check">&#10003;</span>
+        <span class="attempt-score" id="attempt-1-score"></span>
       </div>
-      <div class="gov-card">
-        <div class="gov-card-title">Monarchy</div>
-        <div class="gov-card-subtitle">Rule by a King or Queen</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Divine Right</div>
-        <p>Power is held by a single hereditary ruler. Historically, monarchs claimed authority from God — to question the king was to question God.</p>
-        <p class="example">Examples: Medieval European kingdoms. Modern constitutional monarchies (UK, Sweden) retain a monarch but with little real power.</p>
+      <div class="attempt-box" id="attempt-2">
+        <span class="attempt-box-num">Attempt 2</span>
+        <span class="attempt-check">&#10003;</span>
+        <span class="attempt-score" id="attempt-2-score"></span>
       </div>
-      <div class="gov-card">
-        <div class="gov-card-title">Oligarchy</div>
-        <div class="gov-card-subtitle">Rule by a Small Group</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Wealth or Military Force</div>
-        <p>Power is concentrated among a small elite. Legitimacy is difficult to establish and often depends on coercion. Many authoritarian states function as oligarchies in practice.</p>
-        <p class="example">Examples: Ancient Sparta; Russia today, where a small circle of oligarchs and security officials holds real power.</p>
-      </div>
-      <div class="gov-card">
-        <div class="gov-card-title">Theocracy</div>
-        <div class="gov-card-subtitle">Rule by Religious Leaders</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Divine Authority</div>
-        <p>Government is led by religious authorities who claim to enforce God's law. Questioning the government means questioning God — dissent is treated as heresy.</p>
-        <p class="example">Examples: Medieval papal states; Iran today, where religious scholars hold supreme authority above elected officials.</p>
-      </div>
-      <div class="gov-card">
-        <div class="gov-card-title">Dictatorship</div>
-        <div class="gov-card-subtitle">Rule by a Single Person</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Military Force</div>
-        <p>A single leader holds power, often having seized it by force. Dictators typically use the military and coercion to maintain control. "Might makes right."</p>
-        <p class="example">Examples: Adolf Hitler in Nazi Germany; Kim Jong-un in North Korea; Muammar Gaddafi in Libya.</p>
-      </div>
-      <div class="gov-card hybrid">
-        <div class="gov-card-title">Hybrid Regime</div>
-        <div class="gov-card-subtitle">Democracy as a Facade</div>
-        <div class="legitimacy-tag">Claim to Legitimacy: Rigged Elections</div>
-        <p>Holds elections and maintains the formal structures of democracy — but systematically rigs the game so the ruling party cannot lose. Courts, press, and genuine opposition are gradually dismantled. Scholars call this <em>democratic backsliding</em>.</p>
-        <p class="example">Examples: Hungary under Orban; Turkey under Erdogan; Venezuela under Maduro; Russia.</p>
+      <div class="attempt-box" id="attempt-3">
+        <span class="attempt-box-num">Attempt 3</span>
+        <span class="attempt-check">&#10003;</span>
+        <span class="attempt-score" id="attempt-3-score"></span>
       </div>
     </div>
-  </section>
 
-  <!-- ════════════════════════════════════════════
-       SECTION 2 — KEY PRINCIPLES
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="principles">
-    <div class="section-header">
-      <div class="section-number">02</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section Two</span>
-        <h2 class="section-title">Key Principles of American Democracy</h2>
-      </div>
-    </div>
-    <p class="section-intro">American democracy rests on eight foundational principles built into the Constitution and tested throughout American history. Click each card to flip it and explore the definition and an example.</p>
+    <button class="play-again-btn" onclick="resetGame()">Play Again</button>
+  </div>
+</div>
 
-    <div class="flip-grid">
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">1</div>
-            <div class="flip-front-name">Popular Sovereignty</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">All government authority comes from the people. The government rules only with the consent of the governed.</div>
-            <div class="flip-back-example">Citizens vote for leaders, sign petitions, and can amend the Constitution. Power flows upward from the governed.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">2</div>
-            <div class="flip-front-name">Limited Government</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">Government power is defined and bounded. It cannot act outside those limits.</div>
-            <div class="flip-back-example">The Constitution lists what Congress can do. The Bill of Rights lists what government cannot do — restrict speech, conduct unreasonable searches, deny due process.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">3</div>
-            <div class="flip-front-name">Separation of Powers</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">Government power is split among three branches. No single branch can do everything.</div>
-            <div class="flip-back-example">Congress passes laws. The President enforces them. The Supreme Court interprets them. Each branch operates in its own lane.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">4</div>
-            <div class="flip-front-name">Checks &amp; Balances</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">Each branch can limit the others, preventing any one from abusing power.</div>
-            <div class="flip-back-example">Congress can impeach the President. The President nominates Supreme Court justices, but the Senate confirms them. The Court can strike down laws as unconstitutional.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">5</div>
-            <div class="flip-front-name">Rule of Law</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">No one is above the law — not citizens, not officials, not the President. Rules apply equally to everyone.</div>
-            <div class="flip-back-example">Even the President can face criminal charges. Courts operate independently to ensure the law is applied fairly regardless of who is involved.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">6</div>
-            <div class="flip-front-name">Majority Rule</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">The side that wins elections earns the right to govern. Losers must accept the legitimate outcome.</div>
-            <div class="flip-back-example">The winning party takes power. The losing side accepts the result and competes in the next election rather than rejecting the results of the last one.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">7</div>
-            <div class="flip-front-name">Minority Rights</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">No majority has the right to strip away the basic rights of a minority. Majority rule has limits.</div>
-            <div class="flip-back-example">The Bill of Rights protects individual freedoms regardless of popular opinion. Courts can strike down laws that violate minority rights even if passed by large majorities.</div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-front">
-            <div class="flip-front-num">8</div>
-            <div class="flip-front-name">Federalism</div>
-            <div class="flip-hint">click to flip</div>
-          </div>
-          <div class="flip-back">
-            <div class="flip-back-label">Definition</div>
-            <div class="flip-back-def">Power is divided between the national government and the states. Neither can simply absorb the other's authority.</div>
-            <div class="flip-back-example">Education and law enforcement are largely left to the states. National defense, immigration, and currency are federal responsibilities.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</div><!-- /slider-track -->
+</div><!-- /slider-viewport -->
 
-  <!-- ════════════════════════════════════════════
-       SECTION 3 — SCENARIO CHALLENGE
-  ════════════════════════════════════════════ -->
-  <section class="section-block" id="scenarios">
-    <div class="section-header">
-      <div class="section-number">03</div>
-      <div class="section-title-wrap">
-        <span class="section-label">Section Three</span>
-        <h2 class="section-title">Scenario Challenge</h2>
-      </div>
-    </div>
-    <p class="section-intro">Each card shows two versions of the same situation. The green side shows the principle working as intended. The red side shows it breaking down. Flip to see both — then be ready to answer: which principle is mainly at play?</p>
+<div class="feedback" id="feedback"></div>
 
-    <div class="scenario-legend">
-      <div class="legend-item"><div class="legend-dot green"></div> Principle upheld</div>
-      <div class="legend-item"><div class="legend-dot red"></div> Principle violated</div>
-    </div>
+<footer class="page-footer">Blue Valley Academy &mdash; American Government &mdash; Unit 1 Review</footer>
 
-    <div class="scenarios-grid">
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
 
-      <!-- S01: Popular Sovereignty -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 01 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">After a census, the state legislature redraws congressional districts using an independent bipartisan commission. The new maps are tested against neutral criteria — compactness, contiguity, community boundaries — and result in district outcomes that closely track the statewide vote share.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 01</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">A state legislature redraws its congressional districts so that one party is almost guaranteed to win 70% of the seats despite getting only about 50% of the votes statewide. Party leaders defend the maps as legal. Critics call it gerrymandering.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+const VOCAB_PAIRS = [
+  { term: 'Government', def: 'The thing that organizes and makes decisions for a large group of people' },
+  { term: 'Nation', def: 'A large group of people with a shared ancestry, history, culture, or language' },
+  { term: 'Nation-State', def: 'A country with defined territory, a legitimate government, sovereignty, and a nation of people' },
+  { term: 'Sovereignty', def: 'The right of a nation to rule itself without outside interference' },
+  { term: 'Legitimacy', def: 'The quality of being accepted and recognized as having the right to govern' },
+  { term: 'Authority', def: 'Power plus legitimacy -- the right and ability to make decisions and enforce them' },
+  { term: 'Constitution', def: 'A set of rules for a government that says what powers its different parts have' },
+  { term: 'Legislature', def: 'The law-making branch of government; in the US, this is Congress' },
+  { term: 'Direct Democracy', def: 'Citizens vote on laws themselves rather than through elected representatives' },
+  { term: 'Indirect Democracy', def: 'Citizens elect representatives who vote on laws on their behalf -- also called a republic' },
+];
 
-      <!-- S02: Majority Rule -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 02 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Following a close presidential election, the losing candidate reviews the certified results, acknowledges the outcome, and concedes publicly. The candidate directs legal challenges through the courts, all of which are decided against them, and then participates in the peaceful transfer of power.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 02</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Following a presidential election, the losing candidate claims — without credible evidence — that the election was stolen. The candidate pressures state officials to reverse certified results and urges supporters to take action to stop Congress from certifying the outcome.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+const GOV_TYPES = [
+  { name: 'Democracy / Republic', claim: 'Popular sovereignty -- the government comes from the people', claimShort: 'Popular Sovereignty' },
+  { name: 'Theocracy', claim: 'Divine authority -- leaders claim to speak for or enforce God\'s law', claimShort: 'Divine Authority' },
+  { name: 'Dictatorship', claim: 'Military force -- "might makes right," often seizing power by force', claimShort: 'Military Force' },
+  { name: 'Oligarchy', claim: 'Wealth or military force -- rule by a small elite, hard to legitimize', claimShort: 'Wealth / Military Elite' },
+  { name: 'Monarchy', claim: 'Divine right -- God placed this family in charge; questioning the king means questioning God', claimShort: 'Divine Right' },
+  { name: 'Hybrid Regime', claim: 'Rigged elections -- holds elections but systematically rigs the game so the ruling party cannot lose', claimShort: 'Rigged Elections' },
+];
 
-      <!-- S03: Checks and Balances -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 03 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">The President nominates individuals to the cabinet and the Supreme Court. The Senate holds rigorous confirmation hearings, scrutinizes each nominee's record and qualifications, rejects two who appear unfit for the role, and confirms the rest only after thorough questioning.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 03</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">The President nominates several individuals to federal positions. Multiple nominees have no relevant experience and have stated they intend to use their offices to serve the President's political agenda. The Senate holds brief hearings and confirms all of them without serious scrutiny or dissent.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+const POWER_CARDS = [
+  { text: 'National government holds almost all the power; regional governments are much weaker', answer: 'Unitary' },
+  { text: 'Power is balanced between national and regional governments; both have defined spheres', answer: 'Federal' },
+  { text: 'Power rests mostly with regional governments; the national government is weak', answer: 'Confederal' },
+  { text: 'Examples: United Kingdom, France, China, Japan', answer: 'Unitary' },
+  { text: 'Example: The United States under the Constitution', answer: 'Federal' },
+  { text: 'Example: The United States under the Articles of Confederation', answer: 'Confederal' },
+];
 
-      <!-- S04: Minority Rights -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 04 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">A newly elected majority party passes election administration reforms. The changes are reviewed by federal courts, which strike down provisions that would have disproportionately burdened minority voters. The surviving reforms apply equally to all voters regardless of party affiliation.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 04</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">A newly elected majority party passes voting legislation that makes it significantly harder for people in districts that tend to vote for the opposing party to register, cast ballots, or have their votes counted. Party leaders argue they have a mandate to govern as they see fit.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+const PRINCIPLES_MC = [
+  {
+    name: 'Popular Sovereignty',
+    question: 'Which definition best describes Popular Sovereignty?',
+    correct: 'Government is created by and derives all authority from the people, who have a voice in how they are governed.',
+    wrong: [
+      'The government\'s power is defined and limited -- it cannot act outside those boundaries.',
+      'Power is divided between the national government and the states.',
+    ]
+  },
+  {
+    name: 'Limited Government',
+    question: 'Which definition best describes Limited Government?',
+    correct: 'The government\'s power is defined and bounded -- it is prevented from acting outside those limits.',
+    wrong: [
+      'Each branch of government can limit or check the powers of the other branches.',
+      'No person is above the law -- rules must be followed consistently by everyone.',
+    ]
+  },
+  {
+    name: 'Separation of Powers',
+    question: 'Which definition best describes Separation of Powers?',
+    correct: 'Government power is divided among three distinct branches -- legislative, executive, and judicial -- so no single branch can do everything.',
+    wrong: [
+      'Each branch can limit or check the actions of the other branches to prevent abuse.',
+      'The side that wins elections earns the right to govern; the losing side must accept the outcome.',
+    ]
+  },
+  {
+    name: 'Checks and Balances',
+    question: 'Which definition best describes Checks and Balances?',
+    correct: 'Each branch of government has the power to limit or check the actions of the other branches, preventing any one branch from abusing power.',
+    wrong: [
+      'Government power is divided among three branches so no single branch can do everything.',
+      'The government\'s power is defined and bounded -- it cannot act outside those limits.',
+    ]
+  },
+  {
+    name: 'Rule of Law',
+    question: 'Which definition best describes the Rule of Law?',
+    correct: 'No person is above the law -- not citizens, not officials, not even the President. Rules apply equally to all, and everyone is entitled to due process.',
+    wrong: [
+      'Government is created by and derives all authority from the people.',
+      'No majority has the right to strip away the basic rights of a minority group.',
+    ]
+  },
+  {
+    name: 'Majority Rule',
+    question: 'Which definition best describes Majority Rule?',
+    correct: 'The side that wins elections earns the right to govern. The losing side must accept the legitimacy of the outcome and participate in the next election rather than reject the result.',
+    wrong: [
+      'No majority has the right to strip away the basic rights of a minority.',
+      'Each branch of government can limit or check the actions of the other branches.',
+    ]
+  },
+  {
+    name: 'Minority Rights',
+    question: 'Which definition best describes the protection of Minority Rights?',
+    correct: 'Even in a democracy, no majority -- no matter how large -- has the right to strip away the basic rights and freedoms of a minority group or individual.',
+    wrong: [
+      'The side that wins elections earns the right to govern and can do as it sees fit.',
+      'Government power is defined and bounded -- it cannot act outside those limits.',
+    ]
+  },
+  {
+    name: 'Federalism',
+    question: 'Which definition best describes Federalism?',
+    correct: 'Power is divided between the national government and the states. Neither can simply absorb the other\'s authority -- both have defined spheres of responsibility.',
+    wrong: [
+      'Government is created by and derives all authority from the people.',
+      'The government\'s power is defined and bounded -- it cannot act outside those limits.',
+    ]
+  },
+];
 
-      <!-- S05: Rule of Law -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 05 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Allegations surface that a political opponent of the President may have engaged in financial misconduct. The President directs the Justice Department to investigate — through its normal independent processes — and explicitly states that the decision to prosecute or decline belongs entirely to career prosecutors, not the White House.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 05</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">A President directs the Attorney General to open criminal investigations into several prominent political opponents. Administration officials privately acknowledge that the goal is to damage the opponents' reputations heading into an election season.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let currentSlide = 0;
+let scores = { vocab: 0, types: 0, power: 0, principles: 0 };
+let totalPossible = 30;
+let attemptCount = 0;
+let attemptScores = [null, null, null];
 
-      <!-- S06: Separation of Powers -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 06 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Facing an economic crisis, the President proposes a package of tariff increases and spending adjustments, then works with Congressional leaders to pass the package through both chambers. The President signs the resulting legislation into law.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 06</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Facing pressure to respond quickly to an economic crisis, a President issues executive orders setting new tax rates on imported goods, raising tariffs, and restructuring federal spending — all without a vote in Congress. The White House argues the situation justifies executive action.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+// vocab state
+let selectedTerm = null;
+let selectedDef = null;
+let matchedCount = 0;
+const VOCAB_TOTAL = VOCAB_PAIRS.length;
 
-      <!-- S07: Checks and Balances / Congressional Oversight -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 07 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Congress issues subpoenas to White House officials as part of an oversight investigation. The President asserts executive privilege over a narrow set of documents involving confidential deliberations, but directs all other officials to cooperate fully. Courts resolve the privilege dispute and the investigation proceeds.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 07</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Congress issues subpoenas to senior White House officials as part of an oversight investigation. The President instructs all administration officials to refuse to comply, claiming executive privilege shields the entire executive branch from Congressional oversight — absolutely and without exception.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+// types state
+let govCorrect = 0;
+const GOV_TOTAL = GOV_TYPES.length;
 
-      <!-- S08: Federalism -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 08 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Crime spikes in a major city. The President offers federal law enforcement resources and National Guard support. The governor and mayor review the offer, request assistance with a specific task, and enter a formal agreement with the federal government that defines the scope of federal involvement and preserves local command authority.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 08</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">The President deploys National Guard troops to a major city to assist with policing. Both the mayor and governor formally object, stating they have not requested federal assistance and do not want it. The President deploys the troops anyway, arguing the federal government has an obligation to protect American citizens.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+// power state
+let powerCorrect = 0;
+const POWER_TOTAL = POWER_CARDS.length;
+let draggedPowerCard = null;
 
-      <!-- S09: Separation of Powers (emergency/tariffs) -->
-      <div class="sc-flip" onclick="this.classList.toggle('flipped')">
-        <div class="sc-flip-inner">
-          <div class="sc-face sc-green">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Upheld</div>
-              <div class="sc-num">Scenario 09 <span class="sc-flip-hint">click to flip</span></div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Facing a trade dispute, the President urges Congress to authorize new tariffs. Congress holds hearings, debates the scope of the tariffs, and passes legislation granting the President limited authority to adjust rates within defined bounds. The President signs the bill and implements the tariffs under that grant of authority.</div>
-              <div class="sc-prompt">Which principle is at work?</div>
-            </div>
-          </div>
-          <div class="sc-face sc-red">
-            <div class="sc-face-header">
-              <div class="sc-face-label">Principle Violated</div>
-              <div class="sc-num">Scenario 09</div>
-            </div>
-            <div class="sc-body">
-              <div class="sc-text">Facing pressure over a trade dispute, the President declares a national economic emergency and uses that declaration to impose sweeping new tariffs on hundreds of imported goods without a vote in Congress. The White House argues the emergency declaration gives the executive broad authority to act unilaterally on trade.</div>
-              <div class="sc-prompt">Which principle is being violated?</div>
-            </div>
-          </div>
-        </div>
-      </div>
+// principles state
+let mcIndex = 0;
+let mcCorrect = 0;
+const MC_TOTAL = PRINCIPLES_MC.length;
 
-    </div>
-  </section>
+// ═══════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-</main>
+function showFeedback(msg, isWrong = false) {
+  const el = document.getElementById('feedback');
+  el.textContent = msg;
+  el.className = 'feedback show' + (isWrong ? ' wrong' : '');
+  clearTimeout(el._timer);
+  el._timer = setTimeout(() => { el.classList.remove('show'); }, 1800);
+}
 
-<footer class="page-footer">
-  Blue Valley Academy &mdash; American Government &mdash; Unit 1
-</footer>
+function updateProgress() {
+  const total = scores.vocab + scores.types + scores.power + scores.principles;
+  document.getElementById('score-display').textContent = `Score: ${total} / ${totalPossible}`;
+  const pct = (currentSlide / 4) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  const labels = ['Section 1 of 4', 'Section 2 of 4', 'Section 3 of 4', 'Section 4 of 4', 'Results'];
+  document.getElementById('section-label').textContent = labels[currentSlide] || 'Results';
+}
 
+function nextSlide(from) {
+  currentSlide = from + 1;
+  const track = document.getElementById('slider-track');
+  track.style.transform = `translateX(-${currentSlide * 20}%)`;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToScore() {
+  currentSlide = 4;
+  const track = document.getElementById('slider-track');
+  track.style.transform = `translateX(-80%)`;
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('section-label').textContent = 'Results';
+  renderScorePage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════
+// SECTION 1: VOCAB MATCH
+// ═══════════════════════════════════════
+function buildVocab() {
+  const shuffledTerms = shuffle(VOCAB_PAIRS);
+  const shuffledDefs = shuffle(VOCAB_PAIRS);
+  const termsCol = document.getElementById('terms-col');
+  const defsCol = document.getElementById('defs-col');
+  termsCol.innerHTML = '';
+  defsCol.innerHTML = '';
+
+  shuffledTerms.forEach((pair, i) => {
+    const el = document.createElement('div');
+    el.className = 'match-item term';
+    el.dataset.id = pair.term;
+    el.dataset.type = 'term';
+    el.textContent = pair.term;
+    el.onclick = () => selectMatchItem(el);
+    termsCol.appendChild(el);
+  });
+
+  shuffledDefs.forEach((pair, i) => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.dataset.id = pair.term; // keyed to term for matching
+    el.dataset.type = 'def';
+    el.textContent = pair.def;
+    el.onclick = () => selectMatchItem(el);
+    defsCol.appendChild(el);
+  });
+}
+
+function selectMatchItem(el) {
+  if (el.classList.contains('matched')) return;
+
+  if (el.dataset.type === 'term') {
+    if (selectedTerm) selectedTerm.classList.remove('selected');
+    selectedTerm = el;
+    el.classList.add('selected');
+  } else {
+    if (selectedDef) selectedDef.classList.remove('selected');
+    selectedDef = el;
+    el.classList.add('selected');
+  }
+
+  if (selectedTerm && selectedDef) {
+    checkVocabMatch();
+  }
+}
+
+function checkVocabMatch() {
+  const termId = selectedTerm.dataset.id;
+  const defId = selectedDef.dataset.id;
+
+  if (termId === defId) {
+    selectedTerm.classList.remove('selected');
+    selectedDef.classList.remove('selected');
+    selectedTerm.classList.add('matched');
+    selectedDef.classList.add('matched');
+    matchedCount++;
+    scores.vocab++;
+    updateProgress();
+    showFeedback('Correct!');
+    if (matchedCount === VOCAB_TOTAL) {
+      document.getElementById('next-0').classList.add('ready');
+    }
+  } else {
+    selectedTerm.classList.add('matched-wrong');
+    selectedDef.classList.add('matched-wrong');
+    showFeedback('Not quite -- try again', true);
+    setTimeout(() => {
+      selectedTerm.classList.remove('matched-wrong', 'selected');
+      selectedDef.classList.remove('matched-wrong', 'selected');
+      selectedTerm = null;
+      selectedDef = null;
+    }, 600);
+    return;
+  }
+  selectedTerm = null;
+  selectedDef = null;
+}
+
+// ═══════════════════════════════════════
+// SECTION 2: TYPES OF GOVERNMENT DRAG
+// ═══════════════════════════════════════
+function buildGovTypes() {
+  const bank = document.getElementById('gov-bank');
+  const grid = document.getElementById('gov-drop-grid');
+  bank.innerHTML = '';
+  grid.innerHTML = '';
+
+  const shuffledTypes = shuffle(GOV_TYPES);
+  shuffledTypes.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'drag-card';
+    card.draggable = true;
+    card.dataset.name = t.name;
+    card.textContent = t.name;
+    card.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', t.name);
+      card.classList.add('dragging');
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+    bank.appendChild(card);
+  });
+
+  // build drop zones in original order
+  GOV_TYPES.forEach(t => {
+    const zone = document.createElement('div');
+    zone.className = 'drop-zone';
+    zone.dataset.answer = t.name;
+    zone.innerHTML = `
+      <div class="drop-zone-label">Claim to Legitimacy</div>
+      <div class="drop-zone-claim">${t.claim}</div>
+      <div class="drop-zone-slot" id="slot-${t.name.replace(/\W+/g,'_')}"></div>
+    `;
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      const name = e.dataTransfer.getData('text/plain');
+      handleGovDrop(name, zone);
+    });
+    grid.appendChild(zone);
+  });
+}
+
+function handleGovDrop(name, zone) {
+  if (zone.classList.contains('correct')) return; // already filled
+  const correct = zone.dataset.answer;
+  const slotId = `slot-${correct.replace(/\W+/g,'_')}`;
+  const slot = document.getElementById(slotId);
+  const card = document.querySelector(`.drag-card[data-name="${CSS.escape(name)}"]`);
+  if (!card) return;
+
+  if (name === correct) {
+    const placed = card.cloneNode(true);
+    placed.classList.add('placed-correct');
+    placed.draggable = false;
+    slot.appendChild(placed);
+    card.remove();
+    zone.classList.add('correct');
+    govCorrect++;
+    scores.types++;
+    updateProgress();
+    showFeedback('Correct!');
+    if (govCorrect === GOV_TOTAL) {
+      document.getElementById('next-1').classList.add('ready');
+    }
+  } else {
+    card.classList.add('placed-wrong');
+    zone.classList.add('wrong-drop');
+    showFeedback('Not quite -- try again', true);
+    setTimeout(() => {
+      card.classList.remove('placed-wrong');
+      zone.classList.remove('wrong-drop');
+    }, 600);
+  }
+}
+
+// ═══════════════════════════════════════
+// SECTION 3: POWER STRUCTURE SORT
+// ═══════════════════════════════════════
+function buildPower() {
+  const bank = document.getElementById('power-bank');
+  const grid = document.getElementById('power-drop-grid');
+  bank.innerHTML = '';
+  grid.innerHTML = '';
+
+  const shuffled = shuffle(POWER_CARDS);
+  shuffled.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'power-card';
+    card.draggable = true;
+    card.dataset.answer = c.answer;
+    card.dataset.idx = i;
+    card.textContent = c.text;
+    card.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('poweridx', card.dataset.idx);
+      e.dataTransfer.setData('text/plain', c.answer);
+      card.classList.add('dragging');
+      draggedPowerCard = card;
+    });
+    card.addEventListener('dragend', () => { card.classList.remove('dragging'); draggedPowerCard = null; });
+    bank.appendChild(card);
+  });
+
+  ['Unitary', 'Federal', 'Confederal'].forEach(col => {
+    const zone = document.createElement('div');
+    zone.className = 'power-drop-zone';
+    zone.dataset.col = col;
+    zone.innerHTML = `
+      <div class="power-drop-zone-title">${col}</div>
+      <div class="power-drop-cards" id="power-cards-${col}"></div>
+    `;
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      const answer = e.dataTransfer.getData('text/plain');
+      handlePowerDrop(answer, col);
+    });
+    grid.appendChild(zone);
+  });
+}
+
+function handlePowerDrop(answer, col) {
+  if (!draggedPowerCard) return;
+  const card = draggedPowerCard;
+  const correct = card.dataset.answer;
+
+  if (correct === col) {
+    const placed = card.cloneNode(true);
+    placed.classList.add('placed-correct');
+    placed.draggable = false;
+    document.getElementById(`power-cards-${col}`).appendChild(placed);
+    card.remove();
+    powerCorrect++;
+    scores.power++;
+    updateProgress();
+    showFeedback('Correct!');
+    if (powerCorrect === POWER_TOTAL) {
+      document.getElementById('next-2').classList.add('ready');
+    }
+  } else {
+    card.classList.add('placed-wrong');
+    showFeedback('Not quite -- try again', true);
+    setTimeout(() => card.classList.remove('placed-wrong'), 600);
+  }
+}
+
+// ═══════════════════════════════════════
+// SECTION 4: PRINCIPLES MC
+// ═══════════════════════════════════════
+let shuffledMC = [];
+
+function buildMC() {
+  shuffledMC = shuffle(PRINCIPLES_MC);
+  mcIndex = 0;
+  mcCorrect = 0;
+  renderMCQuestion();
+}
+
+function renderMCQuestion() {
+  if (mcIndex >= MC_TOTAL) {
+    document.getElementById('next-3').classList.add('ready');
+    return;
+  }
+  const q = shuffledMC[mcIndex];
+  document.getElementById('mc-progress').textContent = `Question ${mcIndex + 1} of ${MC_TOTAL}`;
+  document.getElementById('mc-name').textContent = q.name;
+  document.getElementById('mc-question').textContent = q.question;
+
+  const opts = shuffle([q.correct, ...q.wrong]);
+  const optContainer = document.getElementById('mc-options');
+  optContainer.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'mc-option';
+    btn.textContent = opt;
+    btn.onclick = () => handleMCAnswer(opt === q.correct, opt, q.correct, optContainer);
+    optContainer.appendChild(btn);
+  });
+}
+
+function handleMCAnswer(isCorrect, chosen, correctAns, container) {
+  Array.from(container.children).forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === correctAns) btn.classList.add(isCorrect ? 'correct' : 'reveal');
+    if (btn.textContent === chosen && !isCorrect) btn.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    mcCorrect++;
+    scores.principles++;
+    updateProgress();
+    showFeedback('Correct!');
+  } else {
+    showFeedback('Not quite -- see the correct answer above', true);
+  }
+
+  setTimeout(() => {
+    mcIndex++;
+    if (mcIndex >= MC_TOTAL) {
+      document.getElementById('next-3').classList.add('ready');
+    } else {
+      renderMCQuestion();
+    }
+  }, 1400);
+}
+
+// ═══════════════════════════════════════
+// SCORE PAGE
+// ═══════════════════════════════════════
+function renderScorePage() {
+  const total = scores.vocab + scores.types + scores.power + scores.principles;
+  attemptCount = Math.min(attemptCount + 1, 3);
+  attemptScores[attemptCount - 1] = total;
+
+  document.getElementById('final-score-num').textContent = total;
+  document.getElementById('final-score-sub').textContent = `out of 30 points`;
+
+  document.getElementById('breakdown-vocab').textContent = `${scores.vocab} / 10`;
+  document.getElementById('breakdown-types').textContent = `${scores.types} / 6`;
+  document.getElementById('breakdown-power').textContent = `${scores.power} / 6`;
+  document.getElementById('breakdown-principles').textContent = `${scores.principles} / 8`;
+
+  for (let i = 1; i <= 3; i++) {
+    const box = document.getElementById(`attempt-${i}`);
+    const scoreEl = document.getElementById(`attempt-${i}-score`);
+    if (attemptScores[i-1] !== null) {
+      scoreEl.textContent = `${attemptScores[i-1]} / 30`;
+      setTimeout(() => box.classList.add('done'), 200 * i);
+    } else {
+      box.classList.remove('done');
+      scoreEl.textContent = '';
+    }
+  }
+}
+
+// ═══════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════
+function resetGame() {
+  currentSlide = 0;
+  scores = { vocab: 0, types: 0, power: 0, principles: 0 };
+  selectedTerm = null;
+  selectedDef = null;
+  matchedCount = 0;
+  govCorrect = 0;
+  powerCorrect = 0;
+
+  document.getElementById('slider-track').style.transform = 'translateX(0)';
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('section-label').textContent = 'Section 1 of 4';
+  document.getElementById('score-display').textContent = 'Score: 0 / 30';
+
+  ['next-0','next-1','next-2','next-3'].forEach(id => {
+    document.getElementById(id).classList.remove('ready');
+  });
+
+  buildVocab();
+  buildGovTypes();
+  buildPower();
+  buildMC();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+buildVocab();
+buildGovTypes();
+buildPower();
+buildMC();
+updateProgress();
+</script>
 </body>
 </html>
