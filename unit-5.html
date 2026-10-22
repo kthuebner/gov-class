@@ -52,7 +52,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
   box-shadow:0 0 0 2px rgba(244,236,221,.9), 0 2px 8px rgba(0,0,0,.18);transition:left .55s cubic-bezier(.22,.8,.24,1), width .3s}
 .ticks{position:relative;height:16px;margin-top:5px}
 .ticks span{position:absolute;transform:translateX(-50%);font-family:var(--cond);font-size:12px;color:var(--muted);letter-spacing:.05em}
-.legend{flex:1;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-self:flex-end;padding-bottom:6px;font-family:var(--cond);font-size:13px;color:var(--ink-2)}
+.legend{flex:1;display:flex;flex-wrap:wrap;gap:4px 14px;max-width:min(560px,100%);margin:0 auto;justify-content:center;align-self:flex-end;padding-bottom:6px;font-family:var(--cond);font-size:13px;color:var(--ink-2)}
 .legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .legend b{display:inline-block;width:14px;height:14px;border-radius:3px}
 
@@ -122,19 +122,34 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 /* ---------- lanes ---------- */
 .lane-labels{display:flex;flex-direction:column;align-items:flex-end;padding-right:10px;border-top:2px solid var(--ink)}
 .lane-labels .sh{display:none}
-.lane-labels div{font-family:var(--cond);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;text-align:right;line-height:1.1}
+.lane-labels > div{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;text-align:right;line-height:1.1}
 .lanes-vp{border-top:2px solid var(--ink)}
 .lane-end{border-top:2px solid var(--ink)}
-.era{position:absolute;top:6px;height:26px;border-radius:3px;overflow:hidden}
+.era{position:absolute;top:3px;height:22px;border-radius:3px;overflow:hidden}
 .era:nth-child(odd){background:var(--paper-3)} .era:nth-child(even){background:var(--paper-2)}
 .era.dark{background:#5A4F42}
-.era-l{position:absolute;top:0;height:26px;line-height:26px;font-family:var(--cond);font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2);pointer-events:none;transition:left .55s cubic-bezier(.22,.8,.24,1)}
+.era-l{position:absolute;top:3px;height:22px;line-height:22px;font-family:var(--cond);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2);pointer-events:none;transition:left .55s cubic-bezier(.22,.8,.24,1)}
 .era-l.on-dark{color:var(--paper)}
 .lane-rule{position:absolute;left:0;right:0;height:1px;background:var(--rule)}
-.it{position:absolute;height:24px;display:flex;align-items:center;gap:6px;border:none;background:none;padding:0;cursor:pointer;white-space:nowrap;
-  font-family:var(--cond);font-size:13.5px;letter-spacing:.02em;color:var(--ink)}
+.it{position:absolute;height:21px;display:flex;align-items:center;gap:6px;border:none;background:none;padding:0;cursor:pointer;white-space:nowrap;
+  font-family:var(--cond);font-size:13px;letter-spacing:.02em;color:var(--ink)}
+.it.sm{font-size:12.5px;gap:5px}
+.it .mid{width:11px;height:11px;flex:none;border-radius:2px;border:2px solid var(--ink);box-sizing:border-box}
+.k-mid{color:var(--ink);font-weight:500}
+.k-mid .mid[style*="transparent"]{border-style:dashed}
+.cong{position:absolute;height:18px;padding:0;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.cong i{display:block;height:8px;width:100%;border-radius:1px}
+.cong:hover i{filter:brightness(1.12) saturate(1.15)}
+.cong:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+.cong.future i{background:repeating-linear-gradient(135deg,var(--rule) 0 3px,transparent 3px 6px)}
+.lane-labels .lab-gv{position:relative;align-items:flex-end!important;padding-bottom:9px}
+.lane-labels .bt{position:absolute;right:10px;font-size:8.5px;line-height:9px;letter-spacing:.1em;color:var(--muted)}
+.pop .cg{display:grid;grid-template-columns:72px 1fr;gap:0 8px;margin-top:3px}
+.pop .cg span{display:inline-flex;align-items:center;gap:6px;font-family:var(--cond);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pop .cg b{display:inline-block;width:12px;height:8px;border-radius:1px}
+.pop .cg em{grid-column:2;font-size:12.5px;color:var(--muted)}
 .it .dot{width:11px;height:11px;border-radius:50%;flex:none;border:2px solid var(--paper);box-shadow:0 0 0 1.5px currentColor}
-.it .bar{position:absolute;left:0;top:4px;height:16px;border-radius:3px;opacity:.9}
+.it .bar{position:absolute;left:0;top:50%;transform:translateY(-50%);height:15px;border-radius:3px;opacity:.9}
 .it.span .t{position:relative;padding-left:7px;z-index:1;transition:transform .55s cubic-bezier(.22,.8,.24,1)}
 .it:hover .t{text-decoration:underline;text-underline-offset:3px}
 .it:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:3px}
@@ -157,6 +172,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 .fkey i{display:inline-block;width:9px;height:9px;border-radius:50%}
 .fkey i.d{border-radius:1px;transform:rotate(45deg)}
 .fkey i.w{width:16px;height:8px;border-radius:2px;background:repeating-linear-gradient(135deg,#8B7C69 0 3px,#7A6B58 3px 6px)}
+.fkey i.m{border-radius:2px;border:2px solid var(--ink);background:var(--pR);width:10px;height:10px}
 .fkey .sep{width:1px;height:12px;background:var(--rule)}
 .foot kbd{font-family:var(--cond);font-size:11px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--paper)}
 
@@ -189,10 +205,27 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 .pcard p{font-size:16.5px;line-height:1.6;margin:0 0 12px}
 .pcard .fnote{font-size:14px;font-style:italic;color:var(--ink-2);border-left:3px solid var(--amber);padding-left:10px}
 .mcard{width:min(1180px,100%);padding:26px 28px 22px}
-.mcard h2{font-family:var(--cond);font-weight:500;font-size:34px;line-height:1;margin:0 0 4px;text-transform:uppercase;letter-spacing:.02em}
-.mcard .sub{font-family:var(--cond);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.mcard h2{font-family:var(--cond);font-weight:500;font-size:32px;line-height:1;margin:0 0 4px;text-transform:uppercase;letter-spacing:.02em}
+.mcard .sub{font-family:var(--cond);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.mcard{padding-top:22px!important}
 .mgrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:26px;align-items:start}
 .mapsvg{width:100%;height:auto;display:block}
+.mapsbtn{align-self:flex-end;margin-bottom:6px;display:inline-flex;align-items:center;gap:8px;font-family:var(--cond);font-size:14px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 16px 8px 13px;border-radius:22px;border:none;background:var(--ink);color:var(--paper);cursor:pointer;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.mapsbtn:hover{background:var(--amber-d)}
+.mapsbtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.mapsbtn svg{width:18px;height:13px}
+.mnav{display:flex;align-items:center;gap:8px;margin:0 50px 14px 0}
+.mchips{flex:1;display:flex;flex-wrap:wrap;gap:4px}
+.mchip{font-family:var(--cond);font-size:13px;letter-spacing:.04em;padding:3px 8px;border-radius:12px;border:1.5px solid var(--rule);background:transparent;cursor:pointer;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mchip:hover{border-color:var(--ink)}
+.mchip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.mchip:focus-visible,.mstep:focus-visible,.tl:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.mstep{flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--paper-2);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mstep:hover{background:var(--ink);color:var(--paper)}
+.mstep svg{width:16px;height:16px}
+.tl{margin-top:4px;font-family:var(--cond);font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:18px;border:1.5px solid var(--ink);background:transparent;cursor:pointer}
+.tl:hover{background:var(--ink);color:var(--paper)}
 .mapsvg path{stroke:#FBF6EC;stroke-width:1.1;stroke-linejoin:round}
 .mapsvg path:hover{filter:brightness(1.1)}
 .mapsvg .disp{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-dasharray:6 4;pointer-events:none}
@@ -216,9 +249,10 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
   .nav{width:48px;height:48px} .nav svg{width:22px;height:22px}
   .pcard{grid-template-columns:1fr} .pcard .pic{border-radius:12px 12px 0 0;min-height:240px} .pcard .pic img{max-height:260px}
   .mgrid{grid-template-columns:1fr}
-  .lane-labels .lg{display:none} .lane-labels .sh{display:inline} .lane-labels div{font-size:10.5px;letter-spacing:.08em}
+  .lane-labels .lg{display:none} .lane-labels .sh{display:inline} .lane-labels > div{font-size:10px;letter-spacing:.06em}
 }
-@media (max-width:1100px){ .top{flex-wrap:wrap} .legend{order:3;flex-basis:100%;justify-content:flex-start;padding-bottom:0} }
+@media (max-width:1500px){ .legend{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:3px 16px;max-width:none;margin:0} }
+@media (max-width:1100px){ .top{flex-wrap:wrap} .legend{order:3;flex-basis:100%;justify-content:flex-start;padding-bottom:0} .mapsbtn{margin-left:auto} }
 @media (max-width:600px){ .top{padding:12px 16px 6px} .strip-wrap,.foot{padding-left:16px;padding-right:16px} .range .lbl{display:none} }
 </style>
 </head>
@@ -230,6 +264,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
     <div class="dashes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   </div>
   <div class="legend" id="legend" aria-label="Party colors"></div>
+  <button class="mapsbtn" id="mapsBtn" aria-label="Open the electoral maps"><svg viewBox="0 0 15 11" fill="currentColor" aria-hidden="true"><path d="M1 2l4-1 2 1 3-.5 4 1-.5 3 .5 2-2 2-3-.5-1.5 1-1.5-1.5L3 9 1.5 7 1 4.5z"/></svg>Electoral Maps</button>
   <div class="range" aria-live="polite"><span class="lbl">Now showing</span><span class="val" id="range"></span></div>
 </header>
 
@@ -249,7 +284,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 </main>
 
 <footer class="foot">
-  <div class="fkey"><span><i class="w"></i>War</span><span><i style="background:#5D7A3E"></i>Land</span><span><i style="background:#C08A36"></i>Economy</span><span><i style="background:var(--ink-2)"></i>Event</span><span class="sep"></span><span><i class="d" style="background:#5E4A86"></i>Amendment</span><span><i class="d" style="background:#2F6A6A"></i>Law</span><span><i class="d" style="background:#8A3E3E"></i>Court case</span><span><i class="d" style="background:#B47A2E"></i>Parties</span></div>
+  <div class="fkey"><span><i class="w"></i>War</span><span><i style="background:#5D7A3E"></i>Land</span><span><i style="background:#C08A36"></i>Economy</span><span><i style="background:var(--ink-2)"></i>Event</span><span class="sep"></span><span><i class="d" style="background:#5E4A86"></i>Amendment</span><span><i class="d" style="background:#2F6A6A"></i>Law</span><span><i class="d" style="background:#8A3E3E"></i>Court case</span><span><i class="d" style="background:#B47A2E"></i>Parties</span><span><i class="m"></i>Midterm</span></div>
   <span>Click portraits, maps, and timeline items for details. <kbd>&larr;</kbd> <kbd>&rarr;</kbd> keys work too.</span>
 </footer>
 
@@ -268,6 +303,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
     <button class="close" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
     <h2 id="mtitle"></h2>
     <div class="sub" id="msub"></div>
+    <div class="mnav"><button class="mstep" id="mprev" aria-label="Previous map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l-8 8 8 8"/></svg></button><div class="mchips" id="mchips"></div><button class="mstep" id="mnext" aria-label="Next map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg></button></div>
     <div class="mgrid">
       <div><svg class="mapsvg" id="msvg" viewBox="0 0 975 610" role="img"></svg></div>
       <div id="mside"></div>
@@ -506,52 +542,76 @@ const EVENTS = [
  {y:1989.86, t:"Berlin Wall falls", k:"event", d:"East Germans tear down the Berlin Wall. The Cold War is ending."},
  {y:1991.05, y2:1991.2, t:"Gulf War", k:"war", d:"A U.S.-led coalition drives Iraq out of Kuwait."},
  {y:2001.7, t:"9/11 attacks", k:"event", d:"Al-Qaeda terrorists kill nearly 3,000 people in New York, Virginia, and Pennsylvania."},
- {y:2001.77, y2:2021.65, t:"War in Afghanistan", k:"war", d:"The longest war in U.S. history, ending with the withdrawal of U.S. troops in 2021."},
- {y:2003.2, y2:2011.95, t:"Iraq War", k:"war", d:"The U.S. invades Iraq and removes Saddam Hussein."},
+ {y:2001.77, y2:2021.65, t:"Wars in Afghanistan and Iraq", k:"war", d:"After 9/11, the U.S. invades Afghanistan in 2001 and Iraq in 2003. U.S. troops leave Iraq in 2011 and Afghanistan in 2021, ending the longest war in U.S. history."},
  {y:2008.7, t:"Great Recession", k:"econ", d:"A housing and banking collapse causes the worst downturn since the Great Depression."},
- {y:2020.2, t:"COVID-19 pandemic", k:"event", d:"A global pandemic kills more than a million Americans and shuts down much of daily life."},
- {y:2021.01, t:"January 6", k:"event", d:"A mob attacks the U.S. Capitol while Congress counts the electoral votes."}
+ {y:2020.2, t:"COVID-19 pandemic", k:"event", d:"A global pandemic kills more than a million Americans and shuts down much of daily life."}
 ];
-/* k: amend | law | court | realign */
-const MILESTONES = [
+/* Rights & Freedoms lane. k: amend | law | court */
+const RIGHTS = [
  {y:1791.95, t:"Bill of Rights", k:"amend", d:"The first ten amendments are ratified, protecting individual rights from the federal government."},
- {y:1803.15, t:"Marbury v. Madison", k:"court", d:"The Supreme Court claims the power of judicial review: it can strike down laws that violate the Constitution."},
- {y:1804.45, t:"12th Amendment", k:"amend", d:"Electors now cast separate votes for president and vice president, fixing the problem of the 1800 tie."},
+ {y:1798.5, t:"Alien and Sedition Acts", k:"law", d:"Federalists make it a crime to publish false or malicious criticism of the government. Jefferson and Madison argue the law violates the First Amendment."},
  {y:1828.5, t:"Property rules dropped", k:"law", d:"By 1828 most states let white men vote without owning property, sometimes called universal white male suffrage."},
- {y:1832.4, t:"First party conventions", k:"realign", d:"Parties start choosing presidential candidates at national conventions instead of in private meetings of members of Congress."},
  {y:1848.55, t:"Seneca Falls", k:"law", d:"The first women's rights convention demands, among other things, the right to vote."},
- {y:1854.5, t:"Republican Party founded", k:"realign", d:"Antislavery Northerners form the Republican Party as the Whigs collapse."},
  {y:1857.2, t:"Dred Scott v. Sandford", k:"court", d:"The Supreme Court rules that Black Americans cannot be citizens and that Congress cannot ban slavery in the territories."},
  {y:1865.95, t:"13th Amendment", k:"amend", d:"Abolishes slavery."},
- {y:1868.15, t:"First impeachment", k:"law", d:"The House impeaches Andrew Johnson. The Senate acquits him by one vote."},
  {y:1868.55, t:"14th Amendment", k:"amend", d:"Birthright citizenship, due process, and equal protection of the laws, now applied to the states."},
  {y:1870.1, t:"15th Amendment", k:"amend", d:"States cannot deny the vote because of race."},
- {y:1877.3, t:"The Solid South begins", k:"realign", d:"After Reconstruction, white Democrats control Southern politics for nearly a century, and Black voters are pushed out."},
- {y:1883.05, t:"Pendleton Act", k:"law", d:"Many federal jobs are now filled by merit exams instead of political loyalty."},
  {y:1890.8, t:"Jim Crow voting laws", k:"law", d:"Southern states adopt poll taxes and literacy tests to keep Black citizens from voting."},
  {y:1896.4, t:"Plessy v. Ferguson", k:"court", d:"The Supreme Court allows separate but equal segregation."},
- {y:1913.1, t:"16th Amendment", k:"amend", d:"Congress can collect an income tax."},
- {y:1913.3, t:"17th Amendment", k:"amend", d:"Voters, not state legislatures, now elect U.S. senators."},
+ {y:1919.2, t:"Schenck v. United States", k:"court", d:"The Supreme Court upholds a conviction for antidraft leaflets and creates the clear and present danger test for free speech."},
  {y:1920.65, t:"19th Amendment", k:"amend", d:"States cannot deny the vote because of sex. Women vote nationwide."},
  {y:1924.45, t:"Indian Citizenship Act", k:"law", d:"Native Americans born in the U.S. become citizens, though some states still kept them from voting for decades."},
- {y:1932.9, t:"New Deal coalition", k:"realign", d:"Workers, immigrants, Southern whites, and later Black voters make Democrats the majority party for decades."},
- {y:1933.1, t:"20th Amendment", k:"amend", d:"Moves Inauguration Day from March 4 to January 20 and shortens the lame-duck period."},
- {y:1951.15, t:"22nd Amendment", k:"amend", d:"Limits presidents to two elected terms, a response to FDR's four."},
+ {y:1944.95, t:"Korematsu v. United States", k:"court", d:"The Supreme Court upholds the incarceration of Japanese Americans during World War II. The Court formally rejected the decision in 2018."},
  {y:1954.4, t:"Brown v. Board", k:"court", d:"The Supreme Court rules that segregated public schools are unconstitutional. The case began in Topeka, Kansas."},
- {y:1961.25, t:"23rd Amendment", k:"amend", d:"Washington, D.C., gets three electoral votes."},
+ {y:1961.25, t:"23rd Amendment", k:"amend", d:"Residents of Washington, D.C., get to vote for president, with three electoral votes."},
  {y:1964.1, t:"24th Amendment", k:"amend", d:"Bans poll taxes in federal elections."},
  {y:1964.5, t:"Civil Rights Act", k:"law", d:"Outlaws segregation in public places and job discrimination based on race, color, religion, sex, or national origin."},
  {y:1965.6, t:"Voting Rights Act", k:"law", d:"Bans literacy tests and puts federal oversight on places with a history of discrimination. Black registration in the South soars."},
- {y:1967.15, t:"25th Amendment", k:"amend", d:"Sets rules for presidential disability and filling a vice president vacancy. Used to make Ford vice president in 1973."},
+ {y:1969.15, t:"Tinker v. Des Moines", k:"court", d:"Students who wore black armbands to protest the Vietnam War win. Students do not lose their free speech rights at the schoolhouse gate."},
  {y:1971.5, t:"26th Amendment", k:"amend", d:"Lowers the voting age to 18."},
- {y:1972.6, t:"Primaries take over", k:"realign", d:"After 1968, party reforms make primaries and caucuses, not party leaders, the way nominees are chosen."},
- {y:1980.9, t:"The South turns Republican", k:"realign", d:"The shift of the white South to the Republican Party, which started with Goldwater in 1964, is mostly complete."},
- {y:1998.95, t:"Clinton impeached", k:"law", d:"The House impeaches Bill Clinton. The Senate acquits him."},
- {y:2000.95, t:"Bush v. Gore", k:"court", d:"The Supreme Court stops the Florida recount, deciding the 2000 election."},
  {y:2010.05, t:"Citizens United", k:"court", d:"Corporations and unions can spend unlimited money on independent political ads."},
  {y:2013.5, t:"Shelby County v. Holder", k:"court", d:"Ends the Voting Rights Act rule that some states needed federal approval before changing election laws."},
- {y:2019.97, t:"Trump impeached twice", k:"law", d:"The House impeaches Donald Trump in 2019 and again in 2021. The Senate acquits him both times."}
+ {y:2015.5, t:"Obergefell v. Hodges", k:"court", d:"The Supreme Court rules that the Constitution guarantees same-sex couples the right to marry."}
 ];
+/* Government / Congress lane. k: amend | law | court | realign | mid | event.  mid items carry w = party that won */
+const GOV = [
+ {y:1803.15, t:"Marbury v. Madison", k:"court", d:"The Supreme Court claims the power of judicial review: it can strike down laws that violate the Constitution."},
+ {y:1804.45, t:"12th Amendment", k:"amend", d:"Electors now cast separate votes for president and vice president, fixing the problem of the 1800 tie."},
+ {y:1832.4, t:"First party conventions", k:"realign", d:"Parties start choosing presidential candidates at national conventions instead of in private meetings of members of Congress."},
+ {y:1854.5, t:"Republican Party founded", k:"realign", d:"Antislavery Northerners form the Republican Party as the Whigs collapse."},
+ {y:1866.84, t:"Radical Republicans win", k:"mid", w:"R", d:"Midterm of 1866. Republicans win more than two-thirds of both chambers, enough to override President Johnson's vetoes. Congress takes over Reconstruction and impeaches Johnson in 1868."},
+ {y:1868.15, t:"First impeachment", k:"law", d:"The House impeaches Andrew Johnson. The Senate acquits him by one vote."},
+ {y:1874.84, t:"Democrats win House", k:"mid", w:"D", d:"Midterm of 1874. After the Panic of 1873, Democrats win the House for the first time since before the Civil War, a sign that Northern support for Reconstruction is fading."},
+ {y:1877.3, t:"The Solid South begins", k:"realign", d:"After Reconstruction, white Democrats control Southern politics for nearly a century, and Black voters are pushed out."},
+ {y:1883.05, t:"Pendleton Act", k:"law", d:"Many federal jobs are now filled by merit exams instead of political loyalty."},
+ {y:1894.84, t:"1894 landslide", k:"mid", w:"R", d:"Midterm of 1894. During the depression after the Panic of 1893, Republicans gain more than 100 House seats, the biggest House swing in American history. It sets up the realignment of 1896."},
+ {y:1913.1, t:"16th Amendment", k:"amend", d:"Congress can collect an income tax."},
+ {y:1913.3, t:"17th Amendment", k:"amend", d:"Voters, not state legislatures, now elect U.S. senators."},
+ {y:1918.84, t:"GOP wins Congress", k:"mid", w:"R", d:"Midterm of 1918. Days before World War I ends, Republicans win both chambers. The new Senate rejects the Treaty of Versailles and Wilson's League of Nations."},
+ {y:1932.9, t:"New Deal coalition", k:"realign", d:"Workers, immigrants, Southern whites, and later Black voters make Democrats the majority party for decades."},
+ {y:1933.1, t:"20th Amendment", k:"amend", d:"Moves Inauguration Day from March 4 to January 20 and shortens the lame-duck period."},
+ {y:1946.84, t:"GOP wins Congress", k:"mid", w:"R", d:"Midterm of 1946. Republicans win both chambers for the first time since 1928. The new Congress passes the Taft-Hartley Act over Truman's veto and proposes the 22nd Amendment."},
+ {y:1951.15, t:"22nd Amendment", k:"amend", d:"Limits presidents to two elected terms, a response to FDR's four."},
+ {y:1967.15, t:"25th Amendment", k:"amend", d:"Sets rules for presidential disability and filling a vice president vacancy. Used to make Ford vice president in 1973."},
+ {y:1972.6, t:"Primaries take over", k:"realign", d:"After 1968, party reforms make primaries and caucuses, not party leaders, the way nominees are chosen."},
+ {y:1980.9, t:"The South turns Republican", k:"realign", d:"The shift of the white South to the Republican Party, which started with Goldwater in 1964, is mostly complete."},
+ {y:1994.84, t:"Republican Revolution", k:"mid", w:"R", d:"Midterm of 1994. Running on the Contract with America, Republicans gain 54 House seats and win the House for the first time in 40 years. Newt Gingrich becomes Speaker."},
+ {y:1998.95, t:"Clinton impeached", k:"law", d:"The House impeaches Bill Clinton. The Senate acquits him."},
+ {y:2000.95, t:"Bush v. Gore", k:"court", d:"The Supreme Court stops the Florida recount, deciding the 2000 election."},
+ {y:2010.84, t:"Tea Party wave", k:"mid", w:"R", d:"Midterm of 2010. After the Great Recession and the Affordable Care Act, Republicans gain 63 House seats, the most in any midterm since 1938."},
+ {y:2018.84, t:"Democrats win House", k:"mid", w:"D", d:"Midterm of 2018. Democrats gain 41 House seats and win the House. Nancy Pelosi becomes Speaker again, and the House impeaches Trump in 2019."},
+ {y:2019.97, t:"Trump impeached twice", k:"law", d:"The House impeaches Donald Trump in 2019 and again in 2021. The Senate acquits him both times."},
+ {y:2021.01, t:"January 6", k:"event", d:"A mob attacks the U.S. Capitol while Congress counts the electoral votes."},
+ {y:2026.84, t:"2026 midterms", k:"mid", w:"U", d:"Midterm elections on November 3, 2026. All 435 House seats and 35 Senate seats are on the ballot. The results will decide which party controls Congress starting in January 2027."}
+];
+
+/* ===================== CONGRESS CONTROL =====================
+   One letter per Congress, 1st (1789) to 119th (2025-2027).
+   F = Pro-Administration/Federalist, A = Anti-Administration/Democratic-Republican, D = Jacksonian/Democratic,
+   W = Anti-Jacksonian/Whig, R = Republican, O = Opposition coalition or tie.  Source: House History Office and Wikipedia. */
+const CONGRESS_SENATE = "FFFFFFAAAAAAAAAAAADDDDWDDDWWDDDDDDDDRRRRRRRRRDORRRRRDRRRRRRRRRDDDRRRRRRRDDDDDDDRDDRDDDDDDDDDDDDDRRRDDDDRRRDRRDDDDRRRDDR";
+const CONGRESS_HOUSE  = "FFAAFFAAAAAAAAAAAAWDDDDDDDWDDWDDDODRRRRRRRRDDDRDDDRDDRRRRRRRRDDDDRRRRRRDDDDDDDDRDDRDDDDDDDDDDDDDDDDDDDDRRRRRRDDRRRRDDRR";
+const CONGRESS_NOTES = {34:{H:"Opposition coalition of anti-Nebraska and Know-Nothing members"}, 47:{S:"Tied 37 to 37; control changed during the session"}, 65:{H:"Near tie; Democrats organized the House with third-party votes"}, 107:{S:"Split 50 to 50; Democrats took control in June 2001"}, 117:{S:"Split 50 to 50; Vice President Harris broke ties"}};
 
 /* ===================== ELECTORAL MAPS ===================== */
 /* states: code -> candidate key, or {key:ev, key:ev} for a split.
@@ -571,6 +631,10 @@ const MAPS = {
   states:{AL:"AJ",CT:"JQA",DE:"JQA",GA:"AJ",IL:"AJ",IN:"AJ",KY:"AJ",LA:"AJ",ME:{JQA:8,AJ:1},MD:{JQA:6,AJ:5},MA:"JQA",MS:"AJ",MO:"AJ",NH:"JQA",NJ:"JQA",NY:{AJ:20,JQA:16},NC:"AJ",OH:"AJ",PA:"AJ",RI:"JQA",SC:"AJ",TN:"AJ",VT:"JQA",VA:"AJ"},
   partOf:{WV:"VA"},
   note:"The rematch of 1824. Most states now let voters choose electors, turnout more than doubled, and Jackson won easily. His coalition became the Democratic Party, the oldest party still active today."},
+ 1856:{cands:{JB:["James Buchanan","Democratic","#5C8CB4",174,"45.3%"],JF:["John C. Fremont","Republican","#DD6868",114,"33.1%"],MF:["Millard Fillmore","American (Know-Nothing)","#C9A86A",8,"21.5%"]},
+  states:{AL:"JB",AR:"JB",CA:"JB",CT:"JF",DE:"JB",FL:"JB",GA:"JB",IL:"JB",IN:"JB",IA:"JF",KY:"JB",LA:"JB",ME:"JF",MD:"MF",MA:"JF",MI:"JF",MS:"JB",MO:"JB",NH:"JF",NJ:"JB",NY:"JF",NC:"JB",OH:"JF",PA:"JB",RI:"JF",SC:"JB",TN:"JB",TX:"JB",VT:"JF",VA:"JB",WI:"JF"},
+  partOf:{WV:"VA"},
+  note:"The brand-new Republican Party's first presidential race. Fremont won 11 Northern states and got almost no votes in the South, while Buchanan held the South and a few Northern states. Fillmore, running for the anti-immigrant Know-Nothings, carried only Maryland. The map shows a country splitting along sectional lines four years before the Civil War."},
  1860:{cands:{AL:["Abraham Lincoln","Republican","#DD6868",180,"39.8%"],JB:["John Breckinridge","Southern Democratic","#2F5A84",72,"18.1%"],BE:["John Bell","Constitutional Union","#C9A86A",39,"12.6%"],SD:["Stephen Douglas","Northern Democratic","#A3C0DA",12,"29.5%"]},
   states:{AL:"JB",AR:"JB",CA:"AL",CT:"AL",DE:"JB",FL:"JB",GA:"JB",IL:"AL",IN:"AL",IA:"AL",KY:"BE",LA:"JB",ME:"AL",MD:"JB",MA:"AL",MI:"AL",MN:"AL",MS:"JB",MO:"SD",NH:"AL",NJ:{AL:4,SD:3},NY:"AL",NC:"JB",OH:"AL",OR:"AL",PA:"AL",RI:"AL",SC:"JB",TN:"BE",TX:"JB",VT:"AL",VA:"BE",WI:"AL"},
   partOf:{WV:"VA"},
@@ -591,9 +655,15 @@ const MAPS = {
  1932:{cands:{FR:["Franklin D. Roosevelt","Democratic","#5C8CB4",472,"57.4%"],HH:["Herbert Hoover","Republican","#DD6868",59,"39.7%"]},
   all:"FR", states:{CT:"HH",DE:"HH",ME:"HH",NH:"HH",PA:"HH",VT:"HH"},
   note:"Three years into the Great Depression, Roosevelt won 42 of 48 states. His New Deal coalition kept Democrats the majority party for most of the next 50 years."},
+ 1936:{cands:{FR:["Franklin D. Roosevelt","Democratic","#5C8CB4",523,"60.8%"],AL:["Alf Landon","Republican","#DD6868",8,"36.5%"]},
+  all:"FR", states:{ME:"AL",VT:"AL"},
+  note:"Roosevelt's New Deal landslide. He won every state except Maine and Vermont, the most lopsided Electoral College result since 1820. His opponent, Kansas governor Alf Landon, did not even carry Kansas."},
  1948:{cands:{HT:["Harry Truman","Democratic","#5C8CB4",303,"49.6%"],TD:["Thomas Dewey","Republican","#DD6868",189,"45.1%"],ST:["Strom Thurmond","States' Rights (Dixiecrat)","#C9A86A",39,"2.4%"]},
   all:"HT", states:{CT:"TD",DE:"TD",IN:"TD",KS:"TD",ME:"TD",MD:"TD",MI:"TD",NE:"TD",NH:"TD",NJ:"TD",NY:"TD",ND:"TD",OR:"TD",PA:"TD",SD:"TD",VT:"TD",AL:"ST",LA:"ST",MS:"ST",SC:"ST",TN:{HT:11,ST:1}},
   note:"Southern Democrats angry about Truman's civil rights proposals walked out and ran Strom Thurmond as the Dixiecrat candidate. Polls and newspapers expected Dewey to win easily. Truman won anyway in one of the biggest upsets in American history."},
+ 1960:{cands:{JK:["John F. Kennedy","Democratic","#5C8CB4",303,"49.7%"],RN:["Richard Nixon","Republican","#DD6868",219,"49.6%"],HB:["Harry F. Byrd","Unpledged electors","#C9A86A",15,"0.4%"]},
+  all:"JK", states:{AK:"RN",AZ:"RN",CA:"RN",CO:"RN",FL:"RN",ID:"RN",IN:"RN",IA:"RN",KS:"RN",KY:"RN",ME:"RN",MT:"RN",NE:"RN",NH:"RN",ND:"RN",OH:"RN",OK:{RN:7,HB:1},OR:"RN",SD:"RN",TN:"RN",UT:"RN",VT:"RN",VA:"RN",WA:"RN",WI:"RN",WY:"RN",MS:"HB",AL:{HB:6,JK:5}},
+  note:"One of the closest elections in history. Kennedy won the popular vote by about 113,000 out of 69 million. Unpledged Southern electors, protesting civil rights, cast their votes for Senator Harry Byrd of Virginia. It was the first election with Alaska and Hawaii and the first with televised debates."},
  1964:{cands:{LJ:["Lyndon B. Johnson","Democratic","#5C8CB4",486,"61.1%"],BG:["Barry Goldwater","Republican","#DD6868",52,"38.5%"]},
   all:"LJ", states:{AZ:"BG",LA:"BG",MS:"BG",GA:"BG",AL:"BG",SC:"BG"},
   dc:"LJ",
@@ -602,19 +672,35 @@ const MAPS = {
   all:"RN", states:{CT:"HH",HI:"HH",ME:"HH",MD:"HH",MA:"HH",MI:"HH",MN:"HH",NY:"HH",PA:"HH",RI:"HH",TX:"HH",WA:"HH",WV:"HH",AL:"GW",AR:"GW",GA:"GW",LA:"GW",MS:"GW",NC:{RN:12,GW:1}},
   dc:"HH",
   note:"A year of assassinations, riots, and protests over Vietnam. Nixon won narrowly by promising law and order, and George Wallace carried five Southern states running as a segregationist. It was the last time a third-party candidate won any states."},
+ 1972:{cands:{RN:["Richard Nixon","Republican","#DD6868",520,"60.7%"],GM:["George McGovern","Democratic","#5C8CB4",17,"37.5%"]},
+  all:"RN", states:{MA:"GM"}, dc:"GM",
+  evNote:"One Virginia elector pledged to Nixon voted for the Libertarian candidate instead.",
+  note:"Nixon won 49 states, losing only Massachusetts and Washington, D.C. Less than two years later, the Watergate scandal forced him to resign."},
  1980:{cands:{RR:["Ronald Reagan","Republican","#DD6868",489,"50.7%"],JC:["Jimmy Carter","Democratic","#5C8CB4",49,"41.0%"],JA:["John Anderson","Independent","#9A9488",0,"6.6%"]},
   all:"RR", states:{GA:"JC",MD:"JC",MN:"JC",WV:"JC",HI:"JC",RI:"JC"},
   dc:"JC",
   note:"With inflation high and Americans held hostage in Iran, Reagan beat a sitting president and won 44 states. The election marked a conservative turn in American politics."},
+ 1984:{cands:{RR:["Ronald Reagan","Republican","#DD6868",525,"58.8%"],WM:["Walter Mondale","Democratic","#5C8CB4",13,"40.6%"]},
+  all:"RR", states:{MN:"WM"}, dc:"WM",
+  note:"Reagan won 49 states, losing only Mondale's home state of Minnesota, by fewer than 4,000 votes, and Washington, D.C. His 525 electoral votes are the most any candidate has ever won."},
+ 1992:{cands:{BC:["Bill Clinton","Democratic","#5C8CB4",370,"43.0%"],GB:["George H.W. Bush","Republican","#DD6868",168,"37.4%"],RP:["Ross Perot","Independent","#9A9488",0,"18.9%"]},
+  all:"BC", states:{AL:"GB",AK:"GB",AZ:"GB",FL:"GB",ID:"GB",IN:"GB",KS:"GB",MS:"GB",NE:"GB",NC:"GB",ND:"GB",OK:"GB",SC:"GB",SD:"GB",TX:"GB",UT:"GB",VA:"GB",WY:"GB"}, dc:"BC",
+  note:"Ross Perot won almost 19 percent of the popular vote, the best third-party showing since 1912, but no electoral votes because he did not win any state. Clinton won with 43 percent, ending 12 years of Republican presidents."},
  2000:{cands:{GB:["George W. Bush","Republican","#DD6868",271,"47.9%"],AG:["Al Gore","Democratic","#5C8CB4",266,"48.4%"],RN:["Ralph Nader","Green","#9A9488",0,"2.7%"]},
   all:"GB", states:{CA:"AG",NY:"AG",IL:"AG",PA:"AG",NJ:"AG",MI:"AG",MA:"AG",MD:"AG",MN:"AG",WA:"AG",WI:"AG",CT:"AG",IA:"AG",OR:"AG",NM:"AG",HI:"AG",ME:"AG",RI:"AG",DE:"AG",VT:"AG"},
   dc:"AG",
   note:"Gore won the popular vote by about 540,000, but the election came down to Florida, where Bush led by 537 votes. The Supreme Court stopped the recount in Bush v. Gore, and Bush won 271 to 266."},
+ 2008:{cands:{BO:["Barack Obama","Democratic","#5C8CB4",365,"52.9%"],JM:["John McCain","Republican","#DD6868",173,"45.7%"]},
+  all:"BO", states:{AL:"JM",AK:"JM",AZ:"JM",AR:"JM",GA:"JM",ID:"JM",KS:"JM",KY:"JM",LA:"JM",MS:"JM",MO:"JM",MT:"JM",NE:{JM:4,BO:1},ND:"JM",OK:"JM",SC:"JM",SD:"JM",TN:"JM",TX:"JM",UT:"JM",WV:"JM",WY:"JM"}, dc:"BO",
+  note:"Obama became the first Black president, winning states like Indiana, Virginia, and North Carolina that had voted Republican for decades. Nebraska split its electoral votes for the first time when Obama won the Omaha district."},
  2016:{cands:{DT:["Donald Trump","Republican","#DD6868",304,"46.1%"],HC:["Hillary Clinton","Democratic","#5C8CB4",227,"48.2%"]},
   all:"DT", states:{CA:"HC",CO:"HC",CT:"HC",DE:"HC",HI:"HC",IL:"HC",ME:{HC:3,DT:1},MD:"HC",MA:"HC",MN:"HC",NV:"HC",NH:"HC",NJ:"HC",NM:"HC",NY:"HC",OR:"HC",RI:"HC",VT:"HC",VA:"HC",WA:"HC"},
   dc:"HC",
   evNote:"Seven electors broke their pledges, so the totals are 304 to 227 instead of 306 to 232.",
   note:"Clinton won the popular vote by nearly 2.9 million, but Trump won the Electoral College by narrowly flipping Pennsylvania, Michigan, and Wisconsin, states Democrats had won since 1992."},
+ 2020:{cands:{JB:["Joseph Biden","Democratic","#5C8CB4",306,"51.3%"],DT:["Donald Trump","Republican","#DD6868",232,"46.8%"]},
+  all:"DT", states:{AZ:"JB",CA:"JB",CO:"JB",CT:"JB",DE:"JB",GA:"JB",HI:"JB",IL:"JB",ME:{JB:3,DT:1},MD:"JB",MA:"JB",MI:"JB",MN:"JB",NE:{DT:4,JB:1},NV:"JB",NH:"JB",NJ:"JB",NM:"JB",NY:"JB",OR:"JB",PA:"JB",RI:"JB",VT:"JB",VA:"JB",WA:"JB",WI:"JB"}, dc:"JB",
+  note:"Held during the COVID-19 pandemic, with record mail-in voting. Biden won by flipping Arizona, Georgia, Michigan, Pennsylvania, and Wisconsin, and his 81 million votes were the most ever. Trump refused to concede and challenged the results in court. Congress certified the results on January 6, 2021, after a mob attacked the Capitol."},
  2024:{cands:{DT:["Donald Trump","Republican","#DD6868",312,"49.8%"],KH:["Kamala Harris","Democratic","#5C8CB4",226,"48.3%"]},
   all:"DT", states:{CA:"KH",CO:"KH",CT:"KH",DE:"KH",HI:"KH",IL:"KH",ME:{KH:3,DT:1},MD:"KH",MA:"KH",MN:"KH",NE:{DT:4,KH:1},NH:"KH",NJ:"KH",NM:"KH",NY:"KH",OR:"KH",RI:"KH",VT:"KH",VA:"KH",WA:"KH"},
   dc:"KH",
@@ -763,72 +849,113 @@ function buildStage(){
 }
 
 /* ---------- build lanes ---------- */
+/* Bottom section: four rows that together keep the same 193px height */
 const LANES = [
-  {key:"era", label:"Era"},
-  {key:"ev", label:"Events", items:EVENTS},
-  {key:"ms", label:'<span class="lg">Government</span><span class="sh">Gov\'t</span>', items:MILESTONES}
+  {key:"ev", label:"Events", items:EVENTS, h:50, pad:4, rowH:22, rows:2, fs:13},
+  {key:"rt", label:'<span class="lg">Rights &amp; Freedoms</span><span class="sh">Rights</span>', items:RIGHTS, h:50, pad:4, rowH:22, rows:2, fs:13},
+  {key:"gv", label:'<span class="bt" style="top:4px">House</span><span class="bt" style="top:14px">Senate</span><span class="lg">Gov\'t / Congress</span><span class="sh">Gov\'t</span>', items:GOV, h:65, pad:25, rowH:19, rows:2, fs:12.5, bars:true}
 ];
-const ROW = 27;
+const ERA_H = 28;
 let measureCtx;
-function textW(t){ if (!measureCtx){ measureCtx = document.createElement("canvas").getContext("2d"); } measureCtx.font = '13.5px Oswald, "Arial Narrow", sans-serif'; return measureCtx.measureText(t).width; }
+function textW(t, fs){ if (!measureCtx){ measureCtx = document.createElement("canvas").getContext("2d"); } measureCtx.font = (fs || 13) + 'px Oswald, "Arial Narrow", sans-serif'; return measureCtx.measureText(t).width; }
 let eraEls = [], spanEls = [];
+window.__overlaps = [];
+
+/* Congress n runs March 4 (through the 73rd), then January 3 starting with the 74th in 1935 */
+const congStart = n => n <= 73 ? B[0] + 2 * (n - 1) : 1935.0 + 2 * (n - 74);
+const CONG_PARTY = (L, n) => ({
+  F: [n <= 3 ? "Pro-Administration" : "Federalist", "var(--pF)"],
+  A: [n <= 3 ? "Anti-Administration" : "Democratic-Republican", "var(--pDR)"],
+  D: [n <= 24 ? "Jacksonian" : "Democratic", "var(--pD)"],
+  W: [n <= 24 ? "Anti-Jackson" : "Whig", "var(--pW)"],
+  R: ["Republican", "var(--pR)"],
+  O: ["No clear majority", "var(--pN)"]
+}[L]);
+
 function buildLanes(){
-  ltrack.innerHTML = ""; eraEls = []; spanEls = [];
+  ltrack.innerHTML = ""; eraEls = []; spanEls = []; window.__overlaps = [];
   ltrack.style.width = (N * slotW) + "px";
-  let top = 0;
   const labels = $("laneLabels"); labels.innerHTML = "";
-  // eras
   ERAS.forEach(([a, b, name]) => {
-    const x1 = yToX(a), x2 = yToX(b);
-    const e = el("div", "era" + (/(Civil War|World War II)/.test(name) ? " dark" : ""));
+    const x1 = yToX(a), x2 = yToX(b), dark = /(Civil War|World War II)/.test(name);
+    const e = el("div", "era" + (dark ? " dark" : ""));
     e.style.left = x1 + "px"; e.style.width = (x2 - x1 - 2) + "px";
-    const l = el("div", "era-l" + (/(Civil War|World War II)/.test(name) ? " on-dark" : ""), esc(name));
+    const l = el("div", "era-l" + (dark ? " on-dark" : ""), esc(name));
     ltrack.append(e, l);
-    l.style.top = "6px";
-    eraEls.push({x1, x2, l, w: textW(name.toUpperCase()) * 1.15 + 10});
+    eraEls.push({x1, x2, l, w: textW(name.toUpperCase(), 12.5) * 1.15 + 10});
   });
-  top = 38;
-  const lab0 = el("div", null, "Era"); lab0.style.height = top + "px"; labels.appendChild(lab0);
-  LANES.slice(1).forEach(lane => {
+  let top = ERA_H;
+  const lab0 = el("div", null, "Era"); lab0.style.height = ERA_H + "px"; labels.appendChild(lab0);
+
+  LANES.forEach(lane => {
+    const rule = el("div", "lane-rule"); rule.style.top = top + "px"; ltrack.appendChild(rule);
+    if (lane.bars) buildCongress(top);
     const placed = lane.items.map(it => {
       const x = yToX(it.y), xEnd = it.y2 ? yToX(it.y2) : x;
-      const lw = textW(it.t) + 6;
+      const lw = textW(it.t, lane.fs) + 6;
       const w = it.y2 ? Math.max(xEnd - x, lw + 14) : lw + 18;
       return {it, x, xEnd, w};
     }).sort((a, b) => a.x - b.x);
-    const ends = [];
+    const ends = Array(lane.rows).fill(-1e9);
     placed.forEach(p => {
-      let r = ends.findIndex(e => e + 8 <= p.x - 6);
-      if (r < 0){ if (ends.length < 4) r = ends.length; else r = ends.indexOf(Math.min(...ends)); }
+      let r = ends.findIndex(e => e + 6 <= p.x - 6);
+      if (r < 0){ r = ends.indexOf(Math.min(...ends)); window.__overlaps.push(lane.key + ": " + p.it.t); }
       ends[r] = p.x - 6 + p.w; p.row = r;
     });
-    const rows = Math.max(1, ends.length);
-    const h = rows * ROW + 10;
-    const rule = el("div", "lane-rule"); rule.style.top = top + "px"; ltrack.appendChild(rule);
     placed.forEach(p => {
       const it = p.it, isSpan = !!it.y2;
-      const b = el("button", `it k-${it.k}${isSpan ? " span" : ""}`);
-      b.style.top = (top + 6 + p.row * ROW) + "px";
+      const b = el("button", `it k-${it.k}${isSpan ? " span" : ""}${lane.key === "gv" ? " sm" : ""}`);
+      b.style.top = (top + lane.pad + p.row * lane.rowH) + "px";
+      b.style.height = (lane.rowH - 1) + "px";
       if (isSpan){
         b.style.left = p.x + "px";
         const bw = Math.max(p.xEnd - p.x, 6);
         b.innerHTML = `<span class="bar" style="width:${bw}px"></span><span class="t">${esc(it.t)}</span>`;
-        if (bw < textW(it.t) + 14){ b.querySelector(".t").style.color = "inherit"; b.querySelector(".t").style.paddingLeft = (bw + 6) + "px"; }
-        else spanEls.push({x:p.x, room: bw - textW(it.t) - 16, t:b.querySelector(".t")});
+        if (bw < textW(it.t, lane.fs) + 14){ b.querySelector(".t").style.color = "inherit"; b.querySelector(".t").style.paddingLeft = (bw + 6) + "px"; }
+        else spanEls.push({x:p.x, room: bw - textW(it.t, lane.fs) - 16, t:b.querySelector(".t")});
       } else {
         b.style.left = (p.x - 6) + "px";
-        const mark = lane.key === "ms" ? `<span class="dia"></span>` : `<span class="dot"></span>`;
+        let mark;
+        if (it.k === "mid") mark = `<span class="mid" style="background:${it.w === "U" ? "transparent" : PARTY[it.w].c}"></span>`;
+        else if (it.k === "event") mark = `<span class="dot"></span>`;
+        else if (lane.key === "ev") mark = `<span class="dot"></span>`;
+        else mark = `<span class="dia"></span>`;
         b.innerHTML = `${mark}<span class="t">${esc(it.t)}</span>`;
       }
       b.addEventListener("click", ev => { ev.stopPropagation(); showPop(it, b); });
       ltrack.appendChild(b);
     });
-    const lab = el("div", null, lane.label);
-    lab.style.height = h + "px"; lab.style.flexDirection = "column"; lab.style.alignItems = "flex-end"; lab.style.justifyContent = "center";
+    const lab = el("div", "lab-" + lane.key, lane.label);
+    lab.style.height = lane.h + "px";
     labels.appendChild(lab);
-    top += h;
+    top += lane.h;
   });
   $("lvp").style.height = top + "px";
+}
+
+function buildCongress(top){
+  const ordC = n => ordinal(n) + " Congress";
+  for (let n = 1; n <= 120; n++){
+    const a = n <= 119 ? congStart(n) : 2027.0, b = n <= 118 ? congStart(n + 1) : n === 119 ? 2027.0 : B[N];
+    const x1 = yToX(a), x2 = yToX(b);
+    const c = el("button", "cong" + (n === 120 ? " future" : ""));
+    c.style.left = x1 + "px"; c.style.width = Math.max(1, x2 - x1 - 1) + "px"; c.style.top = (top + 4) + "px";
+    let pop;
+    if (n === 120){
+      c.innerHTML = `<i></i><i></i>`;
+      c.setAttribute("aria-label", "Congress after January 2027, not yet elected");
+      pop = {yLabel:"2027-2029", t:"120th Congress", d:"Not yet decided. The November 3, 2026 midterm elections will choose this Congress."};
+    } else {
+      const sL = CONGRESS_SENATE[n - 1], hL = CONGRESS_HOUSE[n - 1];
+      const sp = CONG_PARTY(sL, n), hp = CONG_PARTY(hL, n), note = CONGRESS_NOTES[n] || {};
+      c.innerHTML = `<i style="background:${hp[1]}"></i><i style="background:${sp[1]}"></i>`;
+      const yrs = Math.floor(a) + "-" + Math.floor(b + .01);
+      c.setAttribute("aria-label", `${ordC(n)}, ${yrs}. House: ${hp[0]}. Senate: ${sp[0]}.`);
+      pop = {yLabel:yrs, t:ordC(n), html:`<div class="cg"><span><b style="background:${hp[1]}"></b>House</span>${hp[0]} majority${note.H ? `<em>${esc(note.H)}</em>` : ""}</div><div class="cg"><span><b style="background:${sp[1]}"></b>Senate</span>${sp[0]} majority${note.S ? `<em>${esc(note.S)}</em>` : ""}</div>`};
+    }
+    c.addEventListener("click", ev => { ev.stopPropagation(); showPop(pop, c); });
+    ltrack.appendChild(c);
+  }
 }
 function placeEraLabels(){
   const v1 = idx * slotW - PAD, v2 = v1 + $("lvp").clientWidth;
@@ -868,6 +995,7 @@ function go(i, instant){
 $("prev").addEventListener("click", () => go(idx - 1));
 $("next").addEventListener("click", () => go(idx + 1));
 document.addEventListener("keydown", e => {
+  if (!$("mmodal").hidden && (e.key === "ArrowRight" || e.key === "ArrowLeft")){ stepMap(e.key === "ArrowRight" ? 1 : -1); e.preventDefault(); return; }
   if (!$("pmodal").hidden || !$("mmodal").hidden){ if (e.key === "Escape") closeModals(); return; }
   if (e.key === "Escape") hidePop();
   if (e.target.closest && e.target.closest("input,textarea")) return;
@@ -896,7 +1024,7 @@ function fmtYear(it){ const a = Math.floor(it.y); if (!it.y2) return a; const b 
 function showPop(it, anchor){
   if (popFor === anchor){ hidePop(); return; }
   popFor = anchor;
-  pop.innerHTML = `<div class="py">${fmtYear(it)}</div><div class="pt">${esc(it.t)}</div><div>${esc(it.d)}</div>`;
+  pop.innerHTML = `<div class="py">${it.yLabel || fmtYear(it)}${it.k === "mid" ? " midterm" : ""}</div><div class="pt">${esc(it.t)}</div>${it.html || `<div>${esc(it.d)}</div>`}`;
   pop.hidden = false;
   const r = anchor.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
   let x = Math.min(Math.max(10, r.left), innerWidth - pw - 10);
@@ -944,8 +1072,25 @@ function resultFor(m, code, year){
   if (m.all && ADMIT[code] <= year) return m.all;
   return undefined;
 }
+const MAP_YEARS = Object.keys(MAPS).map(Number).sort((a, b) => a - b);
+let curMap = null;
+MAP_YEARS.forEach(y => {
+  const c = el("button", "mchip", y); c.dataset.y = y;
+  c.addEventListener("click", () => openMap(y));
+  $("mchips").appendChild(c);
+});
+$("mprev").addEventListener("click", () => stepMap(-1));
+$("mnext").addEventListener("click", () => stepMap(1));
+function stepMap(d){ const i = MAP_YEARS.indexOf(curMap); openMap(MAP_YEARS[(i + d + MAP_YEARS.length) % MAP_YEARS.length]); }
+$("mapsBtn").addEventListener("click", e => {
+  const first = S[idx].e, last = S[idx + VIS - 1].e;
+  const y = MAP_YEARS.find(y => y >= first && y <= last) || MAP_YEARS.find(y => y >= first) || MAP_YEARS[MAP_YEARS.length - 1];
+  openMap(y, e.currentTarget);
+});
 function openMap(year, from){
   const m = MAPS[year], svg = $("msvg");
+  curMap = year;
+  document.querySelectorAll(".mchip").forEach(c => { const on = +c.dataset.y === year; c.classList.toggle("on", on); c.setAttribute("aria-pressed", on); });
   const keys = Object.keys(m.cands);
   const winKey = m.win || keys.reduce((a, b) => m.cands[a][3] >= m.cands[b][3] ? a : b);
   $("mtitle").textContent = "Election of " + year;
@@ -1005,8 +1150,10 @@ function openMap(year, from){
   if (m.evNote) side += `<p class="msmall">${esc(m.evNote)}</p>`;
   if (year >= 1964) side += `<p class="msmall">Washington, D.C., has voted since 1964 (23rd Amendment). It is too small to see on the map.</p>`;
   side += `<p class="msmall">Sources: Wikipedia state-by-state results${year === 2024 ? " and the National Archives" : ""}. Map outlines: U.S. Census Bureau.</p>`;
+  side += `<button class="tl" id="mgo">Show ${year} on the timeline</button>`;
   $("mside").innerHTML = side;
-  openModal($("mmodal"), from);
+  $("mgo").addEventListener("click", () => { closeModals(); go(S.findIndex(s => s.e === year) - Math.floor(VIS / 2)); });
+  if ($("mmodal").hidden) openModal($("mmodal"), from);
 }
 
 /* ---------- start ---------- */
