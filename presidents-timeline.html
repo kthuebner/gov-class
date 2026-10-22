@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline of Presidents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4ECDD; --paper-2:#EADFCA; --paper-3:#E2D5BC;
+  --ink:#2A251F; --ink-2:#4A4238; --muted:#766B5C; --rule:#D2C3A7;
+  --amber:#B47A2E; --amber-d:#8C5C1C;
+  --pN:#A39C8F; --pF:#E9AD6D; --pDR:#8FBC7C; --pW:#F0CD5C; --pD:#5C8CB4; --pR:#DD6868;
+  --pad:64px; --slot:360px;
+  --mk-h:70px; --banner-h:48px; --info-h:84px;
+  --serif:"Lora", Georgia, "Times New Roman", serif;
+  --cond:"Oswald", "Arial Narrow", Impact, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:var(--serif); color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+    repeating-linear-gradient(135deg, rgba(120,100,70,.035) 0 1px, transparent 1px 9px);
+  display:flex; flex-direction:column; min-height:100vh; overflow-x:hidden;
+}
+button{font:inherit;color:inherit}
+img{user-select:none;-webkit-user-drag:none}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:12px 28px 8px}
+.kicker{font-family:var(--cond);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-height:1;letter-spacing:.02em;text-transform:uppercase;margin:3px 0 7px}
+.dashes{display:flex;gap:6px}
+.dashes i{display:block;width:22px;height:4px;border-radius:2px;background:var(--amber)}
+.dashes i:nth-child(2){background:var(--pD)} .dashes i:nth-child(4){background:var(--pR)}
+.dashes i:nth-child(3){background:var(--ink-2)} .dashes i:nth-child(5){background:var(--pDR)}
+.range{text-align:right}
+.range .lbl{display:block;font-family:var(--cond);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.range .val{font-family:var(--cond);font-weight:500;font-size:clamp(22px,2.6vw,34px);line-height:1.1}
+
+/* ---------- party strip ---------- */
+.strip-wrap{padding:4px 28px 6px}
+.strip{position:relative;display:flex;gap:2px;height:26px;cursor:pointer;touch-action:none}
+.cell{flex:1;border-radius:2px;position:relative}
+.cell:hover{filter:brightness(1.08) saturate(1.1)}
+.win{position:absolute;top:-5px;bottom:-5px;border:3px solid var(--ink);border-radius:5px;pointer-events:none;
+  box-shadow:0 0 0 2px rgba(244,236,221,.9), 0 2px 8px rgba(0,0,0,.18);transition:left .55s cubic-bezier(.22,.8,.24,1), width .3s}
+.ticks{position:relative;height:16px;margin-top:5px}
+.ticks span{position:absolute;transform:translateX(-50%);font-family:var(--cond);font-size:12px;color:var(--muted);letter-spacing:.05em}
+.legend{flex:1;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-self:flex-end;padding-bottom:6px;font-family:var(--cond);font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.legend b{display:inline-block;width:14px;height:14px;border-radius:3px}
+
+/* ---------- stage ---------- */
+.stage{flex:1;display:grid;grid-template-columns:88px minmax(0,1fr) 88px;grid-template-rows:minmax(330px,1fr) auto;min-height:0;padding:0 0 4px}
+.nav{align-self:center;justify-self:center;width:68px;height:68px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--ink);color:var(--paper);display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.22);
+  transition:transform .15s, background .15s, opacity .2s}
+.nav:hover{background:var(--amber-d);transform:scale(1.06)}
+.nav:active{transform:scale(.96)}
+.nav:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.nav[disabled]{opacity:.22;cursor:default;transform:none;background:var(--ink)}
+.nav svg{width:30px;height:30px}
+.vp{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 calc(var(--pad)*.8),#000 calc(100% - var(--pad)*.8),transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 calc(var(--pad)*.8),#000 calc(100% - var(--pad)*.8),transparent 100%)}
+.stage-vp{touch-action:pan-y}
+.track{position:absolute;top:0;left:0;height:100%;will-change:transform;transition:transform .55s cubic-bezier(.22,.8,.24,1)}
+@media (prefers-reduced-motion:reduce){.track,.win{transition:none}}
+
+/* election markers */
+.mk{position:absolute;top:6px;bottom:var(--info-h);width:0;display:flex;flex-direction:column;align-items:center;z-index:1}
+.mk::after{content:"";position:absolute;top:calc(var(--mk-h) - 6px);bottom:var(--banner-h);left:-1px;border-left:2px dotted var(--rule)}
+.mk .lab{text-align:center;white-space:nowrap;font-family:var(--cond);line-height:1}
+.mk .of{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.mk .yr{font-size:28px;font-weight:500;display:block;margin-top:2px}
+.mk.future{opacity:.38}
+.mk .tags{display:flex;gap:4px;margin-top:5px;position:relative;z-index:2}
+.mapbtn{display:inline-flex;align-items:center;gap:5px;font-family:var(--cond);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px 3px 7px;border-radius:12px;border:1.5px solid var(--ink);background:var(--paper);cursor:pointer;white-space:nowrap}
+.mapbtn:hover{background:var(--ink);color:var(--paper)}
+.mapbtn svg{width:15px;height:11px}
+.poptag{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-d);white-space:nowrap;
+  border:1.5px dashed var(--amber);border-radius:12px;padding:2px 7px;background:var(--paper)}
+
+/* slots */
+.slot{position:absolute;top:0;bottom:0;display:flex;flex-direction:column}
+.portraits{flex:1;display:flex;align-items:flex-end;justify-content:center;padding:calc(var(--mk-h) + 6px) 34px 0;min-height:0}
+.pf{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center;border:none;background:none;padding:0;cursor:pointer;min-width:0}
+.pf img{display:block;max-height:100%;max-width:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 4px 6px rgba(60,40,10,.18));transition:transform .2s}
+.pf:hover img{transform:translateY(-3px)}
+.pf:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:6px}
+.two .pf{max-width:54%} .two .pf+.pf{margin-left:-5%}
+.fallback{width:min(70%,180px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;margin-bottom:10px;
+  font-family:var(--cond);font-size:44px;font-weight:500;color:#fff;box-shadow:inset 0 0 0 4px rgba(255,255,255,.35)}
+.banner{height:var(--banner-h);margin:0 3px;display:flex;position:relative;
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)}
+.seg{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 22px;border:none;cursor:pointer;min-width:0;
+  font-family:var(--cond);white-space:nowrap;overflow:hidden}
+.seg .fn{font-size:15px;font-weight:400}
+.seg .ln{font-size:clamp(20px,calc(var(--slot)*.075),27px);font-weight:500}
+.seg:hover{filter:brightness(1.07)}
+.seg:focus-visible{outline:3px solid var(--ink);outline-offset:-5px}
+.zig{position:absolute;top:0;height:100%;width:14px;transform:translateX(-50%);pointer-events:none}
+.info{height:var(--info-h);padding:7px 22px 0;font-size:14px;line-height:1.35;overflow:hidden}
+.yrs{font-family:var(--cond);font-size:15px;letter-spacing:.05em;color:var(--ink-2)}
+.share{display:flex;gap:3px;height:7px;margin:5px 0 3px}
+.share i{display:block;border-radius:2px;min-width:4px}
+.sharelab{display:flex;justify-content:space-between;gap:10px;font-family:var(--cond);font-size:12.5px;color:var(--ink-2);letter-spacing:.02em;white-space:nowrap}
+.sharelab span{overflow:hidden;text-overflow:ellipsis}
+.badge{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:2;font-family:var(--cond);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;background:var(--ink);color:var(--paper);padding:2px 8px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.opp{margin-top:4px;color:var(--ink-2)}
+.opp .k{font-family:var(--cond);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.opp b{font-weight:600;color:var(--ink)}
+
+/* ---------- lanes ---------- */
+.lane-labels{display:flex;flex-direction:column;align-items:flex-end;padding-right:10px;border-top:2px solid var(--ink)}
+.lane-labels .sh{display:none}
+.lane-labels div{font-family:var(--cond);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;text-align:right;line-height:1.1}
+.lanes-vp{border-top:2px solid var(--ink)}
+.lane-end{border-top:2px solid var(--ink)}
+.era{position:absolute;top:6px;height:26px;border-radius:3px;overflow:hidden}
+.era:nth-child(odd){background:var(--paper-3)} .era:nth-child(even){background:var(--paper-2)}
+.era.dark{background:#5A4F42}
+.era-l{position:absolute;top:0;height:26px;line-height:26px;font-family:var(--cond);font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2);pointer-events:none;transition:left .55s cubic-bezier(.22,.8,.24,1)}
+.era-l.on-dark{color:var(--paper)}
+.lane-rule{position:absolute;left:0;right:0;height:1px;background:var(--rule)}
+.it{position:absolute;height:24px;display:flex;align-items:center;gap:6px;border:none;background:none;padding:0;cursor:pointer;white-space:nowrap;
+  font-family:var(--cond);font-size:13.5px;letter-spacing:.02em;color:var(--ink)}
+.it .dot{width:11px;height:11px;border-radius:50%;flex:none;border:2px solid var(--paper);box-shadow:0 0 0 1.5px currentColor}
+.it .bar{position:absolute;left:0;top:4px;height:16px;border-radius:3px;opacity:.9}
+.it.span .t{position:relative;padding-left:7px;z-index:1;transition:transform .55s cubic-bezier(.22,.8,.24,1)}
+.it:hover .t{text-decoration:underline;text-underline-offset:3px}
+.it:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:3px}
+.k-war{color:#6A5C4C} .k-war .bar{background:repeating-linear-gradient(135deg,#8B7C69 0 5px,#7A6B58 5px 10px)} .k-war.span .t{color:#fff}
+.k-land{color:#5D7A3E} .k-land .dot{background:#5D7A3E}
+.k-econ{color:#A8701F} .k-econ .dot{background:#C08A36}
+.k-event{color:var(--ink-2)} .k-event .dot{background:var(--ink-2)}
+.k-event.span .bar{background:#9B8E7C} .k-event.span .t{color:#fff}
+.it .dia{width:11px;height:11px;transform:rotate(45deg);flex:none;border-radius:2px}
+.k-amend .dia{background:#5E4A86} .k-law .dia{background:#2F6A6A} .k-court .dia{background:#8A3E3E} .k-realign .dia{background:var(--amber)}
+.k-amend,.k-law,.k-court,.k-realign{color:var(--ink)}
+.mini-key{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:2px 7px;margin-top:3px;letter-spacing:.04em;text-transform:none;font-size:11px}
+.mini-key span{display:inline-flex;align-items:center;gap:3px}
+.mini-key i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.mini-key i.d{border-radius:1px;transform:rotate(45deg)}
+
+.foot{display:flex;justify-content:space-between;align-items:center;gap:6px 20px;flex-wrap:wrap;padding:6px 28px 10px;font-size:12px;color:var(--muted)}
+.fkey{display:flex;flex-wrap:wrap;gap:3px 12px;font-family:var(--cond);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2)}
+.fkey span{display:inline-flex;align-items:center;gap:5px}
+.fkey i{display:inline-block;width:9px;height:9px;border-radius:50%}
+.fkey i.d{border-radius:1px;transform:rotate(45deg)}
+.fkey i.w{width:16px;height:8px;border-radius:2px;background:repeating-linear-gradient(135deg,#8B7C69 0 3px,#7A6B58 3px 6px)}
+.fkey .sep{width:1px;height:12px;background:var(--rule)}
+.foot kbd{font-family:var(--cond);font-size:11px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--paper)}
+
+/* ---------- popover ---------- */
+.pop{position:fixed;z-index:40;max-width:320px;background:#FFFBF3;border:1.5px solid var(--ink);border-radius:8px;padding:10px 14px 12px;
+  box-shadow:0 8px 24px rgba(40,25,5,.22);font-size:14.5px;line-height:1.45}
+.pop .py{font-family:var(--cond);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pop .pt{font-family:var(--cond);font-size:19px;font-weight:500;margin:1px 0 4px;line-height:1.15}
+
+/* ---------- modals ---------- */
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(42,37,31,.55);backdrop-filter:blur(2px)}
+.modal[hidden]{display:none}
+.card{position:relative;background:var(--paper);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.35);max-height:calc(100vh - 40px);overflow:auto;
+  background-image:repeating-linear-gradient(135deg, rgba(120,100,70,.03) 0 1px, transparent 1px 9px)}
+.close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;background:var(--ink);color:var(--paper);cursor:pointer;display:grid;place-items:center;z-index:2}
+.close:hover{background:var(--amber-d)}
+.close:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.pcard{width:min(860px,100%);display:grid;grid-template-columns:minmax(200px,300px) 1fr}
+.pcard .pic{display:flex;align-items:flex-end;justify-content:center;padding:28px 10px 0;border-radius:12px 0 0 12px;min-height:320px;position:relative;overflow:hidden}
+.pcard .pic::before{content:"";position:absolute;inset:0;background:var(--pc);opacity:.85}
+.pcard .pic img{position:relative;max-width:100%;max-height:380px;display:block}
+.pcard .txt{padding:30px 34px 30px 30px}
+.pcard .ordl{font-family:var(--cond);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.pcard h2{font-family:var(--cond);font-weight:500;font-size:40px;line-height:1.05;margin:4px 0 10px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--cond);font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px 3px 8px;border-radius:14px;background:var(--paper-2)}
+.chip b{width:12px;height:12px;border-radius:3px;display:inline-block}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:14px 0;font-size:14.5px}
+.facts dt{font-family:var(--cond);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.facts dd{margin:0}
+.pcard p{font-size:16.5px;line-height:1.6;margin:0 0 12px}
+.pcard .fnote{font-size:14px;font-style:italic;color:var(--ink-2);border-left:3px solid var(--amber);padding-left:10px}
+.mcard{width:min(1180px,100%);padding:26px 28px 22px}
+.mcard h2{font-family:var(--cond);font-weight:500;font-size:34px;line-height:1;margin:0 0 4px;text-transform:uppercase;letter-spacing:.02em}
+.mcard .sub{font-family:var(--cond);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:26px;align-items:start}
+.mapsvg{width:100%;height:auto;display:block}
+.mapsvg path{stroke:#FBF6EC;stroke-width:1.1;stroke-linejoin:round}
+.mapsvg path:hover{filter:brightness(1.1)}
+.mapsvg .disp{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-dasharray:6 4;pointer-events:none}
+.cands{display:grid;gap:8px;margin-bottom:12px}
+.cand{display:grid;grid-template-columns:16px 1fr auto;gap:2px 10px;align-items:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.45)}
+.cand.won{background:#fff;box-shadow:0 0 0 1.5px var(--ink)}
+.cand .sw{width:16px;height:16px;border-radius:4px;grid-row:span 2}
+.cand .nm{font-family:var(--cond);font-size:18px;font-weight:500;line-height:1.1}
+.cand .pty{font-size:12.5px;color:var(--muted);grid-column:2}
+.cand .ev{font-family:var(--cond);font-size:24px;font-weight:500;text-align:right;grid-row:1;grid-column:3;line-height:1}
+.cand .pv{font-size:12.5px;color:var(--muted);text-align:right;grid-column:3;grid-row:2}
+.mkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);margin:4px 0 12px}
+.mkey span{display:inline-flex;align-items:center;gap:6px}
+.mkey i{display:inline-block;width:16px;height:12px;border-radius:2px}
+.mnote{font-size:15.5px;line-height:1.6;margin:0 0 8px}
+.msmall{font-size:12.5px;color:var(--muted);line-height:1.45;margin:0 0 4px}
+.mtip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--cond);font-size:13px;letter-spacing:.03em;padding:4px 9px;border-radius:5px;white-space:nowrap}
+
+@media (max-width:900px){
+  .stage{grid-template-columns:56px minmax(0,1fr) 56px}
+  .nav{width:48px;height:48px} .nav svg{width:22px;height:22px}
+  .pcard{grid-template-columns:1fr} .pcard .pic{border-radius:12px 12px 0 0;min-height:240px} .pcard .pic img{max-height:260px}
+  .mgrid{grid-template-columns:1fr}
+  .lane-labels .lg{display:none} .lane-labels .sh{display:inline} .lane-labels div{font-size:10.5px;letter-spacing:.08em}
+}
+@media (max-width:1100px){ .top{flex-wrap:wrap} .legend{order:3;flex-basis:100%;justify-content:flex-start;padding-bottom:0} }
+@media (max-width:600px){ .top{padding:12px 16px 6px} .strip-wrap,.foot{padding-left:16px;padding-right:16px} .range .lbl{display:none} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="kicker">Mr. Huebner's American Government</div>
+    <h1>Timeline of Presidents</h1>
+    <div class="dashes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="legend" id="legend" aria-label="Party colors"></div>
+  <div class="range" aria-live="polite"><span class="lbl">Now showing</span><span class="val" id="range"></span></div>
+</header>
+
+<section class="strip-wrap" aria-label="All 60 presidential terms, colored by party">
+  <div class="strip" id="strip"><div class="win" id="win"></div></div>
+  <div class="ticks" id="ticks"></div>
+</section>
+
+<main class="stage" id="stage">
+  <button class="nav" id="prev" aria-label="Back one term"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l-8 8 8 8"/></svg></button>
+  <div class="vp stage-vp" id="vp"><div class="track" id="track"></div></div>
+  <button class="nav" id="next" aria-label="Forward one term"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg></button>
+
+  <div class="lane-labels" id="laneLabels"></div>
+  <div class="vp lanes-vp" id="lvp"><div class="track" id="ltrack"></div></div>
+  <div class="lane-end"></div>
+</main>
+
+<footer class="foot">
+  <div class="fkey"><span><i class="w"></i>War</span><span><i style="background:#5D7A3E"></i>Land</span><span><i style="background:#C08A36"></i>Economy</span><span><i style="background:var(--ink-2)"></i>Event</span><span class="sep"></span><span><i class="d" style="background:#5E4A86"></i>Amendment</span><span><i class="d" style="background:#2F6A6A"></i>Law</span><span><i class="d" style="background:#8A3E3E"></i>Court case</span><span><i class="d" style="background:#B47A2E"></i>Parties</span></div>
+  <span>Click portraits, maps, and timeline items for details. <kbd>&larr;</kbd> <kbd>&rarr;</kbd> keys work too.</span>
+</footer>
+
+<div class="pop" id="pop" role="dialog" hidden></div>
+
+<div class="modal" id="pmodal" hidden>
+  <div class="card pcard" role="dialog" aria-modal="true" aria-labelledby="pname">
+    <button class="close" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <div class="pic" id="ppic"></div>
+    <div class="txt" id="ptxt"></div>
+  </div>
+</div>
+
+<div class="modal" id="mmodal" hidden>
+  <div class="card mcard" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <button class="close" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <h2 id="mtitle"></h2>
+    <div class="sub" id="msub"></div>
+    <div class="mgrid">
+      <div><svg class="mapsvg" id="msvg" viewBox="0 0 975 610" role="img"></svg></div>
+      <div id="mside"></div>
+    </div>
+  </div>
+</div>
+<div class="mtip" id="mtip" hidden></div>
+
+<script>
+/* ===================== PRESIDENTS ===================== */
+const P = {
+  "washington": {first:"George", last:"Washington", party:"N", ord:1,
+    sum:"Set the precedents every president since has followed, from forming a cabinet to stepping down after two terms. He belonged to no party, and in his Farewell Address he warned that parties could tear the country apart.",
+    foot:"Washington belonged to no political party."},
+  "j-adams": {first:"John", last:"Adams", party:"F", ord:2,
+    sum:"The only Federalist president. He kept the country out of a full war with France, but the Alien and Sedition Acts made him unpopular. His loss in 1800 led to the first peaceful handoff of power between rival parties."},
+  "jefferson": {first:"Thomas", last:"Jefferson", party:"DR", ord:3,
+    sum:"Author of the Declaration of Independence and co-founder of the Democratic-Republican Party. He doubled the size of the country with the Louisiana Purchase, even though he doubted the Constitution clearly allowed it."},
+  "madison": {first:"James", last:"Madison", party:"DR", ord:4,
+    sum:"Called the Father of the Constitution for his work at the Convention and on the Bill of Rights. He led the country through the War of 1812, when British troops burned the White House."},
+  "monroe": {first:"James", last:"Monroe", party:"DR", ord:5,
+    sum:"Led during the Era of Good Feelings, when the Federalists faded and one party ruled. The Monroe Doctrine warned Europe to stay out of the Americas, and the Missouri Compromise tried to settle where slavery could spread."},
+  "jq-adams": {first:"John Quincy", last:"Adams", party:"DR", ord:6,
+    sum:"Won the 1824 election in the House of Representatives even though Andrew Jackson had more popular and electoral votes. He wanted federal roads, canals, and schools but got little from Congress. Later he served 17 years in the House and fought the gag rule on antislavery petitions.",
+    foot:"Ran in 1824 as a Democratic-Republican. All four major candidates that year came from the same party. His supporters later formed the National Republicans."},
+  "jackson": {first:"Andrew", last:"Jackson", party:"D", ord:7,
+    sum:"The face of a new mass democracy and the first president from the West. He used the veto more than all earlier presidents combined, destroyed the Second Bank of the United States, and signed the Indian Removal Act, which led to the Trail of Tears."},
+  "van-buren": {first:"Martin", last:"Van Buren", party:"D", ord:8,
+    sum:"Jackson's chosen successor and the main organizer of the Democratic Party. The Panic of 1837 hit weeks after he took office, and the long depression that followed cost him reelection."},
+  "wh-harrison": {first:"William Henry", last:"Harrison", party:"W", ord:9,
+    sum:"The first Whig president, sold to voters with a log cabin campaign that painted him as a common man. He died 31 days into his term, the shortest presidency in history."},
+  "tyler": {first:"John", last:"Tyler", party:"W", ord:10,
+    sum:"The first vice president to take over after a president died. He insisted he was fully president, not acting president, and that precedent stuck. He vetoed Whig bank bills, and the Whigs expelled him. He signed the annexation of Texas.",
+    foot:"Elected vice president as a Whig. The party expelled him in September 1841, so he governed without a party."},
+  "polk": {first:"James K.", last:"Polk", party:"D", ord:11,
+    sum:"Ran on Manifest Destiny and delivered it: Texas, the Oregon Territory, and the Mexican Cession after the Mexican-American War pushed the country to the Pacific. He promised to serve one term and kept that promise."},
+  "taylor": {first:"Zachary", last:"Taylor", party:"W", ord:12,
+    sum:"A Mexican-American War hero with no political experience. Although he owned slaves, he wanted California admitted as a free state and threatened force against secession. He died after 16 months in office."},
+  "fillmore": {first:"Millard", last:"Fillmore", party:"W", ord:13,
+    sum:"Took over when Taylor died and signed the Compromise of 1850, including a tough Fugitive Slave Act that angered many Northerners. He was the last Whig president."},
+  "pierce": {first:"Franklin", last:"Pierce", party:"D", ord:14,
+    sum:"Signed the Kansas-Nebraska Act, which let settlers vote on slavery and set off the violence of Bleeding Kansas. The act broke apart the Whigs and led directly to the founding of the Republican Party."},
+  "buchanan": {first:"James", last:"Buchanan", party:"D", ord:15,
+    sum:"Backed the Dred Scott decision and the proslavery Lecompton Constitution for Kansas. He argued that secession was illegal but that he had no power to stop it, and seven states left the Union in his final months."},
+  "lincoln": {first:"Abraham", last:"Lincoln", party:"R", ord:16,
+    sum:"The first Republican president, elected without a single Southern electoral vote. He held the Union together through the Civil War, issued the Emancipation Proclamation, and pushed the 13th Amendment through Congress. He was assassinated days after the war's main fighting ended.",
+    foot:"Ran for reelection in 1864 on the National Union ticket, a wartime coalition of Republicans and pro-war Democrats."},
+  "a-johnson": {first:"Andrew", last:"Johnson", party:"R", ord:17,
+    sum:"A Southern Democrat who stayed loyal to the Union and joined Lincoln's 1864 unity ticket. He fought the Radical Republicans over Reconstruction and vetoed civil rights bills. He was the first president impeached, and the Senate fell one vote short of removing him.",
+    foot:"Johnson was a Democrat elected on the National Union ticket. He is shown in Republican red because he took office on Lincoln's ticket, but he never joined the Republican Party."},
+  "grant": {first:"Ulysses S.", last:"Grant", party:"R", ord:18,
+    sum:"The general who won the Civil War. As president he enforced Reconstruction and used federal troops against the Ku Klux Klan, and the 15th Amendment was ratified. Corruption among his appointees damaged his reputation."},
+  "hayes": {first:"Rutherford B.", last:"Hayes", party:"R", ord:19,
+    sum:"Won the disputed 1876 election by a single electoral vote. He pulled the last federal troops from the South, which ended Reconstruction. He promised to serve one term and kept that promise."},
+  "garfield": {first:"James A.", last:"Garfield", party:"R", ord:20,
+    sum:"Shot four months into his term by a man angry about being denied a government job. Garfield died that September, and his death built support for civil service reform."},
+  "arthur": {first:"Chester A.", last:"Arthur", party:"R", ord:21,
+    sum:"Known as a product of the spoils system, he surprised critics by signing the Pendleton Act, which began hiring federal workers based on merit exams. He also signed the Chinese Exclusion Act, the first law to ban immigration by a national group."},
+  "cleveland": {first:"Grover", last:"Cleveland", party:"D", ord:"22 & 24",
+    sum:"The only Democrat elected during the Gilded Age and the first president to serve two non-consecutive terms. He vetoed hundreds of bills he saw as wasteful. His second term began just as the Panic of 1893 hit."},
+  "b-harrison": {first:"Benjamin", last:"Harrison", party:"R", ord:23,
+    sum:"Lost the popular vote to Cleveland but won the Electoral College. He signed the Sherman Antitrust Act, the first federal law against monopolies, and six new states joined the Union during his term."},
+  "mckinley": {first:"William", last:"McKinley", party:"R", ord:25,
+    sum:"Won the realigning election of 1896 and led the country through the Spanish-American War, which brought Puerto Rico, Guam, and the Philippines under American control. He was assassinated in 1901."},
+  "t-roosevelt": {first:"Theodore", last:"Roosevelt", party:"R", ord:26,
+    sum:"Became the youngest president at 42 after McKinley was killed. He broke up trusts, protected millions of acres of public land, and used the presidency as a bully pulpit. In 1912 he ran as a Progressive and split the Republican vote."},
+  "taft": {first:"William H.", last:"Taft", party:"R", ord:27,
+    sum:"Brought even more antitrust cases than Roosevelt but split with the progressives in his own party. He later became Chief Justice of the United States, the only person to hold both offices."},
+  "wilson": {first:"Woodrow", last:"Wilson", party:"D", ord:28,
+    sum:"Won in 1912 when the Republicans split. He created the Federal Reserve, signed the first modern income tax, and led the country into World War I. The Senate rejected his League of Nations. He also segregated much of the federal workforce."},
+  "harding": {first:"Warren G.", last:"Harding", party:"R", ord:29,
+    sum:"Promised a return to normalcy after World War I and won in a landslide. He died in office in 1923, and the Teapot Dome bribery scandal stained his administration."},
+  "coolidge": {first:"Calvin", last:"Coolidge", party:"R", ord:30,
+    sum:"Took over when Harding died and led a booming economy with low taxes and light regulation. He signed the Indian Citizenship Act of 1924 and chose not to run again in 1928."},
+  "hoover": {first:"Herbert", last:"Hoover", party:"R", ord:31,
+    sum:"A famous engineer and humanitarian who took office months before the 1929 stock market crash. Most voters saw his response to the Great Depression as too limited, and he lost in a landslide in 1932."},
+  "fdr": {first:"Franklin D.", last:"Roosevelt", party:"D", ord:32,
+    sum:"Elected four times, the only president to serve more than two terms. His New Deal greatly expanded the federal government's role in the economy, and he led the country through most of World War II. He also ordered the incarceration of Japanese Americans. His long tenure led to the 22nd Amendment."},
+  "truman": {first:"Harry", last:"Truman", party:"D", ord:33,
+    sum:"Took over weeks before the war in Europe ended and chose to drop atomic bombs on Japan. He began the Cold War policy of containment, desegregated the armed forces, and sent troops to Korea."},
+  "eisenhower": {first:"Dwight D.", last:"Eisenhower", party:"R", ord:34,
+    sum:"Grew up in Abilene, Kansas, and commanded the Allied invasion of Europe in World War II. He ended the Korean War, built the Interstate Highway System, and sent federal troops to enforce school integration in Little Rock."},
+  "kennedy": {first:"John F.", last:"Kennedy", party:"D", ord:35,
+    sum:"The youngest person ever elected president and the first Catholic. He faced down the Soviets in the Cuban Missile Crisis and launched the race to the moon. He was assassinated in Dallas in November 1963."},
+  "lbj": {first:"Lyndon B.", last:"Johnson", party:"D", ord:36,
+    sum:"Used his skill as a former Senate leader to pass the Civil Rights Act, the Voting Rights Act, Medicare, and Medicaid. He also escalated the Vietnam War, which divided the country and led him not to seek reelection."},
+  "nixon": {first:"Richard", last:"Nixon", party:"R", ord:37,
+    sum:"Opened relations with China, created the Environmental Protection Agency, ended the draft, and pulled U.S. combat troops out of Vietnam. The Watergate cover-up made him the only president to resign."},
+  "ford": {first:"Gerald", last:"Ford", party:"R", ord:38,
+    sum:"The only president never elected president or vice president. He was appointed vice president under the 25th Amendment. He pardoned Nixon a month after taking office, a choice that likely cost him the 1976 election."},
+  "carter": {first:"Jimmy", last:"Carter", party:"D", ord:39,
+    sum:"A Washington outsider elected after Watergate. He brokered the Camp David Accords between Egypt and Israel, but high inflation and the Iran hostage crisis sank his reelection. He won the Nobel Peace Prize in 2002 for his work after leaving office."},
+  "reagan": {first:"Ronald", last:"Reagan", party:"R", ord:40,
+    sum:"Argued that big government was the problem, not the solution. He cut income taxes, built up the military, and pressed the Soviet Union in the last decade of the Cold War. His coalition shaped the Republican Party for a generation."},
+  "ghw-bush": {first:"George H.W.", last:"Bush", party:"R", ord:41,
+    sum:"Led the country as the Berlin Wall fell and the Soviet Union collapsed, and built the coalition that won the Gulf War. Breaking his no new taxes pledge hurt him in 1992."},
+  "clinton": {first:"Bill", last:"Clinton", party:"D", ord:42,
+    sum:"A centrist New Democrat who signed NAFTA and welfare reform and left office with a federal budget surplus. The House impeached him in 1998, and the Senate acquitted him."},
+  "gw-bush": {first:"George W.", last:"Bush", party:"R", ord:43,
+    sum:"Won the contested 2000 election after the Supreme Court stopped the Florida recount. After the 9/11 attacks he launched wars in Afghanistan and Iraq. The 2008 financial crisis hit in his final months."},
+  "obama": {first:"Barack", last:"Obama", party:"D", ord:44,
+    sum:"The first Black president. He took office during the Great Recession, signed the Affordable Care Act, and ordered the raid that killed Osama bin Laden."},
+  "trump": {first:"Donald J.", last:"Trump", party:"R", ord:"45 & 47",
+    sum:"A businessman with no prior government or military experience. In his first term he cut taxes and appointed three Supreme Court justices. The House impeached him twice, and the Senate acquitted him both times. In 2024 he became the second president to win non-consecutive terms."},
+  "biden": {first:"Joseph", last:"Biden", party:"D", ord:46,
+    sum:"Served 36 years as a senator from Delaware and eight as Obama's vice president. He took office during the COVID-19 pandemic, signed major infrastructure and climate laws, and withdrew U.S. troops from Afghanistan. He ended his reelection campaign in July 2024."}
+};
+
+/* ===================== ELECTION SLOTS (60) =====================
+   e = election year. who = [president id, start, end, how-ended, portrait override]
+   opp = main losing candidates. popLoss = winner lost the popular vote. */
+const S = [
+ {e:1788, who:[["washington","1789-04-30","1793-03-04"]], opp:"No opponent. John Adams finished second and became vice president."},
+ {e:1792, who:[["washington","1793-03-04","1797-03-04"]], opp:"Ran unopposed"},
+ {e:1796, who:[["j-adams","1797-03-04","1801-03-04"]], opp:["Thomas Jefferson"]},
+ {e:1800, who:[["jefferson","1801-03-04","1805-03-04"]], opp:["John Adams"]},
+ {e:1804, who:[["jefferson","1805-03-04","1809-03-04"]], opp:["Charles C. Pinckney"]},
+ {e:1808, who:[["madison","1809-03-04","1813-03-04"]], opp:["Charles C. Pinckney"]},
+ {e:1812, who:[["madison","1813-03-04","1817-03-04"]], opp:["DeWitt Clinton"]},
+ {e:1816, who:[["monroe","1817-03-04","1821-03-04"]], opp:["Rufus King"]},
+ {e:1820, who:[["monroe","1821-03-04","1825-03-04"]], opp:"Ran virtually unopposed"},
+ {e:1824, who:[["jq-adams","1825-03-04","1829-03-04"]], opp:["Andrew Jackson","William Crawford","Henry Clay"], popLoss:true},
+ {e:1828, who:[["jackson","1829-03-04","1833-03-04"]], opp:["John Quincy Adams"]},
+ {e:1832, who:[["jackson","1833-03-04","1837-03-04"]], opp:["Henry Clay"]},
+ {e:1836, who:[["van-buren","1837-03-04","1841-03-04"]], opp:["William Henry Harrison","and other Whigs"]},
+ {e:1840, who:[["wh-harrison","1841-03-04","1841-04-04","died"],["tyler","1841-04-04","1845-03-04"]], opp:["Martin Van Buren"]},
+ {e:1844, who:[["polk","1845-03-04","1849-03-04"]], opp:["Henry Clay"]},
+ {e:1848, who:[["taylor","1849-03-05","1850-07-09","died"],["fillmore","1850-07-09","1853-03-04"]], opp:["Lewis Cass","Martin Van Buren"]},
+ {e:1852, who:[["pierce","1853-03-04","1857-03-04"]], opp:["Winfield Scott"]},
+ {e:1856, who:[["buchanan","1857-03-04","1861-03-04"]], opp:["John C. Fremont","Millard Fillmore"]},
+ {e:1860, who:[["lincoln","1861-03-04","1865-03-04",null,"lincoln-1860"]], opp:["Stephen Douglas","John Breckinridge","John Bell"]},
+ {e:1864, who:[["lincoln","1865-03-04","1865-04-15","assassinated"],["a-johnson","1865-04-15","1869-03-04"]], opp:["George McClellan"]},
+ {e:1868, who:[["grant","1869-03-04","1873-03-04"]], opp:["Horatio Seymour"]},
+ {e:1872, who:[["grant","1873-03-04","1877-03-04"]], opp:["Horace Greeley"]},
+ {e:1876, who:[["hayes","1877-03-04","1881-03-04"]], opp:["Samuel Tilden"], popLoss:true},
+ {e:1880, who:[["garfield","1881-03-04","1881-09-19","assassinated"],["arthur","1881-09-19","1885-03-04"]], opp:["Winfield S. Hancock"]},
+ {e:1884, who:[["cleveland","1885-03-04","1889-03-04"]], opp:["James G. Blaine"]},
+ {e:1888, who:[["b-harrison","1889-03-04","1893-03-04"]], opp:["Grover Cleveland"], popLoss:true},
+ {e:1892, who:[["cleveland","1893-03-04","1897-03-04"]], opp:["Benjamin Harrison","James Weaver"]},
+ {e:1896, who:[["mckinley","1897-03-04","1901-03-04"]], opp:["William Jennings Bryan"]},
+ {e:1900, who:[["mckinley","1901-03-04","1901-09-14","assassinated"],["t-roosevelt","1901-09-14","1905-03-04"]], opp:["William Jennings Bryan"]},
+ {e:1904, who:[["t-roosevelt","1905-03-04","1909-03-04"]], opp:["Alton Parker"]},
+ {e:1908, who:[["taft","1909-03-04","1913-03-04"]], opp:["William Jennings Bryan"]},
+ {e:1912, who:[["wilson","1913-03-04","1917-03-04"]], opp:["Theodore Roosevelt","William H. Taft","Eugene Debs"]},
+ {e:1916, who:[["wilson","1917-03-04","1921-03-04"]], opp:["Charles Evans Hughes"]},
+ {e:1920, who:[["harding","1921-03-04","1923-08-02","died"],["coolidge","1923-08-02","1925-03-04"]], opp:["James Cox"]},
+ {e:1924, who:[["coolidge","1925-03-04","1929-03-04"]], opp:["John W. Davis","Robert La Follette"]},
+ {e:1928, who:[["hoover","1929-03-04","1933-03-04"]], opp:["Al Smith"]},
+ {e:1932, who:[["fdr","1933-03-04","1937-01-20"]], opp:["Herbert Hoover"]},
+ {e:1936, who:[["fdr","1937-01-20","1941-01-20"]], opp:["Alf Landon (Kansas governor)"]},
+ {e:1940, who:[["fdr","1941-01-20","1945-01-20"]], opp:["Wendell Willkie"]},
+ {e:1944, who:[["fdr","1945-01-20","1945-04-12","died","fdr-1944"],["truman","1945-04-12","1949-01-20"]], opp:["Thomas Dewey"]},
+ {e:1948, who:[["truman","1949-01-20","1953-01-20"]], opp:["Thomas Dewey","Strom Thurmond"]},
+ {e:1952, who:[["eisenhower","1953-01-20","1957-01-20"]], opp:["Adlai Stevenson"]},
+ {e:1956, who:[["eisenhower","1957-01-20","1961-01-20"]], opp:["Adlai Stevenson"]},
+ {e:1960, who:[["kennedy","1961-01-20","1963-11-22","assassinated"],["lbj","1963-11-22","1965-01-20"]], opp:["Richard Nixon"]},
+ {e:1964, who:[["lbj","1965-01-20","1969-01-20"]], opp:["Barry Goldwater"]},
+ {e:1968, who:[["nixon","1969-01-20","1973-01-20"]], opp:["Hubert Humphrey","George Wallace"]},
+ {e:1972, who:[["nixon","1973-01-20","1974-08-09","resigned"],["ford","1974-08-09","1977-01-20"]], opp:["George McGovern"]},
+ {e:1976, who:[["carter","1977-01-20","1981-01-20"]], opp:["Gerald Ford"]},
+ {e:1980, who:[["reagan","1981-01-20","1985-01-20"]], opp:["Jimmy Carter","John Anderson"]},
+ {e:1984, who:[["reagan","1985-01-20","1989-01-20"]], opp:["Walter Mondale"]},
+ {e:1988, who:[["ghw-bush","1989-01-20","1993-01-20"]], opp:["Michael Dukakis"]},
+ {e:1992, who:[["clinton","1993-01-20","1997-01-20"]], opp:["George H.W. Bush","Ross Perot"]},
+ {e:1996, who:[["clinton","1997-01-20","2001-01-20"]], opp:["Bob Dole (Kansas senator)","Ross Perot"]},
+ {e:2000, who:[["gw-bush","2001-01-20","2005-01-20"]], opp:["Al Gore"], popLoss:true},
+ {e:2004, who:[["gw-bush","2005-01-20","2009-01-20"]], opp:["John Kerry"]},
+ {e:2008, who:[["obama","2009-01-20","2013-01-20"]], opp:["John McCain"]},
+ {e:2012, who:[["obama","2013-01-20","2017-01-20"]], opp:["Mitt Romney"]},
+ {e:2016, who:[["trump","2017-01-20","2021-01-20"]], opp:["Hillary Clinton"], popLoss:true},
+ {e:2020, who:[["biden","2021-01-20","2025-01-20"]], opp:["Donald Trump"]},
+ {e:2024, who:[["trump","2025-01-20","2029-01-20",null,"trump-2025"]], opp:["Kamala Harris"]}
+];
+/* losing candidates who were (or later became) president get bolded */
+const WAS_PRES = ["Thomas Jefferson","John Adams","John Quincy Adams","Andrew Jackson","Martin Van Buren","William Henry Harrison","Millard Fillmore","Grover Cleveland","Benjamin Harrison","Theodore Roosevelt","William H. Taft","Herbert Hoover","Richard Nixon","Gerald Ford","Jimmy Carter","George H.W. Bush","Donald Trump"];
+
+/* ===================== CONTEXT LANES ===================== */
+const ERAS = [
+ [1789.3,1817.2,"Early Republic"],
+ [1817.2,1825.2,"Era of Good Feelings"],
+ [1825.2,1848.5,"Age of Jackson"],
+ [1848.5,1861.3,"Sectional Crisis"],
+ [1861.3,1865.3,"Civil War"],
+ [1865.3,1877.2,"Reconstruction"],
+ [1877.2,1900,"Gilded Age"],
+ [1900,1920,"Progressive Era"],
+ [1920,1929.8,"Roaring Twenties"],
+ [1929.8,1941.9,"Great Depression"],
+ [1941.9,1945.7,"World War II"],
+ [1945.7,1991.95,"Cold War"],
+ [1991.95,2001.7,"After the Cold War"],
+ [2001.7,2029.1,"Post-9/11 Era"]
+];
+/* k: war | land | econ | event */
+const EVENTS = [
+ {y:1794.6, t:"Whiskey Rebellion", k:"event", d:"Washington leads troops to end a tax revolt in Pennsylvania, showing the new federal government can enforce its laws."},
+ {y:1803.3, t:"Louisiana Purchase", k:"land", d:"The U.S. buys the Louisiana Territory from France for $15 million, doubling the size of the country."},
+ {y:1812.5, y2:1815.1, t:"War of 1812", k:"war", d:"War with Britain over trade and the seizure of American sailors. It ends in a draw but boosts national pride."},
+ {y:1819.2, t:"Panic of 1819", k:"econ", d:"The first major financial crisis in U.S. history."},
+ {y:1820.2, t:"Missouri Compromise", k:"event", d:"Missouri enters as a slave state and Maine as a free state. Slavery is banned in the rest of the Louisiana Territory north of Missouri's southern border."},
+ {y:1823.9, t:"Monroe Doctrine", k:"event", d:"The U.S. warns European powers not to start new colonies in the Western Hemisphere."},
+ {y:1830.4, t:"Indian Removal Act", k:"event", d:"Congress gives the president power to force Native nations in the East to move west of the Mississippi."},
+ {y:1837.4, t:"Panic of 1837", k:"econ", d:"Banks fail and a depression lasts into the 1840s."},
+ {y:1838.5, t:"Trail of Tears", k:"event", d:"The Cherokee are forced out of Georgia. About 4,000 die on the march to Indian Territory."},
+ {y:1845.2, t:"Texas annexed", k:"land", d:"Texas joins the Union as a slave state, angering Mexico."},
+ {y:1846.4, y2:1848.1, t:"Mexican-American War", k:"war", d:"The U.S. defeats Mexico and takes the Mexican Cession, including California."},
+ {y:1846.5, t:"Oregon Treaty", k:"land", d:"Britain and the U.S. split the Oregon Country at the 49th parallel."},
+ {y:1849, t:"Gold Rush", k:"event", d:"Hundreds of thousands rush to California, which quickly applies for statehood as a free state."},
+ {y:1850.7, t:"Compromise of 1850", k:"event", d:"California enters as a free state, and a strict Fugitive Slave Act forces Northerners to help return escaped slaves."},
+ {y:1854.4, t:"Kansas-Nebraska Act", k:"event", d:"Settlers in Kansas and Nebraska can vote on slavery. Proslavery and antislavery settlers fight in Bleeding Kansas."},
+ {y:1857.7, t:"Panic of 1857", k:"econ", d:"A financial panic hits Northern industry hard."},
+ {y:1861.3, y2:1865.3, t:"Civil War", k:"war", d:"Eleven Southern states secede. More than 600,000 soldiers die, and the Union wins."},
+ {y:1863, t:"Emancipation Proclamation", k:"event", d:"Lincoln declares enslaved people in Confederate-held areas free and opens the Union army to Black soldiers."},
+ {y:1867.2, t:"Alaska Purchase", k:"land", d:"The U.S. buys Alaska from Russia for $7.2 million."},
+ {y:1869.4, t:"Transcontinental Railroad", k:"event", d:"The first railroad across the country is completed in Utah."},
+ {y:1873.7, t:"Panic of 1873", k:"econ", d:"A railroad bubble bursts and a long depression follows."},
+ {y:1890.95, t:"Wounded Knee", k:"event", d:"U.S. troops kill about 250 Lakota at Wounded Knee, South Dakota, the last major clash of the Plains wars."},
+ {y:1893.4, t:"Panic of 1893", k:"econ", d:"The worst depression before the 1930s. Unemployment climbs above 10 percent."},
+ {y:1898.3, y2:1898.6, t:"Spanish-American War", k:"war", d:"A short war with Spain. The U.S. gains Puerto Rico, Guam, and the Philippines."},
+ {y:1898.55, t:"Hawaii annexed", k:"land", d:"The U.S. annexes Hawaii five years after American planters overthrew its queen."},
+ {y:1907.8, t:"Panic of 1907", k:"econ", d:"A bank panic that leads Congress to create the Federal Reserve in 1913."},
+ {y:1917.3, y2:1918.9, t:"World War I", k:"war", d:"The U.S. joins the Allies in 1917. About 116,000 Americans die."},
+ {y:1918.7, t:"1918 flu pandemic", k:"event", d:"Influenza kills about 675,000 Americans."},
+ {y:1929.8, t:"Stock market crash", k:"econ", d:"Black Tuesday. The crash helps set off the Great Depression."},
+ {y:1935.3, t:"Dust Bowl", k:"event", d:"Drought and dust storms ruin farms across the Plains, including western Kansas."},
+ {y:1941.93, t:"Pearl Harbor", k:"war", d:"Japan attacks the U.S. Navy in Hawaii, and the U.S. enters World War II."},
+ {y:1945.6, t:"Atomic bombs", k:"war", d:"The U.S. drops atomic bombs on Hiroshima and Nagasaki, and Japan surrenders."},
+ {y:1950.5, y2:1953.6, t:"Korean War", k:"war", d:"U.S. and UN forces defend South Korea. The war ends in a stalemate at the 38th parallel."},
+ {y:1957.8, t:"Sputnik", k:"event", d:"The Soviet Union launches the first satellite, starting the space race."},
+ {y:1962.8, t:"Cuban Missile Crisis", k:"event", d:"Thirteen days when the U.S. and the Soviet Union came closest to nuclear war."},
+ {y:1965.2, y2:1973.2, t:"Vietnam War", k:"war", d:"U.S. combat troops fight in Vietnam. More than 58,000 Americans die, and protests divide the country."},
+ {y:1969.55, t:"Moon landing", k:"event", d:"Apollo 11 lands the first people on the moon."},
+ {y:1972.5, y2:1974.6, t:"Watergate", k:"event", d:"A break-in at Democratic headquarters and the White House cover-up lead to Nixon's resignation."},
+ {y:1973.8, t:"Oil crisis", k:"econ", d:"An Arab oil embargo sends gas prices soaring. Inflation and unemployment rise together through the 1970s."},
+ {y:1979.85, y2:1981.05, t:"Iran hostage crisis", k:"event", d:"Iranian students hold 52 Americans hostage for 444 days."},
+ {y:1989.86, t:"Berlin Wall falls", k:"event", d:"East Germans tear down the Berlin Wall. The Cold War is ending."},
+ {y:1991.05, y2:1991.2, t:"Gulf War", k:"war", d:"A U.S.-led coalition drives Iraq out of Kuwait."},
+ {y:2001.7, t:"9/11 attacks", k:"event", d:"Al-Qaeda terrorists kill nearly 3,000 people in New York, Virginia, and Pennsylvania."},
+ {y:2001.77, y2:2021.65, t:"War in Afghanistan", k:"war", d:"The longest war in U.S. history, ending with the withdrawal of U.S. troops in 2021."},
+ {y:2003.2, y2:2011.95, t:"Iraq War", k:"war", d:"The U.S. invades Iraq and removes Saddam Hussein."},
+ {y:2008.7, t:"Great Recession", k:"econ", d:"A housing and banking collapse causes the worst downturn since the Great Depression."},
+ {y:2020.2, t:"COVID-19 pandemic", k:"event", d:"A global pandemic kills more than a million Americans and shuts down much of daily life."},
+ {y:2021.01, t:"January 6", k:"event", d:"A mob attacks the U.S. Capitol while Congress counts the electoral votes."}
+];
+/* k: amend | law | court | realign */
+const MILESTONES = [
+ {y:1791.95, t:"Bill of Rights", k:"amend", d:"The first ten amendments are ratified, protecting individual rights from the federal government."},
+ {y:1803.15, t:"Marbury v. Madison", k:"court", d:"The Supreme Court claims the power of judicial review: it can strike down laws that violate the Constitution."},
+ {y:1804.45, t:"12th Amendment", k:"amend", d:"Electors now cast separate votes for president and vice president, fixing the problem of the 1800 tie."},
+ {y:1828.5, t:"Property rules dropped", k:"law", d:"By 1828 most states let white men vote without owning property, sometimes called universal white male suffrage."},
+ {y:1832.4, t:"First party conventions", k:"realign", d:"Parties start choosing presidential candidates at national conventions instead of in private meetings of members of Congress."},
+ {y:1848.55, t:"Seneca Falls", k:"law", d:"The first women's rights convention demands, among other things, the right to vote."},
+ {y:1854.5, t:"Republican Party founded", k:"realign", d:"Antislavery Northerners form the Republican Party as the Whigs collapse."},
+ {y:1857.2, t:"Dred Scott v. Sandford", k:"court", d:"The Supreme Court rules that Black Americans cannot be citizens and that Congress cannot ban slavery in the territories."},
+ {y:1865.95, t:"13th Amendment", k:"amend", d:"Abolishes slavery."},
+ {y:1868.15, t:"First impeachment", k:"law", d:"The House impeaches Andrew Johnson. The Senate acquits him by one vote."},
+ {y:1868.55, t:"14th Amendment", k:"amend", d:"Birthright citizenship, due process, and equal protection of the laws, now applied to the states."},
+ {y:1870.1, t:"15th Amendment", k:"amend", d:"States cannot deny the vote because of race."},
+ {y:1877.3, t:"The Solid South begins", k:"realign", d:"After Reconstruction, white Democrats control Southern politics for nearly a century, and Black voters are pushed out."},
+ {y:1883.05, t:"Pendleton Act", k:"law", d:"Many federal jobs are now filled by merit exams instead of political loyalty."},
+ {y:1890.8, t:"Jim Crow voting laws", k:"law", d:"Southern states adopt poll taxes and literacy tests to keep Black citizens from voting."},
+ {y:1896.4, t:"Plessy v. Ferguson", k:"court", d:"The Supreme Court allows separate but equal segregation."},
+ {y:1913.1, t:"16th Amendment", k:"amend", d:"Congress can collect an income tax."},
+ {y:1913.3, t:"17th Amendment", k:"amend", d:"Voters, not state legislatures, now elect U.S. senators."},
+ {y:1920.65, t:"19th Amendment", k:"amend", d:"States cannot deny the vote because of sex. Women vote nationwide."},
+ {y:1924.45, t:"Indian Citizenship Act", k:"law", d:"Native Americans born in the U.S. become citizens, though some states still kept them from voting for decades."},
+ {y:1932.9, t:"New Deal coalition", k:"realign", d:"Workers, immigrants, Southern whites, and later Black voters make Democrats the majority party for decades."},
+ {y:1933.1, t:"20th Amendment", k:"amend", d:"Moves Inauguration Day from March 4 to January 20 and shortens the lame-duck period."},
+ {y:1951.15, t:"22nd Amendment", k:"amend", d:"Limits presidents to two elected terms, a response to FDR's four."},
+ {y:1954.4, t:"Brown v. Board", k:"court", d:"The Supreme Court rules that segregated public schools are unconstitutional. The case began in Topeka, Kansas."},
+ {y:1961.25, t:"23rd Amendment", k:"amend", d:"Washington, D.C., gets three electoral votes."},
+ {y:1964.1, t:"24th Amendment", k:"amend", d:"Bans poll taxes in federal elections."},
+ {y:1964.5, t:"Civil Rights Act", k:"law", d:"Outlaws segregation in public places and job discrimination based on race, color, religion, sex, or national origin."},
+ {y:1965.6, t:"Voting Rights Act", k:"law", d:"Bans literacy tests and puts federal oversight on places with a history of discrimination. Black registration in the South soars."},
+ {y:1967.15, t:"25th Amendment", k:"amend", d:"Sets rules for presidential disability and filling a vice president vacancy. Used to make Ford vice president in 1973."},
+ {y:1971.5, t:"26th Amendment", k:"amend", d:"Lowers the voting age to 18."},
+ {y:1972.6, t:"Primaries take over", k:"realign", d:"After 1968, party reforms make primaries and caucuses, not party leaders, the way nominees are chosen."},
+ {y:1980.9, t:"The South turns Republican", k:"realign", d:"The shift of the white South to the Republican Party, which started with Goldwater in 1964, is mostly complete."},
+ {y:1998.95, t:"Clinton impeached", k:"law", d:"The House impeaches Bill Clinton. The Senate acquits him."},
+ {y:2000.95, t:"Bush v. Gore", k:"court", d:"The Supreme Court stops the Florida recount, deciding the 2000 election."},
+ {y:2010.05, t:"Citizens United", k:"court", d:"Corporations and unions can spend unlimited money on independent political ads."},
+ {y:2013.5, t:"Shelby County v. Holder", k:"court", d:"Ends the Voting Rights Act rule that some states needed federal approval before changing election laws."},
+ {y:2019.97, t:"Trump impeached twice", k:"law", d:"The House impeaches Donald Trump in 2019 and again in 2021. The Senate acquits him both times."}
+];
+
+/* ===================== ELECTORAL MAPS ===================== */
+/* states: code -> candidate key, or {key:ev, key:ev} for a split.
+   partOf: areas that were part of another state at the time. */
+const MAPS = {
+ 1800:{sub:"Jefferson and Burr tie at 73 electoral votes. The House picks Jefferson.", cands:{TJ:["Thomas Jefferson","Democratic-Republican","#8FBC7C",73,"60.6%"],JA:["John Adams","Federalist","#E9AD6D",65,"39.4%"]},
+  states:{CT:"JA",DE:"JA",GA:"TJ",KY:"TJ",MD:{TJ:5,JA:5},MA:"JA",NH:"JA",NJ:"JA",NY:"TJ",NC:{TJ:8,JA:4},PA:{TJ:8,JA:7},RI:"JA",SC:"TJ",TN:"TJ",VT:"JA",VA:"TJ"},
+  partOf:{ME:"MA",WV:"VA"},
+  popNote:"Many states let the legislature pick electors, so popular vote totals are partial.",
+  note:"Jefferson and his running mate, Aaron Burr, tied at 73 electoral votes because electors could not mark which vote was for president. The House took 36 ballots to choose Jefferson. The tie led to the 12th Amendment, and Adams handing power to his rival set the precedent of a peaceful transfer between parties."},
+ 1824:{win:"JQA", sub:"No one wins a majority. The House picks John Quincy Adams.", cands:{AJ:["Andrew Jackson","Democratic-Republican","#5C8CB4",99,"40.5%"],JQA:["John Quincy Adams","Democratic-Republican","#8FBC7C",84,"32.7%"],WC:["William Crawford","Democratic-Republican","#B59E6E",41,"11.0%"],HC:["Henry Clay","Democratic-Republican","#9A7FB5",37,"13.0%"]},
+  states:{AL:"AJ",CT:"JQA",DE:{WC:2,JQA:1},GA:"WC",IL:{AJ:2,JQA:1},IN:"AJ",KY:"HC",LA:{AJ:3,JQA:2},ME:"JQA",MD:{AJ:7,JQA:3,WC:1},MA:"JQA",MS:"AJ",MO:"HC",NH:"JQA",NJ:"AJ",NY:{JQA:26,WC:5,HC:4,AJ:1},NC:"AJ",OH:"HC",PA:"AJ",RI:"JQA",SC:"AJ",TN:"AJ",VT:"JQA",VA:"WC"},
+  partOf:{WV:"VA"},
+  popNote:"Six states still let the legislature pick electors.",
+  note:"All four candidates came from the same party. Jackson led in popular and electoral votes but fell short of a majority, so the House chose among the top three. Clay backed Adams, who won and then named Clay secretary of state. Jackson's supporters called it a corrupt bargain, and the anger fueled his win in 1828."},
+ 1828:{cands:{AJ:["Andrew Jackson","Democratic","#5C8CB4",178,"56%"],JQA:["John Quincy Adams","National Republican","#F0CD5C",83,"44%"]},
+  states:{AL:"AJ",CT:"JQA",DE:"JQA",GA:"AJ",IL:"AJ",IN:"AJ",KY:"AJ",LA:"AJ",ME:{JQA:8,AJ:1},MD:{JQA:6,AJ:5},MA:"JQA",MS:"AJ",MO:"AJ",NH:"JQA",NJ:"JQA",NY:{AJ:20,JQA:16},NC:"AJ",OH:"AJ",PA:"AJ",RI:"JQA",SC:"AJ",TN:"AJ",VT:"JQA",VA:"AJ"},
+  partOf:{WV:"VA"},
+  note:"The rematch of 1824. Most states now let voters choose electors, turnout more than doubled, and Jackson won easily. His coalition became the Democratic Party, the oldest party still active today."},
+ 1860:{cands:{AL:["Abraham Lincoln","Republican","#DD6868",180,"39.8%"],JB:["John Breckinridge","Southern Democratic","#2F5A84",72,"18.1%"],BE:["John Bell","Constitutional Union","#C9A86A",39,"12.6%"],SD:["Stephen Douglas","Northern Democratic","#A3C0DA",12,"29.5%"]},
+  states:{AL:"JB",AR:"JB",CA:"AL",CT:"AL",DE:"JB",FL:"JB",GA:"JB",IL:"AL",IN:"AL",IA:"AL",KY:"BE",LA:"JB",ME:"AL",MD:"JB",MA:"AL",MI:"AL",MN:"AL",MS:"JB",MO:"SD",NH:"AL",NJ:{AL:4,SD:3},NY:"AL",NC:"JB",OH:"AL",OR:"AL",PA:"AL",RI:"AL",SC:"JB",TN:"BE",TX:"JB",VT:"AL",VA:"BE",WI:"AL"},
+  partOf:{WV:"VA"},
+  note:"The Democrats split into Northern and Southern wings. Lincoln won with under 40 percent of the popular vote and without a single Southern state; he was not even on the ballot in most of the South. Seven states seceded before he took office."},
+ 1876:{cands:{RH:["Rutherford B. Hayes","Republican","#DD6868",185,"47.9%"],ST:["Samuel Tilden","Democratic","#5C8CB4",184,"50.9%"]},
+  states:{AL:"ST",AR:"ST",CA:"RH",CO:"RH",CT:"ST",DE:"ST",FL:"RH",GA:"ST",IL:"RH",IN:"ST",IA:"RH",KS:"RH",KY:"ST",LA:"RH",ME:"RH",MD:"ST",MA:"RH",MI:"RH",MN:"RH",MS:"ST",MO:"ST",NE:"RH",NV:"RH",NH:"RH",NJ:"ST",NY:"ST",NC:"ST",OH:"RH",OR:"RH",PA:"RH",RI:"RH",SC:"RH",TN:"ST",TX:"ST",VT:"RH",VA:"ST",WV:"ST",WI:"RH"},
+  disputed:["FL","LA","SC","OR"],
+  note:"Tilden won the popular vote, but 20 electoral votes from Florida, Louisiana, South Carolina, and Oregon were disputed. A special commission gave all of them to Hayes, who won by one electoral vote. Under the informal Compromise of 1877, Democrats accepted Hayes and federal troops left the South, ending Reconstruction."},
+ 1888:{cands:{BH:["Benjamin Harrison","Republican","#DD6868",233,"47.8%"],GC:["Grover Cleveland","Democratic","#5C8CB4",168,"48.6%"]},
+  states:{AL:"GC",AR:"GC",CA:"BH",CO:"BH",CT:"GC",DE:"GC",FL:"GC",GA:"GC",IL:"BH",IN:"BH",IA:"BH",KS:"BH",KY:"GC",LA:"GC",ME:"BH",MD:"GC",MA:"BH",MI:"BH",MN:"BH",MS:"GC",MO:"GC",NE:"BH",NV:"BH",NH:"BH",NJ:"GC",NY:"BH",NC:"GC",OH:"BH",OR:"BH",PA:"BH",RI:"BH",SC:"GC",TN:"GC",TX:"GC",VT:"BH",VA:"GC",WV:"GC",WI:"BH"},
+  note:"Cleveland won the popular vote, but Harrison won the Electoral College by carrying swing states, including Cleveland's home state of New York. Four years later Cleveland beat Harrison in a rematch."},
+ 1896:{cands:{WM:["William McKinley","Republican","#DD6868",271,"51.0%"],WB:["William Jennings Bryan","Democratic and Populist","#5C8CB4",176,"46.7%"]},
+  states:{AL:"WB",AR:"WB",CA:{WM:8,WB:1},CO:"WB",CT:"WM",DE:"WM",FL:"WB",GA:"WB",ID:"WB",IL:"WM",IN:"WM",IA:"WM",KS:"WB",KY:{WM:12,WB:1},LA:"WB",ME:"WM",MD:"WM",MA:"WM",MI:"WM",MN:"WM",MS:"WB",MO:"WB",MT:"WB",NE:"WB",NV:"WB",NH:"WM",NJ:"WM",NY:"WM",NC:"WB",ND:"WM",OH:"WM",OR:"WM",PA:"WM",RI:"WM",SC:"WB",SD:"WB",TN:"WB",TX:"WB",UT:"WB",VT:"WM",VA:"WB",WA:"WB",WV:"WM",WI:"WM",WY:"WB"},
+  note:"A fight over gold versus silver money. Bryan, backed by Democrats and Populists, carried the South and farm states like Kansas. McKinley won the industrial North and Midwest, starting a long stretch of Republican dominance."},
+ 1912:{cands:{WW:["Woodrow Wilson","Democratic","#5C8CB4",435,"41.8%"],TR:["Theodore Roosevelt","Progressive","#8E6FAE",88,"27.4%"],WT:["William H. Taft","Republican","#DD6868",8,"23.2%"],ED:["Eugene Debs","Socialist","#9A9488",0,"6.0%"]},
+  states:{AL:"WW",AZ:"WW",AR:"WW",CA:{TR:11,WW:2},CO:"WW",CT:"WW",DE:"WW",FL:"WW",GA:"WW",ID:"WW",IL:"WW",IN:"WW",IA:"WW",KS:"WW",KY:"WW",LA:"WW",ME:"WW",MD:"WW",MA:"WW",MI:"TR",MN:"TR",MS:"WW",MO:"WW",MT:"WW",NE:"WW",NV:"WW",NH:"WW",NJ:"WW",NM:"WW",NY:"WW",NC:"WW",ND:"WW",OH:"WW",OK:"WW",OR:"WW",PA:"TR",RI:"WW",SC:"WW",SD:"TR",TN:"WW",TX:"WW",UT:"WT",VT:"WT",VA:"WW",WA:"TR",WV:"WW",WI:"WW",WY:"WW"},
+  note:"Roosevelt challenged Taft, the sitting Republican president, and ran as a Progressive when he lost the nomination. The split let Wilson win 40 states with only 42 percent of the vote. Roosevelt's second-place finish is the best ever by a third-party candidate."},
+ 1932:{cands:{FR:["Franklin D. Roosevelt","Democratic","#5C8CB4",472,"57.4%"],HH:["Herbert Hoover","Republican","#DD6868",59,"39.7%"]},
+  all:"FR", states:{CT:"HH",DE:"HH",ME:"HH",NH:"HH",PA:"HH",VT:"HH"},
+  note:"Three years into the Great Depression, Roosevelt won 42 of 48 states. His New Deal coalition kept Democrats the majority party for most of the next 50 years."},
+ 1948:{cands:{HT:["Harry Truman","Democratic","#5C8CB4",303,"49.6%"],TD:["Thomas Dewey","Republican","#DD6868",189,"45.1%"],ST:["Strom Thurmond","States' Rights (Dixiecrat)","#C9A86A",39,"2.4%"]},
+  all:"HT", states:{CT:"TD",DE:"TD",IN:"TD",KS:"TD",ME:"TD",MD:"TD",MI:"TD",NE:"TD",NH:"TD",NJ:"TD",NY:"TD",ND:"TD",OR:"TD",PA:"TD",SD:"TD",VT:"TD",AL:"ST",LA:"ST",MS:"ST",SC:"ST",TN:{HT:11,ST:1}},
+  note:"Southern Democrats angry about Truman's civil rights proposals walked out and ran Strom Thurmond as the Dixiecrat candidate. Polls and newspapers expected Dewey to win easily. Truman won anyway in one of the biggest upsets in American history."},
+ 1964:{cands:{LJ:["Lyndon B. Johnson","Democratic","#5C8CB4",486,"61.1%"],BG:["Barry Goldwater","Republican","#DD6868",52,"38.5%"]},
+  all:"LJ", states:{AZ:"BG",LA:"BG",MS:"BG",GA:"BG",AL:"BG",SC:"BG"},
+  dc:"LJ",
+  note:"Johnson won in a landslide months after signing the Civil Rights Act. But Goldwater, who voted against the act, carried five Deep South states that had voted Democratic for decades. It was an early sign that the white South was moving to the Republican Party."},
+ 1968:{cands:{RN:["Richard Nixon","Republican","#DD6868",301,"43.4%"],HH:["Hubert Humphrey","Democratic","#5C8CB4",191,"42.7%"],GW:["George Wallace","American Independent","#C9A86A",46,"13.5%"]},
+  all:"RN", states:{CT:"HH",HI:"HH",ME:"HH",MD:"HH",MA:"HH",MI:"HH",MN:"HH",NY:"HH",PA:"HH",RI:"HH",TX:"HH",WA:"HH",WV:"HH",AL:"GW",AR:"GW",GA:"GW",LA:"GW",MS:"GW",NC:{RN:12,GW:1}},
+  dc:"HH",
+  note:"A year of assassinations, riots, and protests over Vietnam. Nixon won narrowly by promising law and order, and George Wallace carried five Southern states running as a segregationist. It was the last time a third-party candidate won any states."},
+ 1980:{cands:{RR:["Ronald Reagan","Republican","#DD6868",489,"50.7%"],JC:["Jimmy Carter","Democratic","#5C8CB4",49,"41.0%"],JA:["John Anderson","Independent","#9A9488",0,"6.6%"]},
+  all:"RR", states:{GA:"JC",MD:"JC",MN:"JC",WV:"JC",HI:"JC",RI:"JC"},
+  dc:"JC",
+  note:"With inflation high and Americans held hostage in Iran, Reagan beat a sitting president and won 44 states. The election marked a conservative turn in American politics."},
+ 2000:{cands:{GB:["George W. Bush","Republican","#DD6868",271,"47.9%"],AG:["Al Gore","Democratic","#5C8CB4",266,"48.4%"],RN:["Ralph Nader","Green","#9A9488",0,"2.7%"]},
+  all:"GB", states:{CA:"AG",NY:"AG",IL:"AG",PA:"AG",NJ:"AG",MI:"AG",MA:"AG",MD:"AG",MN:"AG",WA:"AG",WI:"AG",CT:"AG",IA:"AG",OR:"AG",NM:"AG",HI:"AG",ME:"AG",RI:"AG",DE:"AG",VT:"AG"},
+  dc:"AG",
+  note:"Gore won the popular vote by about 540,000, but the election came down to Florida, where Bush led by 537 votes. The Supreme Court stopped the recount in Bush v. Gore, and Bush won 271 to 266."},
+ 2016:{cands:{DT:["Donald Trump","Republican","#DD6868",304,"46.1%"],HC:["Hillary Clinton","Democratic","#5C8CB4",227,"48.2%"]},
+  all:"DT", states:{CA:"HC",CO:"HC",CT:"HC",DE:"HC",HI:"HC",IL:"HC",ME:{HC:3,DT:1},MD:"HC",MA:"HC",MN:"HC",NV:"HC",NH:"HC",NJ:"HC",NM:"HC",NY:"HC",OR:"HC",RI:"HC",VT:"HC",VA:"HC",WA:"HC"},
+  dc:"HC",
+  evNote:"Seven electors broke their pledges, so the totals are 304 to 227 instead of 306 to 232.",
+  note:"Clinton won the popular vote by nearly 2.9 million, but Trump won the Electoral College by narrowly flipping Pennsylvania, Michigan, and Wisconsin, states Democrats had won since 1992."},
+ 2024:{cands:{DT:["Donald Trump","Republican","#DD6868",312,"49.8%"],KH:["Kamala Harris","Democratic","#5C8CB4",226,"48.3%"]},
+  all:"DT", states:{CA:"KH",CO:"KH",CT:"KH",DE:"KH",HI:"KH",IL:"KH",ME:{KH:3,DT:1},MD:"KH",MA:"KH",MN:"KH",NE:{DT:4,KH:1},NH:"KH",NJ:"KH",NM:"KH",NY:"KH",OR:"KH",RI:"KH",VT:"KH",VA:"KH",WA:"KH"},
+  dc:"KH",
+  note:"Harris replaced Biden as the Democratic nominee in July. Trump won all seven swing states and the popular vote, becoming the second president, after Grover Cleveland, to win non-consecutive terms. Maine and Nebraska again split their electoral votes by congressional district."}
+};
+
+/* year each state could first cast electoral votes (for graying out non-states) */
+const ADMIT = {DE:1788,PA:1788,NJ:1788,GA:1788,CT:1788,MA:1788,MD:1788,SC:1788,NH:1788,VA:1788,NY:1792,NC:1792,RI:1792,VT:1792,KY:1792,TN:1796,OH:1804,LA:1812,IN:1816,MS:1820,IL:1820,AL:1820,ME:1820,MO:1820,AR:1836,MI:1836,FL:1848,TX:1848,IA:1848,WI:1848,CA:1852,MN:1860,OR:1860,KS:1864,WV:1864,NV:1864,NE:1868,CO:1876,ND:1892,SD:1892,MT:1892,WA:1892,ID:1892,WY:1892,UT:1896,OK:1908,NM:1912,AZ:1912,AK:1960,HI:1960,DC:1964};
+
+const GEO = {"states":{"AL":"M648,492L648,492L648,492ZM642,384L689,380L702,427L710,440L706,450L709,457L708,465L711,469L661,474L666,486L664,490L656,488L653,482L652,490L646,489L642,455L644,386Z","AK":"M104,552L104,552L104,552ZM99,570L103,565L105,569ZM95,582L95,582L95,582ZM93,575L99,571L105,573L95,580ZM93,583L93,583L93,583ZM89,588L89,588L89,588ZM72,594L72,594L72,594ZM71,592L71,592L71,592ZM68,593L68,593L68,593ZM66,590L66,590L66,590ZM68,564L68,564L68,564ZM61,591L61,591L61,591ZM58,592L58,592L58,592ZM66,524L66,524L66,524ZM56,596L56,596L56,596ZM45,597L45,597L45,597ZM43,595L43,595L43,595ZM41,596L41,596L41,596ZM44,547L50,547L48,552ZM31,601L38,596L37,601ZM51,505L66,500L65,504L74,504L73,498L67,496L66,492L59,484L62,481L67,481L75,471L87,468L89,465L95,469L101,469L104,472L109,471L123,474L126,472L133,474L147,547L155,547L164,555L169,546L181,554L193,565L200,567L203,573L201,578L193,574L188,565L183,563L178,557L171,551L173,557L168,559L160,554L151,551L141,550L135,552L126,547L119,547L121,553L114,554L109,560L105,560L106,546L100,557L96,560L100,564L96,569L90,572L77,586L47,595L49,592L57,590L62,585L66,585L81,573L84,563L76,566L71,561L65,564L66,557L64,551L58,553L53,547L51,538L61,526L64,528L73,523L73,514L68,517L55,514L56,509ZM25,603L25,603L25,603ZM28,573L28,573L28,573ZM20,602L20,602L20,602ZM27,568L27,568L27,568ZM16,603L16,603L16,603ZM34,518L39,518L45,522L41,524ZM7,603L7,603L7,603ZM23,540L23,540L23,540ZM0,602L0,602L0,602ZM-6,601L-6,601L-6,601ZM-10,599L-10,599L-10,599ZM-11,601L-11,601L-11,601ZM-15,601L-15,601L-15,601ZM-18,600L-18,600L-18,600ZM-20,597L-20,597L-20,597ZM-30,593L-30,593L-30,593ZM-35,593L-35,593L-35,593ZM-41,589L-41,589L-41,589ZM-56,577L-56,577L-56,577ZM-58,571L-58,571L-58,571ZM197,577L197,577L197,577ZM196,577L196,577L196,577ZM195,575L195,575L195,575ZM188,570L188,570L188,570ZM187,569L187,569L187,569ZM186,577L186,577L186,577ZM185,573L187,570L194,576L196,580ZM183,574L183,574L183,574ZM180,567L185,564L189,567ZM175,556L178,557L181,563L180,566ZM174,565L177,563L181,573ZM173,566L173,566L173,566ZM169,561L172,558L177,563L174,565ZM121,555L121,555L121,555ZM120,551L120,551L120,551Z","AZ":"M145,407L149,407L150,401L147,400L148,392L152,389L154,380L163,374L160,370L157,356L160,331L167,331L170,335L173,331L176,313L239,324L265,328L247,456L208,450L172,429L142,412Z","CO":"M277,237L333,244L361,247L395,249L394,272L390,341L372,339L349,338L315,334L265,328L268,299Z","FL":"M815,594L815,594L815,594ZM813,596L813,596L813,596ZM807,599L807,599L807,599ZM794,604L800,598L805,600ZM790,605L790,605L790,605ZM786,605L786,605L786,605ZM777,558L777,558L777,558ZM770,606L770,606L770,606ZM720,495L720,495L720,495ZM711,469L714,475L766,471L770,476L769,466L780,466L787,486L795,500L806,514L807,522L820,544L823,554L824,575L820,586L807,590L801,578L792,575L785,563L778,557L766,543L771,533L765,530L767,534L765,537L762,533L764,517L759,505L755,505L746,498L740,491L732,487L727,487L714,501L707,500L706,494L696,488L681,486L664,490L666,486L661,474Z","GA":"M689,380L713,377L735,374L732,382L741,385L748,396L762,406L766,412L771,414L774,423L786,435L783,442L781,454L778,460L780,466L769,466L770,476L766,471L714,475L711,469L708,465L709,457L706,450L710,440L702,427Z","IN":"M640,230L647,231L652,228L686,224L686,225L693,284L694,292L683,295L684,298L677,305L674,313L669,309L666,314L661,313L655,319L647,315L639,320L638,317L647,298L643,288L645,284Z","KS":"M394,272L422,273L465,275L510,275L516,278L514,286L519,293L522,295L523,344L489,344L433,343L390,341Z","ME":"M940,115L940,115L940,115ZM938,116L938,116L938,116ZM936,112L936,112L936,112ZM932,116L932,116L932,116ZM934,125L934,125L934,125ZM931,119L931,119L931,119ZM930,116L930,116L930,116ZM910,150L905,145L891,102L894,99L900,86L898,83L900,74L899,67L906,48L912,52L923,46L930,50L939,80L945,80L946,87L952,88L957,95L953,99L950,106L947,104L944,110L939,114L937,110L936,118L931,110L930,123L918,131L913,138Z","MA":"M928,187L928,187L928,187ZM918,188L921,184L925,187ZM871,168L884,165L903,161L909,155L914,158L909,166L917,171L922,178L931,177L920,183L918,179L913,186L911,183L910,182L905,176L899,178L871,184Z","MN":"M479,71L511,71L511,62L516,64L520,77L531,79L532,81L540,78L563,87L566,91L577,86L578,89L588,88L596,91L582,98L559,119L560,121L556,122L556,136L551,139L548,147L551,150L550,154L549,166L564,175L565,178L572,182L576,193L549,194L491,195L491,154L484,147L489,140L489,131L486,123L485,102L481,89L481,78Z","NJ":"M849,246L850,244L851,241L861,231L854,226L850,221L850,214L855,204L870,209L869,216L869,217L867,221L871,222L873,237L865,257L859,254L849,246Z","NC":"M864,329L864,329L864,329ZM863,350L863,350L863,350ZM756,334L780,331L812,326L859,316L856,317L859,323L847,333L856,330L863,329L866,335L860,344L843,343L854,347L850,356L859,354L856,361L851,361L844,365L834,377L833,384L823,386L798,368L778,371L772,365L749,367L735,374L713,377L713,371L717,369L721,363L726,362L738,350L741,351L747,345L751,346Z","ND":"M377,66L404,68L445,70L479,71L481,78L481,89L485,102L486,123L489,131L489,140L460,139L412,137L371,134Z","OK":"M372,339L390,341L433,343L489,344L523,344L523,355L527,381L526,421L520,418L512,413L499,415L492,420L481,414L476,419L467,413L462,413L454,409L452,411L438,404L429,403L424,398L426,354L372,351Z","PA":"M756,209L768,200L769,206L800,201L841,192L847,197L850,202L855,204L850,214L850,221L854,226L861,231L851,241L845,245L816,251L782,257L765,260L761,239Z","SD":"M369,156L371,134L412,137L460,139L489,140L484,147L491,154L491,195L488,195L491,204L488,212L491,218L476,210L467,210L466,212L457,206L404,204L365,201Z","TX":"M372,351L426,354L424,398L429,403L438,404L452,411L454,409L462,413L467,413L476,419L481,414L492,420L499,415L512,413L520,418L526,421L535,423L535,435L535,458L540,463L540,467L545,476L546,484L542,490L543,502L539,507L541,510L535,511L522,517L524,509L518,511L520,519L523,519L510,530L492,539L480,548L480,546L489,541L484,542L477,547L469,564L468,576L471,592L474,595L467,597L464,593L452,592L440,585L434,584L431,574L428,570L428,559L420,552L419,548L412,541L405,522L390,506L378,505L366,505L361,517L357,522L337,511L330,504L328,492L323,480L316,475L306,463L302,460L296,452L295,447L339,451L363,453L367,408L371,351Z","WY":"M369,156L365,201L361,247L333,244L277,237L244,232L247,210L256,154L258,142L298,148L339,153Z","CT":"M871,184L899,178L902,193L893,197L885,198L874,208L874,201Z","MO":"M502,262L521,262L545,261L571,260L576,265L576,273L578,280L590,290L591,297L601,298L598,313L614,326L614,333L621,340L620,349L617,351L616,351L615,352L612,363L600,364L605,357L604,352L550,355L523,355L523,344L522,295L519,293L514,286L516,278L510,275Z","WV":"M733,295L738,293L739,285L741,280L744,283L746,273L754,269L758,263L761,247L761,239L765,260L782,257L784,269L794,257L800,258L805,253L814,260L813,265L803,259L803,266L797,277L794,275L790,286L784,283L780,297L776,305L777,309L761,318L750,319L747,313L741,311L734,302Z","IL":"M576,265L577,259L581,258L584,248L582,241L593,236L596,224L587,215L634,212L634,217L640,230L645,284L643,288L647,298L638,317L639,320L639,327L632,330L632,337L624,334L621,340L614,333L614,326L598,313L601,298L591,297L590,290L578,280L576,273Z","NM":"M265,328L315,334L349,338L372,339L372,351L371,351L367,408L363,453L339,451L295,447L296,452L264,448L263,458L247,456Z","AR":"M523,355L550,355L604,352L605,357L600,364L612,363L613,367L605,378L607,383L603,387L598,393L599,400L595,402L593,409L590,411L592,415L588,420L591,430L589,433L535,435L535,423L526,421L527,381Z","CA":"M77,374L77,374L77,374ZM75,384L75,384L75,384ZM65,358L65,358L65,358ZM58,374L58,374L58,374ZM57,355L57,355L57,355ZM50,355L50,355L50,355ZM47,353L47,353L47,353ZM33,160L84,175L100,179L83,246L157,356L160,370L163,374L154,380L152,389L148,392L147,400L150,401L149,407L145,407L99,402L98,398L99,388L97,382L86,370L82,369L82,362L76,362L70,357L65,349L49,344L46,340L50,328L46,325L47,321L42,313L35,296L36,289L40,286L31,274L33,261L38,270L36,257L33,260L29,255L27,243L20,229L24,209L18,197L19,193L27,184L31,173Z","DE":"M849,246L849,246L849,246ZM845,245L851,241L850,244L849,249L855,258L861,263L864,270L853,273Z","DC":"M826,267L828,270L826,267Z","HI":"M305,584L310,578L310,573L322,578L326,584L332,589L329,593L317,598L314,603L309,600L309,594ZM292,558L294,555L306,561L305,564L299,566ZM292,567L292,567L292,567ZM284,558L284,558L284,558ZM279,554L280,551L291,553L288,555ZM258,543L265,540L271,549L262,549ZM226,533L231,528L235,529L236,534L230,536ZM216,537L216,537L216,537Z","IA":"M491,195L549,194L576,193L579,199L577,202L580,211L587,215L596,224L593,236L582,241L584,248L581,258L577,259L576,265L571,260L545,261L521,262L502,262L497,234L491,218L488,212L491,204L488,195Z","KY":"M621,340L624,334L632,337L632,330L639,327L639,320L647,315L655,319L661,313L666,314L669,309L674,313L677,305L684,298L683,295L694,292L693,284L699,283L704,290L714,293L721,292L727,288L733,295L734,302L741,311L747,313L741,320L735,325L729,334L720,339L704,341L672,343L645,346L641,350L617,351L620,349ZM616,351L615,352L616,351Z","MD":"M850,285L849,285L850,285ZM847,281L847,281L847,281ZM782,257L816,251L845,245L853,273L864,270L863,280L855,284L852,285L848,276L846,279L841,274L846,271L839,266L842,252L837,254L838,263L836,269L844,284L835,282L830,278L827,280L827,274L828,270L826,267L814,260L805,253L800,258L794,257L784,269Z","MI":"M677,131L677,131L677,131ZM663,133L663,133L663,133ZM662,139L662,139L662,139ZM661,136L661,136L661,136ZM659,142L659,142L659,142ZM657,150L657,150L657,150ZM655,153L655,153L655,153ZM646,140L646,140L646,140ZM652,228L659,216L660,205L659,198L652,184L652,175L655,168L655,160L661,154L664,148L664,156L668,153L667,146L674,142L670,138L675,133L685,135L687,138L697,140L701,147L699,149L702,154L702,162L699,169L695,171L694,177L699,180L705,171L710,168L715,172L722,191L721,200L716,199L715,207L708,222L686,225L686,224ZM601,92L610,86L610,89ZM585,123L594,117L601,116L619,101L624,100L615,112L628,114L633,121L644,121L652,115L662,114L670,111L670,118L676,118L683,115L684,121L694,128L681,129L676,127L674,131L671,128L663,127L661,130L653,131L638,140L632,153L631,148L627,147L628,140L623,135L612,134L607,131L590,128Z","MS":"M644,493L644,493L644,493ZM639,493L639,493L639,493ZM635,494L635,494L635,494ZM632,494L632,494L632,494ZM589,433L591,430L588,420L592,415L590,411L593,409L595,402L599,400L598,393L603,387L642,384L644,386L642,455L646,489L636,490L625,495L618,485L619,477L583,479L584,467L595,448L591,445L591,436Z","MT":"M198,39L233,46L265,52L303,57L340,62L377,66L371,134L369,156L339,153L298,148L258,142L256,154L253,148L250,151L237,148L235,151L225,149L224,142L219,139L215,118L208,123L205,120L209,114L208,109L213,96L209,96L201,80L195,74L197,69L193,62Z","NH":"M886,111L887,105L891,102L905,145L910,150L909,155L903,161L884,165L882,163L881,146L883,133L882,128L888,122Z","NY":"M899,196L899,196L899,196ZM897,198L897,198L897,198ZM869,217L867,221L869,217ZM816,154L816,154L816,154ZM814,154L814,154L814,154ZM768,200L776,192L780,186L775,176L784,172L796,170L800,172L809,169L819,161L815,150L815,146L820,141L829,128L832,124L858,118L862,134L861,140L864,149L867,150L871,168L871,184L874,201L874,208L891,204L895,200L900,202L886,213L872,219L869,216L870,209L855,204L850,202L847,197L841,192L800,201L769,206Z","OH":"M721,223L721,223L721,223ZM719,222L719,222L719,222ZM686,225L708,222L718,225L719,224L726,227L733,223L738,223L748,213L756,209L761,239L761,247L758,263L754,269L746,273L744,283L741,280L739,285L738,293L733,295L727,288L721,292L714,293L704,290L699,283L693,284Z","OR":"M71,70L77,74L80,80L79,87L86,91L98,91L103,95L112,94L139,95L171,102L176,112L157,137L162,143L158,150L149,191L100,179L84,175L33,160L31,157L34,146L33,140L45,121L57,92L65,71Z","TN":"M612,363L615,352L616,351L617,351L641,350L645,346L672,343L704,341L720,339L756,334L751,346L747,345L741,351L738,350L726,362L721,363L717,369L713,371L713,377L689,380L642,384L603,387L607,383L605,378L613,367Z","UT":"M198,201L247,210L244,232L277,237L268,299L265,328L239,324L176,313Z","VA":"M855,284L863,280L858,288L857,301L853,301L853,292ZM850,285L849,285L850,285ZM747,313L750,319L761,318L777,309L776,305L780,297L784,283L790,286L794,275L797,277L803,266L803,259L813,265L814,260L826,267L828,270L827,274L825,279L830,279L832,283L838,283L846,287L849,305L846,310L855,308L859,316L812,326L780,331L756,334L720,339L729,334L735,325L741,320Z","WA":"M93,51L93,51L93,51ZM99,25L99,25L99,25ZM99,20L99,20L99,20ZM98,23L98,23L98,23ZM95,31L95,31L95,31ZM96,18L96,18L96,18ZM94,20L94,20L94,20ZM95,13L95,13L95,13ZM91,21L98,22L96,27ZM91,19L91,19L91,19ZM184,36L171,92L171,102L139,95L112,94L103,95L98,91L86,91L79,87L80,80L77,74L71,70L66,69L64,65L66,57L71,54L67,51L68,34L66,23L70,20L77,27L90,33L95,33L97,39L92,52L96,52L98,42L102,38L101,27L102,21L100,14L140,25Z","WI":"M642,146L642,146L642,146ZM636,150L636,150L636,150ZM584,113L584,113L584,113ZM583,116L583,116L583,116ZM581,115L581,115L581,115ZM580,117L580,117L580,117ZM580,114L580,114L580,114ZM579,113L579,113L579,113ZM579,118L579,118L579,118ZM576,114L576,114L576,114ZM560,121L568,120L576,115L580,120L585,123L590,128L607,131L612,134L623,135L628,140L627,147L631,148L632,153L629,157L626,166L628,166L636,157L642,148L635,165L635,174L632,181L633,185L631,195L634,206L634,212L587,215L580,211L577,202L579,199L576,193L572,182L565,178L564,175L549,166L550,154L551,150L548,147L551,139L556,136L556,122Z","NE":"M365,201L404,204L457,206L466,212L467,210L476,210L491,218L497,234L502,262L510,275L465,275L422,273L394,272L395,249L361,247Z","SC":"M735,374L749,367L772,365L778,371L798,368L823,386L816,392L814,404L801,419L792,424L793,427L786,435L774,423L771,414L766,412L762,406L748,396L741,385L732,382Z","ID":"M171,102L171,92L184,36L198,39L193,62L197,69L195,74L201,80L209,96L213,96L208,109L209,114L205,120L208,123L215,118L219,139L224,142L225,149L235,151L237,148L250,151L253,148L256,154L247,210L198,201L149,191L158,150L162,143L157,137L176,112Z","NV":"M100,179L149,191L198,201L176,313L173,331L170,335L167,331L160,331L157,356L83,246Z","VT":"M858,118L886,111L888,122L882,128L883,133L881,146L882,163L884,165L871,168L867,150L864,149L861,140L862,134Z","LA":"M638,497L638,497L638,497ZM629,498L629,498L629,498ZM624,510L624,510L624,510ZM610,521L610,521L610,521ZM606,521L606,521L606,521ZM602,522L602,522L602,522ZM577,511L577,511L577,511ZM535,435L589,433L591,436L591,445L595,448L584,467L583,479L619,477L618,485L625,495L619,499L624,502L626,498L628,501L627,507L623,508L626,513L632,514L634,522L624,516L620,515L613,521L608,515L601,523L590,517L584,508L579,506L571,513L554,508L541,510L539,507L543,502L542,490L546,484L545,476L540,467L540,463L535,458Z","RI":"M911,183L913,186L911,183ZM908,188L908,188L908,188ZM907,196L907,196L907,196ZM902,193L899,178L905,176L910,182L907,181L908,191Z"},"nation":"M648,492L648,492L648,492ZM780,466L787,486L795,500L806,514L807,522L820,544L823,554L824,575L820,586L807,590L801,578L792,575L785,563L778,557L766,543L771,533L765,530L767,534L765,537L762,533L764,517L759,505L755,505L746,498L740,491L732,487L727,487L714,501L707,500L706,494L696,488L681,486L664,490L656,488L653,482L652,490L646,489L636,490L625,495L619,499L624,502L626,498L628,501L627,507L623,508L626,513L632,514L634,522L624,516L620,515L613,521L608,515L601,523L590,517L584,508L579,506L571,513L554,508L541,510L535,511L522,517L524,509L518,511L520,519L523,519L510,530L492,539L480,548L480,546L489,541L484,542L477,547L469,564L468,576L471,592L474,595L467,597L464,593L452,592L440,585L434,584L431,574L428,570L428,559L420,552L419,548L412,541L405,522L390,506L378,505L366,505L361,517L357,522L337,511L330,504L328,492L323,480L316,475L306,463L302,460L296,452L264,448L263,458L247,456L208,450L172,429L142,412L145,407L99,402L98,398L99,388L97,382L86,370L82,369L82,362L76,362L70,357L65,349L49,344L46,340L50,328L46,325L47,321L42,313L35,296L36,289L40,286L31,274L33,261L38,270L36,257L33,260L29,255L27,243L20,229L24,209L18,197L19,193L27,184L31,173L33,160L31,157L34,146L33,140L45,121L57,92L65,71L71,70L66,69L64,65L66,57L71,54L67,51L68,34L66,23L70,20L77,27L90,33L95,33L97,39L92,52L96,52L98,42L102,38L101,27L102,21L100,14L140,25L184,36L198,39L233,46L265,52L303,57L340,62L377,66L404,68L445,70L479,71L511,71L511,62L516,64L520,77L531,79L532,81L540,78L563,87L566,91L577,86L578,89L588,88L596,91L582,98L559,119L560,121L568,120L576,115L580,120L585,123L594,117L601,116L619,101L624,100L615,112L628,114L633,121L644,121L652,115L662,114L670,111L670,118L676,118L683,115L684,121L694,128L681,129L676,127L674,131L671,128L663,127L661,130L653,131L638,140L632,153L629,157L626,166L628,166L636,157L642,148L635,165L635,174L632,181L633,185L631,195L634,206L634,212L634,217L640,230L647,231L652,228L659,216L660,205L659,198L652,184L652,175L655,168L655,160L661,154L664,148L664,156L668,153L667,146L674,142L670,138L675,133L685,135L687,138L697,140L701,147L699,149L702,154L702,162L699,169L695,171L694,177L699,180L705,171L710,168L715,172L722,191L721,200L716,199L715,207L708,222L718,225L719,224L726,227L733,223L738,223L748,213L756,209L768,200L776,192L780,186L775,176L784,172L796,170L800,172L809,169L819,161L815,150L815,146L820,141L829,128L832,124L858,118L886,111L887,105L891,102L894,99L900,86L898,83L900,74L899,67L906,48L912,52L923,46L930,50L939,80L945,80L946,87L952,88L957,95L953,99L950,106L947,104L944,110L939,114L937,110L936,118L931,110L930,123L918,131L913,138L910,150L909,155L914,158L909,166L917,171L922,178L931,177L920,183L918,179L913,186L911,183L910,182L907,181L908,191L902,193L893,197L885,198L874,208L891,204L895,200L900,202L886,213L872,219L869,216L869,217L867,221L871,222L873,237L865,257L859,254L849,246L849,246L850,244L849,249L855,258L861,263L864,270L863,280L858,288L857,301L853,301L853,292L855,284L852,285L848,276L846,279L841,274L846,271L839,266L842,252L837,254L838,263L836,269L844,284L835,282L830,278L827,280L827,274L825,279L830,279L832,283L838,283L846,287L849,305L846,310L855,308L859,316L856,317L859,323L847,333L856,330L863,329L866,335L860,344L843,343L854,347L850,356L859,354L856,361L851,361L844,365L834,377L833,384L823,386L816,392L814,404L801,419L792,424L793,427L786,435L783,442L781,454L778,460ZM104,552L104,552L104,552ZM99,570L103,565L105,569ZM95,582L95,582L95,582ZM93,575L99,571L105,573L95,580ZM93,583L93,583L93,583ZM89,588L89,588L89,588ZM72,594L72,594L72,594ZM71,592L71,592L71,592ZM68,593L68,593L68,593ZM66,590L66,590L66,590ZM68,564L68,564L68,564ZM61,591L61,591L61,591ZM58,592L58,592L58,592ZM66,524L66,524L66,524ZM56,596L56,596L56,596ZM45,597L45,597L45,597ZM43,595L43,595L43,595ZM41,596L41,596L41,596ZM44,547L50,547L48,552ZM31,601L38,596L37,601ZM51,505L66,500L65,504L74,504L73,498L67,496L66,492L59,484L62,481L67,481L75,471L87,468L89,465L95,469L101,469L104,472L109,471L123,474L126,472L133,474L147,547L155,547L164,555L169,546L181,554L193,565L200,567L203,573L201,578L193,574L188,565L183,563L178,557L171,551L173,557L168,559L160,554L151,551L141,550L135,552L126,547L119,547L121,553L114,554L109,560L105,560L106,546L100,557L96,560L100,564L96,569L90,572L77,586L47,595L49,592L57,590L62,585L66,585L81,573L84,563L76,566L71,561L65,564L66,557L64,551L58,553L53,547L51,538L61,526L64,528L73,523L73,514L68,517L55,514L56,509ZM25,603L25,603L25,603ZM28,573L28,573L28,573ZM20,602L20,602L20,602ZM27,568L27,568L27,568ZM16,603L16,603L16,603ZM34,518L39,518L45,522L41,524ZM7,603L7,603L7,603ZM23,540L23,540L23,540ZM0,602L0,602L0,602ZM-6,601L-6,601L-6,601ZM-10,599L-10,599L-10,599ZM-11,601L-11,601L-11,601ZM-15,601L-15,601L-15,601ZM-18,600L-18,600L-18,600ZM-20,597L-20,597L-20,597ZM-30,593L-30,593L-30,593ZM-35,593L-35,593L-35,593ZM-41,589L-41,589L-41,589ZM-56,577L-56,577L-56,577ZM-58,571L-58,571L-58,571ZM197,577L197,577L197,577ZM196,577L196,577L196,577ZM195,575L195,575L195,575ZM188,570L188,570L188,570ZM187,569L187,569L187,569ZM186,577L186,577L186,577ZM185,573L187,570L194,576L196,580ZM183,574L183,574L183,574ZM180,567L185,564L189,567ZM175,556L178,557L181,563L180,566ZM174,565L177,563L181,573ZM173,566L173,566L173,566ZM169,561L172,558L177,563L174,565ZM121,555L121,555L121,555ZM120,551L120,551L120,551ZM815,594L815,594L815,594ZM813,596L813,596L813,596ZM807,599L807,599L807,599ZM794,604L800,598L805,600ZM790,605L790,605L790,605ZM786,605L786,605L786,605ZM777,558L777,558L777,558ZM770,606L770,606L770,606ZM720,495L720,495L720,495ZM940,115L940,115L940,115ZM938,116L938,116L938,116ZM936,112L936,112L936,112ZM932,116L932,116L932,116ZM934,125L934,125L934,125ZM931,119L931,119L931,119ZM930,116L930,116L930,116ZM928,187L928,187L928,187ZM918,188L921,184L925,187ZM864,329L864,329L864,329ZM863,350L863,350L863,350ZM77,374L77,374L77,374ZM75,384L75,384L75,384ZM65,358L65,358L65,358ZM58,374L58,374L58,374ZM57,355L57,355L57,355ZM50,355L50,355L50,355ZM47,353L47,353L47,353ZM305,584L310,578L310,573L322,578L326,584L332,589L329,593L317,598L314,603L309,600L309,594ZM292,558L294,555L306,561L305,564L299,566ZM292,567L292,567L292,567ZM284,558L284,558L284,558ZM279,554L280,551L291,553L288,555ZM258,543L265,540L271,549L262,549ZM226,533L231,528L235,529L236,534L230,536ZM216,537L216,537L216,537ZM849,285L850,285L849,285ZM847,281L847,281L847,281ZM677,131L677,131L677,131ZM663,133L663,133L663,133ZM662,139L662,139L662,139ZM661,136L661,136L661,136ZM659,142L659,142L659,142ZM657,150L657,150L657,150ZM655,153L655,153L655,153ZM646,140L646,140L646,140ZM601,92L610,86L610,89ZM644,493L644,493L644,493ZM639,493L639,493L639,493ZM635,494L635,494L635,494ZM632,494L632,494L632,494ZM899,196L899,196L899,196ZM897,198L897,198L897,198ZM816,154L816,154L816,154ZM814,154L814,154L814,154ZM721,223L721,223L721,223ZM719,222L719,222L719,222ZM93,51L93,51L93,51ZM99,25L99,25L99,25ZM99,20L99,20L99,20ZM98,23L98,23L98,23ZM95,31L95,31L95,31ZM96,18L96,18L96,18ZM94,20L94,20L94,20ZM95,13L95,13L95,13ZM91,21L98,22L96,27ZM91,19L91,19L91,19ZM642,146L642,146L642,146ZM636,150L636,150L636,150ZM584,113L584,113L584,113ZM583,116L583,116L583,116ZM581,115L581,115L581,115ZM580,117L580,117L580,117ZM580,114L580,114L580,114ZM579,113L579,113L579,113ZM579,118L579,118L579,118ZM576,114L576,114L576,114ZM638,497L638,497L638,497ZM629,498L629,498L629,498ZM624,510L624,510L624,510ZM610,521L610,521L610,521ZM606,521L606,521L606,521ZM602,522L602,522L602,522ZM577,511L577,511L577,511ZM908,188L908,188L908,188ZM907,196L907,196L907,196Z"};
+const IMG_DIR = "pres-timeline/";
+
+/* ---------- constants ---------- */
+const PARTY = {
+  N:{name:"No party", c:"var(--pN)", hex:"#A39C8F", txt:"#2A251F"},
+  F:{name:"Federalist", c:"var(--pF)", hex:"#E9AD6D", txt:"#2A251F"},
+  DR:{name:"Democratic-Republican", c:"var(--pDR)", hex:"#8FBC7C", txt:"#2A251F"},
+  W:{name:"Whig", c:"var(--pW)", hex:"#F0CD5C", txt:"#2A251F"},
+  D:{name:"Democratic", c:"var(--pD)", hex:"#5C8CB4", txt:"#FFFFFF"},
+  R:{name:"Republican", c:"var(--pR)", hex:"#DD6868", txt:"#FFFFFF"}
+};
+const STATE_NAMES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"District of Columbia",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+const N = S.length;
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+const $ = id => document.getElementById(id);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pDate = s => { const [y,m,d] = s.split("-").map(Number); return new Date(Date.UTC(y, m-1, d)); };
+const decYear = s => { const d = pDate(s), y = d.getUTCFullYear(); return y + (d - Date.UTC(y,0,1)) / (Date.UTC(y+1,0,1) - Date.UTC(y,0,1)); };
+const fullName = id => P[id].first + " " + P[id].last;
+const ordinal = n => { if (typeof n === "string") return n.split(" & ").map(x => ordinal(Number(x))).join(" and "); const s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); };
+function spanText(a, b, short){
+  const da = pDate(a), db = pDate(b), days = Math.round((db - da) / 864e5);
+  if (days < 75) return days + " days";
+  let months = (db.getUTCFullYear()-da.getUTCFullYear())*12 + db.getUTCMonth()-da.getUTCMonth();
+  if (db.getUTCDate() < da.getUTCDate()) months--;
+  const y = Math.floor(months/12), m = months%12;
+  const parts = [];
+  if (y) parts.push(y + (short ? (y===1?" yr":" yrs") : (y===1?" year":" years")));
+  if (m) parts.push(m + (short ? (m===1?" mo":" mos") : (m===1?" month":" months")));
+  return parts.join(short ? " " : ", ") || days + " days";
+}
+const ENDWORD = {died:"Died", assassinated:"Assassinated", resigned:"Resigned"};
+
+/* slot boundaries in decimal years: B[k] = start of slot k */
+const B = S.map(s => decYear(s.who[0][1]));
+B[0] = decYear("1789-03-04");
+B.push(decYear(S[N-1].who[S[N-1].who.length-1][2]));
+
+/* ---------- state ---------- */
+let idx = 0, VIS = 3, slotW = 360, PAD = 64;
+const yToX = y => {
+  if (y <= B[0]) return (y - B[0]) / 4 * slotW;
+  if (y >= B[N]) return (N + (y - B[N]) / 4) * slotW;
+  let k = 0; while (k < N-1 && y >= B[k+1]) k++;
+  return (k + (y - B[k]) / (B[k+1] - B[k])) * slotW;
+};
+
+/* ---------- party strip ---------- */
+const strip = $("strip");
+S.forEach((s, i) => {
+  const pr = P[s.who[0][0]].party;
+  const c = el("div", "cell"); c.style.background = PARTY[pr].c;
+  c.title = s.e + ": " + s.who.map(w => fullName(w[0])).join(", ");
+  strip.insertBefore(c, $("win"));
+});
+[1800,1850,1900,1950,2000].forEach(y => {
+  const t = el("span", null, y); t.style.left = ((y - B[0]) / (B[N] - B[0]) * 100) + "%"; $("ticks").appendChild(t);
+});
+["N","F","DR","W","D","R"].forEach(k => $("legend").appendChild(el("span", null, `<b style="background:${PARTY[k].c}"></b>${PARTY[k].name}`)));
+function stripIndexAt(clientX){
+  const r = strip.getBoundingClientRect();
+  const i = Math.floor((clientX - r.left) / r.width * N);
+  return Math.max(0, Math.min(N-1, i));
+}
+let stripDrag = false;
+strip.addEventListener("pointerdown", e => { stripDrag = true; strip.setPointerCapture(e.pointerId); go(stripIndexAt(e.clientX) - Math.floor(VIS/2)); });
+strip.addEventListener("pointermove", e => { if (stripDrag) go(stripIndexAt(e.clientX) - Math.floor(VIS/2)); });
+["pointerup","pointercancel","lostpointercapture"].forEach(t => strip.addEventListener(t, () => stripDrag = false));
+
+/* ---------- build stage ---------- */
+const track = $("track"), ltrack = $("ltrack");
+function buildStage(){
+  track.innerHTML = "";
+  for (let k = 0; k <= N; k++){
+    const year = k < N ? S[k].e : S[N-1].e + 4;
+    const m = el("div", "mk" + (k === N ? " future" : ""));
+    m.style.left = (k * slotW) + "px";
+    m.innerHTML = `<div class="lab"><span class="of">Election of</span><span class="yr">${year}</span></div>`;
+    const tags = el("div", "tags");
+    if (k < N && MAPS[year]){
+      const b = el("button", "mapbtn", `<svg viewBox="0 0 15 11" fill="currentColor"><path d="M1 2l4-1 2 1 3-.5 4 1-.5 3 .5 2-2 2-3-.5-1.5 1-1.5-1.5L3 9 1.5 7 1 4.5z"/></svg>Map`);
+      b.setAttribute("aria-label", "Open the electoral map for " + year);
+      b.addEventListener("click", ev => { ev.stopPropagation(); openMap(year, b); });
+      tags.appendChild(b);
+    }
+    if (k < N && S[k].popLoss) tags.appendChild(el("span", "poptag", "Lost popular vote"));
+    if (tags.children.length) m.appendChild(tags);
+    track.appendChild(m);
+  }
+  S.forEach((s, i) => {
+    const slot = el("div", "slot");
+    slot.style.left = (i * slotW) + "px"; slot.style.width = slotW + "px";
+    const pics = el("div", "portraits" + (s.who.length > 1 ? " two" : ""));
+    const ban = el("div", "banner");
+    s.who.forEach((w, j) => {
+      const id = w[0], pr = P[id];
+      const f = el("button", "pf"); f.setAttribute("aria-label", "More about " + fullName(id));
+      const img = new Image(); img.alt = fullName(id); img.decoding = "async";
+      img.src = IMG_DIR + (w[4] || id) + ".webp";
+      img.addEventListener("error", () => {
+        const fb = el("div", "fallback", (pr.first[0] + pr.last[0]).toUpperCase());
+        fb.style.background = PARTY[pr.party].c; img.replaceWith(fb);
+      });
+      f.appendChild(img); f.addEventListener("click", () => openPres(id, w[4], f));
+      if (w[3]){ const d = pDate(w[2]); f.appendChild(el("span", "badge", ENDWORD[w[3]] + " " + d.getUTCFullYear())); }
+      pics.appendChild(f);
+      const seg = el("button", "seg");
+      seg.style.background = PARTY[pr.party].c; seg.style.color = PARTY[pr.party].txt;
+      seg.innerHTML = s.who.length > 1 ? `<span class="ln">${esc(pr.last)}</span>` : `<span class="fn">${esc(pr.first)}</span><span class="ln">${esc(pr.last)}</span>`;
+      seg.setAttribute("aria-label", "More about " + fullName(id));
+      seg.addEventListener("click", () => openPres(id, w[4], seg));
+      ban.appendChild(seg);
+    });
+    if (s.who.length > 1){
+      const z = el("div", "zig"); z.style.left = "50%";
+      z.innerHTML = `<svg viewBox="0 0 14 48" preserveAspectRatio="none" width="14" height="100%"><path d="M9 0 L3 17 L10 22 L4 48" fill="none" stroke="#FBF6EC" stroke-width="3" stroke-linejoin="round"/></svg>`;
+      ban.appendChild(z);
+    }
+    const info = el("div", "info");
+    const first = s.who[0], last = s.who[s.who.length-1];
+    let h = `<div class="yrs">${first[1].slice(0,4)}-${last[2].slice(0,4)}</div>`;
+    if (s.who.length > 1){
+      const tot = pDate(last[2]) - pDate(first[1]);
+      h += `<div class="share">` + s.who.map(w => `<i style="flex:${(pDate(w[2]) - pDate(w[1])) / tot};background:${PARTY[P[w[0]].party].c}"></i>`).join("") + `</div>`;
+      h += `<div class="sharelab">` + s.who.map(w => `<span>${esc(P[w[0]].last)}: ${spanText(w[1], w[2], true)}</span>`).join("") + `</div>`;
+    }
+    const opp = Array.isArray(s.opp) ? s.opp.map(o => WAS_PRES.includes(o) ? `<b>${esc(o)}</b>` : esc(o)).join(", ") : esc(s.opp);
+    h += `<div class="opp">${Array.isArray(s.opp) ? '<span class="k">Defeated</span>' : ""}${opp}</div>`;
+    info.innerHTML = h;
+    slot.append(pics, ban, info);
+    track.appendChild(slot);
+  });
+  track.style.width = (N * slotW) + "px";
+}
+
+/* ---------- build lanes ---------- */
+const LANES = [
+  {key:"era", label:"Era"},
+  {key:"ev", label:"Events", items:EVENTS},
+  {key:"ms", label:'<span class="lg">Government</span><span class="sh">Gov\'t</span>', items:MILESTONES}
+];
+const ROW = 27;
+let measureCtx;
+function textW(t){ if (!measureCtx){ measureCtx = document.createElement("canvas").getContext("2d"); } measureCtx.font = '13.5px Oswald, "Arial Narrow", sans-serif'; return measureCtx.measureText(t).width; }
+let eraEls = [], spanEls = [];
+function buildLanes(){
+  ltrack.innerHTML = ""; eraEls = []; spanEls = [];
+  ltrack.style.width = (N * slotW) + "px";
+  let top = 0;
+  const labels = $("laneLabels"); labels.innerHTML = "";
+  // eras
+  ERAS.forEach(([a, b, name]) => {
+    const x1 = yToX(a), x2 = yToX(b);
+    const e = el("div", "era" + (/(Civil War|World War II)/.test(name) ? " dark" : ""));
+    e.style.left = x1 + "px"; e.style.width = (x2 - x1 - 2) + "px";
+    const l = el("div", "era-l" + (/(Civil War|World War II)/.test(name) ? " on-dark" : ""), esc(name));
+    ltrack.append(e, l);
+    l.style.top = "6px";
+    eraEls.push({x1, x2, l, w: textW(name.toUpperCase()) * 1.15 + 10});
+  });
+  top = 38;
+  const lab0 = el("div", null, "Era"); lab0.style.height = top + "px"; labels.appendChild(lab0);
+  LANES.slice(1).forEach(lane => {
+    const placed = lane.items.map(it => {
+      const x = yToX(it.y), xEnd = it.y2 ? yToX(it.y2) : x;
+      const lw = textW(it.t) + 6;
+      const w = it.y2 ? Math.max(xEnd - x, lw + 14) : lw + 18;
+      return {it, x, xEnd, w};
+    }).sort((a, b) => a.x - b.x);
+    const ends = [];
+    placed.forEach(p => {
+      let r = ends.findIndex(e => e + 8 <= p.x - 6);
+      if (r < 0){ if (ends.length < 4) r = ends.length; else r = ends.indexOf(Math.min(...ends)); }
+      ends[r] = p.x - 6 + p.w; p.row = r;
+    });
+    const rows = Math.max(1, ends.length);
+    const h = rows * ROW + 10;
+    const rule = el("div", "lane-rule"); rule.style.top = top + "px"; ltrack.appendChild(rule);
+    placed.forEach(p => {
+      const it = p.it, isSpan = !!it.y2;
+      const b = el("button", `it k-${it.k}${isSpan ? " span" : ""}`);
+      b.style.top = (top + 6 + p.row * ROW) + "px";
+      if (isSpan){
+        b.style.left = p.x + "px";
+        const bw = Math.max(p.xEnd - p.x, 6);
+        b.innerHTML = `<span class="bar" style="width:${bw}px"></span><span class="t">${esc(it.t)}</span>`;
+        if (bw < textW(it.t) + 14){ b.querySelector(".t").style.color = "inherit"; b.querySelector(".t").style.paddingLeft = (bw + 6) + "px"; }
+        else spanEls.push({x:p.x, room: bw - textW(it.t) - 16, t:b.querySelector(".t")});
+      } else {
+        b.style.left = (p.x - 6) + "px";
+        const mark = lane.key === "ms" ? `<span class="dia"></span>` : `<span class="dot"></span>`;
+        b.innerHTML = `${mark}<span class="t">${esc(it.t)}</span>`;
+      }
+      b.addEventListener("click", ev => { ev.stopPropagation(); showPop(it, b); });
+      ltrack.appendChild(b);
+    });
+    const lab = el("div", null, lane.label);
+    lab.style.height = h + "px"; lab.style.flexDirection = "column"; lab.style.alignItems = "flex-end"; lab.style.justifyContent = "center";
+    labels.appendChild(lab);
+    top += h;
+  });
+  $("lvp").style.height = top + "px";
+}
+function placeEraLabels(){
+  const v1 = idx * slotW - PAD, v2 = v1 + $("lvp").clientWidth;
+  spanEls.forEach(e => { const sh = Math.max(0, Math.min(e.room, v1 + PAD * .7 - e.x)); e.t.style.transform = `translateX(${sh}px)`; });
+  eraEls.forEach(e => {
+    const a = Math.max(e.x1, v1 + PAD * .6), b = Math.min(e.x2, v2 - PAD * .6);
+    let x;
+    if (b - a >= e.w) x = Math.min(Math.max((a + b) / 2 - e.w / 2, a + 4), b - e.w);
+    else x = (e.x1 + e.x2) / 2 - e.w / 2;
+    e.l.style.left = Math.max(e.x1 + 4, Math.min(x, e.x2 - e.w)) + "px";
+    e.l.style.opacity = (e.x2 - e.x1) < e.w * .8 ? 0 : 1;
+  });
+}
+
+/* ---------- layout + navigation ---------- */
+function layout(){
+  const vpW = $("vp").clientWidth;
+  VIS = vpW >= 820 ? 3 : vpW >= 520 ? 2 : 1;
+  PAD = Math.round(Math.min(70, Math.max(30, vpW * .055)));
+  slotW = (vpW - 2 * PAD) / VIS;
+  document.documentElement.style.setProperty("--pad", PAD + "px");
+  document.documentElement.style.setProperty("--slot", slotW + "px");
+  buildStage(); buildLanes();
+  go(idx, true);
+}
+function go(i, instant){
+  idx = Math.max(0, Math.min(N - VIS, i));
+  const tx = `translateX(${PAD - idx * slotW}px)`;
+  [track, ltrack].forEach(t => { if (instant) t.style.transition = "none"; t.style.transform = tx; if (instant){ t.offsetHeight; t.style.transition = ""; } });
+  const win = $("win"); win.style.left = `calc(${idx / N * 100}% + ${-1}px)`; win.style.width = `calc(${VIS / N * 100}% + 2px)`;
+  const a = S[idx].who[0][1].slice(0,4), last = S[idx + VIS - 1].who, b = last[last.length-1][2].slice(0,4);
+  $("range").textContent = a + " to " + b;
+  $("prev").disabled = idx === 0; $("next").disabled = idx >= N - VIS;
+  placeEraLabels(); hidePop();
+  try { history.replaceState(null, "", "#" + S[idx].e); } catch(e){}
+}
+$("prev").addEventListener("click", () => go(idx - 1));
+$("next").addEventListener("click", () => go(idx + 1));
+document.addEventListener("keydown", e => {
+  if (!$("pmodal").hidden || !$("mmodal").hidden){ if (e.key === "Escape") closeModals(); return; }
+  if (e.key === "Escape") hidePop();
+  if (e.target.closest && e.target.closest("input,textarea")) return;
+  if (e.key === "ArrowRight"){ go(idx + (e.shiftKey ? VIS : 1)); e.preventDefault(); }
+  if (e.key === "ArrowLeft"){ go(idx - (e.shiftKey ? VIS : 1)); e.preventDefault(); }
+  if (e.key === "Home") go(0);
+  if (e.key === "End") go(N);
+});
+/* swipe */
+(function(){
+  let sx = null, sy = 0, moved = false;
+  const vp = $("vp");
+  vp.addEventListener("pointerdown", e => { if (e.pointerType === "mouse") return; sx = e.clientX; sy = e.clientY; moved = false; });
+  vp.addEventListener("pointermove", e => { if (sx !== null && Math.abs(e.clientX - sx) > 12) moved = true; });
+  vp.addEventListener("pointerup", e => {
+    if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(idx + (dx < 0 ? 1 : -1));
+  });
+  vp.addEventListener("click", e => { if (moved){ e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+})();
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+
+/* ---------- popover ---------- */
+const pop = $("pop"); let popFor = null;
+function fmtYear(it){ const a = Math.floor(it.y); if (!it.y2) return a; const b = Math.floor(it.y2); return a === b ? a : a + "-" + b; }
+function showPop(it, anchor){
+  if (popFor === anchor){ hidePop(); return; }
+  popFor = anchor;
+  pop.innerHTML = `<div class="py">${fmtYear(it)}</div><div class="pt">${esc(it.t)}</div><div>${esc(it.d)}</div>`;
+  pop.hidden = false;
+  const r = anchor.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+  let x = Math.min(Math.max(10, r.left), innerWidth - pw - 10);
+  let y = r.top - ph - 8; if (y < 10) y = r.bottom + 8;
+  pop.style.left = x + "px"; pop.style.top = y + "px";
+}
+function hidePop(){ pop.hidden = true; popFor = null; }
+document.addEventListener("click", e => { if (!pop.hidden && !pop.contains(e.target)) hidePop(); });
+
+/* ---------- modals ---------- */
+let lastFocus = null;
+function openModal(m, from){ lastFocus = from || document.activeElement; hidePop(); m.hidden = false; m.querySelector("[data-close]").focus(); }
+function closeModals(){ $("pmodal").hidden = true; $("mmodal").hidden = true; $("mtip").hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+document.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeModals));
+document.querySelectorAll(".modal").forEach(m => m.addEventListener("click", e => { if (e.target === m) closeModals(); }));
+
+function openPres(id, imgOverride, from){
+  const p = P[id], pt = PARTY[p.party];
+  const mine = S.filter(s => s.who.some(w => w[0] === id));
+  const ranges = []; // merge consecutive slots
+  S.forEach(s => s.who.forEach(w => { if (w[0] !== id) return; const L = ranges[ranges.length-1]; if (L && L.end === w[1]) L.end = w[2]; else ranges.push({start:w[1], end:w[2]}); }));
+  const served = ranges.map(r => r.start.slice(0,4) + "-" + (pDate(r.end) > new Date() ? "present" : r.end.slice(0,4))).join(" and ");
+  const won = mine.filter(s => s.who[0][0] === id).map(s => s.e);
+  $("ppic").style.setProperty("--pc", pt.c);
+  $("ppic").innerHTML = "";
+  const img = new Image(); img.alt = fullName(id); img.src = IMG_DIR + (imgOverride || id) + ".webp";
+  img.addEventListener("error", () => { img.replaceWith(el("div", "fallback", (p.first[0] + p.last[0]).toUpperCase())); });
+  $("ppic").appendChild(img);
+  $("ptxt").innerHTML = `
+    <div class="ordl">The ${ordinal(p.ord)} President</div>
+    <h2 id="pname">${esc(fullName(id))}</h2>
+    <span class="chip"><b style="background:${pt.c}"></b>${pt.name}</span>
+    <dl class="facts"><dt>Served</dt><dd>${served}</dd><dt>Elected</dt><dd>${won.length ? won.join(", ") : "Never elected president. Took over when the president " + ({died:"died",assassinated:"was assassinated",resigned:"resigned"}[S.find(s => s.who[1] && s.who[1][0] === id).who[0][3]]) + "."}</dd></dl>
+    <p>${esc(p.sum)}</p>
+    ${p.foot ? `<div class="fnote">${esc(p.foot)}</div>` : ""}`;
+  openModal($("pmodal"), from);
+}
+
+/* ---------- electoral maps ---------- */
+const SVGNS = "http://www.w3.org/2000/svg";
+function resultFor(m, code, year){
+  if (m.states[code] !== undefined) return m.states[code];
+  if (m.partOf && m.partOf[code]) return m.states[m.partOf[code]];
+  if (code === "DC") return m.dc;
+  if (m.all && ADMIT[code] <= year) return m.all;
+  return undefined;
+}
+function openMap(year, from){
+  const m = MAPS[year], svg = $("msvg");
+  const keys = Object.keys(m.cands);
+  const winKey = m.win || keys.reduce((a, b) => m.cands[a][3] >= m.cands[b][3] ? a : b);
+  $("mtitle").textContent = "Election of " + year;
+  const total = keys.reduce((t, k) => t + m.cands[k][3], 0);
+  $("msub").textContent = m.sub || (m.cands[winKey][0] + " wins, " + m.cands[winKey][3] + " electoral votes of " + total + (m.evNote ? " cast" : ""));
+  svg.innerHTML = "";
+  const defs = document.createElementNS(SVGNS, "defs"); svg.appendChild(defs);
+  const madePat = {};
+  const fillFor = r => {
+    if (r === undefined) return "#E2D7C1";
+    if (typeof r === "string") return m.cands[r][2];
+    const ks = Object.keys(r).sort((a, b) => r[b] - r[a]).slice(0, 2);
+    const id = "sp-" + year + "-" + ks.join("-");
+    if (!madePat[id]){
+      const pat = document.createElementNS(SVGNS, "pattern");
+      pat.setAttribute("id", id); pat.setAttribute("patternUnits", "userSpaceOnUse"); pat.setAttribute("width", 9); pat.setAttribute("height", 9); pat.setAttribute("patternTransform", "rotate(45)");
+      pat.innerHTML = `<rect width="9" height="9" fill="${m.cands[ks[0]][2]}"/><rect width="4" height="9" fill="${m.cands[ks[1]][2]}"/>`;
+      defs.appendChild(pat); madePat[id] = 1;
+    }
+    return `url(#${id})`;
+  };
+  const describe = (code, r) => {
+    let nm = STATE_NAMES[code];
+    if (m.partOf && m.partOf[code]) nm += " (part of " + STATE_NAMES[m.partOf[code]] + ")";
+    if (r === undefined) return nm + ": not a state yet";
+    if (typeof r === "string") return nm + ": " + m.cands[r][0];
+    return nm + ": split, " + Object.keys(r).sort((a, b) => r[b] - r[a]).map(k => m.cands[k][0].split(" ").slice(-1)[0] + " " + r[k]).join(", ");
+  };
+  const tip = $("mtip");
+  Object.entries(GEO.states).forEach(([code, d]) => {
+    const r = resultFor(m, code, year);
+    const p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", d); p.setAttribute("fill", fillFor(r));
+    const label = describe(code, r);
+    p.setAttribute("aria-label", label);
+    p.addEventListener("pointermove", e => { tip.textContent = label; tip.hidden = false; tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY - 34) + "px"; });
+    p.addEventListener("pointerleave", () => tip.hidden = true);
+    svg.appendChild(p);
+  });
+  (m.disputed || []).forEach(code => { const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", GEO.states[code]); p.setAttribute("class", "disp"); svg.appendChild(p); });
+  svg.setAttribute("aria-label", "Electoral map of the " + year + " election");
+
+  const hasSplit = Object.values(m.states).some(v => typeof v === "object");
+  const hasGray = Object.keys(GEO.states).some(c => resultFor(m, c, year) === undefined);
+  let side = `<div class="cands">` + keys.sort((a, b) => m.cands[b][3] - m.cands[a][3]).map(k => { const c = m.cands[k]; return `
+    <div class="cand${k === winKey ? " won" : ""}"><span class="sw" style="background:${c[2]}"></span><span class="nm">${esc(c[0])}</span><span class="ev">${c[3]}</span><span class="pty">${esc(c[1])}</span><span class="pv">${c[4]} popular</span></div>`; }).join("") + `</div>`;
+  side += `<div class="mkey"><span><i style="background:#7a7a7a"></i>Electoral votes</span>`;
+  if (hasSplit) side += `<span><i style="background:repeating-linear-gradient(45deg,#8a8172 0 3px,#cfc5b3 3px 6px)"></i>Split electoral votes</span>`;
+  if (m.disputed) side += `<span><i style="border:2px dashed var(--ink);background:transparent"></i>Disputed</span>`;
+  if (hasGray) side += `<span><i style="background:#E2D7C1"></i>Not a state yet</span>`;
+  side += `</div>`;
+  side = side.replace(`<span><i style="background:#7a7a7a"></i>Electoral votes</span>`, "");
+  side += `<p class="mnote">${esc(m.note)}</p>`;
+  if (m.partOf && m.partOf.ME) side += `<p class="msmall">Maine was part of Massachusetts until 1820.</p>`;
+  if (m.partOf && m.partOf.WV) side += `<p class="msmall">West Virginia was part of Virginia until 1863.</p>`;
+  if (m.popNote) side += `<p class="msmall">${esc(m.popNote)}</p>`;
+  if (m.evNote) side += `<p class="msmall">${esc(m.evNote)}</p>`;
+  if (year >= 1964) side += `<p class="msmall">Washington, D.C., has voted since 1964 (23rd Amendment). It is too small to see on the map.</p>`;
+  side += `<p class="msmall">Sources: Wikipedia state-by-state results${year === 2024 ? " and the National Archives" : ""}. Map outlines: U.S. Census Bureau.</p>`;
+  $("mside").innerHTML = side;
+  openModal($("mmodal"), from);
+}
+
+/* ---------- start ---------- */
+const startYear = parseInt((location.hash || "").slice(1), 10);
+if (startYear){ const i = S.findIndex(s => s.e === startYear); if (i >= 0) idx = i; }
+layout();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => layout());
+</script>
+</body>
+</html>
