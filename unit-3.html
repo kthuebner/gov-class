@@ -118,6 +118,19 @@ main{max-width:1400px;margin:0 auto;padding:22px 20px 80px}
 .back h4 span{opacity:.7;margin-right:8px}
 .back p{margin:0;font-size:.92rem;line-height:1.4}
 
+.combo{margin-top:18px;background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:22px 24px;box-shadow:0 3px 14px rgba(43,39,34,.12)}
+.combo .eyebrow{margin-bottom:2px}
+.combo h3{font-size:1.45rem;margin-bottom:14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:12px}
+@media(max-width:640px){.tiles{grid-template-columns:1fr 1fr}.tile.total{grid-column:1 / -1}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile .lab{font-family:var(--oswald);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft)}
+.tile .val{font-family:var(--oswald);font-weight:600;font-size:2rem;line-height:1.1;color:var(--accent)}
+.tile .val.miss{font-size:1.1rem;color:var(--bad);padding-top:8px}
+.tile.total{background:var(--accent);border-color:var(--accent)}
+.tile.total .lab{color:rgba(255,255,255,.8)}
+.tile.total .val{color:#fff;font-size:2.4rem}
+.combo .stamp{margin:12px 0 0;font-size:.85rem;color:var(--ink-soft)}
 .score{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--good);border-radius:10px;padding:20px 22px}
 .score h3{font-size:1.25rem;margin-bottom:8px}
 .big{font-family:var(--oswald);font-weight:600;font-size:2.4rem;color:var(--accent);line-height:1}
@@ -432,14 +445,31 @@ function showScore(g){
   const hit=TRAPS.filter(([pair])=>misses[g].some(([a,b])=>pair.includes(a)&&pair.includes(b)));
   const list=(hit.length?hit:TRAPS.slice(0,3)).map(t=>`<li>${t[1]}</li>`).join('');
   const head=hit.length?'The mix ups you made':'The pairs that trip people up';
-  $('#score'+g).innerHTML=`<div class="score">
+  results[g]=s.first;
+  $('#score'+g).innerHTML=(g==='2'?comboCard():'')+`<div class="score">
     <h3>Level ${g} complete</h3>
     <div class="big">${s.first} of 10</div>
     <p class="note">correct on the first try, ${p} percent.</p>
     <div class="debrief"><h4>${head}</h4><ul>${list}
       ${g==='1'?'<li>Ready for more? Level 2 blurs the clues, so the numbers are all you get.</li>':'<li>Want to check yourself one more time? The Study tab has a flip card for each amendment.</li>'}
     </ul></div></div>`;
-  $('#score'+g).querySelector('.score').scrollIntoView({behavior:'smooth',block:'nearest'});
+  $('#score'+g).querySelector('.combo,.score').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+const results={1:null,2:null};
+function comboCard(){
+  const r1=results[1], r2=results[2], done=r1!==null;
+  const tot=(r1||0)+r2;
+  const when=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+  return `<div class="combo">
+    <div class="eyebrow">Unit 3 &middot; Bill of Rights Clues</div>
+    <h3>Final Score</h3>
+    <div class="tiles">
+      <div class="tile"><div class="lab">Level 1: Match the Right</div>${done?`<div class="val">${r1} of 10</div>`:'<div class="val miss">Not finished</div>'}</div>
+      <div class="tile"><div class="lab">Level 2: No Clues</div><div class="val">${r2} of 10</div></div>
+      <div class="tile total"><div class="lab">Combined, first tries</div><div class="val">${done?`${tot} of 20`:'Incomplete'}</div></div>
+    </div>
+    <p class="stamp">${done?`${Math.round(tot/20*100)} percent correct on the first try.`:'Finish Level 1 to complete your combined score.'} Completed ${esc(when)}.</p>
+  </div>`;
 }
 
 /* ============================ BUILD ============================ */
