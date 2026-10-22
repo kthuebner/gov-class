@@ -125,15 +125,28 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 .lane-labels > div{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;text-align:right;line-height:1.1}
 .lanes-vp{border-top:2px solid var(--ink)}
 .lane-end{border-top:2px solid var(--ink)}
-.era{position:absolute;top:3px;height:22px;border-radius:3px;overflow:hidden}
-.era:nth-child(odd){background:var(--paper-3)} .era:nth-child(even){background:var(--paper-2)}
+.era{position:absolute;top:3px;height:22px;border-radius:3px;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--paper-2)}
+.era.alt{background:var(--paper-3)}
+.era:hover{filter:brightness(.95)}
+.era:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
 .era.dark{background:#5A4F42}
+.era.dark:hover{filter:brightness(1.15)}
 .era-l{position:absolute;top:3px;height:22px;line-height:22px;font-family:var(--cond);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2);pointer-events:none;transition:left .55s cubic-bezier(.22,.8,.24,1)}
 .era-l.on-dark{color:var(--paper)}
 .lane-rule{position:absolute;left:0;right:0;height:1px;background:var(--rule)}
 .it{position:absolute;height:21px;display:flex;align-items:center;gap:6px;border:none;background:none;padding:0;cursor:pointer;white-space:nowrap;
   font-family:var(--cond);font-size:13px;letter-spacing:.02em;color:var(--ink)}
 .it.sm{font-size:12.5px;gap:5px}
+.it.tight{font-size:12.5px;gap:5px}
+.it.tight .bar{height:13px}
+.it.tight .dot{width:10px;height:10px}
+.k-civil .bar{background:#6E5A86} .k-civil.span .t{color:#fff}
+.it.has-link .t::after{content:"";display:inline-block;width:5px;height:5px;margin-left:5px;border-radius:50%;background:var(--amber);vertical-align:middle}
+.plink{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:var(--cond);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);padding:5px 12px;border-radius:16px;text-decoration:none}
+.plink:hover{background:var(--amber-d)}
+.plink:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.plink svg{width:12px;height:12px}
 .it .mid{width:11px;height:11px;flex:none;border-radius:2px;border:2px solid var(--ink);box-sizing:border-box}
 .k-mid{color:var(--ink);font-weight:500}
 .k-mid .mid[style*="transparent"]{border-style:dashed}
@@ -284,7 +297,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 </main>
 
 <footer class="foot">
-  <div class="fkey"><span><i class="w"></i>War</span><span><i style="background:#5D7A3E"></i>Land</span><span><i style="background:#C08A36"></i>Economy</span><span><i style="background:var(--ink-2)"></i>Event</span><span class="sep"></span><span><i class="d" style="background:#5E4A86"></i>Amendment</span><span><i class="d" style="background:#2F6A6A"></i>Law</span><span><i class="d" style="background:#8A3E3E"></i>Court case</span><span><i class="d" style="background:#B47A2E"></i>Parties</span><span><i class="m"></i>Midterm</span></div>
+  <div class="fkey"><span><i class="w"></i>War</span><span><i style="background:#5D7A3E"></i>Land</span><span><i style="background:#C08A36"></i>Economy</span><span><i style="background:var(--ink-2)"></i>Event</span><span class="sep"></span><span><i class="d" style="background:#5E4A86"></i>Amendment</span><span><i class="d" style="background:#2F6A6A"></i>Law</span><span><i class="d" style="background:#8A3E3E"></i>Court case</span><span><i class="d" style="background:#B47A2E"></i>Parties</span><span><i class="m"></i>Midterm</span><span class="sep"></span><span><i style="background:var(--amber);width:6px;height:6px"></i>Links to a lesson</span></div>
   <span>Click portraits, maps, and timeline items for details. <kbd>&larr;</kbd> <kbd>&rarr;</kbd> keys work too.</span>
 </footer>
 
@@ -482,20 +495,20 @@ const WAS_PRES = ["Thomas Jefferson","John Adams","John Quincy Adams","Andrew Ja
 
 /* ===================== CONTEXT LANES ===================== */
 const ERAS = [
- [1789.3,1817.2,"Early Republic"],
- [1817.2,1825.2,"Era of Good Feelings"],
- [1825.2,1848.5,"Age of Jackson"],
- [1848.5,1861.3,"Sectional Crisis"],
- [1861.3,1865.3,"Civil War"],
- [1865.3,1877.2,"Reconstruction"],
- [1877.2,1900,"Gilded Age"],
- [1900,1920,"Progressive Era"],
- [1920,1929.8,"Roaring Twenties"],
- [1929.8,1941.9,"Great Depression"],
- [1941.9,1945.7,"World War II"],
- [1945.7,1991.95,"Cold War"],
- [1991.95,2001.7,"After the Cold War"],
- [2001.7,2029.1,"Post-9/11 Era"]
+ [1789.3,1817.2,"Early Republic","The new government under the Constitution takes shape. Washington sets precedents, the first political parties form, and the country doubles in size with the Louisiana Purchase."],
+ [1817.2,1825.2,"Era of Good Feelings","After the War of 1812 the Federalist Party fades, leaving one party in charge. National pride runs high, but quarrels over slavery and western expansion are growing underneath."],
+ [1825.2,1848.5,"Age of Jackson","Politics opens up to ordinary white men as property rules for voting fall away and turnout soars. Mass parties, national conventions, and campaign rallies are born, along with Indian removal."],
+ [1848.5,1861.3,"Sectional Crisis","The fight over whether slavery can spread into new western territory tears the country apart. Compromises fail one after another, the Whig Party collapses, and Southern states secede."],
+ [1861.3,1865.3,"Civil War","The Union and the Confederacy fight the deadliest war in American history. The Union wins, and slavery ends."],
+ [1865.3,1877.2,"Reconstruction","The federal government rebuilds the South and tries to protect the rights of freed people. Three amendments expand citizenship and voting, but the effort ends when federal troops leave in 1877."],
+ [1877.2,1900,"Gilded Age","Railroads, factories, and big business boom, creating huge fortunes alongside poverty and political corruption. Elections are close, turnout is high, and immigrants pour into growing cities."],
+ [1900,1920,"Progressive Era","Reformers push government to fix problems from industrialization: monopolies, unsafe food and work, and corrupt politics. Four amendments pass, including the income tax and women's suffrage."],
+ [1920,1929.8,"Roaring Twenties","A booming economy, new technology like cars and radio, and a youth culture of jazz and flappers. Republicans hold the White House with low taxes and limited government."],
+ [1929.8,1941.9,"Great Depression","The stock market crash sets off the worst economic collapse in U.S. history, with unemployment near 25 percent. FDR's New Deal greatly expands what the federal government does."],
+ [1941.9,1945.7,"World War II","After Pearl Harbor, the U.S. fights Germany and Japan. The war ends the Depression and leaves the U.S. as a world superpower."],
+ [1945.7,1991.95,"Cold War","A long standoff between the U.S. and the Soviet Union, fought through an arms race, a space race, and wars in places like Korea and Vietnam. At home it is also the era of the civil rights movement."],
+ [1991.95,2001.7,"After the Cold War","With the Soviet Union gone, the U.S. is the world's only superpower. The economy booms with the rise of the internet, and politics turns to domestic fights."],
+ [2001.7,2029.1,"Post-9/11 Era","The September 11 attacks lead to long wars overseas and new security powers at home. The period also brings the Great Recession, a pandemic, and deep political polarization."]
 ];
 /* k: war | land | econ | event */
 const EVENTS = [
@@ -532,9 +545,10 @@ const EVENTS = [
  {y:1941.93, t:"Pearl Harbor", k:"war", d:"Japan attacks the U.S. Navy in Hawaii, and the U.S. enters World War II."},
  {y:1945.6, t:"Atomic bombs", k:"war", d:"The U.S. drops atomic bombs on Hiroshima and Nagasaki, and Japan surrenders."},
  {y:1950.5, y2:1953.6, t:"Korean War", k:"war", d:"U.S. and UN forces defend South Korea. The war ends in a stalemate at the 38th parallel."},
+ {y:1954.38, y2:1970, t:"Civil Rights Era", k:"civil", link:["Civil Rights lesson","https://kthuebner.github.io/us-sem2/unit-2b.html"], d:"From Brown v. Board in 1954 through the late 1960s, the civil rights movement uses boycotts, sit-ins, marches, and lawsuits to end legal segregation. It wins the Civil Rights Act of 1964 and the Voting Rights Act of 1965."},
  {y:1957.8, t:"Sputnik", k:"event", d:"The Soviet Union launches the first satellite, starting the space race."},
- {y:1962.8, t:"Cuban Missile Crisis", k:"event", d:"Thirteen days when the U.S. and the Soviet Union came closest to nuclear war."},
- {y:1965.2, y2:1973.2, t:"Vietnam War", k:"war", d:"U.S. combat troops fight in Vietnam. More than 58,000 Americans die, and protests divide the country."},
+ {y:1962.8, t:"Cuban Missile Crisis", k:"event", link:["Cuban Missile Crisis lesson","https://kthuebner.github.io/us-sem2/unit-1d.html"], d:"Thirteen days when the U.S. and the Soviet Union came closest to nuclear war."},
+ {y:1965.2, y2:1973.2, t:"Vietnam War", k:"war", link:["Vietnam War lesson","https://kthuebner.github.io/us-sem2/unit-3c.html"], d:"U.S. combat troops fight in Vietnam. More than 58,000 Americans die, and protests divide the country."},
  {y:1969.55, t:"Moon landing", k:"event", d:"Apollo 11 lands the first people on the moon."},
  {y:1972.5, y2:1974.6, t:"Watergate", k:"event", d:"A break-in at Democratic headquarters and the White House cover-up lead to Nixon's resignation."},
  {y:1973.8, t:"Oil crisis", k:"econ", d:"An Arab oil embargo sends gas prices soaring. Inflation and unemployment rise together through the 1970s."},
@@ -646,6 +660,9 @@ const MAPS = {
  1888:{cands:{BH:["Benjamin Harrison","Republican","#DD6868",233,"47.8%"],GC:["Grover Cleveland","Democratic","#5C8CB4",168,"48.6%"]},
   states:{AL:"GC",AR:"GC",CA:"BH",CO:"BH",CT:"GC",DE:"GC",FL:"GC",GA:"GC",IL:"BH",IN:"BH",IA:"BH",KS:"BH",KY:"GC",LA:"GC",ME:"BH",MD:"GC",MA:"BH",MI:"BH",MN:"BH",MS:"GC",MO:"GC",NE:"BH",NV:"BH",NH:"BH",NJ:"GC",NY:"BH",NC:"GC",OH:"BH",OR:"BH",PA:"BH",RI:"BH",SC:"GC",TN:"GC",TX:"GC",VT:"BH",VA:"GC",WV:"GC",WI:"BH"},
   note:"Cleveland won the popular vote, but Harrison won the Electoral College by carrying swing states, including Cleveland's home state of New York. Four years later Cleveland beat Harrison in a rematch."},
+ 1892:{cands:{GC:["Grover Cleveland","Democratic","#5C8CB4",277,"46.0%"],BH:["Benjamin Harrison","Republican","#DD6868",145,"43.0%"],JW:["James Weaver","Populist","#8E9F4E",22,"8.5%"]},
+  states:{AL:"GC",AR:"GC",CA:{GC:8,BH:1},CO:"JW",CT:"GC",DE:"GC",FL:"GC",GA:"GC",ID:"JW",IL:"GC",IN:"GC",IA:"BH",KS:"JW",KY:"GC",LA:"GC",ME:"BH",MD:"GC",MA:"BH",MI:{BH:9,GC:5},MN:"BH",MS:"GC",MO:"GC",MT:"BH",NE:"BH",NV:"JW",NH:"BH",NJ:"GC",NY:"GC",NC:"GC",ND:{GC:1,BH:1,JW:1},OH:{BH:22,GC:1},OR:{BH:3,JW:1},PA:"BH",RI:"BH",SC:"GC",SD:"BH",TN:"GC",TX:"GC",VT:"BH",VA:"GC",WA:"BH",WV:"GC",WI:"GC",WY:"BH"},
+  note:"A rematch of 1888, and this time Cleveland won, becoming the first president to serve two non-consecutive terms. The new Populist Party, built by struggling farmers, carried Kansas and three other Western states. Winning 22 electoral votes was a strong start for a party only a year old. North Dakota split its three electoral votes among all three candidates."},
  1896:{cands:{WM:["William McKinley","Republican","#DD6868",271,"51.0%"],WB:["William Jennings Bryan","Democratic and Populist","#5C8CB4",176,"46.7%"]},
   states:{AL:"WB",AR:"WB",CA:{WM:8,WB:1},CO:"WB",CT:"WM",DE:"WM",FL:"WB",GA:"WB",ID:"WB",IL:"WM",IN:"WM",IA:"WM",KS:"WB",KY:{WM:12,WB:1},LA:"WB",ME:"WM",MD:"WM",MA:"WM",MI:"WM",MN:"WM",MS:"WB",MO:"WB",MT:"WB",NE:"WB",NV:"WB",NH:"WM",NJ:"WM",NY:"WM",NC:"WB",ND:"WM",OH:"WM",OR:"WM",PA:"WM",RI:"WM",SC:"WB",SD:"WB",TN:"WB",TX:"WB",UT:"WB",VT:"WM",VA:"WB",WA:"WB",WV:"WM",WI:"WM",WY:"WB"},
   note:"A fight over gold versus silver money. Bryan, backed by Democrats and Populists, carried the South and farm states like Kansas. McKinley won the industrial North and Midwest, starting a long stretch of Republican dominance."},
@@ -851,7 +868,7 @@ function buildStage(){
 /* ---------- build lanes ---------- */
 /* Bottom section: four rows that together keep the same 193px height */
 const LANES = [
-  {key:"ev", label:"Events", items:EVENTS, h:50, pad:4, rowH:22, rows:2, fs:13},
+  {key:"ev", label:"Events", items:EVENTS, h:50, pad:2, rowH:16, rows:3, fs:12.5, cls:"tight"},
   {key:"rt", label:'<span class="lg">Rights &amp; Freedoms</span><span class="sh">Rights</span>', items:RIGHTS, h:50, pad:4, rowH:22, rows:2, fs:13},
   {key:"gv", label:'<span class="bt" style="top:4px">House</span><span class="bt" style="top:14px">Senate</span><span class="lg">Gov\'t / Congress</span><span class="sh">Gov\'t</span>', items:GOV, h:65, pad:25, rowH:19, rows:2, fs:12.5, bars:true}
 ];
@@ -876,13 +893,16 @@ function buildLanes(){
   ltrack.innerHTML = ""; eraEls = []; spanEls = []; window.__overlaps = [];
   ltrack.style.width = (N * slotW) + "px";
   const labels = $("laneLabels"); labels.innerHTML = "";
-  ERAS.forEach(([a, b, name]) => {
+  ERAS.forEach(([a, b, name, desc], i) => {
     const x1 = yToX(a), x2 = yToX(b), dark = /(Civil War|World War II)/.test(name);
-    const e = el("div", "era" + (dark ? " dark" : ""));
+    const e = el("button", "era " + (dark ? "dark" : (i % 2 ? "alt" : "")));
     e.style.left = x1 + "px"; e.style.width = (x2 - x1 - 2) + "px";
+    e.setAttribute("aria-label", name + " era, " + Math.floor(a) + " to " + Math.floor(b));
+    const pop = {yLabel: Math.floor(a) + "-" + (b > 2026 ? "present" : Math.floor(b)), t: name, d: desc};
+    e.addEventListener("click", ev => { ev.stopPropagation(); showPop(pop, e); });
     const l = el("div", "era-l" + (dark ? " on-dark" : ""), esc(name));
     ltrack.append(e, l);
-    eraEls.push({x1, x2, l, w: textW(name.toUpperCase(), 12.5) * 1.15 + 10});
+    eraEls.push({x1, x2, l, e, w: textW(name.toUpperCase(), 12.5) * 1.15 + 10});
   });
   let top = ERA_H;
   const lab0 = el("div", null, "Era"); lab0.style.height = ERA_H + "px"; labels.appendChild(lab0);
@@ -904,7 +924,7 @@ function buildLanes(){
     });
     placed.forEach(p => {
       const it = p.it, isSpan = !!it.y2;
-      const b = el("button", `it k-${it.k}${isSpan ? " span" : ""}${lane.key === "gv" ? " sm" : ""}`);
+      const b = el("button", `it k-${it.k}${isSpan ? " span" : ""}${lane.key === "gv" ? " sm" : ""}${lane.cls ? " " + lane.cls : ""}`);
       b.style.top = (top + lane.pad + p.row * lane.rowH) + "px";
       b.style.height = (lane.rowH - 1) + "px";
       if (isSpan){
@@ -922,6 +942,7 @@ function buildLanes(){
         else mark = `<span class="dia"></span>`;
         b.innerHTML = `${mark}<span class="t">${esc(it.t)}</span>`;
       }
+      if (it.link) b.classList.add("has-link");
       b.addEventListener("click", ev => { ev.stopPropagation(); showPop(it, b); });
       ltrack.appendChild(b);
     });
@@ -1024,7 +1045,7 @@ function fmtYear(it){ const a = Math.floor(it.y); if (!it.y2) return a; const b 
 function showPop(it, anchor){
   if (popFor === anchor){ hidePop(); return; }
   popFor = anchor;
-  pop.innerHTML = `<div class="py">${it.yLabel || fmtYear(it)}${it.k === "mid" ? " midterm" : ""}</div><div class="pt">${esc(it.t)}</div>${it.html || `<div>${esc(it.d)}</div>`}`;
+  pop.innerHTML = `<div class="py">${it.yLabel || fmtYear(it)}${it.k === "mid" ? " midterm" : ""}</div><div class="pt">${esc(it.t)}</div>${it.html || `<div>${esc(it.d)}</div>`}${it.link ? `<a class="plink" href="${esc(it.link[1])}" target="_blank" rel="noopener">${esc(it.link[0])}<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg></a>` : ""}`;
   pop.hidden = false;
   const r = anchor.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
   let x = Math.min(Math.max(10, r.left), innerWidth - pw - 10);
