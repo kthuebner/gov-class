@@ -101,6 +101,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 
 /* flip card */
 .flip{position:relative;height:var(--card-h);perspective:1600px}
+.col.tall{--card-h:clamp(330px, 44vh, 430px)}
 .flip-in{position:absolute;inset:0;transition:transform .6s cubic-bezier(.22,.8,.24,1);transform-style:preserve-3d}
 .flip.flipped .flip-in{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;
@@ -137,9 +138,9 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 .fld label{font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .fld input{width:100%;padding:10px 12px;border-radius:8px;border:1.5px solid var(--ink);background:var(--card);font-family:var(--cond);font-size:20px;letter-spacing:.02em}
 .fld input:focus{outline:3px solid var(--amber);outline-offset:1px}
-.fld input.shake{animation:shake .32s}
+.fld input.shake,.opts.shake,.psw.shake{animation:shake .32s}
 @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-@media (prefers-reduced-motion:reduce){.fld input.shake{animation:none}}
+@media (prefers-reduced-motion:reduce){.fld input.shake,.opts.shake,.psw.shake{animation:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:var(--cond);font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
   padding:10px 18px;border-radius:22px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;white-space:nowrap}
 .btn:hover{background:var(--paper-2)}
@@ -175,6 +176,26 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 .foot{flex:none;display:flex;justify-content:space-between;align-items:center;gap:4px 20px;flex-wrap:wrap;padding-block:6px 10px;font-size:12.5px;color:var(--muted)}
 .foot kbd{font-family:var(--cond);font-size:11px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--paper)}
 .foot a{font-family:var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration-color:var(--amber);text-underline-offset:3px}
+/* multiple choice (medium) */
+.qk{font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:-4px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{font-family:var(--cond);font-size:16px;letter-spacing:.03em;padding:8px 10px;border-radius:8px;border:1.5px solid var(--rule);background:var(--card);cursor:pointer;text-align:center;font-variant-numeric:tabular-nums;line-height:1.2;min-width:0}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-checked="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.opt:focus-visible{outline:3px solid var(--amber);outline-offset:1px}
+.opt.wide{grid-column:1/-1}
+/* party switch (hard) */
+.psw{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--paper-2);border-radius:22px;padding:4px;box-shadow:inset 0 1px 3px rgba(60,40,10,.18)}
+.psw .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/6);border-radius:18px;background:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transform:translateX(calc(var(--i) * 100%));transition:transform .22s cubic-bezier(.22,.8,.24,1)}
+.psw .thumb::after{content:"";position:absolute;left:50%;bottom:5px;width:18px;height:3px;margin-left:-9px;border-radius:2px;background:var(--pc)}
+.psw.unset .thumb{opacity:0}
+.psw button{position:relative;z-index:1;border:none;background:none;cursor:pointer;padding:8px 2px 10px;border-radius:18px;font-family:var(--cond);font-size:13px;letter-spacing:.04em;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .22s}
+.psw button[aria-checked="true"]{color:var(--paper)}
+.psw button:focus-visible{outline:3px solid var(--amber);outline-offset:-2px}
+@media (prefers-reduced-motion:reduce){.psw .thumb{transition:none}}
+.pswlab{display:flex;justify-content:space-between;gap:8px}
+.pswlab span:last-child{font-family:var(--cond);font-size:13px;color:var(--ink-2);letter-spacing:.03em;text-transform:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 @media (max-width:820px){
@@ -196,6 +217,7 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
   .restart{margin-left:0}
   :root{--card-h:clamp(360px, 56vh, 460px)}
   .nmline .ln{font-size:28px}
+  .psw button{font-size:11.5px;letter-spacing:0}
 }
 </style>
 </head>
@@ -215,6 +237,8 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,3vw,38px);line-h
 
 <div class="tools gut">
   <div class="tg" role="group" aria-label="Which presidents"><span class="k">Presidents</span><span id="ranges"></span></div>
+  <div class="tg" id="levelGrp" role="group" aria-label="Level" hidden><span class="k">Level</span>
+    <button class="chip" data-lv="easy">Easy</button><button class="chip" data-lv="medium">Medium</button><button class="chip" data-lv="hard">Hard</button></div>
   <div class="tg" id="orderGrp" role="group" aria-label="Card order" hidden><span class="k">Order</span>
     <button class="chip" id="oShuf" aria-pressed="true">Shuffled</button><button class="chip" id="oChron" aria-pressed="false">In order</button></div>
   <label class="sw"><input type="checkbox" id="strict"> Exact spelling</label>
@@ -408,6 +432,9 @@ let mode = store.get("psg-mode") === "2" ? 2 : 1;
 let strict = store.get("psg-strict") === "1";
 let rangeK = store.get("psg-range") || "all";
 let shuffled = store.get("psg-order") !== "chron";
+let level = ["easy","medium","hard"].includes(store.get("psg-level")) ? store.get("psg-level") : "medium";
+const LEVEL_MAX = {easy:1, medium:3, hard:4};
+let pick = {term:null, party:null};
 let deck = [], pos = 0, res = {}, phase = "ask", hinted = false, retryOnly = null;
 
 function rangeObj(){ return RANGES.find(r => r.k === rangeK) || RANGES[0]; }
@@ -430,11 +457,14 @@ function renderTools(){
   $("m1").setAttribute("aria-pressed", mode === 1); $("m2").setAttribute("aria-pressed", mode === 2);
   $("ranges").innerHTML = RANGES.map(r => `<button class="chip" data-r="${r.k}" aria-pressed="${r.k===rangeK}">${r.label}</button>`).join(" ");
   $("orderGrp").hidden = mode !== 2;
+  $("levelGrp").hidden = mode !== 2;
+  document.querySelectorAll("[data-lv]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lv === level));
   $("oShuf").setAttribute("aria-pressed", shuffled); $("oChron").setAttribute("aria-pressed", !shuffled);
   $("strict").checked = strict;
   $("help").innerHTML = mode === 1
     ? 'Type the last name of the president who came next. <kbd>Enter</kbd> checks, <kbd>Enter</kbd> again flips to the next card.'
-    : 'Type the name and the years in office. Last name is enough unless two presidents share it. <kbd>Enter</kbd> checks, <kbd>Enter</kbd> again moves on.';
+    : ({easy:'Easy: type the name only.', medium:'Medium: type the name, then choose the years in office and the party.', hard:'Hard: type the name and both years, then slide the switch to the party.'})[level]
+      + ' Last name is enough unless two presidents share it. <kbd>Enter</kbd> checks, <kbd>Enter</kbd> again moves on.';
 }
 
 function renderScore(){
@@ -448,7 +478,7 @@ function renderScore(){
   } else {
     const pts = vals.reduce((s,v) => s + v.pts, 0);
     $("scLbl").textContent = "Points";
-    $("scVal").textContent = pts + " of " + vals.length * 3;
+    $("scVal").textContent = pts + " of " + vals.reduce((s,v) => s + v.max, 0);
     $("scSub").textContent = (deck.length - vals.length) + " to go";
   }
 }
@@ -511,7 +541,7 @@ function backHTML(p, terms, r){
   const t0 = terms[0];
   const stamp = !r ? "" : r.revealed ? `<span class="stamp rev">Revealed</span>`
     : r.full ? `<span class="stamp ok">Correct</span>`
-    : r.pts > 0 ? `<span class="stamp part">${r.pts} of 3</span>`
+    : r.pts > 0 ? `<span class="stamp part">${r.pts} of ${r.max}</span>`
     : `<span class="stamp bad">Missed</span>`;
   const ordTxt = mode === 1 ? `<span class="ord"><small>President</small>No. ${t0.n}</span>` : `<span class="ord"><small>President</small>No. ${p.terms.map(t=>t.n).join(" &amp; ")}</span>`;
   const yrs = mode === 1 ? span(t0) : termsText(p);
@@ -525,6 +555,7 @@ function backHTML(p, terms, r){
 function renderCard(){
   const d = deck[pos];
   $("done").hidden = true; $("col").hidden = false;
+  $("col").classList.toggle("tall", mode === 2 && level !== "easy");
   const flip = $("flip");
   const r = res[key(d)];
   // place the card face-up or face-down without animating when jumping
@@ -542,7 +573,7 @@ function renderCard(){
   } else {
     $("front").innerHTML = `<div class="hd"><span class="ord"><small>Card</small>${pos+1} of ${deck.length}</span><span class="tag">Who is this?</span></div>
       ${picHTML(d.img, "plain", null, "Portrait of a president")}
-      <div class="cap"><div class="q">Name this president and give the <b>years in office</b>.</div></div>`;
+      <div class="cap"><div class="q">${({easy:"Name this president.", medium:"Name this president, then pick the <b>years in office</b> and <b>party</b>.", hard:"Name this president, type the <b>years in office</b>, and set the <b>party</b>."})[level]}</div></div>`;
     $("back").innerHTML = backHTML(d, d.terms, r);
   }
   $("front").setAttribute("aria-hidden", !!r); $("back").setAttribute("aria-hidden", !r);
@@ -565,12 +596,30 @@ function renderCtl(){
         $("hintBtn").disabled = true; $("ans").focus();
       };
     } else {
-      ctl.innerHTML = `<div class="row"><div class="fld"><label for="ans">Name</label><input id="ans" type="text" spellcheck="false" autocapitalize="words"></div></div>
-        <div class="row"><div class="fld yr"><label for="y1">Took office</label><input id="y1" type="text" inputmode="numeric" maxlength="7" placeholder="Year"></div>
-          <div class="fld yr"><label for="y2">Left office</label><input id="y2" type="text" inputmode="numeric" maxlength="7" placeholder="Year"></div>
-          <button class="btn pri grow" type="submit" style="align-self:flex-end">${ICON.check}Check</button></div>
-        <div class="row"><button class="btn" type="button" id="revBtn">Reveal</button></div>
+      pick = {term:null, party:null};
+      const nameRow = `<div class="row"><div class="fld"><label for="ans">Name</label><input id="ans" type="text" spellcheck="false" autocapitalize="words"></div></div>`;
+      const btns = `<div class="row"><button class="btn pri grow" type="submit">${ICON.check}Check</button><button class="btn" type="button" id="revBtn">Reveal</button></div>
         <div class="msg" id="msg" role="status"></div>`;
+      let mid = "";
+      if (level === "medium") {
+        const terms = termChoices(d), parties = partyChoices(d);
+        mid = `<div class="qk" id="tLab">Years in office</div>
+          <div class="opts" role="radiogroup" aria-labelledby="tLab" id="tOpts">${terms.map(t => `<button type="button" class="opt${t.length > 14 ? " wide" : ""}" role="radio" aria-checked="false" data-v="${esc(t)}">${esc(t)}</button>`).join("")}</div>
+          <div class="qk" id="pLab">Party</div>
+          <div class="opts" role="radiogroup" aria-labelledby="pLab" id="pOpts">${parties.map(k => `<button type="button" class="opt" role="radio" aria-checked="false" data-v="${k}">${PARTY[k].name}</button>`).join("")}</div>`;
+      } else if (level === "hard") {
+        mid = `<div class="row"><div class="fld yr"><label for="y1">Took office</label><input id="y1" type="text" inputmode="numeric" maxlength="7" placeholder="Year"></div>
+            <div class="fld yr"><label for="y2">Left office</label><input id="y2" type="text" inputmode="numeric" maxlength="7" placeholder="Year"></div></div>
+          <div class="qk pswlab"><span id="pLab">Party</span><span id="pRead">Slide to choose</span></div>
+          <div class="psw unset" role="radiogroup" aria-labelledby="pLab" id="psw" style="--i:0"><span class="thumb" aria-hidden="true"></span>
+            ${SWITCH.map((k,i) => `<button type="button" role="radio" aria-checked="false" tabindex="${i ? -1 : 0}" data-v="${k}" data-i="${i}" aria-label="${PARTY[k].name}">${SWITCH_LBL[k]}</button>`).join("")}</div>`;
+      }
+      ctl.innerHTML = nameRow + mid + btns;
+      if (level === "medium") {
+        wireOpts("tOpts", v => pick.term = v);
+        wireOpts("pOpts", v => pick.party = v);
+      }
+      if (level === "hard") wireSwitch();
     }
     $("revBtn").onclick = () => record({revealed:true});
     setTimeout(() => $("ans") && $("ans").focus({preventScroll:true}), 30);
@@ -585,9 +634,12 @@ function renderCtl(){
     } else {
       const m = (ok, label, val) => `<span class="mark ${ok?"ok":"bad"}">${ok?ICON.check:ICON.x}${label}${!ok && val ? ` <s>${esc(val)}</s>` : ""}</span>`;
       fb = r.revealed ? `The answer is <b>${esc(fullName(d))}</b>, ${termsText(d)}.`
-        : `<div class="marks">${m(r.name,"Name",r.typed)}${m(r.y1,"Took office",r.t1)}${m(r.y2,"Left office",r.t2)}</div>`
+        : `<div class="marks">${m(r.name,"Name",r.typed)}`
+            + ("term" in r ? m(r.term,"Years",r.tPick) : "")
+            + ("y1" in r ? m(r.y1,"Took office",r.t1) + m(r.y2,"Left office",r.t2) : "")
+            + ("party" in r ? m(r.party,"Party",r.pPick && PARTY[r.pPick].name) : "") + `</div>`
           + (r.close ? `<div style="margin-top:6px">Name counted. It is spelled <b>${esc(d.last)}</b>.</div>` : "")
-          + (d.terms.length > 1 && !r.revealed ? `<div style="margin-top:6px">${esc(d.last)} served two separate terms, so either one counts.</div>` : "");
+          + (d.terms.length > 1 && "y1" in r ? `<div style="margin-top:6px">${esc(d.last)} served two separate terms, so either one counts.</div>` : "");
     }
     ctl.innerHTML = `<div class="msg" id="msg" role="status">${fb}</div>
       <div class="row"><button class="btn pri grow" type="submit" id="nextBtn">${last ? "Finish round" : "Next card"}${ICON.next}</button></div>`;
@@ -600,6 +652,53 @@ function nudge(text, field){
   const f = $(field || "ans"); f.classList.remove("shake"); void f.offsetWidth; f.classList.add("shake"); f.focus();
 }
 
+/* Medium: the right term plus three from presidents close in time, so the years have to be known, not guessed by century. */
+function termChoices(p){
+  const i = PEOPLE.indexOf(p), near = [];
+  for (let k = 1; near.length < 6 && k < PEOPLE.length; k++) {
+    [PEOPLE[i-k], PEOPLE[i+k]].forEach(q => { if (q && near.length < 6) near.push(q); });
+  }
+  return shuffle([p, ...shuffle(near).slice(0,3)].map(termsText));
+}
+/* Medium: the right party, always Democratic and Republican, filled to four. Listed in the order the parties appeared. */
+function partyChoices(p){
+  const set = new Set([p.party, "D", "R"]);
+  shuffle(Object.keys(PARTY).filter(k => !set.has(k))).forEach(k => { if (set.size < 4) set.add(k); });
+  return Object.keys(PARTY).filter(k => set.has(k));
+}
+function wireOpts(id, onPick){
+  const g = $(id);
+  g.addEventListener("click", e => {
+    const b = e.target.closest(".opt"); if (!b) return;
+    g.querySelectorAll(".opt").forEach(x => x.setAttribute("aria-checked", x === b));
+    onPick(b.dataset.v); $("msg").classList.remove("warn"); $("msg").textContent = "";
+  });
+}
+const SWITCH = ["N","F","DR","W","D","R"];
+const SWITCH_LBL = {N:"None", F:"Fed", DR:"Dem-Rep", W:"Whig", D:"Dem", R:"Rep"};
+function wireSwitch(){
+  const sw = $("psw"), bs = [...sw.querySelectorAll("button")];
+  const set = (i, focus) => {
+    const k = SWITCH[i];
+    sw.classList.remove("unset"); sw.style.setProperty("--i", i); sw.style.setProperty("--pc", PARTY[k].hex);
+    bs.forEach((b,j) => { b.setAttribute("aria-checked", j === i); b.tabIndex = j === i ? 0 : -1; });
+    if (focus) bs[i].focus();
+    pick.party = k; $("pRead").textContent = PARTY[k].name;
+    $("msg").classList.remove("warn"); $("msg").textContent = "";
+  };
+  sw.addEventListener("click", e => { const b = e.target.closest("button"); if (b) set(+b.dataset.i); });
+  sw.addEventListener("keydown", e => {
+    const cur = pick.party ? SWITCH.indexOf(pick.party) : -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); set(Math.min(5, cur + 1), true); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); set(Math.max(0, cur < 0 ? 0 : cur - 1), true); }
+  });
+}
+function nudgeGroup(text, id){
+  $("msg").innerHTML = text; $("msg").classList.add("warn");
+  const g = $(id); g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
+  const first = g.querySelector('[aria-checked="true"]') || g.querySelector("button"); first && first.focus();
+}
+
 function check(){
   const d = deck[pos];
   if (mode === 1) {
@@ -608,24 +707,37 @@ function check(){
     const g = gradeName(p, v, false);
     record({ok: g.r === "ok" || g.r === "close", close: g.r === "close", typed: v.trim(), hint: hinted});
   } else {
-    const v = $("ans").value, a = $("y1").value, b = $("y2").value;
+    const v = $("ans").value;
     if (!v.trim()) return nudge("Type a name, or press Reveal.");
-    if (!a.trim() || !b.trim()) return nudge("Fill in both years. Your best guess is fine.", !a.trim() ? "y1" : "y2");
     const g = gradeName(d, v, true);
     if (g.r === "ambig") return nudge(`Two presidents were named <b>${SHARED[d.id]}</b>. Add a first name or initials.`);
     const name = g.r === "ok" || g.r === "close";
+    const base = {name, close: g.r === "close", typed: v.trim()};
+    if (level === "easy") return record(base);
+    if (level === "medium") {
+      if (!pick.term) return nudgeGroup("Choose the years in office.", "tOpts");
+      if (!pick.party) return nudgeGroup("Choose a party.", "pOpts");
+      return record({...base, term: pick.term === termsText(d), tPick: pick.term, party: pick.party === d.party, pPick: pick.party});
+    }
+    const a = $("y1").value, b = $("y2").value;
+    if (!a.trim() || !b.trim()) return nudge("Fill in both years. Your best guess is fine.", !a.trim() ? "y1" : "y2");
+    if (!pick.party) return nudgeGroup("Slide the switch to a party.", "psw");
     const y1 = gradeYear(a, d.terms.map(t => t.a));
     // left-office year must match the term the start year came from, when the start year is right
     const startTerm = d.terms.find(t => gradeYear(a, [t.a]));
     const y2 = gradeYear(b, startTerm ? [startTerm.b] : d.terms.map(t => t.b));
-    record({name, y1, y2, close: g.r === "close", typed: v.trim(), t1: a.trim(), t2: b.trim()});
+    record({...base, y1, y2, t1: a.trim(), t2: b.trim(), party: pick.party === d.party, pPick: pick.party});
   }
 }
 
 function record(r){
   const d = deck[pos];
   if (mode === 1) { r.full = !!r.ok && !r.revealed; }
-  else { r.pts = r.revealed ? 0 : (r.name?1:0)+(r.y1?1:0)+(r.y2?1:0); r.full = r.pts === 3; }
+  else {
+    r.max = LEVEL_MAX[level];
+    r.pts = r.revealed ? 0 : ["name","term","y1","y2","party"].filter(k => r[k]).length;
+    r.full = r.pts === r.max;
+  }
   res[key(d)] = r;
   phase = "shown";
   $("back").innerHTML = mode === 1 ? backHTML(personOf(d), [d], r) : backHTML(d, d.terms, r);
@@ -648,7 +760,7 @@ function finish(){
   const missed = deck.filter(d => !res[key(d)].full);
   const vals = Object.values(res);
   const score = mode === 1 ? `${vals.filter(v=>v.ok).length} of ${deck.length} correct`
-    : `${vals.reduce((s,v)=>s+v.pts,0)} of ${deck.length*3} points`;
+    : `${vals.reduce((s,v)=>s+v.pts,0)} of ${vals.reduce((s,v)=>s+v.max,0)} points`;
   const card = d => {
     const p = mode === 1 ? personOf(d) : d;
     return `<div class="mm"><div class="pp" style="--pc:${PARTY[p.party].hex}"><img src="${imgSrc(mode===1?d.img:p.img)}" alt=""></div>
@@ -678,6 +790,7 @@ $("ctl").addEventListener("submit", e => { e.preventDefault(); phase === "ask" ?
 $("m1").onclick = () => { if (mode !== 1) { mode = 1; store.set("psg-mode","1"); restart(); } };
 $("m2").onclick = () => { if (mode !== 2) { mode = 2; store.set("psg-mode","2"); restart(); } };
 $("ranges").addEventListener("click", e => { const b = e.target.closest("[data-r]"); if (!b) return; rangeK = b.dataset.r; store.set("psg-range", rangeK); restart(); });
+$("levelGrp").addEventListener("click", e => { const b = e.target.closest("[data-lv]"); if (!b || b.dataset.lv === level) return; level = b.dataset.lv; store.set("psg-level", level); restart(); });
 $("oShuf").onclick = () => { shuffled = true; store.set("psg-order","shuf"); restart(); };
 $("oChron").onclick = () => { shuffled = false; store.set("psg-order","chron"); restart(); };
 $("strict").onchange = e => { strict = e.target.checked; store.set("psg-strict", strict ? "1" : "0"); };
